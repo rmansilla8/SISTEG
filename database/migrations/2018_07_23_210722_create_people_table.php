@@ -18,12 +18,12 @@ class CreatePeopleTable extends Migration
             $table->string('dpi',13);
             $table->string('nit', 8);
             $table->string('first_name', 45);
-            $table->string('second_name', 45);
-            $table->string('third_name', 45);
+            $table->string('second_name', 45)->unsigned();
+            $table->string('third_name', 45)->unsigned();
             $table->string('first_surname', 45);
-            $table->string('second_name', 45);
-            $table->string('email',60);
-            $table->string('phone', 8);
+            $table->string('second_surname', 45)->unsigned();
+            $table->string('email',60)->unsigned();
+            $table->string('phone', 8)->unsigned();
             $table->integer('person_type_id');
             $table->integer('contract_id');
             $table->string('address', 150);
