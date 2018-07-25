@@ -35,6 +35,9 @@ class CreatePeopleTable extends Migration
             $table->string('scale_register',15);
             $table->timestamps();
 
+            /**
+             * *Area de las Llaves foraneas
+             */
             $table->foreign('person_type_id')->references('id')->on('person_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
