@@ -44,5 +44,10 @@ class Person extends Model
         return $this->belongsTo(Municipality::class);
     }
 
+    public function affiliate()
+    {
+        return $this->hasOne(Affiliate::class);
+    }
+
 
 }
