@@ -16,7 +16,7 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dpi',13);
-            $table->string('nit', 8);
+            $table->string('nit', 9);
             $table->string('first_name', 45);
             $table->string('second_name', 45)->unsigned();
             $table->string('third_name', 45)->unsigned();

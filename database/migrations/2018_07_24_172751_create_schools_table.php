@@ -16,7 +16,7 @@ class CreateSchoolsTable extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('code');
-            $table->string('name');
+            $table->string('name', 150);
             $table->integer('nivel_id');
             $table->integer('school_district_id');
             $table->integer('area_id');
