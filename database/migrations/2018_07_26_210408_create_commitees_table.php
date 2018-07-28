@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommiteesTable extends Migration
+class CreateCommitteesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCommiteesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commitees', function (Blueprint $table) {
+        Schema::create('committees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('affiliate_id')->unsigned();
             $table->integer('position_id')->unsigned();
@@ -46,6 +46,6 @@ class CreateCommiteesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commitees');
+        Schema::dropIfExists('committees');
     }
 }

@@ -4,18 +4,18 @@ namespace Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Commitee extends Model
+class Committee extends Model
 {
     protected $fillable = [
-        'afiliado_id',
+        'affiliate_id',
         'position_id',
         'committee_level_id',
         'user_id',
     ];
 
-    public function afiliado()
+    public function affiliate()
     {
-        return $this->belongsTo(Afiliado::class);
+        return $this->belongsTo(Affiliate::class);
     }
 
     public function position()

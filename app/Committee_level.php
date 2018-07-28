@@ -13,6 +13,6 @@ class Committee_level extends Model
 
     public function committees()
     {
-        return $this->hasMany(Committee::clas);
+        return $this->hasMany(Committee::class);
     }
 }

@@ -20,7 +20,7 @@ class CreateSchoolsTable extends Migration
             $table->integer('nivel_id');
             $table->integer('school_district_id')->unsigned();
             $table->integer('area_id')->unsigned();
-            $table->integer('clasification_id')->unsigned();
+            $table->integer('classification_id')->unsigned();
             $table->integer('modality_id')->unsigned();
             $table->integer('turn_id')->unsigned();
             $table->string('address', 200);
@@ -42,9 +42,9 @@ class CreateSchoolsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('clasification_id')->references('id')->on('clasifications')
+            $table->foreign('classification_id')->references('id')->on('classifications')
                 ->onDelete('cascade')
-                ->onUPdate('cascade');
+                ->onUpdate('cascade');
             
             $table->foreign('modality_id')->references('id')->on('modalities')
                 ->onDelete('cascade')

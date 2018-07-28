@@ -12,7 +12,7 @@ class School extends Model
         'nivel_id',
         'school_district_id',
         'area_id',
-        'clasification_id',
+        'classification_id',
         'modality_id',
         'turn_id',
         'address',
@@ -30,12 +30,12 @@ class School extends Model
 
     public function area()
     {
-        return $this->belognsTo(Area::class);
+        return $this->belongsTo(Area::class);
     }
 
-    public function clasification()
+    public function classification()
     {
-        return $this->belongsTo(Clasification::class);
+        return $this->belongsTo(Classification::class);
     }
 
     public function modality()

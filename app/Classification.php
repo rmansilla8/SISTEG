@@ -4,7 +4,7 @@ namespace Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Clasification extends Model
+class Classification extends Model
 {
     protected $fillable = [
         'description',

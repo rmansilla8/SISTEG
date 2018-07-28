@@ -44,7 +44,7 @@ class CreatePeopleTable extends Migration
 
             $table->foreign('contract_id')-references('id')->on('contracts')
                 ->onDelete('cascade')
-                ->onUpdate('casdade');
+                ->onUpdate('cascade');
 
             $table->foreign('gender_id')->references('id')->on('genders')
                 ->onDelete('cascade')
