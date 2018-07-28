@@ -15,10 +15,10 @@ class CreateCommiteesTable extends Migration
     {
         Schema::create('commitees', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('affiliate_id');
-            $table->integer('position_id');
-            $table->integer('committee_level_id');
-            $table->integer('user_id');
+            $table->integer('affiliate_id')->unsigned();
+            $table->integer('position_id')->unsigned();
+            $table->integer('committee_level_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('affiliate_id')->references('id')->on('affiliates')

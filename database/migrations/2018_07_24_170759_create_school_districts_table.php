@@ -16,7 +16,7 @@ class CreateSchoolDistrictsTable extends Migration
         Schema::create('school_districts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('code');
-            $table->integer('municipality_id');
+            $table->integer('municipality_id')->unsigned();
             $table->timestamps();
         });
     }

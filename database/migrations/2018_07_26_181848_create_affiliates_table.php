@@ -16,8 +16,8 @@ class CreateAffiliatesTable extends Migration
         Schema::create('affiliates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('number',4);
-            $table->integer('person_id');
-            $table->integer('affiliate_state_id');
+            $table->integer('person_id')->unsigned();
+            $table->integer('affiliate_state_id')->unsigned();
             $table->timestamps();
 
             /**

@@ -18,17 +18,17 @@ class CreatePeopleTable extends Migration
             $table->string('dpi',13);
             $table->string('nit', 9);
             $table->string('first_name', 45);
-            $table->string('second_name', 45)->unsigned();
-            $table->string('third_name', 45)->unsigned();
+            $table->string('second_name', 45)->nullable();
+            $table->string('third_name', 45)->nullable();
             $table->string('first_surname', 45);
-            $table->string('second_surname', 45)->unsigned();
-            $table->string('email',60)->unsigned();
-            $table->string('phone', 8)->unsigned();
-            $table->integer('person_type_id');
-            $table->integer('contract_id');
-            $table->string('address', 150);
-            $table->integer('municipality_id');
-            $table->integer('gender_id');
+            $table->string('second_surname', 45)->nullable();
+            $table->string('email',60)->nullable();
+            $table->string('phone', 8)->nullable();
+            $table->integer('person_type_id')->unsigned();
+            $table->integer('contract_id')->unsigned();
+            $table->string('address', 150)->unsigned();
+            $table->integer('municipality_id')->unsigned();
+            $table->integer('gender_id')->unsigned();
             /**
              * TODO Revisar el campo de scale register, Tamaño, nombre y si hay mas campos en esta tabla.
              */
@@ -50,9 +50,6 @@ class CreatePeopleTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-                /**
-                 * TODO Crear el modelo municipality
-                 */
             $table->foreign('municipality_id')->references('id')->on('municipalities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

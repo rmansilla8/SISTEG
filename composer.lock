@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5bca48e56bbf3a25645858fcab9c285",
+    "content-hash": "cb52984885ed7fe34589f020a7fbb51d",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -365,6 +365,47 @@
                 "trusted proxy"
             ],
             "time": "2018-02-07T20:20:57+00:00"
+        },
+        {
+            "name": "intelguasoft/generators",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intelguasoft/generators.git",
+                "reference": "b63fd5eafa3581567e9b4d92e2b82273d9538eb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intelguasoft/generators/zipball/b63fd5eafa3581567e9b4d92e2b82273d9538eb0",
+                "reference": "b63fd5eafa3581567e9b4d92e2b82273d9538eb0",
+                "shasum": ""
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "IntelGUA\\Generators\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Henry Díaz",
+                    "email": "hnrdiaz@gmail.com"
+                }
+            ],
+            "description": "Generate numbers in a specific way according to the needs of the user.",
+            "keywords": [
+                "aleatorio",
+                "generate",
+                "generators",
+                "lottery",
+                "lotto",
+                "random"
+            ],
+            "time": "2018-07-26T22:02:22+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3987,7 +4028,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "intelguasoft/generators": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

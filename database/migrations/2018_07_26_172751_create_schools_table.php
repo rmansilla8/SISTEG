@@ -18,11 +18,11 @@ class CreateSchoolsTable extends Migration
             $table->integer('code');
             $table->string('name', 150);
             $table->integer('nivel_id');
-            $table->integer('school_district_id');
-            $table->integer('area_id');
-            $table->integer('clasification_id');
-            $table->integer('modality_id');
-            $table->integer('turn_id');
+            $table->integer('school_district_id')->unsigned();
+            $table->integer('area_id')->unsigned();
+            $table->integer('clasification_id')->unsigned();
+            $table->integer('modality_id')->unsigned();
+            $table->integer('turn_id')->unsigned();
             $table->string('address', 200);
             $table->timestamps();
 
