@@ -11,12 +11,12 @@ class Employee_title extends Model
         'employee_id',
     ];
 
-    public function titles()
+    public function title()
     {
         return $this->belongsTo(Title::class);
     }
 
-    public function employees()
+    public function employee()
     {
         return $this-belongsTo(Employee::class);
     }

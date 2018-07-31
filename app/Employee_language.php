@@ -12,17 +12,17 @@ class Employee_language extends Model
         'employee_id',
     ];
 
-    public function languages()
+    public function language()
     {
         return $this->belongsTo(Language::class);
     }
 
-    public function language_domains()
+    public function language_domain()
     {
         return $this->belongsTo(Language_domain::class);
     }
 
-    public function employees()
+    public function employee()
     {
         return $this->belongsTo(Employee::class);
     }

@@ -10,7 +10,7 @@ class Position extends Model
         'description',
     ];
 
-    public function committees ()
+    public function committees()
     {
         return $this->hasMany(Committee::class);
     }

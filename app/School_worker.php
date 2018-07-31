@@ -13,22 +13,22 @@ class School_worker extends Model
         'worker_type',
     ];
 
-    public function schools()
+    public function school()
     {
         return $this->belongsTo(School::class);
     }
 
-    public function employees()
+    public function employee()
     {
         return $this-belongsTo(Employee::class);
     }
 
-    public function contracts()
+    public function contract()
     {
         return $this->belongsTo(Contracts::class);
     }
 
-    public function worker_types()
+    public function worker_type()
     {
             return $this->belongsTo(Worker_type::class);
     }
