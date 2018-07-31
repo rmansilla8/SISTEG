@@ -4,14 +4,14 @@ namespace Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gender extends Model
+class Civil_state extends Model
 {
     protected $fillable = [
         'description',
     ];
 
-    public function people ()
+    public function people()
     {
-        return $this->hasMany(Person::class);
+        return $this->hasOne(Person::class);
     }
 }

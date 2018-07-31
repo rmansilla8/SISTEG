@@ -15,4 +15,9 @@ class School_district extends Model
     {
         return $this->hasMany(School::class);
     }
+
+    public function supervisions()
+    {
+        return $this->hasOne(Supervision::class);
+    }
 }

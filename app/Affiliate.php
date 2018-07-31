@@ -12,14 +12,19 @@ class Affiliate extends Model
         'affiliate_state_id',
     ];
 
-    public function person()
+    public function employee()
     {
-        return $this->belongsTo(Person::class);
+        return $this->belongsTo(Employee::class);
     }
 
-    public function affilliate_state()
+    public function affiliate_state()
     {
         return $this->belongsTo(Affiliate_state::class);
+    }
+
+    public function committees()
+    {
+        return $this->hasMany(Committee::class);
     }
 
 }

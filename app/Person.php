@@ -8,7 +8,6 @@ class Person extends Model
 {
     protected $fillable = [
         'dpi',
-        'nit',
         'first_name',
         'second_name',
         'third_name',
@@ -16,24 +15,18 @@ class Person extends Model
         'second_surname',
         'email',
         'phone',
-        'person_type_id',
-        'contract_id',
         'address',
         'municipality_id',
         'gender_id',
-        'scale_register',
+        'birthdate',
+        'civil_status_id'
+        
     ];
 
-    public function person_type()
+    public function civil_state()
     {
-        return $this->belongsTo(Person_type::class);
+        return $this->belongsTo(Civil_state::class);
     }
-
-    public function contract()
-    {
-        return $this->belongsTo(Contract::class);
-    }
-
     public function gender()
     {
         return $this->belongsTo(Gender::class);
@@ -44,10 +37,13 @@ class Person extends Model
         return $this->belongsTo(Municipality::class);
     }
 
-    public function affiliate()
+    public function supervision()
     {
-        return $this->hasOne(Affiliate::class);
+        return $this->hasOne(Supervision::class);
     }
 
-
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
+    }
 }

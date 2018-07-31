@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTurnsTable extends Migration
+class CreatePersonTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTurnsTable extends Migration
      */
     public function up()
     {
-        Schema::create('turns', function (Blueprint $table) {
+        Schema::create('worker_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description', 100);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTurnsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turns');
+        Schema::dropIfExists('worker_types');
     }
 }

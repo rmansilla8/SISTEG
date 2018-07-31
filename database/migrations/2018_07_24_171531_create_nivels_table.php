@@ -18,6 +18,8 @@ class CreateNivelsTable extends Migration
             $table->integer('code');
             $table->string('description', 100);
             $table->timestamps();
+
+            
         });
     }
 

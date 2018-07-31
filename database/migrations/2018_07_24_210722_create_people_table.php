@@ -16,7 +16,6 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dpi',13);
-            $table->string('nit', 9);
             $table->string('first_name', 45);
             $table->string('second_name', 45)->nullable();
             $table->string('third_name', 45)->nullable();
@@ -24,25 +23,17 @@ class CreatePeopleTable extends Migration
             $table->string('second_surname', 45)->nullable();
             $table->string('email',60)->nullable();
             $table->string('phone', 8)->nullable();
-            $table->integer('person_type_id')->unsigned();
-            $table->integer('contract_id')->unsigned();
-            $table->string('address', 150)->unsigned();
+            $table->string('address', 150);
             $table->integer('municipality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
-            /**
-             * TODO Revisar el campo de scale register, Tamaño, nombre y si hay mas campos en esta tabla.
-             */
-            $table->string('scale_register',15);
+            $table->date('birthdate');
+            $table->integer('civil_state_id')->unsigned();
             $table->timestamps();
 
             /**
              * *Area de las Llaves foraneas
              */
-            $table->foreign('person_type_id')->references('id')->on('person_types')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('contract_id')-references('id')->on('contracts')
+            $table->foreign('civil_state_id')->references('id')->on('civil_states')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

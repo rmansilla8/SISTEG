@@ -4,15 +4,14 @@ namespace Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contract extends Model
+class Title extends Model
 {
     protected $fillable =[
-        'number',
         'description',
     ];
 
-    public function school_workers()
+    public function employee_titles()
     {
-        return $this->hasMany(School_worker::class);
+        return $this->hasMany(Employee_titles);
     }
 }

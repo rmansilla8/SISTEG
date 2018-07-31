@@ -15,7 +15,7 @@ class CreateModalitiesTable extends Migration
     {
         Schema::create('modalities', function (Blueprint $table) {
             $table->increments('id');
-            $tabe->string('description', 45);
+            $tabe->string('description', 100);
             $table->timestamps();
         });
     }

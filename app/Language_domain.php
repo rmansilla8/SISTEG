@@ -4,14 +4,14 @@ namespace Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Person_type extends Model
+class Language_domain extends Model
 {
     protected $fillable = [
         'description',
     ];
 
-    public function persons()
+    public function employee_languages()
     {
-        return $this->hasMany(Person::class);
+        return $this->hasMany(Employee_languages::class);
     }
 }

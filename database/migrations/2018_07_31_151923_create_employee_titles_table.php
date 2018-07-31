@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchoolDistrictsTable extends Migration
+class CreateEmployeeTitlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class CreateSchoolDistrictsTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_districts', function (Blueprint $table) {
+        Schema::create('employee_titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('code');
-            $table->integer('municipality_id')->unsigned();
+            $table->integer('title_id');
+            $table->integer('employee_id');
             $table->timestamps();
 
-            $table->foreign('municipality_id')->references('id')->ond('municipalities')
+            $table->foreign('title_id')->references('id')->on('titles')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            
+            $table->foreign('employee_id')->references('id')->on('employees')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -32,6 +36,6 @@ class CreateSchoolDistrictsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('school_districts');
+        Schema::dropIfExists('employee_titles');
     }
 }
