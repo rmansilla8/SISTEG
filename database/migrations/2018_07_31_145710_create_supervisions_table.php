@@ -20,7 +20,7 @@ class CreateSupervisionsTable extends Migration
             $table->integer('school_district_id')->unsigned();
             $table->timestamps();
 
-            $table-foreign('worker_type_id')->references('id')->on('worker_types')
+            $table->foreign('worker_type_id')->references('id')->on('worker_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

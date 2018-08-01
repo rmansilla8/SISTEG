@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommitteesTable extends Migration
+class CreateEmployeeSchoolTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,27 +13,27 @@ class CreateCommitteesTable extends Migration
      */
     public function up()
     {
-        Schema::create('committees', function (Blueprint $table) {
+        Schema::create('employee_school', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('affiliate_id')->unsigned();
-            $table->integer('position_id')->unsigned();
-            $table->integer('committee_level_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('school_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
+            $table->integer('contract_id')->unsigned();
+            $table->integer('worker_type_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('affiliate_id')->references('id')->on('affiliates')
+            $table->foreign('school_id')->references('id')->on('schools')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('position_id')->references('id')->on('positions')
+            $table->foreign('employee_id')->references('id')->on('employees')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('committee_level_id')->references('id')->on('committee_levels')
+            $table->foreign('contract_id')->references('id')->on('contracts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            
-            $table->foreign('user_id')->references('id')->on('users')
+
+            $table->foreign('worker_type_id')->references('id')->on('worker_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -46,6 +46,6 @@ class CreateCommitteesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('committees');
+        Schema::dropIfExists('employee_school');
     }
 }

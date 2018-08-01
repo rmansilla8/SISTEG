@@ -11,8 +11,8 @@ class Contract extends Model
         'description',
     ];
 
-    public function school_workers()
+    public function schools()
     {
-        return $this->hasMany(School_worker::class);
+        return $this->belongsToMany(School::class);
     }
 }

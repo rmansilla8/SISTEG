@@ -4,7 +4,7 @@ namespace Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Nivel extends Model
+class Level extends Model
 {
     protected $fillable = [
         'number',

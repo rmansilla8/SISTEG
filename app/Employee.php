@@ -28,8 +28,25 @@ class Employee extends Model
         return $this->hasOne(Affiliate::class);
     }
 
-    public function school_workers()
+    public function schools()
     {
-        return $this->hasMany(School_worker::class);
+        return $this->belongsToMany(School::class);
     }
+
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class);
+    }
+
+    public function language_domains()
+    {
+        return $this->belongsToMany(Language_domain::class);
+    }
+
+    public function titles()
+    {
+        return $this->belongsToMany(Title::class);
+    }
+
+
 }

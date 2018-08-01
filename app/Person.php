@@ -37,12 +37,12 @@ class Person extends Model
         return $this->belongsTo(Municipality::class);
     }
 
-    public function supervisions()
+    public function supervision()
     {
         return $this->hasOne(Supervision::class);
     }
 
-    public function employees()
+    public function employee()
     {
         return $this->hasOne(Employee::class);
     }

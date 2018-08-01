@@ -17,7 +17,7 @@ class CreateSchoolsTable extends Migration
             $table->increments('id');
             $table->integer('code');
             $table->string('name', 150);
-            $table->integer('nivel_id');
+            $table->integer('level_id')->unsigned();
             $table->integer('school_district_id')->unsigned();
             $table->integer('area_id')->unsigned();
             $table->integer('classification_id')->unsigned();
@@ -30,7 +30,7 @@ class CreateSchoolsTable extends Migration
              * *Area de las llaves foraneas
              */
 
-            $table->foreign('nivel_id')->references('id')->on('nivels')
+            $table->foreign('level_id')->references('id')->on('levels')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             

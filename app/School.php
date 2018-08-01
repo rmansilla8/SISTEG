@@ -9,7 +9,7 @@ class School extends Model
     protected $fillable = [
         'code',
         'name',
-        'nivel_id',
+        'level_id',
         'school_district_id',
         'area_id',
         'classification_id',
@@ -18,9 +18,9 @@ class School extends Model
         'address',
     ];
 
-    public function nivel()
+    public function level()
     {
-        return $this->belongsTo(Nivel::class);
+        return $this->belongsTo(Level::class);
     }
 
     public function school_district()
@@ -46,5 +46,15 @@ class School extends Model
     public function turn()
     {
         return $this->belongsTo(Turn::class);
+    }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class);
+    }
+
+    public function contracts()
+    {
+        return $this->belongsToMany(Contract::class);
     }
 }

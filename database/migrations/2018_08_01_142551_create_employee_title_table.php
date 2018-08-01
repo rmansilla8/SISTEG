@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeTitlesTable extends Migration
+class CreateEmployeeTitleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateEmployeeTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_titles', function (Blueprint $table) {
+        Schema::create('employee_title', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('title_id');
-            $table->integer('employee_id');
+            $table->integer('title_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('title_id')->references('id')->on('titles')
@@ -26,6 +26,7 @@ class CreateEmployeeTitlesTable extends Migration
             $table->foreign('employee_id')->references('id')->on('employees')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            
         });
     }
 
@@ -36,6 +37,6 @@ class CreateEmployeeTitlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_titles');
+        Schema::dropIfExists('employee_title');
     }
 }

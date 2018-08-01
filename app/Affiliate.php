@@ -22,9 +22,14 @@ class Affiliate extends Model
         return $this->belongsTo(Affiliate_state::class);
     }
 
-    public function committees()
+    public function positions()
     {
-        return $this->hasMany(Committee::class);
+        return $this->belongsToMany(Position::class);
+    }
+
+    public function committee_levels()
+    {
+        return $this->belongsToMany(Committee_level::class);
     }
 
 }

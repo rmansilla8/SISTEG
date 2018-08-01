@@ -10,8 +10,8 @@ class Title extends Model
         'description',
     ];
 
-    public function employee_titles()
+    public function employees()
     {
-        return $this->hasMany(Employee_titles);
+        return $this->belongsToMany(Employee::class);
     }
 }

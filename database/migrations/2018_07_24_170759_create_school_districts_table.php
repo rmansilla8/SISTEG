@@ -19,7 +19,7 @@ class CreateSchoolDistrictsTable extends Migration
             $table->integer('municipality_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('municipality_id')->references('id')->ond('municipalities')
+            $table->foreign('municipality_id')->references('id')->on('municipalities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

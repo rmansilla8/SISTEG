@@ -20,4 +20,9 @@ class School_district extends Model
     {
         return $this->hasOne(Supervision::class);
     }
+
+    public function municipalities()
+    {
+        return $this->belongsTo(Municipality::class);
+    }
 }

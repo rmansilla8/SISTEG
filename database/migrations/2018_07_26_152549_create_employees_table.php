@@ -17,8 +17,8 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
             $table->string('nit');
             $table->string('scale_register');
-            $table->integer('person_id');
-            $table->integer('ethnic_community_id');
+            $table->integer('person_id')->unsigned();
+            $table->integer('ethnic_community_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('person_id')->references('id')->on('people')

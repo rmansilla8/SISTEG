@@ -10,8 +10,8 @@ class Language extends Model
         'name',
     ];
 
-    public function employee_languages()
+    public function employees()
     {
-        return $this->hasMany(Employee_language::class);
+        return $this->belongsToMany(Employee::class);
     }
 }
