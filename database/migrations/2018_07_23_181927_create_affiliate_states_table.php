@@ -15,7 +15,7 @@ class CreateAffiliateStatesTable extends Migration
     {
         Schema::create('affiliate_states', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description', 45);
+            $table->string('description', 45)->unique();
             $table->timestamps();
         });
     }

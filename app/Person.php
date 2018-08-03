@@ -19,7 +19,7 @@ class Person extends Model
         'municipality_id',
         'gender_id',
         'birthdate',
-        'civil_status_id'
+        'civil_state_id'
         
     ];
 

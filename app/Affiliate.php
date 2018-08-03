@@ -8,7 +8,7 @@ class Affiliate extends Model
 {
     protected $fillable = [
         'number',
-        'person_id',
+        'employee_id',
         'affiliate_state_id',
     ];
 

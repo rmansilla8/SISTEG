@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class School_district extends Model
 {
     protected $fillable = [
-        'number',
+        'code',
         'municipality_id',
     ];
 

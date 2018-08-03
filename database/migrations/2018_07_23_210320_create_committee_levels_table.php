@@ -15,7 +15,7 @@ class CreateCommitteeLevelsTable extends Migration
     {
         Schema::create('committee_levels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 45);
+            $table->string('name', 45)->unique();
             $table->string('description', 150);
             $table->timestamps();
         });
