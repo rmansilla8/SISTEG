@@ -23,3 +23,12 @@ Route::get("generar", function(){
         echo $lista[$i] . "<br />";
     } 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('my-theme', function () {
+
+    return view('welcome2');
+
+});

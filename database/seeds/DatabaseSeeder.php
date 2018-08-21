@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             LanguageDomainsSeeder::class,
             TitlesSeeder::class,
             EthnicCommunitiesSeeder::class,
+            PlanSeeder::class,
             DepartmentsSeeder::class,
             MunicipalitiesSeeder::class,
             ClassificationsSeeder::class,

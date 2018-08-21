@@ -16,11 +16,17 @@ class School extends Model
         'modality_id',
         'turn_id',
         'address',
+        'plan_id',
     ];
 
     public function level()
     {
         return $this->belongsTo(Level::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
     }
 
     public function school_district()
