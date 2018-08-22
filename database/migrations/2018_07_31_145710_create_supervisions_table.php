@@ -15,12 +15,12 @@ class CreateSupervisionsTable extends Migration
     {
         Schema::create('supervisions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('worker_type_id')->unsigned();
+            $table->integer('employee_type_id')->unsigned();
             $table->integer('person_id')->unsigned();
             $table->integer('school_district_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('worker_type_id')->references('id')->on('worker_types')
+            $table->foreign('employee_type_id')->references('id')->on('worker_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

@@ -11,8 +11,13 @@ class Employee extends Model
         'scale_register',
         'person_id',
         'ethnic_community_id',
+        'employee_id',
     ];
 
+    public function employee_type()
+    {
+        return $this->belongsTo(Employee_type::class);
+    }
     public function person()
     {
         return $this->belongsTo(Person::class);

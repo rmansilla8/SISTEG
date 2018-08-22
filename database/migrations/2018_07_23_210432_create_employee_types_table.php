@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWorkerTypesTable extends Migration
+class CreateEmployeeTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWorkerTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('worker_types', function (Blueprint $table) {
+        Schema::create('employee_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description', 100)->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateWorkerTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('worker_types');
+        Schema::dropIfExists('employee_types');
     }
 }

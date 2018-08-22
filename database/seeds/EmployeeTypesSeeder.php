@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Worker_type;
-class WorkerTypesSeeder extends Seeder
+use Sisteg\Employee_type;
+class EmployeeTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class WorkerTypesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Worker_type::class, 6)->create();
+        factory (Sisteg\Employee_type::class, 6)->create();
     }
 }

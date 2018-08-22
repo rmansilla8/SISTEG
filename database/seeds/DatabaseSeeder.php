@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             AffiliateStatesSeeder::class,
             PositionsSeeder::class,
             CommitteeLevelsSeeder::class,
-            WorkerTypesSeeder::class,
+            EmployeeTypesSeeder::class,
             ContractsSeeder::class,
             GendersSeeder::class,
             SchoolDistrictsSeeder::class,

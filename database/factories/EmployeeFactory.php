@@ -8,5 +8,6 @@ $factory->define(Sisteg\Employee::class, function (Faker $faker) {
         'scale_register'            =>$faker->unique()->word,
         'person_id'                 =>rand(1, 6),
         'ethnic_community_id'       =>rand(1, 6),
+        'employee_id'               =>rand(1, 6),
     ];
 });
