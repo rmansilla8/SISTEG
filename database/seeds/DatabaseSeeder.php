@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             ModalitiesSeeder::class,
             AreasSeeder::class,
             LevelsSeeder::class,
-            TurnsSeeder::class,
+            WorkingDaysSeeder::class,
             AffiliateStatesSeeder::class,
             PositionsSeeder::class,
             CommitteeLevelsSeeder::class,

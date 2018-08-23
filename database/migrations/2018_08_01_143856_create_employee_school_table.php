@@ -18,7 +18,7 @@ class CreateEmployeeSchoolTable extends Migration
             $table->integer('school_id')->unsigned();
             $table->integer('employee_id')->unsigned();
             $table->integer('contract_id')->unsigned();
-            $table->integer('worker_type_id')->unsigned();
+            $table->integer('employee_type_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('school_id')->references('id')->on('schools')
@@ -33,7 +33,7 @@ class CreateEmployeeSchoolTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('worker_type_id')->references('id')->on('worker_types')
+            $table->foreign('employee_type_id')->references('id')->on('employee_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

@@ -49,9 +49,9 @@ class School extends Model
         return $this->belongsTo(Modality::class);
     }
 
-    public function turn()
+    public function working_day()
     {
-        return $this->belongsTo(Turn::class);
+        return $this->belongsTo(Working_day::class);
     }
 
     public function employees()

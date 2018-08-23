@@ -4,7 +4,7 @@ namespace Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Turn extends Model
+class Working_day extends Model
 {
     protected $fillable = [
         'description',

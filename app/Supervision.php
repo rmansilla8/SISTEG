@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Supervision extends Model
 {
     protected $fillable = [
-        'worker_type_id',
+        'employee_type_id',
         'person_id',
         'school_district',
     ];

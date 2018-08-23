@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Turn;
-class TurnsSeeder extends Seeder
+use Sisteg\Working_day;
+class WorkingDaysSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class TurnsSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Turn::class, 6)->create();
+        factory (Sisteg\Working_day::class, 6)->create();
     }
 }

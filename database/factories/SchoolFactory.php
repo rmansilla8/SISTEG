@@ -11,7 +11,7 @@ $factory->define(Sisteg\School::class, function (Faker $faker) {
         'area_id'                   =>rand(1,6),
         'classification_id'         =>rand(1,6),
         'modality_id'               =>rand(1,6),
-        'turn_id'                   =>rand(1,6),
+        'working_day_id'            =>rand(1,6),
         'address'                   =>$faker->address,
     ];
 });
