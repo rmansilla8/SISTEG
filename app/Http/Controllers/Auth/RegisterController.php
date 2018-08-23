@@ -1,9 +1,9 @@
 <?php
 
-namespace Sisteg\Http\Controllers\Auth;
+namespace IntelGUA\Sisteg\Http\Controllers\Auth;
 
-use Sisteg\User;
-use Sisteg\Http\Controllers\Controller;
+use IntelGUA\Sisteg\User;
+use IntelGUA\Sisteg\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -59,7 +59,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \Sisteg\User
+     * @return \IntelGUA\Sisteg\User
      */
     protected function create(array $data)
     {

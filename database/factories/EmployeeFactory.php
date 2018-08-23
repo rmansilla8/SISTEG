@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Sisteg\Employee::class, function (Faker $faker) {
+$factory->define(IntelGUA\Sisteg\Employee::class, function (Faker $faker) {
     return [
         'nit'                       =>$faker->unique()->word,
         'scale_register'            =>$faker->unique()->word,

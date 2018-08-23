@@ -25,7 +25,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "Sisteg\\": "app/"
+            "IntelGUA\\Sisteg\\": "app/"
         }
     },
     "autoload-dev": {

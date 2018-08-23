@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Http\Middleware;
+namespace IntelGUA\Sisteg\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 

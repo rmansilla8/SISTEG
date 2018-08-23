@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg;
+namespace IntelGUA\Sisteg;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;

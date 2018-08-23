@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg;
+namespace IntelGUA\Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,8 +15,8 @@ class Employee_type extends Model
         return $this->hasMany(School_worker::class);
     }
 
-    public function supervisions()
+    public function administrative_employees()
     {
-        return $this->hasMany(Supervision::class);
+        return $this->hasMany(Administrative_employee::class);
     }
 }

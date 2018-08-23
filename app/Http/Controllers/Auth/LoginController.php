@@ -1,8 +1,8 @@
 <?php
 
-namespace Sisteg\Http\Controllers\Auth;
+namespace IntelGUA\Sisteg\Http\Controllers\Auth;
 
-use Sisteg\Http\Controllers\Controller;
+use IntelGUA\Sisteg\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller

@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Sisteg\User::class,
+            'model' => IntelGUA\Sisteg\User::class,
         ],
 
         // 'users' => [

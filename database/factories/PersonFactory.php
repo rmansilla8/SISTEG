@@ -2,9 +2,9 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Sisteg\Person::class, function (Faker $faker) {
+$factory->define(IntelGUA\Sisteg\Person::class, function (Faker $faker) {
     return [
-        'dpi'                       =>$faker->unique()->word,
+        'dpi'                       =>$faker->unique()->text($maxNbChars = 13),
         'first_name'                =>$faker->firstName,
         'second_name'               =>$faker->firstName,
         'third_name'                =>$faker->word,

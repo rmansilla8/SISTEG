@@ -154,11 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Sisteg\Providers\AppServiceProvider::class,
-        Sisteg\Providers\AuthServiceProvider::class,
-        // Sisteg\Providers\BroadcastServiceProvider::class,
-        Sisteg\Providers\EventServiceProvider::class,
-        Sisteg\Providers\RouteServiceProvider::class,
+        IntelGUA\Sisteg\Providers\AppServiceProvider::class,
+        IntelGUA\Sisteg\Providers\AuthServiceProvider::class,
+        // IntelGUA\Sisteg\Providers\BroadcastServiceProvider::class,
+        IntelGUA\Sisteg\Providers\EventServiceProvider::class,
+        IntelGUA\Sisteg\Providers\RouteServiceProvider::class,
 
     ],
 

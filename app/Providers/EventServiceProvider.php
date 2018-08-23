@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Providers;
+namespace IntelGUA\Sisteg\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Sisteg\Events\Event' => [
-            'Sisteg\Listeners\EventListener',
+        'IntelGUA\Sisteg\Events\Event' => [
+            'IntelGUA\Sisteg\Listeners\EventListener',
         ],
     ];
 

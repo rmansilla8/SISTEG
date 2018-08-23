@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSupervisionsTable extends Migration
+class CreateAdministrativeEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSupervisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supervisions', function (Blueprint $table) {
+        Schema::create('administrative_employees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_type_id')->unsigned();
             $table->integer('person_id')->unsigned();
@@ -41,6 +41,6 @@ class CreateSupervisionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supervisions');
+        Schema::dropIfExists('administrative_employees');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Http;
+namespace IntelGUA\Sisteg\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,9 +16,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Sisteg\Http\Middleware\TrimStrings::class,
+        \IntelGUA\Sisteg\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Sisteg\Http\Middleware\TrustProxies::class,
+        \IntelGUA\Sisteg\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -28,12 +28,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Sisteg\Http\Middleware\EncryptCookies::class,
+            \IntelGUA\Sisteg\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Sisteg\Http\Middleware\VerifyCsrfToken::class,
+            \IntelGUA\Sisteg\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -56,7 +56,7 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Sisteg\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \IntelGUA\Sisteg\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];

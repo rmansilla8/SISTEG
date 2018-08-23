@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Providers;
+namespace IntelGUA\Sisteg\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

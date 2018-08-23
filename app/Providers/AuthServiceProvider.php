@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Providers;
+namespace IntelGUA\Sisteg\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Sisteg\Model' => 'Sisteg\Policies\ModelPolicy',
+        'IntelGUA\Sisteg\Model' => 'IntelGUA\Sisteg\Policies\ModelPolicy',
     ];
 
     /**

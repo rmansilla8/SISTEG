@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Http\Controllers;
+namespace IntelGUA\Sisteg\Http\Controllers;
 
 use Illuminate\Http\Request;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg;
+namespace IntelGUA\Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,9 +16,9 @@ class School_district extends Model
         return $this->hasMany(School::class);
     }
 
-    public function supervisions()
+    public function administrative_employees()
     {
-        return $this->hasOne(Supervision::class);
+        return $this->hasOne(Administrative_employee::class);
     }
 
     public function municipalities()

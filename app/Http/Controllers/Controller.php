@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Http\Controllers;
+namespace IntelGUA\Sisteg\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

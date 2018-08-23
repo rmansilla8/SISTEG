@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Sisteg\User::class,
+        'model' => IntelGUA\Sisteg\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

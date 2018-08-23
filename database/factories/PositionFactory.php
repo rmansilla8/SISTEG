@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Sisteg\Position::class, function (Faker $faker) {
+$factory->define(IntelGUA\Sisteg\Position::class, function (Faker $faker) {
     return [
         'description'  => $faker->unique()->word,
     ];

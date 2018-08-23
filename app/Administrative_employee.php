@@ -4,17 +4,17 @@ namespace IntelGUA\Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Administrative_employee extends Model
 {
     protected $fillable = [
         'employee_type_id',
         'person_id',
-        'school_district',
+        'school_district_id',
     ];
 
-    public function worker_type()
+    public function employee_type()
     {
-        return $this->belongsTo(Worker_type::class);
+        return $this->belongsTo(Employee_type::class);
     }
 
     public function person()

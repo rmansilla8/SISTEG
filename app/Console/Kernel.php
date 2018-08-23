@@ -1,6 +1,6 @@
 <?php
 
-namespace Sisteg\Console;
+namespace IntelGUA\Sisteg\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
