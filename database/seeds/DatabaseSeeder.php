@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             PeopleSeeder::class,
             EmployeesSeeder::class,
             AffiliatesSeeder::class,
-            //AdministrativeEmployeesSeeder::class,
+            AdministrativeEmployeesSeeder::class,
             FeeTypesSeeder::class,
             FeesSeeder::class,
             //

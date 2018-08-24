@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Department;
+use IntelGUA\Sisteg\Department;
+
 class DepartmentsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class DepartmentsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Sisteg\Department::class, 6)->create();
+        factory(IntelGUA\Sisteg\Department::class, 6)->create();
     }
 }

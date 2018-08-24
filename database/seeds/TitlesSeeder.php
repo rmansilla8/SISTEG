@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Title;
+use IntelGUA\Sisteg\Title;
+
 class TitlesSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class TitlesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Title::class, 6)->create();
+        factory(IntelGUA\Sisteg\Title::class, 6)->create();
     }
 }

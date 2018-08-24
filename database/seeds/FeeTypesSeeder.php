@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Fee_type;
+use IntelGUA\Sisteg\Fee_type;
+
 class FeeTypesSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class FeeTypesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Fee_type::class, 6)->create();
+        factory(IntelGUA\Sisteg\Fee_type::class, 6)->create();
     }
 }

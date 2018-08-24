@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Committee_level;
+use IntelGUA\Sisteg\Committee_level;
+
 class CommitteeLevelsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class CommitteeLevelsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Sisteg\Committee_level::class, 6)->create();
+        factory(IntelGUA\Sisteg\Committee_level::class, 6)->create();
     }
 }

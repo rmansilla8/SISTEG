@@ -20,9 +20,13 @@ class Person extends Model
         'gender_id',
         'birthdate',
         'civil_state_id'
-        
+
     ];
 
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->second_name . ' ' . $this->first_surname . ' ' . $this->second_surname;
+    }
     public function civil_state()
     {
         return $this->belongsTo(Civil_state::class);

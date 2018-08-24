@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Ethnic_community;
+use IntelGUA\Sisteg\Ethnic_community;
+
 class EthnicCommunitiesSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class EthnicCommunitiesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Ethnic_community::class, 6)->create();
+        factory(IntelGUA\Sisteg\Ethnic_community::class, 6)->create();
     }
 }

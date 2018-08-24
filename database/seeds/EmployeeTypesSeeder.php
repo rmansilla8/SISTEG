@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Employee_type;
+use IntelGUA\Sisteg\Employee_type;
+
 class EmployeeTypesSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class EmployeeTypesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Employee_type::class, 6)->create();
+        factory(IntelGUA\Sisteg\Employee_type::class, 6)->create();
     }
 }

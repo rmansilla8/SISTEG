@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\School;
+use IntelGUA\Sisteg\School;
+
 class SchoolsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class SchoolsSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\School::class, 6)->create();
+        factory(IntelGUA\Sisteg\School::class, 6)->create();
     }
 }

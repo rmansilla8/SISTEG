@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Modality;
+use IntelGUA\Sisteg\Modality;
+
 class ModalitiesSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class ModalitiesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Modality::class, 6)->create();
+        factory(IntelGUA\Sisteg\Modality::class, 6)->create();
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Classification;
+use IntelGUA\Sisteg\Classification;
+
 class ClassificationsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class ClassificationsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Sisteg\Classification::class, 6)->create();
+        factory(IntelGUA\Sisteg\Classification::class, 6)->create();
     }
 }

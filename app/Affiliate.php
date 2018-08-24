@@ -32,4 +32,9 @@ class Affiliate extends Model
         return $this->belongsToMany(Committee_level::class);
     }
 
+    public function fees()
+    {
+        return $this->hasMany(Fee::class);
+    }
+
 }

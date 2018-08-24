@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Area;
+use IntelGUA\Sisteg\Area;
+
 class AreasSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class AreasSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Area::class, 6)->create();
+        factory(IntelGUA\Sisteg\Area::class, 6)->create();
     }
 }

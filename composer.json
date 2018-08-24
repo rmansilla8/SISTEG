@@ -6,7 +6,9 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "drmonty/datatables-responsive": "^2.2",
         "fideloper/proxy": "^4.0",
+        "filsh/footable": "^2.0",
         "fzaninotto/faker": "^1.8",
         "intelguasoft/generators": "dev-master",
         "jeroennoten/laravel-adminlte": "^1.23",

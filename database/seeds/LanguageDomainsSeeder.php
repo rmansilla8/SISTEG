@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Language_domain;
+use IntelGUA\Sisteg\Language_domain;
+
 class LanguageDomainsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class LanguageDomainsSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Language_domain::class, 6)->create();
+        factory(IntelGUA\Sisteg\Language_domain::class, 6)->create();
     }
 }

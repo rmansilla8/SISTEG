@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Civil_state;
+use IntelGUA\Sisteg\Civil_state;
+
 class CivilStatesSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class CivilStatesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Civil_state::class, 6)->create();
+        factory(IntelGUA\Sisteg\Civil_state::class, 6)->create();
     }
 }

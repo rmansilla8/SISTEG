@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Position;
+use IntelGUA\Sisteg\Position;
+
 class PositionsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class PositionsSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Position::class, 6)->create();
+        factory(IntelGUA\Sisteg\Position::class, 6)->create();
     }
 }

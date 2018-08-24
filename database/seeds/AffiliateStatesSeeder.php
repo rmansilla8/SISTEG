@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Affiliate_state;
+use IntelGUA\Sisteg\Affiliate_state;
+
 class AffiliateStatesSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class AffiliateStatesSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Affiliate_state::class, 6)->create();
+        factory(IntelGUA\Sisteg\Affiliate_state::class, 6)->create();
     }
 }

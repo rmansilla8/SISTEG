@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98644ae20eb41f2c32ef3474415e496d",
+    "content-hash": "41b51b3e8c867886e6c48d91c536ca53",
     "packages": [
+        {
+            "name": "components/jquery",
+            "version": "3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jquery.git",
+                "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jquery/zipball/459648cda77875519c5da3ae1dd0ed5d170aa649",
+                "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery.min.map",
+                        "jquery.slim.js",
+                        "jquery.slim.min.js",
+                        "jquery.slim.min.map"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "JS Foundation and other contributors"
+                }
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "time": "2018-03-04T13:23:48+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -210,6 +252,67 @@
             "time": "2018-06-06T03:12:17+00:00"
         },
         {
+            "name": "drmonty/datatables-responsive",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mrohnstock/datatables-responsive.git",
+                "reference": "ac91501eef046ee3a3670aa15fd75072a50b825a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mrohnstock/datatables-responsive/zipball/ac91501eef046ee3a3670aa15fd75072a50b825a",
+                "reference": "ac91501eef046ee3a3670aa15fd75072a50b825a",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=1.7.0"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "js/dataTables.responsive.js"
+                    ],
+                    "files": [
+                        "css/dataTables.responsive.css",
+                        "css/responsive.bootstrap4.min.css",
+                        "css/responsive.bootstrap.css",
+                        "css/responsive.semanticui.css",
+                        "css/responsive.foundation.css",
+                        "css/responsive.bootstrap.min.css",
+                        "css/dataTables.responsive.min.css",
+                        "css/responsive.bootstrap4.css",
+                        "css/responsive.jqueryui.min.css",
+                        "css/responsive.foundation.min.css",
+                        "css/responsive.semanticui.min.css",
+                        "css/responsive.jqueryui.css",
+                        "js/responsive.foundation.js",
+                        "js/responsive.bootstrap4.min.js",
+                        "js/responsive.semanticui.js",
+                        "js/responsive.jqueryui.js",
+                        "js/responsive.bootstrap.min.js",
+                        "js/responsive.bootstrap.js",
+                        "js/responsive.semanticui.min.js",
+                        "js/responsive.jqueryui.min.js",
+                        "js/responsive.foundation.min.js",
+                        "js/responsive.bootstrap4.js",
+                        "js/dataTables.responsive.js",
+                        "js/dataTables.responsive.min.js"
+                    ],
+                    "shim": {
+                        "deps": [
+                            "jquery"
+                        ]
+                    }
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Responsive extension for DataTables, providing support for complex tables on all device screen sizes",
+            "homepage": "http://www.datatables.net/",
+            "time": "2017-12-11T12:13:29+00:00"
+        },
+        {
             "name": "egulias/email-validator",
             "version": "2.1.4",
             "source": {
@@ -365,6 +468,61 @@
                 "trusted proxy"
             ],
             "time": "2018-02-07T20:20:57+00:00"
+        },
+        {
+            "name": "filsh/footable",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Filsh/FooTable.git",
+                "reference": "3c080a5e91bf911400d7806063711cbd6121c86a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Filsh/FooTable/zipball/3c080a5e91bf911400d7806063711cbd6121c86a",
+                "reference": "3c080a5e91bf911400d7806063711cbd6121c86a",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=1.4.4",
+                "robloach/component-installer": "*"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "js/footable.js"
+                    ],
+                    "files": [
+                        "js/footable.filter.js",
+                        "js/footable.paginate.js",
+                        "js/footable.sort.js",
+                        "css/footable.standalone.css",
+                        "css/footable.paginate.css"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steven Usher",
+                    "email": "steveush@gmail.com"
+                },
+                {
+                    "name": "Brad Vincent",
+                    "email": "bradvin@gmail.com"
+                }
+            ],
+            "description": "jQuery plugin to make HTML tables responsive",
+            "homepage": "http://fooplugins.com",
+            "keywords": [
+                "responsive",
+                "table"
+            ],
+            "time": "2013-08-31T09:12:02+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -596,6 +754,49 @@
                 "laravel"
             ],
             "time": "2018-07-22T14:15:15+00:00"
+        },
+        {
+            "name": "kriswallsmith/assetic",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/assetic.git",
+                "reference": "8ab3638325af9cd144242765494a9dc9b53ab430"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/8ab3638325af9cd144242765494a9dc9b53ab430",
+                "reference": "8ab3638325af9cd144242765494a9dc9b53ab430",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Assetic": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Asset Management for PHP",
+            "homepage": "https://github.com/kriswallsmith/assetic",
+            "keywords": [
+                "assets",
+                "compression",
+                "minification"
+            ],
+            "time": "2014-12-12T05:07:58+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1407,6 +1608,54 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "robloach/component-installer",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RobLoach/component-installer.git",
+                "reference": "908a859aa7c4949ba9ad67091e67bac10b66d3d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RobLoach/component-installer/zipball/908a859aa7c4949ba9ad67091e67bac10b66d3d7",
+                "reference": "908a859aa7c4949ba9ad67091e67bac10b66d3d7",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "kriswallsmith/assetic": "1.*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "composer/composer": "1.*@alpha",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                },
+                "class": "ComponentInstaller\\ComponentInstallerPlugin"
+            },
+            "autoload": {
+                "psr-0": {
+                    "ComponentInstaller": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Loach",
+                    "homepage": "http://robloach.net"
+                }
+            ],
+            "description": "Allows installation of Components via Composer.",
+            "time": "2015-08-10T12:35:38+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\User;
+use IntelGUA\Sisteg\User;
+
 class UsersSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\User::class, 6)->create();
+        factory(IntelGUA\Sisteg\User::class, 6)->create();
     }
 }

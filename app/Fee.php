@@ -11,7 +11,6 @@ class Fee extends Model
         'fee_type_id',
         'amount',
         'date',
-        'year',
         'detail'
     ];
 
@@ -20,8 +19,8 @@ class Fee extends Model
         return $this->belongsTo(Fee_type::class);
     }
 
-    public function fee()
+    public function affiliate()
     {
-        return $this->belongsTo(Fee::class);
+        return $this->belongsTo(Affiliate::class);
     }
 }

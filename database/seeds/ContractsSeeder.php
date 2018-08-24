@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Contract;
+use IntelGUA\Sisteg\Contract;
+
 class ContractsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class ContractsSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Contract::class, 6)->create();
+        factory(IntelGUA\Sisteg\Contract::class, 6)->create();
     }
 }

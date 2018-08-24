@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Working_day;
+use IntelGUA\Sisteg\Working_day;
+
 class WorkingDaysSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class WorkingDaysSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Working_day::class, 6)->create();
+        factory(IntelGUA\Sisteg\Working_day::class, 6)->create();
     }
 }

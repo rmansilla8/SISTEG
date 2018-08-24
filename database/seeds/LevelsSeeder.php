@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Sisteg\Level;
+use IntelGUA\Sisteg\Level;
+
 class LevelsSeeder extends Seeder
 {
     /**
@@ -11,6 +12,6 @@ class LevelsSeeder extends Seeder
      */
     public function run()
     {
-        factory (Sisteg\Level::class, 6)->create();
+        factory(IntelGUA\Sisteg\Level::class, 6)->create();
     }
 }
