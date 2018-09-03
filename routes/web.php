@@ -9,22 +9,28 @@ use IntelGUA\Generators\Generate;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
-    
+
 });
 
 /*Route::get("generar", function(){
     $numeros=new Generate();
     $lista =$numeros->getNumbersGenerated(1000,true, 4);
-    for ($i=1; $i < count($lista); $i++) { 
+    for ($i=1; $i < count($lista); $i++) {
         echo $lista[$i] . "<br />";
-    } 
+    }
 });*/
 
-Route::resource('fees',   'FeesController');
+//Route::resource('fees',   'FeesController');
+Route::resource('fees', 'FeesController');
+Route::get('get-fees', 'FeesController@getFees');
+Route::get('get-fee_types', 'FeesController@getFeeType');
+Route::get('get-affiliates', 'FeesController@getAffiliate');
+
+
 
 
 

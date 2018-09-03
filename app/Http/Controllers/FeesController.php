@@ -2,8 +2,15 @@
 
 namespace IntelGUA\Sisteg\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use IntelGUA\Sisteg\Fee;
+use IntelGUA\Sisteg\Fee_type;
+use IntelGUA\Sisteg\Affiliate;
+use IntelGUA\Sisteg\AffiliatePerson;
+use IntelGUA\Sisteg\Person;
+
+
 
 class FeesController extends Controller
 {
@@ -14,10 +21,44 @@ class FeesController extends Controller
      */
     public function index()
     {
-        $fees = Fee::all();
-
-        return View('fees.index', compact('fees'));
+        return view('fees.index');
     }
+
+    public function getFees()
+    {
+        $fees = Fee::with("fee_type")->with("affiliate")->orderby('id', 'DESC')->get();
+        return $fees;
+
+    }
+
+    public function getFeeType()
+    {
+        $fee_types = Fee_type::orderby('id', 'DESC')->get();
+        return $fee_types;
+    }
+
+    public function getAffiliate()
+    {
+        $listPeople = [];
+        $person = new AffiliatePerson();
+        $affiliates = Affiliate::with('employee')->get();
+        $people = Person::all();
+        foreach ($affiliates as $afi) {
+            foreach ($people as $per) {
+                if ($per->id == $afi->employee->person_id) {
+                    $listPeople[] = array(
+                        "id" => $afi->id,
+                        "name" => $per->full_name
+                    );
+                }
+            }
+        };
+
+        return $listPeople;
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +67,7 @@ class FeesController extends Controller
      */
     public function create()
     {
-        return View('fees.create');
+
     }
 
     /**
@@ -37,7 +78,12 @@ class FeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            $fees = Fee::create($request->all());
+            return $fees;
+
+        }
     }
 
     /**
@@ -57,9 +103,14 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            $fees = Fee::find($request->id);
+            return response($fees);
+
+        }
     }
 
     /**
@@ -69,9 +120,15 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($request->ajax()) {
+
+            $fees = Fee::find($request->id);
+            $fees->update($request->all());
+            return response($fees);
+
+        }
     }
 
     /**
@@ -80,8 +137,11 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            Fee::destroy($request->id);
+            return redirect('fees')->with('status', 'Cuota eliminada exitosamente');
+        }
     }
 }

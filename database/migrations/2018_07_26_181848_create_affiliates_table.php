@@ -15,16 +15,16 @@ class CreateAffiliatesTable extends Migration
     {
         Schema::create('affiliates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number',4);
-            $table->integer('employee_id')->unsigned();
+            $table->string('number', 4);
+            $table->integer('employee_id')->unsigned()->unique();
             $table->integer('affiliate_state_id')->unsigned();
             $table->timestamps();
 
             /**
-             * *Area de llaves Foraneas
+             * *Area de llaves Foráneas
              */
 
-             $table->foreign('employee_id')->references('id')->on('employees')
+            $table->foreign('employee_id')->references('id')->on('employees')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

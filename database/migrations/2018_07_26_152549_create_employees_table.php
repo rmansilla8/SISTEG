@@ -17,7 +17,7 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
             $table->string('nit')->unique();
             $table->string('scale_register')->unique();
-            $table->integer('person_id')->unsigned();
+            $table->integer('person_id')->unsigned()->unique();
             $table->integer('ethnic_community_id')->unsigned();
             $table->integer('employee_type_id')->unsigned();
             $table->timestamps();
@@ -30,7 +30,7 @@ class CreateEmployeesTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-                $table->foreign('employee_type_id')->references('id')->on('employee_types')
+            $table->foreign('employee_type_id')->references('id')->on('employee_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
