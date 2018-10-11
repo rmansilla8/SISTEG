@@ -19,7 +19,7 @@ class CreateFeesTable extends Migration
             $table->integer('fee_type_id')->unsigned();
             $table->decimal('amount');
             $table->date('date');
-            $table->year('year');
+            //$table->year('year');
             $table->text('detail');
             $table->timestamps();
         });

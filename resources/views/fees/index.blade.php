@@ -39,23 +39,22 @@
                 <button data-toggle="modal" data-target="#add_new_fee_modal" class="btn btn-success pull-right">
 				<i class="fa fa-plus"></i> Nuevo Registro</button>
             </p>
+
             <!-- Tabla -->
                 <div class="container table-responsive">
-                   <table class="table table-stripped table-bordered table-responsive" >
+                   <table id="tblfees" class="table table-stripped table-bordered table-responsive" >
 					<thead>
 						<tr >
 							<th class="text-center">No.</th>
-							<th class="text-center">Afiliado</th>
+							<th class="text-center">Afiliación</th>
+							<th class="text-center">Nombre</th>
 							<th class="text-center">Tipo de Cuota</th>
 							<th class="text-center">Cantidad</th>
 							<th class="text-center">Fecha</th>
 							<th class="text-center">Detalle</th>
+							<th class="text-center">Acciones</th>
 						</tr>
 					</thead>
-					<tbody id="tbl-fees">
-
-					</tbody>
-
 				</table>
 
 				<!--/ fin de la tabla-->
@@ -86,8 +85,12 @@
 	 				<form  action="{{ URL::to('fees')}}" method="POST" id="frm-insert">
 						{{ csrf_field() }}
 	                	<div class="form-group">
-	                    	<label for="affiliate_id">Afiliado</label>
+	                    	<label for="affiliate_id">Número de Afiliado</label>
 	                		<select name="affiliate_id" id="affiliate_id"></select>
+						</div>
+						<div class="form-group">
+	                    	<label for="affiliate_id">Nombre Afiliado</label>
+	                		<select name="name" id="name"></select>
 						</div>
 
 	                	<div class="form-group">
@@ -177,14 +180,77 @@
 
 
 @section('css')
-     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">-->
 
 @stop
 
 @section('js')
-   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+   <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
    <script>
-        // $(document).ready( function () {
+
+			$(document).ready(function(){
+
+				datatables1();
+				getFeeType();
+				getAffiliate();
+				//getFees();
+			});
+
+			function datatables1()
+			{
+				$('#tblfees').DataTable({
+					//"autoWidth": 	true,
+					"responsive":	true,
+					"fixedColumns":	true,
+
+					"language":
+                     {
+                         "url":"//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                     },
+
+					"ajax": {
+						"url": 		'../get-fees',
+						"type":		'GET',
+						"dataSrc":	'fees',
+					},
+					"columns" : [
+						{"data":	"id"},
+						{"data":	"number"},
+						{
+							/**
+							 * * Permite combinar el nombre de la persona en una sola columna.
+							 *
+							 */
+							data: null,
+							render: function ( data, type, row )
+							{
+								/**
+								 ** data se carga con los campos donde se almacena el nombre.
+								 */
+								return data.first_name+'  '+data.second_name+'  '+data.first_surname+'  '+data.second_surname;
+							},
+							//editField: ['first_name', 'second_name', 'first_surname', 'second_surname']
+						},
+						{"data":	"description"},
+						{"data":	"amount"},
+						{"data":	"date"},
+						{"data":	"detail"},
+						{"defaultContent":
+							"<button type='button' id='Show' class='show btn btn-info'><i class='fa fa-eye'></i></button>"+
+							"<button type='button' id='Edit' class='edit btn btn-warning'><i class='fa fa-pencil-square-o'></i></button>"+
+							"<button type='button' id='Delete' class='delete btn btn-danger'><i class='fa fa-trash-o'></i></button>"
+
+						}
+						/* {"render":	function (data, type){
+							return '<a class="col btn btn-outline-danger btn-sm" href=#/>'+
+							'<i class="fas fa-trash"></i></a>';
+							}
+						} */
+					]
+				});
+			}
+
+		// 	$(document).ready( function () {
         //     $('#tblfees').DataTable(
         //         {
 
@@ -198,51 +264,40 @@
         //     );
 
         // } );
-
-
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-
-			$(document).ready(function(){
-				getFees();
-				getFeeType();
-				getAffiliate();
-
-			});
-
-			function getFees(){
-				$("#tbl-fees").empty();
-				$.get('get-fees', function(data){
-					$.each(data,	function(i, value){
-						var fila = $('<tr />');
-						fila.append($('<td />', {
-							text : value.id
-						})).append($('<td />', {
-							text : value.affiliate.number
-						})).append($('<td />', {
-							text : value.fee_type.description
-						})).append($('<td />', {
-							text : value.amount
-							})).append($('<td />', {
-							text : value.date
-						})).append($('<td />', {
-							text : value.detail
-						})).append($('<td />', {
-							html : '<a class="btn btn-sm btn-warning" href="" id="edit" data-id=' + value.id + ' >' +
-									'<i class="fa fa-edit"></i> Editar</a>' +
-									' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' >' +
-									'<i class="fa fa-trash"></i> Eliminar</a>'
-						}).css('width','172px'));
-						$("#tbl-fees").append(fila);
-					});
-				});
-			}
+			 /*
+			  * Esta función llena  el tbody #tbl-fees con los datos de
+			  * la tabla fees, además contiene los botones de editar y eliminar.
+			  */
+			// function getFees(){
+			// 	$("#tbl-fees").empty();
+			// 	$.get('get-fees', function(data){
+			// 		$.each(data,	function(i, value){
+			// 			var fila = $('<tr />');
+			// 			fila.append($('<td />', {
+			// 				text : value.id
+			// 			})).append($('<td />', {
+			// 				text : value.affiliate.number
+			// 			})).append($('<td />', {
+			// 				text : value.fee_type.description
+			// 			})).append($('<td />', {
+			// 				text : value.amount
+			// 				})).append($('<td />', {
+			// 				text : value.date
+			// 			})).append($('<td />', {
+			// 				text : value.detail
+			// 			})).append($('<td />', {
+			// 				html : '<a class="btn btn-sm btn-warning" href="" id="edit" data-id=' + value.id + ' >' +
+			// 						'<i class="fa fa-edit"></i> Editar</a>' +
+			// 						' <a  class="btn btn-sm btn-danger" href="" id="del" data-id=' + value.id + ' >' +
+			// 						'<i class="fa fa-trash"></i> Eliminar</a>'
+			// 			}).css('width','172px'));
+			// 			$("#tbl-fees").append(fila);
+			// 		});
+			// 	});
+			// }
 
 			/*
-			 * Permite cargar la lista de tipos de cuota
+			 * Permite cargar la lista de tipos de cuota.
 			 */
 			function getFeeType(){
 			$.get('get-fee_types', function(data){
@@ -251,7 +306,9 @@
 					});
 				});
 			}
-
+			/*
+			 * Permite cargar la lista de afiliados.
+			 */
 			function getAffiliate(){
 			$.get('get-affiliates', function(data){
 					$.each(data,	function(i, value){
@@ -264,26 +321,30 @@
 			//-------------Eliminar cuotas-------------//
 
 				/*
-				 * Esta función permite eliminar una cuota al presionar el botón eliminar.
+				 * Esta función permite eliminar una cuota a través del botón
+				 * eliminar
 				 */
+
 
 
 				$('body').delegate('#tbl-fees #del', 'click', function(e){
 					e.preventDefault();
-					//var resp = confirm("¿Desea eliminar el registro?");
-
 					swal({
-						title: "Eliminar",
-						text: "¿Realmente desea eliminar la cuota?",
-						icon: "warning",
-						buttons: true,
-						dangerMode: true,
+						title: 'Está seguro de realizar esta acción?',
+						text: "Si continua esta cuota será eliminada!",
+						type: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Sí, deseo eliminarla!'
 						})
 						.then((willDelete) => {
 						if (willDelete) {
 							var id = $(this).data('id');
-							$.post('{{route("fees.destroy", ' + id + ')}}', {id:id}, function(data){
+
+							$.post('{{route("fees.destroy", '+ id +' )}}', {id:id}, function(data){
 								$(+id).remove();
+
 							});
 							getFees();
 							swal("La cuota se eliminó correctamente!", {
@@ -333,13 +394,18 @@
 
 
 			//-----------Crear cuota --------
-
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
 
 			$('#frm-insert').on('submit', function(e){
 				e.preventDefault();
 				var data 	= $(this).serialize();
 				var url 	= $(this).attr('action');
 				var post 	= $(this).attr('method');
+				console.info(data);
 				$.ajax({
 					type 	: post,
 					url 	: url,
@@ -349,14 +415,15 @@
 					{
 						$('#add_new_fee_modal').modal('hide');
 						getFees();
-						$.toast({
-							heading: 'Information',
-							text: '¡Cuota creada exitosamente!',
-							icon: 'info',
-							position: 'top-right',
-							loader: true,        // Change it to false to disable loader
-							loaderBg: '#9EC600'  // To change the background
-						});
+						toastr["success"]("Cuota guardada","Información")
+						// $.toastr.info({
+						// 	heading: 'Information',
+						// 	text: '¡Cuota creada exitosamente!',
+						// 	icon: 'info',
+						// 	position: 'top-right',
+						// 	loader: true,        // Change it to false to disable loader
+						// 	loaderBg: '#9EC600'  // To change the background
+						// });
 					}
 				});
 			});
@@ -366,6 +433,7 @@
 
 
     </script>
+
 
 
 @stop

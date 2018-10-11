@@ -28,6 +28,16 @@
         <link rel="stylesheet" href="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css">
     @endif
 
+    @if(config('adminlte.plugins.sweetalert'))
+        <!-- DataTables with bootstrap 3 style -->
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/sweetalert/sweetalert2.min.css')}}">
+    @endif
+
+    @if(config('adminlte.plugins.toastr'))
+        <!-- DataTables with bootstrap 3 style -->
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/toastr/toastr.min.css')}}">
+    @endif
+
     @yield('adminlte_css')
 
     <!--[if lt IE 9]>
@@ -59,6 +69,17 @@
 @if(config('adminlte.plugins.chartjs'))
     <!-- ChartJS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+@endif
+
+@if(config('adminlte.plugins.sweetalert'))
+    <!-- ChartJS -->
+    <script src="{{ asset('vendor/adminlte/vendor/sweetalert/sweetalert2.min.js')}}"></script>
+@endif
+
+@if(config('adminlte.plugins.toastr'))
+    <!-- ChartJS -->
+    <script src="{{ asset('vendor/adminlte/vendor/toastr/toastr.min.js')}}" defer></script>
+
 @endif
 
 @yield('adminlte_js')

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use IntelGUA\Sisteg\Fee;
 use IntelGUA\Sisteg\Fee_type;
 use IntelGUA\Sisteg\Affiliate;
+use IntelGUA\Sisteg\Employee;
 use IntelGUA\Sisteg\AffiliatePerson;
 use IntelGUA\Sisteg\Person;
 
@@ -26,9 +27,17 @@ class FeesController extends Controller
 
     public function getFees()
     {
-        $fees = Fee::with("fee_type")->with("affiliate")->orderby('id', 'DESC')->get();
-        return $fees;
-
+        /*$fees = Fee::with("fee_type")->with("affiliate")->orderby('id', 'DESC')->get();
+        return (compact('fees'));
+         */
+        $fees = DB::table('fees')
+            ->join('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
+            ->join('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
+            ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
+            ->join('people', 'people.id', '=', 'employees.person_id')
+            ->select('fees.*', 'fee_types.description', 'affiliates.number', 'employees.nit', 'people.first_name', 'people.second_name', 'people.third_name', 'people.first_surname', 'people.second_surname')
+            ->get();
+        return (compact('fees'));
     }
 
     public function getFeeType()
