@@ -146,11 +146,19 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
+
         if ($request->ajax()) {
+            $tooth = Tooth::findOrFail($id);
+            $tooth->delete();
+            return redirect('teeth')->with('success', 'Cuota voluntaria eliminada exitosamente');
+        }
+        return redirect('teeth')->with('fail', 'Diente eliminado exitosamente');
+    }
+        /* if ($request->ajax()) {
             Fee::destroy($request->id);
             return redirect('fees')->with('status', 'Cuota eliminada exitosamente');
-        }
-    }
+        } */
+
 }

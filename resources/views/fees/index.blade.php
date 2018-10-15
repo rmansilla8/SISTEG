@@ -25,29 +25,34 @@
                         title="Collapse">
                     <i class="fa fa-minus"></i>
                 </button>
+
                 <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove" disabled>
                     <i class="fa fa-times"></i>
                 </button>
+
             </div>
         </div>
         <div class="box-body">
             <!-- Cuerpo de la página -->
             <!-- se pueden colocar cualquier recurso como tablas, etc. -->
 
-
-            <p>
-                <button data-toggle="modal" data-target="#add_new_fee_modal" class="btn btn-success pull-right">
-				<i class="fa fa-plus"></i> Nuevo Registro</button>
-            </p>
+			<div class="row">
+				<div class="col-md-12">
+						<button style="margin-bottom:10px;" type="button" data-toggle="modal" data-target="#add_new_fee_modal" class="btn btn-success pull-right">
+						<i class="fa fa-plus"></i> Nuevo Registro</button>
+					<br/>
+				</div>
+			</div>
 
             <!-- Tabla -->
-                <div class="container table-responsive">
-                   <table id="tblfees" class="table table-stripped table-bordered table-responsive" >
+			<div class="row">
+                <div class="col-md-12">
+                   <table id="tblfees" class="display responsive no-wrap" width="100%" >
 					<thead>
 						<tr >
 							<th class="text-center">No.</th>
-							<th class="text-center">Afiliación</th>
-							<th class="text-center">Nombre</th>
+							<th data-priority="2" class="text-center">Afiliación</th>
+							<th data-priority="1" class="text-center">Nombre</th>
 							<th class="text-center">Tipo de Cuota</th>
 							<th class="text-center">Cantidad</th>
 							<th class="text-center">Fecha</th>
@@ -59,8 +64,9 @@
 
 				<!--/ fin de la tabla-->
                 </div>
+			</div>
 
-            </div>
+        </div>
 
         <!-- /.box-body -->
         <div class="box-footer">
@@ -84,13 +90,13 @@
 
 	 				<form  action="{{ URL::to('fees')}}" method="POST" id="frm-insert">
 						{{ csrf_field() }}
-	                	<div class="form-group">
+	                	<!-- <div class="form-group">
 	                    	<label for="affiliate_id">Número de Afiliado</label>
 	                		<select name="affiliate_id" id="affiliate_id"></select>
-						</div>
+						</div> -->
 						<div class="form-group">
 	                    	<label for="affiliate_id">Nombre Afiliado</label>
-	                		<select name="name" id="name"></select>
+	                		<select name="affiliate_id" id="affiliate_id"></select>
 						</div>
 
 	                	<div class="form-group">
@@ -138,7 +144,7 @@
 
 					<div class="form-group">
 						<label for="update_affiliate_id">Afiliado</label>
-						<input name="affiliate_id" type="text" id="update_affiliate_id" placeholder="Afiliado" class="form-control"/>
+						<input name="affiliate_name" type="text" id="update_affiliate" placeholder="Afiliado" class="form-control"/>
 					</div>
 
 					<div class="form-group">
@@ -185,7 +191,6 @@
 @stop
 
 @section('js')
-   <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
    <script>
 
 			$(document).ready(function(){
@@ -198,21 +203,37 @@
 
 			function datatables1()
 			{
-				$('#tblfees').DataTable({
-					//"autoWidth": 	true,
+				var t = $('#tblfees').DataTable({
+
+
+
+					"autoWidth": 	true,
 					"responsive":	true,
+					"columnDefs":
+						[
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: -2 },
+							{
+								"searchable": false,
+								"orderable": false,
+								"targets": 0
+							}
+						],
+
+					"order": [[ 1, 'asc' ]],
 					"fixedColumns":	true,
 
 					"language":
-                     {
-                         "url":"//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-                     },
+						{
+							"url":"//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+						},
 
-					"ajax": {
-						"url": 		'../get-fees',
-						"type":		'GET',
-						"dataSrc":	'fees',
-					},
+					"ajax":
+						{
+							"url": 		'../get-fees',
+							"type":		'GET',
+							"dataSrc":	'fees',
+						},
 					"columns" : [
 						{"data":	"id"},
 						{"data":	"number"},
@@ -223,12 +244,12 @@
 							 */
 							data: null,
 							render: function ( data, type, row )
-							{
-								/**
-								 ** data se carga con los campos donde se almacena el nombre.
-								 */
-								return data.first_name+'  '+data.second_name+'  '+data.first_surname+'  '+data.second_surname;
-							},
+								{
+									/**
+									** data se carga con los campos donde se almacena el nombre.
+									*/
+									return data.first_name+'  '+data.second_name+'  '+data.first_surname+'  '+data.second_surname;
+								},
 							//editField: ['first_name', 'second_name', 'first_surname', 'second_surname']
 						},
 						{"data":	"description"},
@@ -236,34 +257,23 @@
 						{"data":	"date"},
 						{"data":	"detail"},
 						{"defaultContent":
+							"<div class='btn-group btn-group-xs'>"+
 							"<button type='button' id='Show' class='show btn btn-info'><i class='fa fa-eye'></i></button>"+
 							"<button type='button' id='Edit' class='edit btn btn-warning'><i class='fa fa-pencil-square-o'></i></button>"+
-							"<button type='button' id='Delete' class='delete btn btn-danger'><i class='fa fa-trash-o'></i></button>"
-
+							"<button type='button' id='Delete' class='delete btn btn-danger'><i class='fa fa-trash-o'></i></button>"+
+							"</div>"
 						}
-						/* {"render":	function (data, type){
-							return '<a class="col btn btn-outline-danger btn-sm" href=#/>'+
-							'<i class="fas fa-trash"></i></a>';
-							}
-						} */
+
+
 					]
+
 				});
+				t.on( 'order.dt search.dt', function () {
+						t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+							cell.innerHTML = i+1;
+						} );
+				} ).draw();
 			}
-
-		// 	$(document).ready( function () {
-        //     $('#tblfees').DataTable(
-        //         {
-
-        //             "language":
-        //             {
-        //                 "url":"//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-        //             },
-        //              //responsive:true,
-
-        //         }
-        //     );
-
-        // } );
 			 /*
 			  * Esta función llena  el tbody #tbl-fees con los datos de
 			  * la tabla fees, además contiene los botones de editar y eliminar.
@@ -358,24 +368,28 @@
 
 			//-------------Editar cuotas-------------
 
-			$('body').delegate('#tbl-fees #edit', 'click', function(e){
+			$('body').delegate('#tblfees #Edit', 'click', function(e){
 				e.preventDefault();
-				var id = $(this).data('id');
-				//console.log(id);
-				$.get('fees/' + id + '/edit', {id:id}, function(data){
-					$('#frm-update').find('#update_affiliate_id').val(data.affiliate_id)
-					$('#frm-update').find('#update_fee_type_id').val(data.fee_type_id)
-					$('#frm-update').find('#update_amount').val(data.amount)
-					$('#frm-update').find('#update_date').val(data.date)
-					$('#frm-update').find('#update_detail').val(data.detail)
-					$('#frm-update').find('#update_id').val(data.id)
+				var $tr = $(this).closest('tr');
+    			var rowData = $('#tblfees').DataTable().row($tr).data();
+   				console.log(rowData);
+				var vid = rowData.id;
+				console.log(vid);
+
+				$.get('fees/' + vid + '/edit', {id:vid}, function(data){
+					$('#update_fee_modal').find('#update_affiliate').val(data.affiliate_id)
+					$('#update_fee_modal').find('#update_fee_type_id').val(data.fee_type_id)
+					$('#update_fee_modal').find('#update_amount').val(data.amount)
+					$('#update_fee_modal').find('#update_date').val(data.date)
+					$('#update_fee_modal').find('#update_detail').val(data.detail)
+					$('#update_fee_modal').find('#update_id').val(data.id)
 					$('#update_fee_modal').modal('show');
 				});
 			});
 
 			//-------------Actualizar cuotas-------------
 
-				$('#frm-update').on('submit', function(e){
+				$('#update_fee_modal').on('submit', function(e){
 				e.preventDefault();
 				var data 	= $(this).serialize();
 				var id 		= $('#update_id').val();
@@ -413,9 +427,12 @@
 					dataType: 'json',
 					success:function(data)
 					{
+						var tbl = $('#tblfees').DataTable();
+						tbl.ajax.reload()
 						$('#add_new_fee_modal').modal('hide');
 						getFees();
 						toastr["success"]("Cuota guardada","Información")
+
 						// $.toastr.info({
 						// 	heading: 'Information',
 						// 	text: '¡Cuota creada exitosamente!',
@@ -426,6 +443,8 @@
 						// });
 					}
 				});
+
+
 			});
 
 

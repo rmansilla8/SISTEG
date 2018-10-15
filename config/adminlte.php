@@ -217,7 +217,7 @@ return [
      */
 
     'plugins' => [
-        'datatables' => true,
+        'datatable' => true,
         'select2' => true,
         'chartjs' => true,
         'sweetalert' => true,
