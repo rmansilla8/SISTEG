@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeesTable extends Migration
+class CreateAccountingRecordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,15 @@ class CreateFeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fees', function (Blueprint $table) {
+        Schema::create('accounting_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('affiliate_id')->unsigned();
-            $table->integer('fee_type_id')->unsigned();
+            $table->text('description');
             $table->decimal('amount');
             $table->date('date');
-            //$table->year('year');
-            $table->text('detail');
+            $table->integer('record_type_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('affiliate_id')->references('id')->on('affiliates')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('fee_type_id')->references('id')->on('fee_types')
+            $table->foreign('record_type_id')->references('id')->on('record_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -40,6 +34,6 @@ class CreateFeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fees');
+        Schema::dropIfExists('accounting_records');
     }
 }

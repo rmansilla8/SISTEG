@@ -153,16 +153,16 @@ class FeesController extends Controller
         if ($request->ajax()) {
             $fee = Fee::findOrFail($id);
             $fee->delete();
-            return redirect('fees')->with('success', 'Diente eliminado exitosamente');
+            return redirect('fees')->with('success', 'cuota voluntaria eliminada exitosamente');
         }
-        return redirect('fees')->with('fail', 'Diente eliminado exitosamente');
+        return redirect('fees')->with('fail', 'cuota voluntaria eliminada exitosamente');
 
         /* if ($request->ajax()) {
             $tooth = Tooth::findOrFail($id);
             $tooth->delete();
             return redirect('teeth')->with('success', 'Cuota voluntaria eliminada exitosamente');
         }
-        return redirect('teeth')->with('fail', 'Diente eliminado exitosamente');
+        return redirect('teeth')->with('fail', 'cuota voluntaria eliminada exitosamente');
     } */
         /* if ($request->ajax()) {
             Fee::destroy($request->id);

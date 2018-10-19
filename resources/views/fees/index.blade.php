@@ -99,6 +99,7 @@
 							<!--
 								-Formulario del modal
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
+								-El nombre de los input y select deben ser igual nombre del campo en la BD.
 							 -->
 							<form  action="{{ URL::to('fees')}}" method="POST" id="frm-insert" onsubmit="return validateDataCreate();">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
@@ -273,6 +274,8 @@
 				getFeeEdit();
 				/**Llena el select #update_affiliate_id del modal #update_fee_modal */
 				getAffiliateEdit();
+				/**Contiene maskaras para inputs */
+				mask();
 
 			});
 			/**Inicio del DataTable de fees */
@@ -418,7 +421,8 @@
 			//-------------Eliminar Diente-------------
 	/*se creo esta función para que al dar click al botón eliminar muestre uns alerta con
 	 mensajes para que el usuario de click a la opción aceptar o cancelar */
-$('body').delegate('#tblfees #Delete', 'click', function(e){
+
+		$('body').delegate('#tblfees #Delete', 'click', function(e){
 		e.preventDefault();
 		// Crea los botones para que el usuario decida
 		const swalWithBootstrapButtons = swal.mixin({
@@ -429,7 +433,7 @@ $('body').delegate('#tblfees #Delete', 'click', function(e){
 		//Muestra el mensaje de la alerta y activa el botón cancelar
 		swalWithBootstrapButtons({
 			title: 'Eliminar',
-			text: "¿Realmente desea eliminar el registro?",
+			text: "¿Desea eliminar la cuota voluntaria?",
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonText: 'Si, eliminar!',
@@ -445,7 +449,6 @@ $('body').delegate('#tblfees #Delete', 'click', function(e){
     				var rowData = $('#tblfees').DataTable().row($tr).data();
    						console.log(rowData)
 					var vid = rowData.id;
-					console.log(vid)
 					var v_token = "{{csrf_token()}}";
 					var parametros = {_method: 'DELETE', _token: v_token};
 					$.ajax({
@@ -462,17 +465,25 @@ $('body').delegate('#tblfees #Delete', 'click', function(e){
 					});
 					//Se muestra un mensaje de que el dato se elimino correctamente
 					swalWithBootstrapButtons({
-						title:"Poof! ",
-						text: "Diente se eliminó correctamente!",
-						icon: "success",
+						title:"Eliminado",
+						text: "La cuota voluntaria se eliminó correctamente!",
+						type: "success"
 					});
 					// En caso de que el usuario seleccione el botón cancelar se muestra un mensaje de operación cancelada
 				} else if(
 					result.dismiss === swal.DismissReason.cancel){
-					swalWithBootstrapButtons("¡Operación cancelada por el usuario!");
+					swalWithBootstrapButtons({
+						title:"Cancelado",
+						text: "¡Operación cancelada por el usuario!",
+						type: "error"
+
+						});
 				}
 			});
 		});
+
+
+
 			//-------------Editar cuotas-------------
 
 			$('body').delegate('#tblfees #Edit', 'click', function(e){
@@ -610,11 +621,6 @@ $('body').delegate('#tblfees #Delete', 'click', function(e){
 
 
 			});
-
-
-
-
-
 /**Función que valida que no existan campos vacíos en el modal #add_new_fee_modal */
 function validateDataCreate(){
 
@@ -622,7 +628,7 @@ function validateDataCreate(){
 		var fee_type_create 	 = $("#fee_type_id").val();
 		var amount_create 	 	 = $("#amount").val();
 		var date_create			 = $("#date").val();
-		var description_create	 = $("#description").val();
+		var description_create	 = $("#detail").val();
 		//validamos campos
 		if($.trim(affiliate_create) == ""){
 		toastr.error("No ha seleccionado un afiliado","Aviso!");
@@ -655,7 +661,7 @@ function validateDataUpdate(){
 		var fee_type_update 	 = $("#update_fee_type_id").val();
 		var amount_update 	 = $("#update_amount").val();
 		var date_update		 = $("#update_date").val();
-		var description_update	 = $("#update_description").val();
+		var description_update	 = $("#update_detail").val();
 		//validamos campos
 		if($.trim(affiliate_update) == ""){
 		toastr.error("No ha seleccionado un afiliado","Aviso!");
@@ -683,7 +689,8 @@ function validateDataUpdate(){
 
 /**Máscara para el input de monto */
 function mask(){
-	$('#amount').mask('00,00', {reverse: true});
+	$('#amount').mask('00.00', {reverse: true});
+	$('#update_amount').mask('00.00', {reverse: true});
 }
     </script>
 

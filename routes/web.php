@@ -29,6 +29,10 @@ Route::resource('fees', 'FeesController');
 Route::get('get-fees', 'FeesController@getFees');
 Route::get('get-fee_types', 'FeesController@getFeeType');
 Route::get('get-affiliates', 'FeesController@getAffiliate');
+
+Route::resource('accounting_records', 'AccountingRecordsController');
+Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingRecords');
+Route::get('get-record_types', 'AccountingRecordsController@getRecordTypes');
 //Route::post('fees/{fee}', 'FeesController@destroy')->name('eliminar');
 
 
