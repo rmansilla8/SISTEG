@@ -10,6 +10,7 @@ use IntelGUA\Sisteg\Affiliate;
 use IntelGUA\Sisteg\Employee;
 use IntelGUA\Sisteg\AffiliatePerson;
 use IntelGUA\Sisteg\Person;
+use IntelGUA\Sisteg\Http\Requests\FeeRequest;
 
 
 
@@ -129,13 +130,13 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         if ($request->ajax()) {
 
-            $fees = Fee::find($request->id);
-            $fees->update($request->all());
-            return response($fees);
+            $fee = Fee::find($request->id);
+            $fee->update($request->all());
+            return response($fee);
 
         }
     }
@@ -150,15 +151,23 @@ class FeesController extends Controller
     {
 
         if ($request->ajax()) {
+            $fee = Fee::findOrFail($id);
+            $fee->delete();
+            return redirect('fees')->with('success', 'Diente eliminado exitosamente');
+        }
+        return redirect('fees')->with('fail', 'Diente eliminado exitosamente');
+
+        /* if ($request->ajax()) {
             $tooth = Tooth::findOrFail($id);
             $tooth->delete();
             return redirect('teeth')->with('success', 'Cuota voluntaria eliminada exitosamente');
         }
         return redirect('teeth')->with('fail', 'Diente eliminado exitosamente');
-    }
+    } */
         /* if ($request->ajax()) {
             Fee::destroy($request->id);
             return redirect('fees')->with('status', 'Cuota eliminada exitosamente');
         } */
 
+    }
 }

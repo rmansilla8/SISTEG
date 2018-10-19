@@ -19,11 +19,12 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.19/filtering/row-based/range_dates.js"></script>
-
+    <!-- <script src="//cdn.datatables.net/plug-ins/1.10.19/filtering/row-based/range_dates.js"></script> -->
+    <!-- <script src="//cdn.datatables.net/plug-ins/1.10.19/sorting/date-uk.js"></script> -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/helper-css/icon-on-input.css') }}">
     @if(config('adminlte.plugins.select2'))
         <!-- Select2 -->
-        <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.19/sorting/date-uk.js">
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/select2/select2.min.css') }}">
     @endif
 
     <!-- Theme style -->
@@ -67,10 +68,11 @@
 <script src="{{ asset('vendor/adminlte/vendor/datatable/jquery-3.3.1.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.mask.min.js') }}"></script>
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/select2/select2.min.js') }}"></script>
 @endif
 
 @if(config('adminlte.plugins.datatable'))
