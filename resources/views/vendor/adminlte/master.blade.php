@@ -15,10 +15,9 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
 
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
     <!-- <script src="//cdn.datatables.net/plug-ins/1.10.19/filtering/row-based/range_dates.js"></script> -->
     <!-- <script src="//cdn.datatables.net/plug-ins/1.10.19/sorting/date-uk.js"></script> -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/helper-css/icon-on-input.css') }}">
@@ -70,6 +69,7 @@
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.mask.min.js') }}"></script>
 
+
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
     <script src="{{ asset('vendor/adminlte/vendor/select2/select2.min.js') }}"></script>
@@ -84,6 +84,10 @@
     <script src="{{ asset('vendor/adminlte/vendor/datatable/vfs_fonts.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatable/pdfmake.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/vendor/datatable/jszip.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatable/moment.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/datatable/datetime-moment.js') }}"></script>
+    <!-- <script src="{{ asset('vendor/adminlte/vendor/datatable/dataTables.dateFormat.js') }}"></script> -->
+    <!-- <script src="{{ asset('vendor/adminlte/vendor/datatable/date-uk.js') }}"></script> -->
 
 
 @endif

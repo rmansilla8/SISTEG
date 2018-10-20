@@ -22,14 +22,14 @@ class AccountingRecordsController extends Controller
 
     public function getAccountingRecords()
     {
-        $accounting_records = Accounting_record::with("record_types")->orderby('id', 'DESC')->get();
+        $accounting_records = Accounting_record::with("record_type")->orderby('id', 'DESC')->get();
         return (compact('accounting_records'));
     }
 
     public function getRecordTypes()
     {
         $record_types = Record_type::orderby('id', 'DESC')->get();
-        return (compact('record_types'));
+        return $record_types;
     }
     /**
      * Show the form for creating a new resource.
@@ -108,7 +108,7 @@ class AccountingRecordsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         if ($request->ajax()) {
             $accounting_record = Accounting_record::findOrFail($id);

@@ -104,30 +104,40 @@
 							<form  action="{{ URL::to('fees')}}" method="POST" id="frm-insert" onsubmit="return validateDataCreate();">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
-								<div  class="form-group ">
-									<label for="affiliate_id">Nombre Afiliado</label>
+								<div  class="input-group ">
+									<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
+									<span class="input-group-addon"><i class="fa fa-user"></i></span>
 									<select name="affiliate_id" id="affiliate_id" class="form-control"></select>
 								</div>
+								<br/>
 
-								<div class="form-group">
-									<label for="fee_type_id">Tipo de Cuota</label>
+								<div class="input-group">
+									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+									<span class="input-group-addon"><i class="fa fa-list"></i></span>
 									<select name="fee_type_id" id="fee_type_id" class="form-control"></select>
 								</div>
+								<br/>
 
-								<div class="form-group">
-									<label for="amount">Cantidad</label>
+								<div class="input-group">
+									<!-- <label for="amount">Cantidad</label> -->
+									<span class="input-group-addon"><i class="fa fa-money"></i></span>
 									<input name="amount" type="text" id="amount" placeholder="Cantidad" class="form-control"/>
 								</div>
+								<br/>
 
-								<div class="form-group">
-									<label for="date">Fecha</label>
+								<div class="input-group">
+									<!-- <label for="date">Fecha</label> -->
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									<input name="date" type="date" id="date" placeholder="Name" class="form-control"/>
 								</div>
+								<br/>
 
-								<div class="form-group">
-									<strong>Descripción:</strong>
+								<div class="input-group">
+									<!-- <strong>Descripción:</strong> -->
+									<span class="input-group-addon"><i class="fa fa-pencil"></i></span>
 									<textarea id="detail" class="form-control" name="detail"></textarea>
 								</div>
+								<br/>
 
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -159,30 +169,40 @@
 													<input type="hidden" name="_method" value="PUT">
 													<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-														<div class="form-group">
-															<label for="affiliate_id">Nombre Afiliado</label>
+														<div class="input-group">
+															<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
+															<span class="input-group-addon"><i class="fa fa-user"></i></span>
 															<select name="affiliate_id" id="update_affiliate_id" class="form-control"></select>
 														</div>
+														<br/>
 
-														<div class="form-group">
-															<label for="update_fee_type_id">Tipo de cuota</label>
+														<div class="input-group">
+															<!-- <label for="update_fee_type_id">Tipo de cuota</label> -->
+															<span class="input-group-addon"><i class="fa fa-list"></i></span>
 																<select name="fee_type_id" id="update_fee_type_id" class="form-control"></select>
 														</div>
+														<br/>
 
-														<div class="form-group">
-															<label for="update_amount">Cantidad</label>
-															<input name="amount" type="text" id="update_amount" placeholder="Cantidad" class="form-control"/>
+														<div class="input-group">
+															<!-- <label for="update_amount">Cantidad</label> -->
+															<span class="input-group-addon"><i class="fa fa-money"></i></span>
+															<input name="amount" type="text" id="update_amount" placeholder="Ingrese la cantidad" class="form-control"/>
 														</div>
+														<br/>
 
-														<div class="form-group">
-															<label for="update_date">Fecha</label>
-															<input name="date" type="date" id="update_date" placeholder="Cantidad" class="form-control"/>
+														<div class="input-group">
+															<!-- <label for="update_date">Fecha</label> -->
+															<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+															<input name="date" type="date" id="update_date" placeholder="Ingrese la fecha" class="form-control"/>
 														</div>
+														<br/>
 
-														<div class="form-group">
-															<strong>Detalle:</strong>
-															<textarea id="update_detail" class="form-control" name="detail" ></textarea>
+														<div class="input-group">
+															<!-- <strong>Detalle:</strong> -->
+															<span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+															<textarea id="update_detail" class="form-control" name="detail" placeholder="Ingrese el detalle" ></textarea>
 														</div>
+														<br/>
 
 														<input name="id" type="hidden" id="update_id"  placeholder="" class=""/>
 
@@ -466,15 +486,15 @@
 					//Se muestra un mensaje de que el dato se elimino correctamente
 					swalWithBootstrapButtons({
 						title:"Eliminado",
-						text: "La cuota voluntaria se eliminó correctamente!",
+						text: "¡La cuota voluntaria se eliminó correctamente!",
 						type: "success"
 					});
 					// En caso de que el usuario seleccione el botón cancelar se muestra un mensaje de operación cancelada
 				} else if(
 					result.dismiss === swal.DismissReason.cancel){
 					swalWithBootstrapButtons({
-						title:"Cancelado",
-						text: "¡Operación cancelada por el usuario!",
+						title:"Cancelada",
+						text: "¡Operación cancelada!",
 						type: "error"
 
 						});
