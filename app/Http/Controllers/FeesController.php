@@ -36,7 +36,7 @@ class FeesController extends Controller
             ->join('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
             ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
             ->join('people', 'people.id', '=', 'employees.person_id')
-            ->select('fees.*', 'fee_types.description', 'affiliates.number', 'employees.nit', 'people.first_name', 'people.second_name', 'people.third_name', 'people.first_surname', 'people.second_surname')
+            ->select('fees.*', 'fee_types.description', 'affiliates.number', 'employees.nit', 'people.names', 'people.surnames', DB::Raw('date_format(fees.date,\'%d/%m/%Y\') as date'))
             ->get();
         return (compact('fees'));
     }

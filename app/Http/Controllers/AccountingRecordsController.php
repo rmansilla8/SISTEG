@@ -22,7 +22,10 @@ class AccountingRecordsController extends Controller
 
     public function getAccountingRecords()
     {
-        $accounting_records = Accounting_record::with("record_type")->orderby('id', 'DESC')->get();
+        $accounting_records = DB::table("accounting_records")
+            ->join('record_types', 'record_type_id', '=', 'accounting_records.record_type_id')
+            ->select('accounting_records.id', 'accounting_records.description', 'accounting_records.amount', 'record_types.description as rdescription', DB::Raw('date_format(accounting_records.date,\'%d/%m/%Y\') as date'))
+            ->get();
         return (compact('accounting_records'));
     }
 

@@ -61,8 +61,8 @@
 					<thead>
 						<tr >
 							<th class="text-center">No.</th>
-							<th data-priority="2" class="text-center">Descripción</th>
-							<th data-priority="1" class="text-center">Cantidad</th>
+							<th data-priority="1" class="text-center">Descripción</th>
+							<th data-priority="2" class="text-center">Cantidad</th>
 							<th class="text-center">Fecha</th>
 							<th class="text-center">Tipo de Registro</th>
 							<th class="text-center">Acciones</th>
@@ -326,7 +326,7 @@
 						{"data":	"description"},
 						{"data":	"amount"},
 						{"data":	"date"},
-						{"data":	"record_type.description"},
+						{"data":	"rdescription"},
 						/**Contiene los botones de actualizar, mostrar y eliminar */
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs'>"+

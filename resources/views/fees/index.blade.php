@@ -355,7 +355,7 @@
 									/**
 									** data se carga con los campos donde se almacena el nombre.
 									*/
-									return data.first_name+'  '+data.second_name+'  '+data.first_surname+'  '+data.second_surname;
+									return data.names+'  '+data.surnames;
 								},
 							//editField: ['first_name', 'second_name', 'first_surname', 'second_surname']
 						},
@@ -597,7 +597,7 @@
 				var vid = rowData.id;
 				console.log(vid);
 				//$.get('fees/' + vid + '/edit', {id:vid}, function(data){
-					$('#show').find('#show_affiliate').val(rowData.first_name+' '+rowData.second_name+' '+rowData.first_surname+' '+rowData.second_surname)
+					$('#show').find('#show_affiliate').val(rowData.names+' '+rowData.surnames)
 					$('#show').find('#show_fee_type_id').val(rowData.description)
 					$('#show').find('#show_amount').val(rowData.amount)
 					$('#show').find('#show_date').val(rowData.date)

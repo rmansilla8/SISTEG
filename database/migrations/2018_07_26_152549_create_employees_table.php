@@ -15,6 +15,7 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('dpi', 13)->unique();
             $table->string('nit')->unique();
             $table->string('scale_register')->unique();
             $table->integer('person_id')->unsigned()->unique();

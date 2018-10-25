@@ -7,12 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {
     protected $fillable = [
-        'dpi',
-        'first_name',
-        'second_name',
-        'third_name',
-        'first_surname',
-        'second_surname',
+        'names',
+        'surnames',
         'email',
         'phone',
         'address',
@@ -25,7 +21,7 @@ class Person extends Model
 
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->second_name . ' ' . $this->first_surname . ' ' . $this->second_surname;
+        return $this->names . ' ' . $this->surnames;
     }
     public function civil_state()
     {

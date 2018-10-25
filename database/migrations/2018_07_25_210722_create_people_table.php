@@ -15,13 +15,9 @@ class CreatePeopleTable extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('dpi',13)->unique();
-            $table->string('first_name', 45);
-            $table->string('second_name', 45)->nullable();
-            $table->string('third_name', 45)->nullable();
-            $table->string('first_surname', 45);
-            $table->string('second_surname', 45)->nullable();
-            $table->string('email',60)->unique()->nullable();
+            $table->string('names', 80);
+            $table->string('surnames', 80);
+            $table->string('email', 60)->unique()->nullable();
             $table->string('phone', 8)->nullable();
             $table->string('address', 150);
             $table->integer('municipality_id')->unsigned();

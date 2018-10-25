@@ -35,6 +35,18 @@ Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingR
 Route::get('get-record_types', 'AccountingRecordsController@getRecordTypes');
 //Route::post('fees/{fee}', 'FeesController@destroy')->name('eliminar');
 
+Route::resource('affiliates', 'affiliatesController');
+Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
+Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
+Route::get('create-affiliates', array('uses' => 'AffiliatesController@create', 'as' => 'affiliates.create'));
+Route::get('get-departments', 'PeopleController@getDepartments');
+Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
+Route::get('get-genders', 'PeopleController@getGenders');
+Route::get('get-civil_states', 'PeopleController@getCivilStates');
+Route::resource('people', 'PeopleController');
+
+
+
 
 
 
