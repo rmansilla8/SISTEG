@@ -61,7 +61,6 @@ class AffiliatesController extends Controller
             ->join('affiliates', 'affiliates.id', '=', 'employees.id')
             ->join('people', 'people.id', '=', 'employees.person_id')
             ->join('genders', 'genders.id', '=', 'people.gender_id')
-
             ->select('employees.dpi', 'titles.description AS title', 'schools.name AS school', 'affiliates.*', 'people.names', 'people.surnames', 'genders.description AS gender')
             ->get();
         //     ->join('employees', 'employees.id', '=', 'affiliates.employee_id')

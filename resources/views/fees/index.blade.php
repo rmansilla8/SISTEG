@@ -121,14 +121,14 @@
 								<div class="input-group">
 									<!-- <label for="amount">Cantidad</label> -->
 									<span class="input-group-addon"><i class="fa fa-money"></i></span>
-									<input name="amount" type="text" id="amount" placeholder="Cantidad" class="form-control"/>
+									<input type="text" data-mask="99.99" name="amount"  id="amount" placeholder="Cantidad" class="form-control"/>
 								</div>
 								<br/>
 
 								<div class="input-group">
 									<!-- <label for="date">Fecha</label> -->
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-									<input name="date" type="date" id="date" placeholder="Name" class="form-control"/>
+									<input name="date" type="date" id="date" placeholder="Fecha" class="form-control"/>
 								</div>
 								<br/>
 
@@ -295,7 +295,7 @@
 				/**Llena el select #update_affiliate_id del modal #update_fee_modal */
 				getAffiliateEdit();
 				/**Contiene maskaras para inputs */
-				mask();
+				// mask();
 
 			});
 			/**Inicio del DataTable de fees */
@@ -421,7 +421,6 @@
 				$('#fee_type_id').append($('<option>', {value: '', text: 'Seleccionar tipo de cuota'}));
 					$.each(data,	function(i, value){
 					$('#fee_type_id').append($('<option>', {value: value.id, text: `${value.description}`}));
-
 					});
 				});
 			}
@@ -708,10 +707,10 @@ function validateDataUpdate(){
 }
 
 /**Máscara para el input de monto */
-function mask(){
-	$('#amount').mask('00.00', {reverse: true});
-	$('#update_amount').mask('00.00', {reverse: true});
-}
+// function mask(){
+// 	$('#amount').mask('00.00', {reverse: true});
+// 	$('#update_amount').mask('00.00', {reverse: true});
+// }
     </script>
 
 

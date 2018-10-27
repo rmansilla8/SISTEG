@@ -95,10 +95,10 @@
 						</div>
 						<div class="modal-body">
 						<!-- Paso 1 del modal -->
-							<div class="row hide" data-step="1" data-title="Datos Personales 1 de 3">
-								<div class="jumbotron" style="background-color:#FFFF;">
-									<div class="container">
-										<form  action="{{ URL::to('people')}}" method="POST" id="frm-insert_people" onsubmit="return validateDataCreate();" data-toggle="validator">
+							<div class="row hide" data-step="1" data-title="Datos Personales - 1 de 3">
+								<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
+									<div class="container-fluid">
+										<form  id="frm-insert_people" data-toggle="validator">
 											<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 											{{ csrf_field() }}
 											<div class="row">
@@ -127,8 +127,7 @@
 													<div class="input-group">
 														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
 														<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
-														<input type="email" name="email" id="email" class="form-control" placeholder="Ingrese el correo electrónico" data-error="El correo ingresado es invalido" required="required"/>
-														<div class="help-block with-errors"></div>
+														<input type="email" name="email" id="email" class="form-control" placeholder="Ingrese el correo electrónico" data-error="El correo ingresado es invalido"/>
 													</div>
 													<br/>
 												</div>
@@ -198,18 +197,18 @@
 														<select name="civil_state_id" id="civil_state_id" class="form-control" aria-describedby="scivil_state"></select>
 													</div>
 												</div>
-											</div>
-												<input type="submit" class="btn btn-success" value="Guardar" />
+											<!-- </div> -->
+
 										</form>
 									</div>
 
 								</div>
 							</div>
 								<!-- Paso 2 del modal -->
-							<div class="row hide" data-step="2" data-title="This is the second step!">
-								<div class="jumbotron" style="background-color:#FFFF;">
-									<div class="container">
-										<form  action="{{ URL::to('employees')}}" method="POST" id="frm-insert-employees" onsubmit="return validateDataCreate();" data-toggle="validator">
+							<div class="row hide" data-step="2" data-title="Datos de empleado - 2 de 3">
+								<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
+									<div class="container-fluid">
+										<form   id="frm-insert_employees" data-toggle="validator">
 											<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 											{{ csrf_field() }}
 											<div class="row">
@@ -228,8 +227,8 @@
 														<input name="nit" type="text" id="nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
 													</div>
 												</div>
+												<br/>
 											</div>
-											<br/>
 
 											<div class="row">
 												<div class="col-sm-12 col-md-4">
@@ -244,7 +243,7 @@
 													<div class="input-group">
 														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
 														<span class="input-group-addon"><i class="fa fa-users"></i></span>
-														<select name="Ethnic_community_id" id="ethnic_community_id" class="form-control"></select>
+														<select name="ethnic_community_id" id="ethnic_community_id" class="form-control"></select>
 													</div>
 													<br/>
 												</div>
@@ -255,18 +254,51 @@
 														<span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
 														<select name="employee_type_id" id="employee_type_id" class="form-control"></select>
 													</div>
+													<br/>
+												</div>
+
+												<div class="col-sm-12 col-md-4">
+													<div class="input-group">
+														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+														<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+														<select name="title_id" id="title_id" class="form-control"></select>
+													</div>
 												</div>
 											</div>
-
+												<!-- Al registrar un afiliado de forma predeterminada se establece su estado como activo -->
+												<input type="hidden" name="affiliate_state_id" id="affiliate_state_id" value="7" />
+												<input type="submit" class="btn btn-success" value="Guardar" />
 										</form>
 									</div>
-								</div>
+								<!-- </div> -->
 							</div>
 
 							<div class="row hide" data-step="3" data-title="This is the last step!">
-								<div class="jumbotron" style="background-color:#FFFF;">
-									This is the last step!
-								</div>
+								<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
+									<div class='container-fluid'>
+										<form id="frm-insert_school">
+											<div class="row">
+												<div class="col-sm-12 col-md-6">
+													<div  class="input-group ">
+														<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
+														<span class="input-group-addon" id="snames">Nombres</span>
+														<input name="names" id="names" class="form-control" placeholder="Ingrese los nombres" aria-describedby="snames"/>
+													</div>
+													<br/>
+												</div>
+
+												<div class="col-sm-12 col-md-6">
+													<div class="input-group">
+														<!-- <label for="amount">Cantidad</label> -->
+														<span class="input-group-addon" id="ssurnames">Apellidos</span>
+														<input name="surnames" type="text" id="surnames" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
+													</div>
+													<br/>
+												</div>
+											</div>
+										</form>
+									</div>
+								<!-- </div> -->
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -305,6 +337,10 @@
 				//getMunicipalities();
 				getGenders();
 				getCivilStates();
+				getEthnicCommunities();
+				getEmployeeTypes();
+				// getAffiliateStates()
+				getTitles();
 
 
 
@@ -393,7 +429,7 @@
 						} );
 				} ).draw();
 			}
-
+			/**Permite que el modal contenga pasos */
 			function modalSteps(){
 				$('#add_new_affiliate_modal').modalSteps({
 					btnCancelHtml: "Cancel",
@@ -402,14 +438,20 @@
 					btnLastStepHtml: "Complete",
 					disableNextButton: false,
 					completeCallback: function() {},
-					callbacks: {},
+					callbacks: {
+						'1':	callback1,
+					},
 					getTitleAndStep: function() {}
-					});
+				});
 			}
+			var callback1 = function (){
+				console.log('Aqui probando!');
+			};
+
 
 			function departmentMunicipality(){
 				$('#municipality_id').prop('disabled', true);
-				$("#department_id").click(function() {
+				$("#department_id").change(function() {
 					$('#municipality_id').empty();
 					if($("#department_id").val() !== '0'){
 						$('#municipality_id').prop('disabled', false);
@@ -433,32 +475,69 @@
 
 			function getMunicipalities(){
 				$department=$('#department_id').val();
-				console.log($department);
 				$.get('get-municipalities/'+$department, function(data){
 					$('#municipality_id').append($('<option>', {value: '', text: 'Seleccionar municipio'}));
-						$.each(data,	function(i, value){
+					$.each(data,	function(i, value){
 						$('#municipality_id').append($('<option>', {value: value.id, text: `${value.name}`}));
-						});
 					});
-				}
+				});
+			}
 
 			function getGenders(){
 				$.get('get-genders', function(data){
 					$('#gender_id').append($('<option>', {value: '', text: 'Seleccionar género'}));
-						$.each(data,	function(i, value){
+					$.each(data,	function(i, value){
 						$('#gender_id').append($('<option>', {value: value.id, text: `${value.description}`}));
-						});
 					});
+				});
 			}
 
 			function getCivilStates(){
 				$.get('get-civil_states', function(data){
 					$('#civil_state_id').append($('<option>', {value: '', text: 'Seleccionar estado civil'}));
-						$.each(data,	function(i, value){
+					$.each(data,	function(i, value){
 						$('#civil_state_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+					});
+				});
+			}
+
+			function getEmployeeTypes(){
+				$.get('get-employee_types', function(data){
+					$('#employee_type_id').append($('<option>', {value: '0', text: 'Seleccionar tipo de empleado'}));
+						$.each(data,	function(i, value){
+						$('#employee_type_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 						});
 					});
-				}
+			}
+
+			function getEthnicCommunities(){
+				$.get('get-ethnic_communities', function(data){
+					$('#ethnic_community_id').append($('<option>', {value: '0', text: 'Seleccionar comunidad étnica'}));
+						$.each(data,	function(i, value){
+						$('#ethnic_community_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+						});
+					});
+			}
+
+			function getTitles(){
+				$.get('get-titles', function(data){
+					$('#title_id').append($('<option>', {value: '0', text: 'Seleccionar titulo que acredita'}));
+						$.each(data,	function(i, value){
+						$('#title_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+						});
+					});
+			}
+
+			// function getAffiliateStates(){
+			// 	$.get('get-affiliates_states', function(data){
+			// 		// $('#affiliate_state_id').append($('<option>', {value: '0', text: 'Seleccionar estado de afiliado'}));
+			// 			$.each(data,	function(i, value){
+			// 				if(value.id === 7){
+			// 			$('#affiliate_state_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+			// 			}
+			// 			});
+			// 		});
+			// }
 
 
 
@@ -467,8 +546,11 @@
 			jQuery.validator.addMethod("lettersonly", function(value, element) {
 				return this.optional(element) || /^[a-z\sÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]+$/i.test(value);
 			}, );
-			$('#frm-insert').validate({
-				keyup: true,
+			jQuery.validator.addMethod("phone", function(value, element) {
+				return this.optional(element) || /^[0-9/-]+$/i.test(value);
+			}, );
+			$('#frm-insert_people').validate({
+				keyup: false,
 				rules: {
 					names: {
 						required: 		true,
@@ -481,7 +563,7 @@
 					surnames: {
 						required: 		true,
 						lettersonly: 	true,
-						minlength: 		9,
+						minlength: 		3,
 						maxlength: 		30,
 
 					},
@@ -490,7 +572,7 @@
 
 					},
 					phone: {
-						digits: 		true,
+						phone: 			true,
 						minlength: 		8,
 						maxlength: 		8,
 
@@ -540,7 +622,7 @@
 						email: 			function () {toastr.error('Ingrese un correo electrónico válido')},
 					},
 					phone: {
-						digits: 		function () {toastr.error('Ingrese un número de teléfono válido')},
+						phone: 			function () {toastr.error('Ingrese un número de teléfono válido')},
 						minlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
 						maxlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
 
@@ -579,21 +661,22 @@
 				}
 			});
 
-			$('#frm-insert_people').on('submit', function(e){
+			$('#frm-insert_employees').on('submit', function(e){
 				e.preventDefault();
 				/**Se carga data con el array de datos del formulario #frm-insert */
-				var data 	= $(this).serializeArray();
-				var url 	= $(this).attr('action');
-				var post 	= $(this).attr('method');
-				console.log(data);
+				var data 	= $('#frm-insert_people, #frm-insert_employees').serialize();
+				//var url 	= $(this).attr('action');
+				//var post 	= $(this).attr('method');
+				console.log(data)
 				console.info(data);
 				$.ajax({
-					type 	: post,
-					url 	: url,
-					data 	: data,
-					dataType: 'json',
-					success:function(data)
+				type 	: 'POST',
+				url 	: '{{ URL::to('people')}}',
+				data 	: data,
+				dataType: 'json',
+				success:function(data)
 					{
+						console.log(data)
 						/**Se actualiza el DataTable */
 						var tbl = $('#tblAffiliates').DataTable();
 						tbl.ajax.reload()

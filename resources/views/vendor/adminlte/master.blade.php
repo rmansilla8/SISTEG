@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
+    <!-- Jasny Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/jquery/dist/jasny-bootstrap.min.css') }}">
+    <!-- InputMask -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/jquery/dist/inputmask.min.css') }}">
 
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
@@ -63,15 +67,14 @@
 
 
 
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+<!-- <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script> -->
 <script src="{{ asset('vendor/adminlte/vendor/datatable/jquery-3.3.1.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.mask.min.js') }}"></script>
+<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jasny-bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/inputmask.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/modal-steps.min.js') }}"></script>
 
 
