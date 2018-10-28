@@ -11,6 +11,9 @@ use IntelGUA\Sisteg\Person;
 use IntelGUA\Sisteg\Employee;
 use IntelGUA\Sisteg\Affiliate;
 use Illuminate\Support\Facades\DB;
+use IntelGUA\Sisteg\Employee_title;
+use IntelGUA\Sisteg\Employee_school;
+use IntelGUA\Sisteg\Language_domain;
 
 class PeopleController extends Controller
 {
@@ -94,14 +97,48 @@ class PeopleController extends Controller
                 $employee->scale_register = $request->input('scale_register');
                 $employee->person_id = $person->id;
                 $employee->ethnic_community_id = $request->input('ethnic_community_id');
-                $employee->employee_type_id = $request->input('employee_type_id');
                 $employee->save();
 
                 $affiliate = new Affiliate();
                 $affiliate->number = str_random(4);
                 $affiliate->employee_id = $employee->id;
-                $affiliate->affiliate_state_id = $request->input('affiliate_state_id');
+                $affiliate->affiliate_state_id = 7;
                 $affiliate->save();
+
+                $employee_title = new Employee_title();
+                $employee_title->title_id = $request->input('title_id');
+                $employee_title->employee_id = $employee->id;
+                $employee_title->institution = $request->input('institution');
+                $employee_title->year_title = $request->input('year_title');
+                $employee_title->save();
+
+                $employee_school = new Employee_school();
+                $employee_school->school_id = $request->input('school_id');
+                $employee_school->employee_id = $employee->id;
+                $employee_school->contract_id = $request->input('contract_id');
+                $employee_school->work_state_id = $request->input('work_state_id');
+                $employee_school->year_start = $request->input('year_start');
+                $employee_school->employee_type_id = $request->input('employee_type_id');
+                $employee_school->save();
+
+                $language_domain = new Language_domain();
+                $language_domain->language_id = $request->input('language_id');
+                $language_domain->employee_id = $employee->id;
+                if ($request->speak = 'on') {
+                    $language_domain->speak = 1;
+                }
+                if ($request->understand = 'on') {
+                    $language_domain->understand = 1;
+                }
+                if ($request->read = 'on') {
+                    $language_domain->read = 1;
+                }
+                if ($request->speak = 'on') {
+                    $language_domain->write = 1;
+                }
+                $language_domain->save();
+
+
 
                 DB::commit();
             } catch (Exception $e) {

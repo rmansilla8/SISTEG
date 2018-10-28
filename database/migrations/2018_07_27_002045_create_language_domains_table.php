@@ -17,10 +17,10 @@ class CreateLanguageDomainsTable extends Migration
             $table->increments('id');
             $table->integer('language_id')->unsigned();
             $table->integer('employee_id')->unsigned();
-            $table->boolean('speak');
-            $table->boolean('understand');
-            $table->boolean('read');
-            $table->boolean('write');
+            $table->boolean('speak')->default(0)->nullable();
+            $table->boolean('understand')->default(0)->nullable();
+            $table->boolean('read')->default(0)->nullable();
+            $table->boolean('write')->default(0)->nullable();
             $table->timestamps();
 
 

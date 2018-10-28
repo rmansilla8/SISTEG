@@ -10,8 +10,7 @@ class Employee_title extends Model
         'title_id',
         'employee_id',
         'institution',
-        'year_title',
-        'academic_level'
+        'year_title'
     ];
 
     public function employee()

@@ -260,13 +260,14 @@
 									<br/>
 								</div>
 							</div>
+							<input type="submit" class="btn btn-success" value="Guardar" />
 						</form>
 					</div>
 				</div>
 
 				<div class="row hide" data-step="3" data-title="Datos complementarios - 3 de 3">
 					<div class='container-fluid'>
-						<form id="frm-insert_school">
+						<form id="frm-insert_schools">
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Establecimiento</b></center> </span></div>
 							<div class="row">
 								<div class="col-sm-12 col-md-8">
@@ -317,32 +318,33 @@
 								<div class="col-md-2">
 									<div class="input-group">
 										<span>Habla
-											<input type="radio" id="speak" aria-label="habla">
+											<input type="radio" id="speak" name="speak" aria-label="habla">
 										</span>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="input-group">
 										<p>Entiende
-											<input type="radio" id="understand" aria-label="entiende">
+											<input type="radio" id="understand" name="undestand" aria-label="entiende">
 										</p>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="input-group">
 										<p>Lee
-											<input type="radio" id="read" aria-label="lee">
+											<input type="radio" id="read" name="read" aria-label="lee">
 										</p>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="input-group">
 										<p>Escribe
-											<input type="radio" id="write" aria-label="escribe">
+											<input type="radio" id="write" name="write" aria-label="escribe">
 										</p>
 									</div>
 								</div>
 							</div>
+
 						</form>
 					</div>
 				</div>
@@ -390,6 +392,7 @@
 				getWorkStates();
 				getSchools();
 				getLanguages();
+				check();
 			});
 
 		function dataTableAffiliates()
@@ -482,7 +485,9 @@
 					btnNextHtml: "Next",
 					btnLastStepHtml: "Complete",
 					disableNextButton: false,
-					completeCallback: function() {},
+					completeCallback: function() {
+
+					},
 					callbacks: {
 						'1':	callback1,
 					},
@@ -745,7 +750,7 @@
 			$('#frm-insert_employees').on('submit', function(e){
 				e.preventDefault();
 				/**Se carga data con el array de datos del formulario #frm-insert */
-				var data 	= $('#frm-insert_people, #frm-insert_employees').serialize();
+				var data 	= $('#frm-insert_people, #frm-insert_employees, #frm-insert_schools').serializeArray();
 				//var url 	= $(this).attr('action');
 				//var post 	= $(this).attr('method');
 				console.log(data)
@@ -769,6 +774,48 @@
 
 
 			});
+
+			function check(){
+					//We need to bind click handler as well
+				//as FF sets button checked after mousedown, but before click
+				$('input:radio').bind('click mousedown', (function() {
+					//Capture radio button status within its handler scope,
+					//so we do not use any global vars and every radio button keeps its own status.
+					//This required to uncheck them later.
+					//We need to store status separately as browser updates checked status before click handler called,
+					//so radio button will always be checked.
+					var isChecked;
+
+					return function(event) {
+						//console.log(event.type + ": " + this.checked);
+
+						if(event.type == 'click') {
+							//console.log(isChecked);
+
+							if(isChecked) {
+								//Uncheck and update status
+								isChecked = this.checked = 0;
+							} else {
+								//Update status
+								//Browser will check the button by itself
+								isChecked = 1;
+
+								//Do something else if radio button selected
+								/*
+								if(this.value == 'somevalue') {
+									doSomething();
+								} else {
+									doSomethingElse();
+								}
+								*/
+							}
+					} else {
+						//Get the right status before browser sets it
+						//We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+						isChecked = this.checked;
+					}
+				}})());
+			}
 
 
 </script>
