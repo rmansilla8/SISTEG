@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeSchoolTable extends Migration
+class CreateEmployeeSchoolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateEmployeeSchoolTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_school', function (Blueprint $table) {
+        Schema::create('employee_schools', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id')->unsigned();
             $table->integer('employee_id')->unsigned();
             $table->integer('contract_id')->unsigned();
+            $table->integer('work_state_id')->unsigned();
             $table->integer('employee_type_id')->unsigned();
+            $table->string('year_start', 4);
             $table->timestamps();
 
             $table->foreign('school_id')->references('id')->on('schools')
@@ -30,6 +32,10 @@ class CreateEmployeeSchoolTable extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('contract_id')->references('id')->on('contracts')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('work_state_id')->references('id')->on('work_states')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
@@ -46,6 +52,6 @@ class CreateEmployeeSchoolTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_school');
+        Schema::dropIfExists('employee_schools');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeLanguageTable extends Migration
+class CreateLanguageDomainsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,24 @@ class CreateEmployeeLanguageTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_language', function (Blueprint $table) {
+        Schema::create('language_domains', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('language_id')->unsigned();
-            $table->integer('language_domain_id')->unsigned();
             $table->integer('employee_id')->unsigned();
+            $table->boolean('speak');
+            $table->boolean('understand');
+            $table->boolean('read');
+            $table->boolean('write');
             $table->timestamps();
 
-            $table->foreign('language_id')->references('id')->on('languages')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('language_domain_id')->references('id')->on('language_domains')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
 
             $table->foreign('employee_id')->references('id')->on('employees')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            
+
+            $table->foreign('language_id')->references('id')->on('languages')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -42,6 +41,6 @@ class CreateEmployeeLanguageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_language');
+        Schema::dropIfExists('language_domains');
     }
 }

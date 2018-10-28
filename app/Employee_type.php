@@ -10,9 +10,9 @@ class Employee_type extends Model
         'description',
     ];
 
-    public function school_workers()
+    public function employee_schools()
     {
-        return $this->hasMany(School_worker::class);
+        return $this->hasMany(Employee_school::class);
     }
 
     public function administrative_employees()

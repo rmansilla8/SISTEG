@@ -4,15 +4,14 @@ namespace IntelGUA\Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class Title extends Model
+class Work_state extends Model
 {
     protected $fillable = [
         'description',
     ];
 
-    public function employee_schools()
+    public function schools()
     {
-        return $this - hasMany(Employee_school::class);
+        return $this->hasMany(Employee_school::class);
     }
 }

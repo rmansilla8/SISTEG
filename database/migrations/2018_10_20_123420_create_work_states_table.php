@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLanguageDomainsTable extends Migration
+class CreateWorkStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateLanguageDomainsTable extends Migration
      */
     public function up()
     {
-        Schema::create('language_domains', function (Blueprint $table) {
+        Schema::create('work_states', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description', 45);
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateLanguageDomainsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('language_domains');
+        Schema::dropIfExists('work_states');
     }
 }

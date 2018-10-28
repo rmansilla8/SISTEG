@@ -10,8 +10,8 @@ class Language extends Model
         'name',
     ];
 
-    public function employees()
+    public function language_domains()
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->belongsTo(Language_domain::class);
     }
 }

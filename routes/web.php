@@ -39,14 +39,22 @@ Route::resource('affiliates', 'affiliatesController');
 Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
 Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
 Route::get('create-affiliates', array('uses' => 'AffiliatesController@create', 'as' => 'affiliates.create'));
+
 Route::get('get-departments', 'PeopleController@getDepartments');
 Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
 Route::get('get-genders', 'PeopleController@getGenders');
 Route::get('get-civil_states', 'PeopleController@getCivilStates');
 Route::resource('people', 'PeopleController');
-Route::get('get-employee_types', 'EmployeesController@getEmployee_types');
 Route::get('get-ethnic_communities', 'EmployeesController@getEthnic_communities');
 Route::get('get-titles', 'EmployeesController@getTitles');
+
+Route::get('get-employee_types', 'EmployeeSchoolsController@getEmployee_types');
+Route::get('get-work_states', 'EmployeeSchoolsController@getWork_states');
+Route::get('get-contracts', 'EmployeeSchoolsController@getContracts');
+Route::get('get-schools', 'EmployeeSchoolsController@getSchools');
+Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
+
+
 
 
 

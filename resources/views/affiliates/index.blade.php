@@ -86,229 +86,274 @@
 
 		<!-- Area de Modales -->
 				<!-- Modal -->
-					<div class="modal fade bd-example-modal-lg" id="add_new_affiliate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog modal-lg" role="document">
-						<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="js-title-step"></h4>
-						</div>
-						<div class="modal-body">
-						<!-- Paso 1 del modal -->
-							<div class="row hide" data-step="1" data-title="Datos Personales - 1 de 3">
-								<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
-									<div class="container-fluid">
-										<form  id="frm-insert_people" data-toggle="validator">
-											<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
-											{{ csrf_field() }}
-											<div class="row">
-												<div class="col-sm-12 col-md-6">
-													<div  class="input-group ">
-														<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
-														<span class="input-group-addon" id="snames">Nombres</span>
-														<input name="names" id="names" class="form-control" placeholder="Ingrese los nombres" aria-describedby="snames"/>
-													</div>
-													<br/>
-												</div>
-
-												<div class="col-sm-12 col-md-6">
-													<div class="input-group">
-														<!-- <label for="amount">Cantidad</label> -->
-														<span class="input-group-addon" id="ssurnames">Apellidos</span>
-														<input name="surnames" type="text" id="surnames" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
-													</div>
-													<br/>
-												</div>
-											</div>
-
-
-											<div class="row">
-												<div class="col-sm-12 col-md-6">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
-														<input type="email" name="email" id="email" class="form-control" placeholder="Ingrese el correo electrónico" data-error="El correo ingresado es invalido"/>
-													</div>
-													<br/>
-												</div>
-												<div class="col-sm-12 col-md-6">
-													<div class="input-group">
-														<!-- <label for="amount">Cantidad</label> -->
-														<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-														<input name="phone" type="text" id="phone" placeholder="Ingrese número telefónico" class="form-control"/>
-													</div>
-													<br/>
-												</div>
-											</div>
-
-
-											<div class="row">
-												<div class="col-sm-12 col-md-6">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon" ><i class="fa fa-map"></i></span>
-														<select name="department_id" id="department_id" class="form-control"></select>
-													</div>
-													<br/>
-												</div>
-
-												<div class="col-sm-12 col-md-6">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon" ><i class="fa fa-map-o"></i></span>
-														<select name="municipality_id" id="municipality_id" class="form-control" ></select>
-													</div>
-													<br/>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-sm-12 col-md-12">
-													<div class="input-group">
-														<!-- <label for="amount">Cantidad</label> -->
-														<span class="input-group-addon" ><i class="fa  fa-map-marker"></i></span>
-														<input name="address" type="text" id="address" placeholder="Ingrese dirección" class="form-control"/>
-													</div>
-												</div>
-											</div>
-											<br/>
-
-											<div class="row">
-												<div class="col-sm-12 col-md-3">
-													<div class="input-group">
-														<!-- <label for="date">Fecha</label> -->
-														<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-														<input name="birthdate" type="date" id="birthdate" placeholder="Name" class="form-control"/>
-													</div>
-													<br/>
-												</div>
-
-												<div class="col-sm-12 col-md-4">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon" id="sgender">Género</span>
-														<select name="gender_id" id="gender_id" class="form-control" aria-describedby="sgender"></select>
-													</div>
-													<br/>
-												</div>
-												<div class="col-sm-12 col-md-5">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon" id="scivil_state">Estado Civil</span>
-														<select name="civil_state_id" id="civil_state_id" class="form-control" aria-describedby="scivil_state"></select>
-													</div>
-												</div>
-											<!-- </div> -->
-
-										</form>
+	<div class="modal fade bd-example-modal-lg" id="add_new_affiliate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="js-title-step"></h4>
+				</div>
+				<div class="modal-body">
+					<!-- Paso 1 del modal -->
+					<div class="row hide" data-step="1" data-title="Afiliación - 1 de 3">
+						<div class="container-fluid">
+							<form  id="frm-insert_people" data-toggle="validator">
+								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
+								{{ csrf_field() }}
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+										<div  class="input-group ">
+											<span class="input-group-addon" id="snames">Nombres</span>
+											<input name="names" id="names" class="form-control" placeholder="Ingrese los nombres" aria-describedby="snames"/>
+										</div>
+										<br/>
 									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon" id="ssurnames">Apellidos</span>
+											<input name="surnames" type="text" id="surnames" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+											<input type="email" name="email" id="email" class="form-control" placeholder="Ingrese el correo electrónico" data-error="El correo ingresado es invalido"/>
+										</div>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+											<input name="phone" type="text" id="phone" placeholder="Ingrese número telefónico" class="form-control"/>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Residencia</b></center> </span></div>
+								<div class="row ">
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon" ><i class="fa fa-map"></i></span>
+											<select name="department_id" id="department_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon" ><i class="fa fa-map-o"></i></span>
+											<select name="municipality_id" id="municipality_id" class="form-control" ></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<div class="input-group">
+											<span class="input-group-addon" ><i class="fa  fa-map-marker"></i></span>
+											<input name="address" type="text" id="address" aria-describedby="addressHelp"placeholder="Ingrese dirección" class="form-control"/>
+										</div>
+										<small id="addressHelp" class="form-text text-muted">Aldea, caserío, barrio, colonia, entre otros.</small>
+									</div>
+								</div>
+								<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos complementarios</b></center> </span></div>
+								<div class="row">
+									<div class="col-sm-12 col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											<input name="birthdate" type="date" id="birthdate" aria-describedby="birthdateHelp" placeholder="Fecha de nacimiento" class="form-control"/>
+										</div>
+										<small id="birthdateHelp" class="form-text text-muted">Fecha de nacimiento.</small>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon" id="sgender">Género</span>
+											<select name="gender_id" id="gender_id" class="form-control" aria-describedby="sgender"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-5">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon" id="scivil_state">Estado Civil</span>
+											<select name="civil_state_id" id="civil_state_id" class="form-control" aria-describedby="scivil_state"></select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				<!-- </div> -->
+					<!-- Paso 2 del modal -->
+				<div class="row hide" data-step="2" data-title="Afiliación- 2 de 3">
+					<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
+					<div class="container-fluid">
+						<form   id="frm-insert_employees" data-toggle="validator">
+							<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
+							{{ csrf_field() }}
+							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos de identificación</b></center> </span></div>
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<div  class="input-group ">
+										<span class="input-group-addon" id="sdpi">DPI</span>
+										<input name="dpi" id="dpi" alt="Documento personal de identificación" class="form-control" placeholder="Ingrese DPI" aria-describedby="sdpi"/>
+									</div>
+									<br/>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon" id="snit">NIT</span>
+										<input name="nit" type="text" id="nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
+									</div>
+									<br/>
+								</div>
+								<br/>
+							</div>
+							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos complementarios</b></center> </span></div>
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+										<input type="text" name="scale_register" id="scale_register" class="form-control" placeholder="Ingrese el registro escalafonario"/>
+									</div>
+									<br/>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-users"></i></span>
+										<select name="ethnic_community_id" id="ethnic_community_id" class="form-control"></select>
+									</div>
+									<br/>
+								</div>
 
+							</div>
+							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Información Académica</b></center> </span></div>
+							<div class="row">
+								<div class="col-sm-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+										<select name="title_id" id="title_id" class="form-control"></select>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-4">
+									<div class="input-group">
+										<span class="input-group-addon" id="syear">Año</span>
+										<input name="year_title" type="text" id="year_title" aria-describedby="yearHelp" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
+									</div>
+									<small id="yearHelp" class="form-text text-muted">Año en el que obtuvo el título.</small>
+									<br/>
 								</div>
 							</div>
-								<!-- Paso 2 del modal -->
-							<div class="row hide" data-step="2" data-title="Datos de empleado - 2 de 3">
-								<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
-									<div class="container-fluid">
-										<form   id="frm-insert_employees" data-toggle="validator">
-											<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
-											{{ csrf_field() }}
-											<div class="row">
-												<div class="col-sm-12 col-md-6">
-													<div  class="input-group ">
-														<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
-														<span class="input-group-addon" id="sdpi">DPI</span>
-														<input name="dpi" id="dpi" class="form-control" placeholder="Ingrese DPI" aria-describedby="sdpi"/>
-													</div>
-													<br/>
-												</div>
-												<div class="col-sm-12 col-md-6">
-													<div class="input-group">
-														<!-- <label for="amount">Cantidad</label> -->
-														<span class="input-group-addon" id="snit">NIT</span>
-														<input name="nit" type="text" id="nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
-													</div>
-												</div>
-												<br/>
-											</div>
-
-											<div class="row">
-												<div class="col-sm-12 col-md-4">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-														<input type="text" name="scale_register" id="scale_register" class="form-control" placeholder="Ingrese el registro escalafonario"/>
-													</div>
-													<br/>
-												</div>
-												<div class="col-sm-12 col-md-4">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon"><i class="fa fa-users"></i></span>
-														<select name="ethnic_community_id" id="ethnic_community_id" class="form-control"></select>
-													</div>
-													<br/>
-												</div>
-
-												<div class="col-sm-12 col-md-4">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-														<select name="employee_type_id" id="employee_type_id" class="form-control"></select>
-													</div>
-													<br/>
-												</div>
-
-												<div class="col-sm-12 col-md-4">
-													<div class="input-group">
-														<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-														<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-														<select name="title_id" id="title_id" class="form-control"></select>
-													</div>
-												</div>
-											</div>
-												<!-- Al registrar un afiliado de forma predeterminada se establece su estado como activo -->
-												<input type="hidden" name="affiliate_state_id" id="affiliate_state_id" value="7" />
-												<input type="submit" class="btn btn-success" value="Guardar" />
-										</form>
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<div  class="input-group ">
+										<span class="input-group-addon" id="sinstitution">Institución</span>
+										<input name="institution" id="institution" class="form-control" aria-describedby="institutionHelp" placeholder="Institución donde obtuvo el titulo" aria-describedby="snames"/>
 									</div>
-								<!-- </div> -->
+									<small id="institutionHelp" class="form-text text-muted">Institución donde obtuvo el título.</small>
+									<br/>
+								</div>
 							</div>
+						</form>
+					</div>
+				</div>
 
-							<div class="row hide" data-step="3" data-title="This is the last step!">
-								<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
-									<div class='container-fluid'>
-										<form id="frm-insert_school">
-											<div class="row">
-												<div class="col-sm-12 col-md-6">
-													<div  class="input-group ">
-														<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
-														<span class="input-group-addon" id="snames">Nombres</span>
-														<input name="names" id="names" class="form-control" placeholder="Ingrese los nombres" aria-describedby="snames"/>
-													</div>
-													<br/>
-												</div>
-
-												<div class="col-sm-12 col-md-6">
-													<div class="input-group">
-														<!-- <label for="amount">Cantidad</label> -->
-														<span class="input-group-addon" id="ssurnames">Apellidos</span>
-														<input name="surnames" type="text" id="surnames" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
-													</div>
-													<br/>
-												</div>
-											</div>
-										</form>
+				<div class="row hide" data-step="3" data-title="Datos complementarios - 3 de 3">
+					<div class='container-fluid'>
+						<form id="frm-insert_school">
+							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Establecimiento</b></center> </span></div>
+							<div class="row">
+								<div class="col-sm-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+										<select name="school_id" id="school_id" class="form-control"></select>
 									</div>
-								<!-- </div> -->
+								</div>
+								<div class="col-sm-12 col-md-4">
+									<div class="input-group">
+										<span class="input-group-addon" id="scontract"></span>
+										<select name="contract_id" type="text" id="contract_id" aria-describedby="contractHelp" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"></select>
+									</div>
+									<small id="contractHelp" class="form-text text-muted">Renglón presupuestario al que pertenece.</small>
+									<br/>
+								</div>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
-							<button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
-							<button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
-						</div>
-						</div>
+							<div class='row'>
+								<div class="col-md-4">
+									<div class="input-group">
+										<span class="input-group-addon" id="syear">Año</span>
+										<input name="year_start" type="text" id="year_start" aria-describedby="yearSchoolHelp" placeholder="Ingrese el año" class="form-control" aria-describedby="ssurnames"/>
+									</div>
+									<small id="yearSchoolHelp" class="form-text text-muted">Año desde que labora en dicha escuela.</small>
+								</div>
+								<div class="col-md-4">
+									<div class="input-group">
+										<span class="input-group-addon" id="swork_state">Estado</span>
+										<select name="work_state_id" type="text" id="work_state_id" placeholder="Seleccione estado" class="form-control" aria-describedby="swork_state"></select>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-4">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+										<select name="employee_type_id" id="employee_type_id" class="form-control"></select>
+									</div>
+									<br/>
+								</div>
+							</div>
+							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Idioma materno</b></center> </span></div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="input-group">
+										<span class="input-group-addon" id="slanguage">Idioma</span>
+										<select name="language_id" type="text" id="language_id" placeholder="Seleccione idioma" class="form-control" aria-describedby="slanguage"></select>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="input-group">
+										<span>Habla
+											<input type="radio" id="speak" aria-label="habla">
+										</span>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="input-group">
+										<p>Entiende
+											<input type="radio" id="understand" aria-label="entiende">
+										</p>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="input-group">
+										<p>Lee
+											<input type="radio" id="read" aria-label="lee">
+										</p>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="input-group">
+										<p>Escribe
+											<input type="radio" id="write" aria-label="escribe">
+										</p>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
-					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
+					<button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
+					<button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -341,10 +386,10 @@
 				getEmployeeTypes();
 				// getAffiliateStates()
 				getTitles();
-
-
-
-
+				getContracts();
+				getWorkStates();
+				getSchools();
+				getLanguages();
 			});
 
 		function dataTableAffiliates()
@@ -524,6 +569,42 @@
 					$('#title_id').append($('<option>', {value: '0', text: 'Seleccionar titulo que acredita'}));
 						$.each(data,	function(i, value){
 						$('#title_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+						});
+					});
+			}
+
+			function getWorkStates(){
+				$.get('get-work_states', function(data){
+					$('#work_state_id').append($('<option>', {value: '0', text: 'Seleccionar estado laboral'}));
+						$.each(data,	function(i, value){
+						$('#work_state_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+						});
+					});
+			}
+
+			function getContracts(){
+				$.get('get-contracts', function(data){
+					$('#contract_id').append($('<option>', {value: '0', text: 'Seleccionar contrato'}));
+						$.each(data,	function(i, value){
+						$('#contract_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+						});
+					});
+			}
+
+			function getSchools(){
+				$.get('get-schools', function(data){
+					$('#school_id').append($('<option>', {value: '0', text: 'Seleccionar escuela'}));
+						$.each(data,	function(i, value){
+						$('#school_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+						});
+					});
+			}
+
+			function getLanguages(){
+				$.get('get-languages', function(data){
+					$('#language_id').append($('<option>', {value: '0', text: 'Seleccionar idioma'}));
+						$.each(data,	function(i, value){
+						$('#language_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 						});
 					});
 			}

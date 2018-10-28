@@ -15,10 +15,7 @@ class Employee extends Model
         'employee_type_id',
     ];
 
-    public function employee_type()
-    {
-        return $this->belongsTo(Employee_type::class);
-    }
+
     public function person()
     {
         return $this->belongsTo(Person::class, 'id', 'employee_id');
@@ -34,24 +31,14 @@ class Employee extends Model
         return $this->hasOne(Affiliate::class);
     }
 
-    public function schools()
-    {
-        return $this->belongsToMany(School::class);
-    }
-
-    public function languages()
-    {
-        return $this->belongsToMany(Language::class);
-    }
-
     public function language_domains()
     {
-        return $this->belongsToMany(Language_domain::class);
+        return $this->hasMany(Language_domain::class);
     }
 
-    public function titles()
+    public function employee_schools()
     {
-        return $this->belongsToMany(Title::class);
+        return $this->hasMany(Employee_school::class);
     }
 
 

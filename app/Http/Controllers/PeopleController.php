@@ -103,8 +103,6 @@ class PeopleController extends Controller
                 $affiliate->affiliate_state_id = $request->input('affiliate_state_id');
                 $affiliate->save();
 
-
-
                 DB::commit();
             } catch (Exception $e) {
                 DB::rollBack();

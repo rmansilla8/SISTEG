@@ -4,23 +4,24 @@ namespace IntelGUA\Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Language_domain extends Model
+class Employee_title extends Model
 {
     protected $fillable = [
-        'language_id',
+        'title_id',
         'employee_id',
-        'speak',
-        'understand',
-        'read',
-        'write',
+        'institution',
+        'year_title',
+        'academic_level'
     ];
 
     public function employee()
     {
         return $this->belongsTo(Employee::class);
     }
-    public function language()
+
+    public function title()
     {
-        return $this->belongsTo(Language::class);
+        return $this->belongsTo(Title::class);
     }
+
 }

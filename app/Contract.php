@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contract extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
         'number',
         'description',
     ];
 
-    public function schools()
+    public function employee_schools()
     {
-        return $this->belongsToMany(School::class);
+        return $this->belongsTo(Employee_school::class);
     }
 }

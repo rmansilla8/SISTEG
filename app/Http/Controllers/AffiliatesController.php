@@ -53,26 +53,26 @@ class AffiliatesController extends Controller
     public function getAllAffiliates()
     {
         /**join('tablaSecundaria', 'TablaSecundaria.id', '=', 'TablaPrincipal.TablaSecundaria_id') */
-        $affiliates = DB::table('schools', 'titles')
-            ->join('employee_school', 'schools.id', '=', 'employee_school.school_id')
-            ->join('employees', 'employees.id', '=', 'employee_school.employee_id')
-            ->join('employee_title', 'employees.id', '=', 'employee_title.employee_id')
-            ->join('titles', 'titles.id', '=', 'employee_title.title_id')
-            ->join('affiliates', 'affiliates.id', '=', 'employees.id')
-            ->join('people', 'people.id', '=', 'employees.person_id')
-            ->join('genders', 'genders.id', '=', 'people.gender_id')
-            ->select('employees.dpi', 'titles.description AS title', 'schools.name AS school', 'affiliates.*', 'people.names', 'people.surnames', 'genders.description AS gender')
-            ->get();
-        //     ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
+        // $affiliates = DB::table('schools', 'titles')
+        //     ->join('employee_school', 'schools.id', '=', 'employee_school.school_id')
+        //     ->join('employees', 'employees.id', '=', 'employee_school.employee_id')
+        //     ->join('employee_title', 'employees.id', '=', 'employee_title.employee_id')
+        //     ->join('titles', 'titles.id', '=', 'employee_title.title_id')
+        //     ->join('affiliates', 'affiliates.id', '=', 'employees.id')
         //     ->join('people', 'people.id', '=', 'employees.person_id')
         //     ->join('genders', 'genders.id', '=', 'people.gender_id')
-        //     ->join('employee_school', 'employee.id', '=', 'employee_school.employees.id')
-        //    ->join('employee_title', 'employee_title.employee_id', '=', 'employees.id')
-        //     ->join('employee_school', 'schools.id', '=', 'employee_school.school_id')
-        //     ->join('titles', 'titles.id', '=', 'employee_title.title_id')
-
-        //     ->select('affiliates.*', 'employees.dpi', /* 'schools.name', */ 'people.names', 'people.surnames', 'genders.description'/* , 'titles.description' */ )
+        //     ->select('employees.dpi', 'titles.description AS title', 'schools.name AS school', 'affiliates.*', 'people.names', 'people.surnames', 'genders.description AS gender')
         //     ->get();
+        $affiliates = DB::table('affiliates')
+            ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
+            ->join('people', 'people.id', '=', 'employees.person_id')
+            ->join('employee_schools', 'employees.id', '=', 'employee_schools.employee_id')
+            ->join('schools', 'schools.id', 'employee_schools.school_id')
+            ->join('employee_titles', 'employees.id', '=', 'employee_titles.employee_id')
+            ->join('titles', 'titles.id', '=', 'employee_titles.title_id')
+            ->join('genders', 'genders.id', '=', 'people.gender_id')
+            ->select('affiliates.*', 'employees.dpi', 'people.names', 'people.surnames', 'schools.name AS school', 'titles.description AS title', 'genders.description AS gender')
+            ->get();
         return (compact('affiliates'));
     }
 

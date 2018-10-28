@@ -3,11 +3,14 @@
 namespace IntelGUA\Sisteg\Http\Controllers;
 
 use Illuminate\Http\Request;
-use IntelGUA\Sisteg\Ethnic_community;
 use IntelGUA\Sisteg\Employee_type;
-use IntelGUA\Sisteg\Title;
+use IntelGUA\Sisteg\Employee_school;
+use IntelGUA\Sisteg\Work_state;
+use IntelGUA\Sisteg\Contract;
+use IntelGUA\Sisteg\School;
+use IntelGUA\Sisteg\Language;
 
-class EmployeesController extends Controller
+class EmployeeSchoolsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,19 +32,6 @@ class EmployeesController extends Controller
         //
     }
 
-    public function getEthnic_communities()
-    {
-        $ethnic_community = Ethnic_community::orderby('id', 'DESC')->get();
-        return $ethnic_community;
-    }
-
-
-
-    public function getTitles()
-    {
-        $titles = Title::orderby('id', 'DESC')->get();
-        return $titles;
-    }
     /**
      * Store a newly created resource in storage.
      *
@@ -53,7 +43,35 @@ class EmployeesController extends Controller
         //
     }
 
+    public function getEmployee_types()
+    {
+        $employee_types = Employee_type::orderby('id', 'DESC')->get();
+        return $employee_types;
+    }
 
+    public function getWork_states()
+    {
+        $work_states = Work_state::orderby('id', 'DESC')->get();
+        return $work_states;
+    }
+
+    public function getContracts()
+    {
+        $contracts = Contract::orderby('id', 'DESC')->get();
+        return $contracts;
+    }
+
+    public function getSchools()
+    {
+        $schools = School::orderby('id', 'DESC')->get();
+        return $schools;
+    }
+
+    public function getLanguages()
+    {
+        $languages = Language::orderby('id', 'DESC')->get();
+        return $languages;
+    }
     /**
      * Display the specified resource.
      *
