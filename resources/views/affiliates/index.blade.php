@@ -260,7 +260,6 @@
 									<br/>
 								</div>
 							</div>
-							<input type="submit" class="btn btn-success" value="Guardar" />
 						</form>
 					</div>
 				</div>
@@ -379,19 +378,15 @@
 				dataTableAffiliates();
 				modalSteps();
 				validar();
-				departmentMunicipality();
-				getDepartments();
+
+
 				//getMunicipalities();
-				getGenders();
-				getCivilStates();
-				getEthnicCommunities();
-				getEmployeeTypes();
+
+
+
 				// getAffiliateStates()
-				getTitles();
-				getContracts();
-				getWorkStates();
-				getSchools();
-				getLanguages();
+
+
 				check();
 			});
 
@@ -486,17 +481,33 @@
 					btnLastStepHtml: "Complete",
 					disableNextButton: false,
 					completeCallback: function() {
-
+						create();
 					},
 					callbacks: {
 						'1':	callback1,
+						'2':	callback2,
+						'3':	callback3
 					},
 					getTitleAndStep: function() {}
 				});
 			}
 			var callback1 = function (){
-				console.log('Aqui probando!');
+				getDepartments();
+				departmentMunicipality();
+				getGenders();
+				getCivilStates();
 			};
+			var callback2 = function(){
+				getEthnicCommunities();
+				getTitles();
+			}
+			var callback3 = function(){
+				getEmployeeTypes();
+				getContracts();
+				getWorkStates();
+				getSchools();
+				getLanguages();
+			}
 
 
 			function departmentMunicipality(){
@@ -515,12 +526,14 @@
 
 
 			 function getDepartments(){
+				 if($('#department_id').val()==null){
 				$.get('get-departments', function(data){
 					$('#department_id').append($('<option>', {value: '0', text: 'Seleccionar departamento'}));
 						$.each(data,	function(i, value){
 						$('#department_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 						});
 					});
+					}
 			}
 
 			function getMunicipalities(){
@@ -534,84 +547,102 @@
 			}
 
 			function getGenders(){
+				if($('#gender_id').val()==null){
 				$.get('get-genders', function(data){
 					$('#gender_id').append($('<option>', {value: '', text: 'Seleccionar género'}));
 					$.each(data,	function(i, value){
 						$('#gender_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 					});
 				});
+				}
 			}
 
 			function getCivilStates(){
+				if($('#civil_state_id').val()==null){
 				$.get('get-civil_states', function(data){
 					$('#civil_state_id').append($('<option>', {value: '', text: 'Seleccionar estado civil'}));
 					$.each(data,	function(i, value){
 						$('#civil_state_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 					});
 				});
+				}
 			}
 
 			function getEmployeeTypes(){
+				if($('#employee_id').val()==null){
 				$.get('get-employee_types', function(data){
 					$('#employee_type_id').append($('<option>', {value: '0', text: 'Seleccionar tipo de empleado'}));
 						$.each(data,	function(i, value){
 						$('#employee_type_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 						});
 					});
+				}
 			}
 
 			function getEthnicCommunities(){
+				if($('#ethnic_community_id').val()==null){
 				$.get('get-ethnic_communities', function(data){
 					$('#ethnic_community_id').append($('<option>', {value: '0', text: 'Seleccionar comunidad étnica'}));
 						$.each(data,	function(i, value){
 						$('#ethnic_community_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 						});
 					});
+				}
 			}
 
 			function getTitles(){
+				if($('#title_id').val()==null){
 				$.get('get-titles', function(data){
 					$('#title_id').append($('<option>', {value: '0', text: 'Seleccionar titulo que acredita'}));
 						$.each(data,	function(i, value){
 						$('#title_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 						});
 					});
+				}
 			}
 
 			function getWorkStates(){
+				if($('#work_state_id').val()==null){
 				$.get('get-work_states', function(data){
 					$('#work_state_id').append($('<option>', {value: '0', text: 'Seleccionar estado laboral'}));
 						$.each(data,	function(i, value){
 						$('#work_state_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 						});
 					});
+				}
 			}
 
 			function getContracts(){
+				if($('#contract_id').val()==null){
 				$.get('get-contracts', function(data){
 					$('#contract_id').append($('<option>', {value: '0', text: 'Seleccionar contrato'}));
 						$.each(data,	function(i, value){
 						$('#contract_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 						});
 					});
+				}
 			}
 
 			function getSchools(){
+				if($('#school_id').val()==null){
 				$.get('get-schools', function(data){
 					$('#school_id').append($('<option>', {value: '0', text: 'Seleccionar escuela'}));
 						$.each(data,	function(i, value){
 						$('#school_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 						});
 					});
+				}
 			}
 
 			function getLanguages(){
+				if($('#language_id').val()==null){
 				$.get('get-languages', function(data){
 					$('#language_id').append($('<option>', {value: '0', text: 'Seleccionar idioma'}));
 						$.each(data,	function(i, value){
 						$('#language_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 						});
 					});
+				}
 			}
 
 			// function getAffiliateStates(){
@@ -741,14 +772,14 @@
 
 
 //-----------Crear persona --------
+		function create(e){
+
 			$.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				}
 			});
 
-			$('#frm-insert_employees').on('submit', function(e){
-				e.preventDefault();
 				/**Se carga data con el array de datos del formulario #frm-insert */
 				var data 	= $('#frm-insert_people, #frm-insert_employees, #frm-insert_schools').serializeArray();
 				//var url 	= $(this).attr('action');
@@ -762,18 +793,20 @@
 				dataType: 'json',
 				success:function(data)
 					{
-						console.log(data)
+						document.getElementById("frm-insert_people").reset();
+						document.getElementById("frm-insert_employees").reset();
+						document.getElementById("frm-insert_schools").reset();
 						/**Se actualiza el DataTable */
 						var tbl = $('#tblAffiliates').DataTable();
 						tbl.ajax.reload()
-						$('#add_new_affiliate_modal').modal('hide');
+						//$('#add_new_affiliate_modal').modal('hide');
 						toastr["success"]("Persona guardada","Información")
 
 					}
 				});
 
+		}
 
-			});
 
 			function check(){
 					//We need to bind click handler as well

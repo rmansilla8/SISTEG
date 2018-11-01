@@ -124,17 +124,29 @@ class PeopleController extends Controller
                 $language_domain = new Language_domain();
                 $language_domain->language_id = $request->input('language_id');
                 $language_domain->employee_id = $employee->id;
-                if ($request->speak = 'on') {
+                $language_domain->speak = $request->input('speak');
+                if ($language_domain->speak == 'on') {
                     $language_domain->speak = 1;
+                } else {
+                    $language_domain->speak = 0;
                 }
-                if ($request->understand = 'on') {
+                $language_domain->understand = $request->input('understand');
+                if ($language_domain->understand == 'on') {
                     $language_domain->understand = 1;
+                } else {
+                    $language_domain->understand = 0;
                 }
-                if ($request->read = 'on') {
+                $language_domain->read = $request->input('read');
+                if ($language_domain->read == 'on') {
                     $language_domain->read = 1;
+                } else {
+                    $language_domain->read = 0;
                 }
-                if ($request->speak = 'on') {
+                $language_domain->write = $request->input('write');
+                if ($language_domain->write == 'on') {
                     $language_domain->write = 1;
+                } else {
+                    $language_domain->write = 0;
                 }
                 $language_domain->save();
 
@@ -147,7 +159,7 @@ class PeopleController extends Controller
 
 
 
-
+            return $request;
         }
 
 
