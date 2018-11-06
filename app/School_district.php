@@ -21,7 +21,7 @@ class School_district extends Model
         return $this->hasOne(Administrative_employee::class);
     }
 
-    public function municipalities()
+    public function municipality()
     {
         return $this->belongsTo(Municipality::class);
     }

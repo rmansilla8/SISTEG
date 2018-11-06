@@ -52,6 +52,7 @@ class AccountingRecordsController extends Controller
      */
     public function store(Request $request)
     {
+
         if ($request->ajax()) {
 
             $accounting_records = Accounting_record::create($request->all());

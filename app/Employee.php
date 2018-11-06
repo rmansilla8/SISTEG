@@ -12,7 +12,7 @@ class Employee extends Model
         'scale_register',
         'person_id',
         'ethnic_community_id',
-        'employee_type_id',
+
     ];
 
 

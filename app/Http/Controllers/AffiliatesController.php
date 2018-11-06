@@ -11,6 +11,20 @@ use IntelGUA\Sisteg\Person;
 use IntelGUA\Sisteg\Gender;
 use IntelGUA\Sisteg\Title;
 use IntelGUA\Sisteg\School;
+use IntelGUA\Sisteg\Employee_school;
+use IntelGUA\Sisteg\Level;
+use IntelGUA\Sisteg\School_district;
+use IntelGUA\Sisteg\Area;
+use IntelGUA\Sisteg\Classification;
+use IntelGUA\Sisteg\Modality;
+use IntelGUA\Sisteg\Plan;
+use IntelGUA\Sisteg\Working_day;
+use IntelGUA\Sisteg\Employee_title;
+use IntelGUA\Sisteg\Language_domain;
+use IntelGUA\Sisteg\Language;
+use IntelGUA\Sisteg\Ethnic_community;
+use IntelGUA\Sisteg\Municipality;
+use IntelGUA\Sisteg\Employee_type;
 
 class AffiliatesController extends Controller
 {
@@ -90,7 +104,37 @@ class AffiliatesController extends Controller
      */
     public function show($id)
     {
-        //
+        $affiliate = Affiliate::where('id', '=', $id)->first();
+        $employee = Employee::with('ethnic_community')->where('id', '=', $affiliate->employee_id)->first();
+        $person = Person::with('gender')->with('civil_state')->with('municipality.department')
+            ->where('id', '=', $employee->person_id)->first();
+        $employee_school = Employee_school::with('contract')->with('employee_type')->with('work_state')
+            ->with('school.level', 'school.area', 'school.classification', 'school.school_district.municipality.department', 'school.modality', 'school.working_day', 'school.plan')
+            ->where('employee_id', '=', $employee->id)->get();
+        $employee_title = Employee_title::with('title')->where('employee_id', '=', $employee->id)->get();
+        $language_domain = Language_domain::with('language')->where('employee_id', '=', $employee->id)->get();
+        return view('affiliates.show', compact(
+        //return (compact(
+            'affiliate',
+            'employee',
+            'person',
+            'employee_school',
+            'employee_title',
+            'language_domain'
+        ));
+        // $affiliate = DB::table('affiliates')
+        //     ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
+        //     ->join('people', 'people.id', '=', 'employees.person_id')
+        //     ->join('employee_schools', 'employees.id', '=', 'employee_schools.employee_id')
+        //     ->join('schools', 'schools.id', 'employee_schools.school_id')
+        //     ->join('employee_titles', 'employees.id', '=', 'employee_titles.employee_id')
+        //     ->join('titles', 'titles.id', '=', 'employee_titles.title_id')
+        //     ->join('genders', 'genders.id', '=', 'people.gender_id')
+        //     ->join('levels', 'levels.id', '=', 'schools.level_id')
+        //     ->where('affiliates.id', '=', $id)
+        //     ->select('affiliates.*', 'employees.*', 'people.*', 'schools.*', 'titles.description AS title', 'genders.description AS gender', 'levels.description AS level')
+        //     ->get();
+        // return (compact('affiliate'));
     }
 
     /**

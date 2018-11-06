@@ -99,7 +99,7 @@
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
 								-El nombre de los input y select deben ser igual nombre del campo en la BD.
 							 -->
-							<form  action="{{ URL::to('accounting_records')}}" method="POST" id="frm-insert" onsubmit="return validateDataCreate();">
+							<form  action="{{ URL::to('accounting_records')}}" method="POST" id="frm-insert">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
 								<div  class="input-group ">

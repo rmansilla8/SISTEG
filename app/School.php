@@ -14,7 +14,7 @@ class School extends Model
         'area_id',
         'classification_id',
         'modality_id',
-        'turn_id',
+        'working_day_id',
         'address',
         'plan_id',
     ];

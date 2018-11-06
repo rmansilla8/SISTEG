@@ -23,6 +23,7 @@ class CreateSchoolsTable extends Migration
             $table->integer('classification_id')->unsigned();
             $table->integer('modality_id')->unsigned();
             $table->integer('working_day_id')->unsigned();
+            $table->integer('plan_id')->unsigned();
             $table->string('address', 200);
             $table->timestamps();
 
@@ -33,7 +34,7 @@ class CreateSchoolsTable extends Migration
             $table->foreign('level_id')->references('id')->on('levels')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            
+
             $table->foreign('school_district_id')->references('id')->on('school_districts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -45,12 +46,16 @@ class CreateSchoolsTable extends Migration
             $table->foreign('classification_id')->references('id')->on('classifications')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            
+
             $table->foreign('modality_id')->references('id')->on('modalities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            
+
             $table->foreign('working_day_id')->references('id')->on('working_days')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('plan_id')->references('id')->on('plans')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

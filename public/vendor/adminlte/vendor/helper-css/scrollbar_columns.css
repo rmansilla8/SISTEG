@@ -1,0 +1,34 @@
+/*Set the row height to the viewport*/
+.row-height{
+  height: 30vh;
+}
+
+/*Set up the columns with a 100% height, body color and overflow scroll*/
+
+.left{
+  background-color: white;
+  height: 100%;
+  /* overflow-y: scroll; */
+}
+
+.right{
+  background-color: white;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.mid{
+  background-color: green;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+/*Remove the scrollbar from Chrome, Safari, Edge and IE*/
+/* ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+} */
+
+* {
+  -ms-overflow-style: none !important;
+}

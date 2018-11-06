@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
     <!-- Jasny Bootstrap -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/jquery/dist/jasny-bootstrap.min.css') }}">
+    <!-- Columnas con scrollbar -->
+    <!-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/helper-css/scrollbar_columns.css') }}"> -->
     <!-- InputMask -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/jquery/dist/inputmask.min.css') }}">
 

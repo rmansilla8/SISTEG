@@ -108,82 +108,133 @@ return [
      */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'MENU',
         [
-            'text' => 'Blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Inicio',
+            'url' => '../home',
+            'icon' => 'home',
         ],
+        'Módulos',
         [
-            'text' => 'Pages',
-            'url' => 'admin/pages',
-            'icon' => 'file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url' => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url' => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
-            'text' => 'Multilevel',
-            'icon' => 'share',
+            'text' => 'Administración',
+            'url' => '#',
+            'icon' => 'laptop',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'Level One',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'Level Two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
-                    'url' => '#',
+                    'text' => 'User',
+                    'url' => '../users',
+                    'icon' => 'users',
                 ],
             ],
         ],
-        'LABELS',
         [
-            'text' => 'Important',
-            'icon_color' => 'red',
+            'text' => 'Afiliación',
+            'url' => '#',
+            'icon' => 'user',
+            'submenu' => [
+                [
+                    'text' => 'Afiliados',
+                    'url' => '../affiliates',
+                    'icon' => 'edit',
+                ],
+            ],
         ],
         [
-            'text' => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text' => 'Information',
-            'icon_color' => 'aqua',
+            'text' => 'Contabilidad',
+            'icon' => 'calculator',
+            'submenu' => [
+                [
+                    'text' => 'Contabilidad',
+                    'url' => '../accounting_records',
+                    'icon' => 'calculator',
+                ],
+                [
+                    'text' => 'Cuotas',
+                    'url' => '../fees',
+                    'icon' => 'money',
+                ],
+            ],
         ],
     ],
+
+
+    // 'menu' => [
+    //     'MAIN NAVIGATION',
+    //     [
+    //         'text' => 'Blog',
+    //         'url' => 'admin/blog',
+    //         'can' => 'manage-blog',
+    //     ],
+    //     [
+    //         'text' => 'Pages',
+    //         'url' => 'admin/pages',
+    //         'icon' => 'file',
+    //         'label' => 4,
+    //         'label_color' => 'success',
+    //     ],
+    //     'ACCOUNT SETTINGS',
+    //     [
+    //         'text' => 'Profile',
+    //         'url' => 'admin/settings',
+    //         'icon' => 'user',
+    //     ],
+    //     [
+    //         'text' => 'Change Password',
+    //         'url' => 'admin/settings',
+    //         'icon' => 'lock',
+    //     ],
+    //     [
+    //         'text' => 'Multilevel',
+    //         'icon' => 'share',
+    //         'submenu' => [
+    //             [
+    //                 'text' => 'Level One',
+    //                 'url' => '#',
+    //             ],
+    //             [
+    //                 'text' => 'Level One',
+    //                 'url' => '#',
+    //                 'submenu' => [
+    //                     [
+    //                         'text' => 'Level Two',
+    //                         'url' => '#',
+    //                     ],
+    //                     [
+    //                         'text' => 'Level Two',
+    //                         'url' => '#',
+    //                         'submenu' => [
+    //                             [
+    //                                 'text' => 'Level Three',
+    //                                 'url' => '#',
+    //                             ],
+    //                             [
+    //                                 'text' => 'Level Three',
+    //                                 'url' => '#',
+    //                             ],
+    //                         ],
+    //                     ],
+    //                 ],
+    //             ],
+    //             [
+    //                 'text' => 'Level One',
+    //                 'url' => '#',
+    //             ],
+    //         ],
+    //     ],
+    //     'LABELS',
+    //     [
+    //         'text' => 'Important',
+    //         'icon_color' => 'red',
+    //     ],
+    //     [
+    //         'text' => 'Warning',
+    //         'icon_color' => 'yellow',
+    //     ],
+    //     [
+    //         'text' => 'Information',
+    //         'icon_color' => 'aqua',
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------

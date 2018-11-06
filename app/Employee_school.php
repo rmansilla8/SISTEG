@@ -12,6 +12,7 @@ class Employee_school extends Model
         'contract_id',
         'work_state_id',
         'year_start',
+        'employee_type_id',
     ];
 
     public function school()

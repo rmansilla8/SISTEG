@@ -28,31 +28,24 @@
 	 -->
 <div class="box">
 		<!-- Encabezado de la caja -->
-        <div class="box-header with-border">
-            <h3 class="box-title">Listado de cuotas</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-
-                <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove" disabled>
-                    <i class="fa fa-times"></i>
-                </button> -->
-
-            </div>
-       	</div>
-        <div class="box-body">
+    <div class="box-header with-border">
+        <h3 class="box-title">Listado de cuotas</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
             <!-- Cuerpo de la caja-->
-
-			<div class="row">
-				<!-- Botón que invoca el Modal #add_new_fee_modal para agregar registros -->
-				<div class="col-xs-12">
-						<button style="margin-bottom:10px;" type="button" data-toggle="modal" data-target="#add_new_fee_modal" class="btn btn-success pull-right">
-						<i class="fa fa-plus"></i> Nuevo Registro</button>
-					<br/>
-				</div>
+		<div class="row">
+			<!-- Botón que invoca el Modal #add_new_fee_modal para agregar registros -->
+			<div class="col-xs-12">
+					<button style="margin-bottom:10px;" type="button" data-toggle="modal" data-target="#add_new_fee_modal" class="btn btn-success pull-right">
+					<i class="fa fa-plus"></i> Nuevo Registro</button>
+				<br/>
 			</div>
+		</div>
 
             <!-- DataTable -->
 			<div class="row">

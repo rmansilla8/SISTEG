@@ -83,6 +83,7 @@
             <!-- Comiezo del footer -->
         </div>
 		<!-- fin del footer de la caja-->
+        </div>
 
 		<!-- Area de Modales -->
 				<!-- Modal -->
@@ -188,6 +189,7 @@
 								</div>
 							</form>
 						</div>
+					</div>
 					</div>
 				<!-- </div> -->
 					<!-- Paso 2 del modal -->
