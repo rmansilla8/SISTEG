@@ -163,6 +163,7 @@ return [
         IntelGUA\Sisteg\Providers\RouteServiceProvider::class,
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
 
+
     ],
 
     /*

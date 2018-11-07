@@ -113,17 +113,20 @@ return [
             'text' => 'Inicio',
             'url' => '../home',
             'icon' => 'home',
+
         ],
         'Módulos',
         [
             'text' => 'Administración',
             'url' => '#',
             'icon' => 'laptop',
+            // 'can' => 'registrador, finanzas',
             'submenu' => [
                 [
                     'text' => 'User',
                     'url' => '../users',
                     'icon' => 'users',
+                    // 'can' => 'registrador , finanzas',
                 ],
             ],
         ],
@@ -131,27 +134,32 @@ return [
             'text' => 'Afiliación',
             'url' => '#',
             'icon' => 'user',
+            // 'can' => 'registrador', 'administrador',
             'submenu' => [
                 [
                     'text' => 'Afiliados',
                     'url' => '../affiliates',
                     'icon' => 'edit',
+                    // 'can' => 'registrador', 'administrador',
                 ],
             ],
         ],
         [
             'text' => 'Contabilidad',
             'icon' => 'calculator',
+            // 'can' => 'registrador',
             'submenu' => [
                 [
                     'text' => 'Contabilidad',
                     'url' => '../accounting_records',
                     'icon' => 'calculator',
+                    // 'can' => 'registrador',
                 ],
                 [
                     'text' => 'Cuotas',
                     'url' => '../fees',
                     'icon' => 'money',
+                    // 'can' => 'registrador',
                 ],
             ],
         ],
@@ -254,6 +262,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+
     ],
 
     /*
