@@ -61,8 +61,13 @@ class UsersController extends Controller
                 $user = new User();
                 $user->name = $request->input('name');
                 $user->email = $request->input('email');
-                $user->password = Hash::make(str_random(8));
+                $user->password = Hash::make($request->input('password'));
+                $user->status = $request->input('status');
+                if ($request->status == 'on') {
+                    $user->status = 1;
+                }
                 $user->save();
+
                 $role_id = $request->input('role_id');
                 $user->roles()->attach($role_id);
                 $permission_id = $request->input('permission_id');
@@ -112,7 +117,13 @@ class UsersController extends Controller
     {
         if ($request->ajax()) {
             $user = User::find($request->id);
-            $user->update($request->all());
+            $user->name = $request->input('name');
+            $user->name = $request->input('email');
+            $user->save();
+            $role_id = $request->input('role_id');
+            $user->roles()->sync($role_id);
+            $permission_id = $request->input('permission_id');
+            $user->permissions()->sync($permission_id);
             return response($user);
         }
     }

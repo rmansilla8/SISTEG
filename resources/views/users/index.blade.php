@@ -42,7 +42,7 @@
 			<div class="row">
 				<!-- Botón que invoca el Modal #add_new_fee_modal para agregar registros -->
 				<div class="col-xs-12">
-						<button style="margin-bottom:10px;" type="button" data-toggle="modal" data-target="#add_new_fee_modal" class="btn btn-success pull-right">
+						<button style="margin-bottom:10px;" type="button" data-toggle="modal" data-target="#add_new_user_modal" class="btn btn-success pull-right">
 						<i class="fa fa-plus"></i> Nuevo Registro</button>
 					<br/>
 				</div>
@@ -58,6 +58,7 @@
                                 <th data-priority="1" class="text-center">Nombre</th>
                                 <th class="text-center">Correo</th>
                                 <th class="text-center">Rol</th>
+                                <th class="text-center">Estado</th>
                                 <th class="text-center">Permiso</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
@@ -75,6 +76,8 @@
 </div>
 	<!-- Modal - Agregar nuevo registro -->
 
+<!-- Modal - Agregar nuevo registro -->
+
 	<div class="modal fade" id="add_new_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-backdrop="static" data-keyboard="false">
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
@@ -82,6 +85,7 @@
 	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span></button>
 	                	<h4 class="modal-title" id="myModalLabel">Agregar registro</h4>
+
 	            </div>
 	            <div class="modal-body">
 	 				<form  action="{{ URL::to('users')}}" method="POST" id="frm-user" >
@@ -99,6 +103,11 @@
 							<br/>
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-list"></i></span>
+	                    	<input type="text" name="password" id="password" placeholder="Contraseña" class="form-control"/>
+						</div>
+							<br/>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-list"></i></span>
 							<select name="role_id" id="role_id" placeholder="Rol"  class="form-control"></select>
 	                	</div>
 							<br/>
@@ -106,6 +115,11 @@
 							<span class="input-group-addon"><i class="fa fa-list"></i></span>
 							<select name="permission_id" id="permission_id" placeholder="Permiso"  class="form-control"></select>
 	                	</div>
+							<br/>
+						<div class="input-group">
+							Estado<br/>
+							<center>Activo:  <input type="radio" id="status" name="status"/></center>
+						</div>
 							<br/>
 						<div class="modal-footer">
 	                		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -141,6 +155,11 @@
 	                    	<input type="email" name="email" id="update_email" placeholder="Correo electrónico" class="form-control"/>
 						</div>
 							<br/>
+							<!-- <div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-list"></i></span>
+	                    	<input type="text" name="password" id="update_password" placeholder="Contraseña" class="form-control"/>
+						</div>
+							<br/> -->
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-list"></i></span>
 							<select name="role_id" id="update_role_id" placeholder="Rol"  class="form-control"></select>
@@ -150,7 +169,12 @@
 							<span class="input-group-addon"><i class="fa fa-list"></i></span>
 							<select name="permission_id" id="update_permission_id" placeholder="Permiso"  class="form-control"></select>
 	                	</div>
-								<input type="hidden" name="id" id="update_user_id"/>
+						<!-- <div class="input-group">
+							Estado<br/>
+							<center>Activo:  <input type="radio" id="update_status" name="status"/></center>
+						</div>
+						<br/> -->
+						<input type="hidden" name="id" id="update_user_id"/>
 
 						<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -165,10 +189,6 @@
 @stop
 <!-- /Content Section -->
 
-@section('css')
-
-
-@stop
 @push('js')
 	<script>
       	$(document).ready(function() {
@@ -177,6 +197,7 @@
 			getPermissions();
 			getRolesEdit();
 			getPermissionsEdit();
+			check();
         });
 		function dataTableUsers()
 			{
@@ -208,12 +229,22 @@
 						{"data":	"name"},
 						{"data":	"email"},
 						{"data":	"roles.0.name"},
+						{"data":	"status",
+							"render": function (data, type, row) {
+								if( row.status == '1' ){
+										return 'Activo';
+								}
+								else{
+									return 'Inactivo';
+								}
+							}
+						},
 						{"data":	"permissions.0.description"},
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs' > " +
-							"<button type='button' id='show' class='show btn btn-info' title='Mostrar' data-id='id'><i class='fa fa-eye'></i></button>"+
+							// "<button type='button' id='show' class='show btn btn-info' title='Mostrar' data-id='id'><i class='fa fa-eye'></i></button>"+
 							"<button type='button' id='edit' class='edit btn btn-warning' title='Modificar' data-id='id'><i class='fa fa-pencil-square-o'></i></button>"+
-							"<button type='button' id='del' class='delete btn btn-danger' title='Eliminar'><i class='fa fa-trash-o'></i></button>"+
+							"<button type='button' id='del' class='delete btn btn-danger' title='Permisos'><i class='fa fa-cogs'></i></button>"+
 							"</div>"
 						}
 					]
@@ -246,13 +277,13 @@
 						t.ajax.reload()
 						$('#add_new_user_modal').modal('hide');
 						//getTeeth();
-						toastr["success"]("¡Diente creado exitosamente!", "Guardado")
+						toastr["success"]("Usuario creado exitosamente!", "Guardado")
 					}
 				});
 			});
 				//para cargar la lista de roles
 			function getRoles(){
-			$.get('../get-roles', function(data){
+			$.get('get-roles', function(data){
 					$('#role_id').append($('<option>', {value: "", text: 'Seleccionar tipo'}));
 					$.each(data,	function(i, value){
 						//posiciones.append($('<option value="' + value.id + '">').text = value.name;
@@ -262,7 +293,7 @@
 			}
 			//para cargar la lista de permisos
 			function getPermissions(){
-			$.get('../get-permissions', function(data){
+			$.get('get-permissions', function(data){
 					$('#permission_id').append($('<option>', {value: "", text: 'Seleccionar etapa'}));
 					$.each(data,	function(i, value){
 						//posiciones.append($('<option value="' + value.id + '">').text = value.name;
@@ -270,6 +301,35 @@
 					});
 				});
 			}
+// Función para poder seleccionar y deseleccionar el botón radio
+function check(){
+	// Necesitamos también enlazar click handler
+	// como el botón FF establece el botón después de la eliminación, pero antes de hacer clic
+	$('input:radio').bind('click mousedown', (function() {
+		// Capturar el estado del botón de radio dentro de su alcance del controlador,
+		// por lo que no usamos ninguna vars global y cada botón de radio mantiene su propio estado.
+		// Esto es necesario para desmarcarlos más tarde.
+		// Necesitamos almacenar el estado por separado cuando se verifique el estado de las actualizaciones del navegador antes de hacer clic en el controlador,
+		// entonces el botón de radio siempre estará marcado.
+		var isChecked;
+		return function(event) {
+			if(event.type == 'click') {
+				if(isChecked) {
+					// Desmarcar y actualizar el estado
+					isChecked = this.checked = false;
+				}else {
+						//Estado de actualización
+						// El navegador comprobará el botón por sí mismo
+						isChecked = true;
+				}
+			}
+			else {
+				// Obtener el estado correcto antes de que el navegador lo configure
+				// Necesitamos usar el evento onmousedown aquí, ya que es el único evento compatible con varios navegadores para botones de radio
+				isChecked = this.checked;
+			}
+	}})());
+}
 				// Editar usuario
 	$('body').delegate('#tbl-users #edit', 'click', function(e){
 		e.preventDefault();
@@ -279,12 +339,13 @@
     				var rowData = $('#tbl-users').DataTable().row($tr).data();
 					var vid = rowData.id;
 		$.get('users/' + vid + '/edit', {id:vid}, function(data){
-			var rol=data.roles;
-			console.log([[0,0]]);
+			console.log(data);
+			// var rol=data.roles;
 			$('#frm-update_user').find('#update_name').val(data.name)
 			$('#frm-update_user').find('#update_email').val(data.email)
-			$('#frm-update_user').find('#update_role_id').val(data.roles)
-			$('#frm-update_user').find('#update_permission_id').val(data.permission_id)
+			// $('#frm-update_user').find('#update_password').val(data.password)
+			$('#frm-update_user').find('#update_role_id').val(data.roles[0].id)
+			$('#frm-update_user').find('#update_permission_id').val(data.permissions[0].id)
 			$('#frm-update_user').find('#update_user_id').val(data.id)
 			$('#update_user_modal').modal('show');
 		});
@@ -292,9 +353,9 @@
 	 //Esta función se utiliza para cargar los datos del dropdown list de roles de usuario
 			function getRolesEdit(vid){
 				$('#update_role_id').empty();
-				$.get('../get-roles', function(data){
+				$.get('get-roles', function(data){
 					$.each(data,	function(i, value){
-						console.info(value);
+						//console.info(value);
 						if(value.id === vid ){
 							$('#update_role_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
 						}
@@ -305,9 +366,9 @@
 		//Esta función se utiliza para cargar los datos del dropdown list de permisos de usuario
 			function getPermissionsEdit(vid){
 				$('#update_permission_id').empty();
-				$.get('../get-permissions', function(data){
+				$.get('get-permissions', function(data){
 					$.each(data,	function(i, value){
-						console.info(value);
+						//console.info(value);
 						if(value.id === vid ){
 							$('#update_permission_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
 						}
@@ -316,26 +377,26 @@
 				});
 			}
 		//-------------Actualizar Usuario-------------
-	$('#frm-update').on('submit', function(e){
+	$('#frm-update_user').on('submit', function(e){
 				e.preventDefault();
-				var data 	= $('#frm-update').serializeArray();
-				var id 		= $("#tooth_id").val();
-				//console.log(data);
+				var data 	= $('#frm-update_user').serializeArray();
+				var id 		= $("#update_user_id").val();
+				console.log(data);
 				//console.log(id);
 				$.ajax({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					},
-					url 	: 'teeth/' + id ,
+					url 	: 'users/' + id ,
 					dataType: 'json',
 					type 	: 'POST',
 					data 	: data,
 					success:function(data)
 					{
-						var $t = $('#tbl-teeth').DataTable();
+						var $t = $('#tbl-users').DataTable();
 						$t.ajax.reload();
 					//console.log(data);
-						$('#update_tooth_modal').modal('hide');
+						$('#update_user_modal').modal('hide');
 					}
 					});
 				});
