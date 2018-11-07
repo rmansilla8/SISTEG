@@ -1,5 +1,6 @@
 <?php
 use IntelGUA\Generators\Generate;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
 
+
+
     //Grupo de rutas al que solo el Admin puede acceder
     Route::group([
         'middleware' => ['permission:todos'],
@@ -49,6 +52,24 @@ Route::group(['middleware' => ['auth']], function () {
         'middleware' => ['permission:registrador'],
     ], function () {
 
+        Route::resource('affiliates', 'affiliatesController');
+        Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
+        Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
+
+        Route::get('get-departments', 'PeopleController@getDepartments');
+        Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
+        Route::get('get-genders', 'PeopleController@getGenders');
+        Route::get('get-civil_states', 'PeopleController@getCivilStates');
+        Route::resource('people', 'PeopleController');
+        Route::get('get-ethnic_communities', 'EmployeesController@getEthnic_communities');
+        Route::get('get-titles', 'EmployeesController@getTitles');
+
+        Route::get('get-employee_types', 'EmployeeSchoolsController@getEmployee_types');
+        Route::get('get-work_states', 'EmployeeSchoolsController@getWork_states');
+        Route::get('get-contracts', 'EmployeeSchoolsController@getContracts');
+        Route::get('get-schools', 'EmployeeSchoolsController@getSchools');
+        Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
+
 
     });
 
@@ -57,39 +78,17 @@ Route::group(['middleware' => ['auth']], function () {
         'middleware' => ['permission:finanzas'],
     ], function () {
 
+              //Route::resource('fees',   'FeesController');
+        Route::resource('fees', 'FeesController');
+        Route::get('get-fees', 'FeesController@getFees');
+        Route::get('get-fee_types', 'FeesController@getFeeType');
+        Route::get('get-affiliates', 'FeesController@getAffiliate');
 
-    });
-
-
-
-        //Route::resource('fees',   'FeesController');
-    Route::resource('fees', 'FeesController');
-    Route::get('get-fees', 'FeesController@getFees');
-    Route::get('get-fee_types', 'FeesController@getFeeType');
-    Route::get('get-affiliates', 'FeesController@getAffiliate');
-
-    Route::resource('accounting_records', 'AccountingRecordsController');
-    Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingRecords');
-    Route::get('get-record_types', 'AccountingRecordsController@getRecordTypes');
+        Route::resource('accounting_records', 'AccountingRecordsController');
+        Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingRecords');
+        Route::get('get-record_types', 'AccountingRecordsController@getRecordTypes');
         //Route::post('fees/{fee}', 'FeesController@destroy')->name('eliminar');
 
-    Route::resource('affiliates', 'affiliatesController');
-    Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
-    Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
-
-    Route::get('get-departments', 'PeopleController@getDepartments');
-    Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
-    Route::get('get-genders', 'PeopleController@getGenders');
-    Route::get('get-civil_states', 'PeopleController@getCivilStates');
-    Route::resource('people', 'PeopleController');
-    Route::get('get-ethnic_communities', 'EmployeesController@getEthnic_communities');
-    Route::get('get-titles', 'EmployeesController@getTitles');
-
-    Route::get('get-employee_types', 'EmployeeSchoolsController@getEmployee_types');
-    Route::get('get-work_states', 'EmployeeSchoolsController@getWork_states');
-    Route::get('get-contracts', 'EmployeeSchoolsController@getContracts');
-    Route::get('get-schools', 'EmployeeSchoolsController@getSchools');
-    Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
-
+    });
 
 });
