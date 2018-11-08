@@ -37,6 +37,12 @@ class UsersController extends Controller
         $permission = Permission::orderby('id', 'DESC')->get();
         return $permission;
     }
+
+    public function getStatus()
+    {
+        $status = User::select('status', 'id')->get();
+        return $status;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -118,13 +124,23 @@ class UsersController extends Controller
         if ($request->ajax()) {
             $user = User::find($request->id);
             $user->name = $request->input('name');
-            $user->name = $request->input('email');
+            $user->email = $request->input('email');
             $user->save();
             $role_id = $request->input('role_id');
             $user->roles()->sync($role_id);
             $permission_id = $request->input('permission_id');
             $user->permissions()->sync($permission_id);
             return response($user);
+        }
+    }
+
+    public function Status(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $status = User::find($request->id);
+            $status->status = $request->input('status');
+            $status->save();
+            return response($status);
         }
     }
 

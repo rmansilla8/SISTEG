@@ -57,7 +57,7 @@
             <!-- DataTable -->
 			<div class="row">
                 <div class="col-md-12">
-                   <table id="tblAffiliates" class="display responsive no-wrap" width="100%" >
+                   <table id="tbl-affiliates" class="display responsive no-wrap" width="100%" >
 					<thead>
 						<tr >
 							<th class="text-center">No.</th>
@@ -399,7 +399,7 @@
 				 que se usara mas adelante para indexar los
 				 registros.
 				*/
-				var t = $('#tblAffiliates').DataTable({
+				var t = $('#tbl-affiliates').DataTable({
 					/**Procesamiento del lado del servidor */
 					"serverside":	true,
 					/**Ajusta el tamaño de las celdas */
@@ -460,7 +460,6 @@
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs'>"+
 							"<button type='button' id='Show' class='show btn btn-info'><i class='fa fa-eye'></i></button>"+
-							"<button type='button' id='Edit' class='edit btn btn-warning'><i class='fa fa-pencil-square-o'></i></button>"+
 							"<button type='button' id='Delete' class='delete btn btn-danger'><i class='fa fa-trash-o'></i></button>"+
 							"</div>"
 						}
@@ -799,7 +798,7 @@
 						document.getElementById("frm-insert_employees").reset();
 						document.getElementById("frm-insert_schools").reset();
 						/**Se actualiza el DataTable */
-						var tbl = $('#tblAffiliates').DataTable();
+						var tbl = $('#tbl-affiliates').DataTable();
 						tbl.ajax.reload()
 						//$('#add_new_affiliate_modal').modal('hide');
 						toastr["success"]("Persona guardada","Información")
@@ -852,7 +851,19 @@
 				}})());
 			}
 
-
+		$('body').delegate('#tbl-affiliates #Show', 'click', function(e){
+		e.preventDefault();
+			var $tr = $(this).closest('li').length ?
+					$(this).closest('li'):
+					$(this).closest('tr');;
+    				var rowData = $('#tbl-affiliates').DataTable().row($tr).data();
+   						//console.log(rowData);
+					var vid = rowData.id;
+					console.log(vid);
+				$.get('affiliates/' + vid , {id:vid}, function(data){
+					window.location.href = 'affiliates/' + vid;
+		 });
+	});
 </script>
 
 
