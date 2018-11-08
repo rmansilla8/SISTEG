@@ -70,7 +70,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('get-schools', 'EmployeeSchoolsController@getSchools');
         Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
 
-
+        Route::resource('schools', 'SchoolsController');
+        Route::get('get-schools', 'SchoolsController@getSchools');
+        Route::get('get-levels', 'SchoolsController@getLevel');
+        Route::get('get-districts', 'SchoolsController@getDistrict');
+        Route::get('get-areas', 'SchoolsController@getArea');
+        Route::get('get-classifications', 'SchoolsController@getClassification');
+        Route::get('get-modalities', 'SchoolsController@getModality');
+        Route::get('get-working_days', 'SchoolsController@getWorkingDay');
+        Route::get('get-plans', 'SchoolsController@getPlan');
     });
 
     //Grupo de rutas al que solo el de finanzas y el admin pueden acceder
