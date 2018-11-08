@@ -213,13 +213,13 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-						<h4 class="js-title-step"></h4>
+					<h4 class="js-title-step"></h4>
 				</div>
 				<div class="modal-body">
 					<!-- Paso 1 del modal -->
 					<div class="row hide" data-step="1" data-title="Actualización">
 						<div class="container-fluid">
-							<form  id="frm-update_people" data-toggle="validator">
+							<form  id="frm-update_person" data-toggle="validator">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
 								<div class="row">
@@ -305,57 +305,58 @@
 											<select name="civil_state_id" id="update_civil_state_id" class="form-control" aria-describedby="scivil_state"></select>
 										</div>
 									</div>
-								</div>
+                                </div>
+								<input name="id" type="hidden" id="update_id" class="form-control"/>
+
 							</form>
 						</div>
 					</div>
-					</div>
-				<!-- </div> -->
+
+
 					<!-- Paso 2 del modal -->
 				<div class="row hide" data-step="2" data-title="Actualización">
-					<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
 					<div class="container-fluid">
-						<form   id="frm-insert_employees" data-toggle="validator">
+						<form   id="frm-update_employee" data-toggle="validator">
 							<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 							{{ csrf_field() }}
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos de identificación</b></center> </span></div>
-							<div class="row">
-								<div class="col-sm-12 col-md-6">
-									<div  class="input-group ">
-										<span class="input-group-addon" id="sdpi">DPI</span>
-										<input name="dpi" id="update_dpi" alt="Documento personal de identificación" class="form-control" placeholder="Ingrese DPI" aria-describedby="sdpi"/>
-									</div>
+							    <div class="row">
+								    <div class="col-sm-12 col-md-6">
+									    <div  class="input-group ">
+										    <span class="input-group-addon" id="sdpi">DPI</span>
+										    <input name="dpi" id="update_dpi" alt="Documento personal de identificación" class="form-control" placeholder="Ingrese DPI" aria-describedby="sdpi"/>
+									    </div>
 									<br/>
-								</div>
-								<div class="col-sm-12 col-md-6">
-									<div class="input-group">
-										<span class="input-group-addon" id="snit">NIT</span>
-										<input name="nit" type="text" id="update_nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
-									</div>
-									<br/>
-								</div>
-								<br/>
+								    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="snit">NIT</span>
+                                            <input name="nit" type="text" id="update_nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    <br/>
 							</div>
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos complementarios</b></center> </span></div>
-							<div class="row">
-								<div class="col-sm-12 col-md-6">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-										<input type="text" name="scale_register" id="scale_register" class="form-control" placeholder="Ingrese el registro escalafonario"/>
-									</div>
-									<br/>
-								</div>
-								<div class="col-sm-12 col-md-6">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-users"></i></span>
-										<select name="ethnic_community_id" id="update_ethnic_community_id" class="form-control"></select>
-									</div>
-									<br/>
-								</div>
-
-							</div>
-
-				</div>
+							    <div class="row">
+								    <div class="col-sm-12 col-md-6">
+									    <div class="input-group">
+										    <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+										    <input type="text" name="scale_register" id="update_scale_register" class="form-control" placeholder="Ingrese el registro escalafonario"/>
+								    	</div>
+									    <br/>
+								    </div>
+								    <div class="col-sm-12 col-md-6">
+									    <div class="input-group">
+										    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+										    <select name="ethnic_community_id" id="update_ethnic_community_id" class="form-control"></select>
+									    </div>
+									    <br/>
+								    </div>
+							    </div>
+                            </div>
+                        </div>
+                </div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
 					<button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
@@ -386,6 +387,8 @@
 				/**Llena el DataTable */
 
 				modalSteps();
+				getDepartmentEdit();
+
 
 			});
 
@@ -407,14 +410,17 @@
 					getTitleAndStep: function() {}
 				});
 			}
+			// var callback1 = function (){
+			// 	getMunicipalityEdit();
+			// };
 
-$('body').delegate('#Edit', 'click', function(e){
+$('body').delegate(' #Edit', 'click', function(e){
 				e.preventDefault();
 				/**Se obtiene los datos de la fila donde se encuentra el botón
 				   editar al que se le dio clic
 				*/
-                var id = {{$affiliate->id}};
-                console.log(id);
+                var vid = {{$affiliate->id}};
+                console.log(vid);
 				// var $tr = $(this).closest('li').length ?
 				// 	$(this).closest('li'):
 				// 	$(this).closest('tr');
@@ -424,17 +430,60 @@ $('body').delegate('#Edit', 'click', function(e){
 				// /**Se extrae de rowData el id del registro que se editará */
 				// var vid = rowData.id;
 				// console.log(vid);
-				// $.get('fees/' + vid + '/edit', {id:vid}, function(data){
+				$.get('../affiliates/' + vid + '/edit', {id:vid}, function(data){
+                    console.log(data);
 				// 	/**Se llenan los input con los datos de la ruta */
-				// 	$('#frm-update').find('#update_affiliate_id').val(data.affiliate_id)
-				// 	$('#frm-update').find('#update_fee_type_id').val(data.fee_type_id)
-				// 	$('#frm-update').find('#update_amount').val(data.amount)
-				// 	$('#frm-update').find('#update_date').val(data.date)
-				// 	$('#frm-update').find('#update_detail').val(data.detail)
-				// 	$('#frm-update').find('#update_id').val(data.id)
-				// 	$('#update_fee_modal').modal('show');
-				// });
+				 	$('#frm-update_person').find('#update_names').val(data.employee.person.names)
+				 	$('#frm-update_person').find('#update_surnames').val(data.employee.person.surnames)
+				 	$('#frm-update_person').find('#update_email').val(data.employee.person.email)
+				 	$('#frm-update_person').find('#update_phone').val(data.employee.person.phone)
+				 	$('#frm-update_person').find('#update_department_id').val(data.employee.person.municipality.department.id)
+				 	$('#frm-update_person').find('#update_municipality_id').val(data.employee.person.municipality.id)
+				 	$('#frm-update_person').find('#update_address').val(data.employee.person.address)
+				 	$('#frm-update_person').find('#update_birthdate').val(data.employee.person.birthdate)
+				 	$('#frm-update_person').find('#update_gender_id').val(data.employee.person.gender.id)
+				 	$('#frm-update_person').find('#update_civil_state').val(data.employee.person.civil_state.id)
+				 	$('#frm-update_employee').find('#update_dpi').val(data.employee.dpi)
+				 	$('#frm-update_employee').find('#update_nit').val(data.employee.nit)
+				 	$('#frm-update_employee').find('#update_scale_register').val(data.employee.scale_register)
+				 	$('#frm-update_employee').find('#update_ethnic_community').val(data.employee.ethnic_community.id)
+				 	$('#frm-update_person').find('#update_id').val(data.id)
+				 	$('#update_affiliate_modal').modal('show');
+
+				});
 			});
+
+            function getDepartmentEdit(vid){
+ 				//$('#update_fee_type_id').empty();
+ 				$.get('../get-departments', function(data){
+ 					$.each(data,	function(i, value){
+ 						if(value.id === vid ){
+ 							$('#update_department_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
+ 						}
+ 						$('#update_department_id').append($('<option >', {value: value.id, text: `${value.name}`}));
+ 					});
+
+ 				});
+
+ 			}
+			  $('#update_affiliate_modal').on('loaded.bs.modal', function () {
+			 	getMunicipalityEdit();
+			 });
+
+			 function getMunicipalityEdit(vid){
+ 				//$('#update_fee_type_id').empty();
+				 $id = $('#update_department_id').val();
+				 console.log($id);
+ 				$.get('../get-municipalities/'+ $id, function(data){
+ 					$.each(data,	function(i, value){
+						console.log(data);
+ 						if(value.id === vid ){
+ 							$('#update_municipality_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
+ 						}
+ 						$('#update_municipality_id').append($('<option >', {value: value.id, text: `${value.name}`}));
+ 					});
+ 				});
+ 			}
 </script>
 
 

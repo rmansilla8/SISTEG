@@ -143,11 +143,19 @@ class AffiliatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
 
-            $affiliates = Affiliate::find($request->id);
+            $affiliates = Affiliate::with(
+                'employee',
+                'employee.ethnic_community',
+                'employee.person',
+                'employee.person.civil_state',
+                'employee.person.gender',
+                'employee.person.municipality',
+                'employee.person.municipality.department'
+            )->find($request->id);
             return response($affiliates);
 
         }

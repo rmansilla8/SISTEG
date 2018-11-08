@@ -18,7 +18,7 @@ class Employee extends Model
 
     public function person()
     {
-        return $this->belongsTo(Person::class, 'id', 'employee_id');
+        return $this->belongsTo(Person::class);
     }
 
     public function ethnic_community()
