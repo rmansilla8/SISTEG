@@ -186,6 +186,36 @@
 	    </div>
 	</div>
 	<!-- // Modal actualizar registro -->
+
+	<!-- Modal - Actualizar estado -->
+
+	<div class="modal fade" id="update_status_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">Editar registro</h4>
+	            </div>
+					<div class="modal-body">
+	 				<form  action="{{ URL::to('status')}}" method="POST" id="frm-update_status">
+					<input type="hidden" name="_method" value="PUT">
+    				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-list"></i></span>
+							<select name="status" id="update_status" placeholder="Estado"  class="form-control"></select>
+	                	</div>
+						<input type="hidden" name="id" id="update_userstatus_id"/>
+
+						<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<input type="submit" class="btn btn-success" value="Actualizar" />
+					</div>
+				</form>
+				</div>
+	        </div>
+	    </div>
+	</div>
 @stop
 <!-- /Content Section -->
 
@@ -198,6 +228,7 @@
 			getRolesEdit();
 			getPermissionsEdit();
 			check();
+
         });
 		function dataTableUsers()
 			{
@@ -376,29 +407,84 @@ function check(){
 					});
 				});
 			}
-		//-------------Actualizar Usuario-------------
-	$('#frm-update_user').on('submit', function(e){
+
+			//-------------Actualizar usuarios-------------
+
+				$('#frm-update_user').on('submit', function(e){
 				e.preventDefault();
 				var data 	= $('#frm-update_user').serializeArray();
-				var id 		= $("#update_user_id").val();
+				var id 		= $('#update_user_id').val();
 				console.log(data);
-				//console.log(id);
 				$.ajax({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					},
-					url 	: 'users/' + id ,
-					dataType: 'json',
-					type 	: 'POST',
+					type 	: 'post',
+					url 	: 'users/' + id,
 					data 	: data,
+					dataType: 'json',
 					success:function(data)
 					{
+						/**Se actualiza el DataTable */
 						var $t = $('#tbl-users').DataTable();
 						$t.ajax.reload();
-					//console.log(data);
 						$('#update_user_modal').modal('hide');
 					}
 					});
 				});
+
+
+		//-------------Editar estatus-------------
+	$('body').delegate('#tbl-users #del', 'click', function(e){
+		e.preventDefault();
+		$('#update_status').empty();
+			var $tr = $(this).closest('li').length ?
+					$(this).closest('li'):
+					$(this).closest('tr');
+    				var rowData = $('#tbl-users').DataTable().row($tr).data();
+					var user = rowData.id;
+					var status = rowData.status;
+		//$.get('users/' + vid + '/edit', {id:vid}, function(data){
+			//console.log(data);
+			// var rol=data.roles;
+			if(status == 1 ){
+				$('#update_status').append($('<option>', {value: 1, text: 'Activo'}));
+				$('#update_status').append($('<option>', {value: 0, text: 'Inactivo'}));
+			} else{
+				$('#update_status').append($('<option>', {value: 0, text: 'Inactivo'}));
+				$('#update_status').append($('<option>', {value: 1, text: 'Activo'}));
+			}
+			//$('#frm-update_status').find('#update_status').val(status)
+			$('#frm-update_status').find('#update_userstatus_id').val(user)
+			$('#update_status_modal').modal('show');
+		//});
+	});
+
+		//-------------Actualizar status-------------
+
+				$('#frm-update_status').on('submit', function(e){
+				e.preventDefault();
+				var data 	= $('#frm-update_status').serializeArray();
+				var id 		= $('#update_userstatus_id').val();
+				console.log(data);
+				$.ajax({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					},
+					type 	: 'post',
+					url 	: 'status/' + id,
+					data 	: data,
+					dataType: 'json',
+					success:function(data)
+					{
+						/**Se actualiza el DataTable */
+						var $t = $('#tbl-users').DataTable();
+						$t.ajax.reload();
+						$('#update_status_modal').modal('hide');
+					}
+					});
+				});
+
+
 </script>
 @endpush

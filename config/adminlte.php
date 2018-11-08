@@ -120,7 +120,8 @@ return [
             'text' => 'Administración',
             'url' => '#',
             'icon' => 'laptop',
-            // 'can' => 'registrador, finanzas',
+            // 'can' => 'administrador',
+            // 'role' => 'administrador',
             'submenu' => [
                 [
                     'text' => 'User',

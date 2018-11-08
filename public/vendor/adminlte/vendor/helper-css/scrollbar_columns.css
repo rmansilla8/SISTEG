@@ -5,19 +5,19 @@
 
 /*Set up the columns with a 100% height, body color and overflow scroll*/
 
-.left{
+.lefta{
   background-color: white;
   height: 100%;
   /* overflow-y: scroll; */
 }
 
-.right{
+.righta{
   background-color: white;
   height: 100%;
   overflow-y: scroll;
 }
 
-.mid{
+.mida{
   background-color: green;
   height: 100%;
   overflow-y: scroll;

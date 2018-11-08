@@ -60,6 +60,7 @@
                     <p><strong>Genero:</strong> {{$person->gender->description}} </p>
                     <p><strong>Estado Civil:</strong> {{$person->civil_state->description}} </p>
                     <p><strong>Fecha de Nacimiento:</strong> <input type="date" value="{{$person->birthdate}}" readonly="readonly" style="border: 0; background: transparent;"/> </p>
+                    <button type='button' id='Edit' class='edit btn btn-warning'><i class='fa fa-pencil-square-o'></i></button>
                 </div>
                 <div class='col-md-6'>
                     <div class="well well-sm"> Información Laboral</div>
@@ -68,6 +69,7 @@
                     <p><strong>Registro Escalafonario:</strong> {{$employee->scale_register}} </p>
                     <p><strong>Comunidad étnica:</strong> {{$employee->ethnic_community->name}} </p>
                 </div>
+
             </div>
 
             <div class='row '>
@@ -88,8 +90,8 @@
                 </div>
                 <div class="col-md-6 ">
                 <div class="well well-sm"> Historial Laboral</div>
-                    <div class="row row-height">
-                        <div class="col-md-12 right">
+                    <div class="row">
+                        <div class="col-md-12">
                         @foreach($employee_school as $schools)
                             <div class="row">
                                 <div class="col-md-8">
@@ -202,6 +204,168 @@
 
         </div>
 
+        <!-- modales -->
+        <!-- Modal -->
+	<div class="modal fade bd-example-modal-lg" id="update_affiliate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="js-title-step"></h4>
+				</div>
+				<div class="modal-body">
+					<!-- Paso 1 del modal -->
+					<div class="row hide" data-step="1" data-title="Actualización">
+						<div class="container-fluid">
+							<form  id="frm-update_people" data-toggle="validator">
+								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
+								{{ csrf_field() }}
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+										<div  class="input-group ">
+											<span class="input-group-addon" id="snames">Nombres</span>
+											<input name="names" id="update_names" class="form-control" placeholder="Ingrese los nombres" aria-describedby="snames"/>
+										</div>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon" id="ssurnames">Apellidos</span>
+											<input name="surnames" type="text" id="update_surnames" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+											<input type="email" name="email" id="update_email" class="form-control" placeholder="Ingrese el correo electrónico" data-error="El correo ingresado es invalido"/>
+										</div>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+											<input name="phone" type="text" id="update_phone" placeholder="Ingrese número telefónico" class="form-control"/>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Residencia</b></center> </span></div>
+								<div class="row ">
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon" ><i class="fa fa-map"></i></span>
+											<select name="department_id" id="update_department_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon" ><i class="fa fa-map-o"></i></span>
+											<select name="municipality_id" id="update_municipality_id" class="form-control" ></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<div class="input-group">
+											<span class="input-group-addon" ><i class="fa  fa-map-marker"></i></span>
+											<input name="address" type="text" id="update_address" aria-describedby="addressHelp"placeholder="Ingrese dirección" class="form-control"/>
+										</div>
+										<small id="addressHelp" class="form-text text-muted">Aldea, caserío, barrio, colonia, entre otros.</small>
+									</div>
+								</div>
+								<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos complementarios</b></center> </span></div>
+								<div class="row">
+									<div class="col-sm-12 col-md-3">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											<input name="birthdate" type="date" id="update_birthdate" aria-describedby="birthdateHelp" placeholder="Fecha de nacimiento" class="form-control"/>
+										</div>
+										<small id="birthdateHelp" class="form-text text-muted">Fecha de nacimiento.</small>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon" id="sgender">Género</span>
+											<select name="gender_id" id="update_gender_id" class="form-control" aria-describedby="sgender"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-sm-12 col-md-5">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon" id="scivil_state">Estado Civil</span>
+											<select name="civil_state_id" id="update_civil_state_id" class="form-control" aria-describedby="scivil_state"></select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					</div>
+				<!-- </div> -->
+					<!-- Paso 2 del modal -->
+				<div class="row hide" data-step="2" data-title="Actualización">
+					<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
+					<div class="container-fluid">
+						<form   id="frm-insert_employees" data-toggle="validator">
+							<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
+							{{ csrf_field() }}
+							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos de identificación</b></center> </span></div>
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<div  class="input-group ">
+										<span class="input-group-addon" id="sdpi">DPI</span>
+										<input name="dpi" id="update_dpi" alt="Documento personal de identificación" class="form-control" placeholder="Ingrese DPI" aria-describedby="sdpi"/>
+									</div>
+									<br/>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon" id="snit">NIT</span>
+										<input name="nit" type="text" id="update_nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
+									</div>
+									<br/>
+								</div>
+								<br/>
+							</div>
+							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos complementarios</b></center> </span></div>
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+										<input type="text" name="scale_register" id="scale_register" class="form-control" placeholder="Ingrese el registro escalafonario"/>
+									</div>
+									<br/>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-users"></i></span>
+										<select name="ethnic_community_id" id="update_ethnic_community_id" class="form-control"></select>
+									</div>
+									<br/>
+								</div>
+
+							</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
+					<button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
+					<button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- fin de modal -->
+
         <!-- Fin de la caja -->
         <div class="box-footer">
             <!-- Comienzo del footer -->
@@ -217,9 +381,61 @@
 @stop
 
 @section('js')
-   <script>
+<script>
+    $(document).ready(function(){
+				/**Llena el DataTable */
 
-    </script>
+				modalSteps();
+
+			});
+
+    function modalSteps(){
+				$('#update_affiliate_modal').modalSteps({
+					btnCancelHtml: "Cancel",
+					btnPreviousHtml: "Previous",
+					btnNextHtml: "Next",
+					btnLastStepHtml: "Complete",
+					disableNextButton: false,
+					completeCallback: function() {
+						// create();
+					},
+					callbacks: {
+						// '1':	callback1,
+						// '2':	callback2,
+						// '3':	callback3
+					},
+					getTitleAndStep: function() {}
+				});
+			}
+
+$('body').delegate('#Edit', 'click', function(e){
+				e.preventDefault();
+				/**Se obtiene los datos de la fila donde se encuentra el botón
+				   editar al que se le dio clic
+				*/
+                var id = {{$affiliate->id}};
+                console.log(id);
+				// var $tr = $(this).closest('li').length ?
+				// 	$(this).closest('li'):
+				// 	$(this).closest('tr');
+				// /**Los datos de la fila son pasados a la variable rowData */
+    			// var rowData = $('#tblfees').DataTable().row($tr).data();
+   				// console.log(rowData);
+				// /**Se extrae de rowData el id del registro que se editará */
+				// var vid = rowData.id;
+				// console.log(vid);
+				// $.get('fees/' + vid + '/edit', {id:vid}, function(data){
+				// 	/**Se llenan los input con los datos de la ruta */
+				// 	$('#frm-update').find('#update_affiliate_id').val(data.affiliate_id)
+				// 	$('#frm-update').find('#update_fee_type_id').val(data.fee_type_id)
+				// 	$('#frm-update').find('#update_amount').val(data.amount)
+				// 	$('#frm-update').find('#update_date').val(data.date)
+				// 	$('#frm-update').find('#update_detail').val(data.detail)
+				// 	$('#frm-update').find('#update_id').val(data.id)
+				// 	$('#update_fee_modal').modal('show');
+				// });
+			});
+</script>
 
 
 
