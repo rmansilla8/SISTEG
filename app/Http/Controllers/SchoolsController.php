@@ -111,9 +111,21 @@ class SchoolsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+
+           $schools = School::with(
+               'level',
+               'school_district',
+               'area',
+               'classification',
+               'modality',
+               'working_day','plan'
+
+            )->find($request->id);
+            return response($schools);
+        }
     }
 
     /**
@@ -123,9 +135,15 @@ class SchoolsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+  public function update(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+
+            $schools = School::find($request->id);
+            $schools->update($request->all());
+            return response($schools);
+
+        }
     }
 
     /**
@@ -134,8 +152,13 @@ class SchoolsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+   public function destroy(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $schols = School::findOrFail($id);
+            $schols->delete();
+            return redirect('schools')->with('success', 'Afiliado eliminado exitosamente');
+        }
+        return redirect('schools')->with('fail', 'Afiliado eliminado exitosamente');
     }
 }

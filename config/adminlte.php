@@ -143,6 +143,12 @@ return [
                     'icon' => 'edit',
                     // 'can' => 'registrador', 'administrador',
                 ],
+                [
+                    'text' => 'Escuelas',
+                    'url' => '../schools',
+                    'icon' => 'university',
+                    // 'can' => 'registrador', 'administrador',
+                ],
             ],
         ],
         [
