@@ -104,7 +104,16 @@ class FeesController extends Controller
      */
     public function show($id)
     {
-        //
+        $fee = DB:: table('fees')
+        ->leftJoin('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
+        ->leftJoin('employees', 'employees.id', '=', 'affiliates.employee_id')
+        ->leftJoin('people', 'people.id', '=', 'employees.person_id')
+        ->leftJoin('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
+        ->where('fees.id', '=', $id)
+        ->select('fees.*','fee_type.description as description','fees.amount as cantidad', 'fees.date as fecha', 'fees.detail as detalle')
+        ->first();
+        // return view('fees.show', compact('fees'));
+        return(compact('fees'));
     }
 
     /**
