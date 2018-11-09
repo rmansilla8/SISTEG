@@ -582,9 +582,9 @@ $('body').delegate(' #Edit', 'click', function(e){
  					$.each(data,	function(i, value){
 						console.log(data);
  						if(value.id === {{$affiliate->id}} ){
- 							$('#update_gender_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+ 							$('#update_civil_states_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
  						}
- 						$('#update_gender_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+ 						$('#update_civil_states_id').append($('<option >', {value: value.id, text: `${value.description}`}));
  					});
  				});
  			}
