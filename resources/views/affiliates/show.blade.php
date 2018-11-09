@@ -46,10 +46,22 @@
                 <div class="col-md-6">
                     <p><strong>Número de Afiliación:</strong> {{$affiliate->number}}</p>
                 </div>
-                <div class="col-md-6">
-                    <p><strong>Estado:</strong> {{$affiliate->affiliate_state->description}}</p>
+                <div class="col-md-2">
+                    <p><strong>Estado:</strong>
+					@if($affiliate->affiliate_state->description == 'Activo')
+						<span class="label label-success">{{$affiliate->affiliate_state->description}}</span>
+					@elseif($affiliate->affiliate_state->description== 'Inactivo')
+						<span class="label label-danger">{{$affiliate->affiliate_state->description}}</span>
+					@else
+						<span class="label label-warning">{{$affiliate->affiliate_state->description}}</span>
+					@endif
+					</p>
+                </div>
+				<div class="col-md-4">
+					<button type='button' id='EditStatus' class='edit btn btn-warning pull-left'><i class='fa fa-pencil-square-o'> </i> Actualizar estado de afiliación </button>
                 </div>
             </div>
+			<br/>
             <div class='row'>
                 <div class='col-md-6'>
                     <div class="well well-sm"> Información Personal</div>
@@ -60,9 +72,11 @@
                     <p><strong>Genero:</strong> {{$person->gender->description}} </p>
                     <p><strong>Estado Civil:</strong> {{$person->civil_state->description}} </p>
                     <p><strong>Fecha de Nacimiento:</strong> <input type="date" value="{{$person->birthdate}}" readonly="readonly" style="border: 0; background: transparent;"/> </p>
-                    <button type='button' id='Edit' class='edit btn btn-warning'><i class='fa fa-pencil-square-o'></i></button>
+                    <button type='button' id='Edit' class='edit btn btn-warning pull-right'><i class='fa fa-pencil-square-o'> </i> Actualizar datos personales </button>
                 </div>
+
                 <div class='col-md-6'>
+
                     <div class="well well-sm"> Información Laboral</div>
                     <p><strong>DPI:</strong> {{$employee->dpi}} </p>
                     <p><strong>NIT:</strong> {{$employee->nit}} </p>
@@ -71,7 +85,7 @@
                 </div>
 
             </div>
-
+<br/>
             <div class='row '>
                 <div class='col-md-6'>
                 <div class="well well-sm"> Información Académica</div>
@@ -139,7 +153,7 @@
                                     <p><strong>Jornada:</strong>  {{$schools->school->working_day->description}}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p><strong>Plan:</strong> </p>
+                                    <p><strong>Plan:</strong> {{$schools->school->plan->name}}</p>
                                 </div>
                                 <div class="col-md-4">
                                     <p><strong>Dirección:</strong> {{$schools->school->address}}, {{$schools->school->school_district->municipality->name}}, {{$schools->school->school_district->municipality->department->name}}</p>
@@ -205,7 +219,7 @@
         </div>
 
         <!-- modales -->
-        <!-- Modal -->
+        <!-- Modal Update Afiliado -->
 	<div class="modal fade bd-example-modal-lg" id="update_affiliate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -367,6 +381,38 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="update_status" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<form id="frm_update-status">
+						<input type="hidden" name="_method" value="PUT">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
+								{{ csrf_field() }}
+							<div class="col-sm-12 col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon" id="sstatus">Estado</span>
+									<select name="affiliate_state_id" id="update_affiliate_state_id" class="form-control" aria-describedby="sstatus"></select>
+								</div>
+							</div>
+							<input name="id" id="update_id_status" type="hidden"/>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary">Actualizar</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
     <!-- fin de modal -->
 
         <!-- Fin de la caja -->
@@ -394,6 +440,7 @@
 				getGenderEdit();
 				getCivilStateEdit();
 				getEthnicCommunityEdit();
+				getAffiliateStateEdit();
 
 
 			});
@@ -580,7 +627,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 					success:function(data)
 					{
 						/**Se actualiza el DataTable */
-
+						window.location.reload();
 						/**Se cierra el modal #update_fee_modal */
 						$('#update_fee_modal').modal('hide');
 						toastr["success"]("Persona guardada","Información")
@@ -588,6 +635,35 @@ $('body').delegate(' #Edit', 'click', function(e){
 					});
 
 				}
+				function getAffiliateStateEdit(vid){
+						$('#update_affiliate_state_id').empty();
+						$.get('../get-affiliates_states/', function(data){
+							$.each(data,	function(i, value){
+								console.log(data)
+								if(value.id === vid ){
+									$('#update_affiliate_state_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+								}
+								$('#update_affiliate_state_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+							});
+						});
+					}
+
+
+			// $('body').delegate(' #EditStatus', 'click', function(e){
+			// 	e.preventDefault();
+			// 	/**Se obtiene los datos de la fila donde se encuentra el botón
+			// 	   editar al que se le dio clic
+			// 	*/
+            //     var vid = {{$affiliate->id}};
+			// 	$.get('../affiliates/' + vid + '/edit', {id:vid}, function(data){
+            //         //console.log(data);
+			// 	// 	/**Se llenan los input con los datos de la ruta */
+			// 	 	$('#frm-update_status').find('#update_affiliate_state_id').val(data.affiliate_state_id)
+			// 	 	$('#frm-update_status').find('#update_id').val(data.id)
+			// 	 	$('#update_status').modal('show');
+			// 	});
+			// });
+
 </script>
 
 
