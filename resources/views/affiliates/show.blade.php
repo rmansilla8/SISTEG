@@ -576,18 +576,20 @@ $('body').delegate(' #Edit', 'click', function(e){
  				});
  			}
 
-			 function getCivilStateEdit(){
- 			 $('#update_civil_state_id').empty();
- 				$.get('../get-civil_states', function(data){
+			function getCivilStateEdit(){
+ 				$('#update_civil_states_id').empty();
+ 				$.get('../get-civil_states/', function(data){
  					$.each(data,	function(i, value){
 						console.log(data);
- 						if(value.id == {{$affiliate->id}} ){
- 							$('#update_civil_state_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+ 						if(value.id === {{$affiliate->id}} ){
+ 							$('#update_gender_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
  						}
- 						$('#update_civil_state_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+ 						$('#update_gender_id').append($('<option >', {value: value.id, text: `${value.description}`}));
  					});
  				});
  			}
+
+
 
 			 function getEthnicCommunityEdit(){
  				$('#update_ethnic_community_id').empty();
