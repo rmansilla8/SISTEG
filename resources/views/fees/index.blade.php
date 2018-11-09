@@ -210,56 +210,6 @@
 								</div>
 				<!-- Fin del Modal #update_fee_modal -->
 
-				<!-- Modal: #show_fee_modal -->
-							<div class="modal fade" id="show_fee_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										<h4 class="modal-title" id="myModalLabel">Mostrar registro</h4>
-									</div>
-										<div class="modal-body">
-										<form  action="" method="POST" id="show">
-
-											<div class="form-group">
-												<label for="show_affiliate_id">Afiliado</label>
-												<input name="affiliate_id" type="text" id="show_affiliate" readonly="readonly" style="border: 0; background: transparent;" class="form-control""/>
-											</div>
-
-											<div class="form-group">
-												<label for="show_fee_type_id">Tipo de cuota</label>
-													<input name="fee_type_id" type="text" id="show_fee_type_id" readonly="readonly" style="border: 0; background: transparent;" class="form-control" "/>
-											</div>
-
-											<div class="form-group">
-												<label for="update_amount">Cantidad</label>
-												<input name="amount" type="text" id="show_amount" readonly="readonly" style="border: 0; background: transparent;" class="form-control""/>
-											</div>
-
-											<div class="form-group">
-												<label for="update_date">Fecha</label>
-												<input name="date" type="date" id="show_date" readonly="readonly" style="border: 0; background: transparent;" class="form-control""/>
-											</div>
-
-											<div class="form-group">
-												<strong>Detalle:</strong> <br/>
-												<textarea id="show_detail" type="text" name="detail" readonly="readonly" style="border: 0; background: transparent;" class="form-control"></textarea>
-											</div>
-
-											<input name="id" type="hidden" id="show_id"  placeholder="" class=""/>
-
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-												<input type="submit" class="btn btn-success" value="Show" />
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-				<!-- Fin del modal #show_fee_modal -->
 @stop
 
 <!--Fin del área de modales -->
@@ -704,6 +654,26 @@ function validateDataUpdate(){
 // 	$('#amount').mask('00.00', {reverse: true});
 // 	$('#update_amount').mask('00.00', {reverse: true});
 // }
+
+
+
+//--------- Se creo para poder mostrar el detalle de una fila
+
+
+$('body').delegate('#tblfees #Show', 'click', function(e){
+		e.preventDefault();
+			var $tr = $(this).closest('li').length ?
+					$(this).closest('li'):
+					$(this).closest('tr');;
+    				var rowData = $('#tblfees').DataTable().row($tr).data();
+   						//console.log(rowData);
+					var vid = rowData.id;
+					console.log(vid);
+				$.get('fees/' + vid , {id:vid}, function(data){
+					window.location.href = 'fees/' + vid;
+		 });
+	});
+
     </script>
 
 
