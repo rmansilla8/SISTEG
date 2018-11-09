@@ -537,6 +537,7 @@
 					}
 			}
 
+
 			function getMunicipalities(){
 				$department=$('#department_id').val();
 				$.get('get-municipalities/'+$department, function(data){

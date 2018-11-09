@@ -71,7 +71,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('get-modalities', 'SchoolsController@getModality');
             Route::get('get-working_days', 'SchoolsController@getWorkingDay');
             Route::get('get-plans', 'SchoolsController@getPlan');
+<<<<<<< HEAD
     });
+=======
+        });
+>>>>>>> b7270763db92477f7f17f9b1765905ba511ce211
 
     //Grupo de rutas al que solo el de finanzas y el admin pueden acceder
         Route::group([
