@@ -40,7 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
     //Grupo de rutas al que solo el Admin y el registrador pueden acceder
-<<<<<<< HEAD
         Route::group([
             'middleware' => ['permission:registrador'],
         ], function () {
@@ -72,39 +71,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('get-modalities', 'SchoolsController@getModality');
             Route::get('get-working_days', 'SchoolsController@getWorkingDay');
             Route::get('get-plans', 'SchoolsController@getPlan');
-=======
-    Route::group([
-        'middleware' => ['permission:registrador'],
-    ], function () {
-
-        Route::resource('affiliates', 'affiliatesController');
-        Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
-        Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
-
-        Route::get('get-departments', 'PeopleController@getDepartments');
-        Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
-        Route::get('get-genders', 'PeopleController@getGenders');
-        Route::get('get-civil_states', 'PeopleController@getCivilStates');
-        Route::resource('people', 'PeopleController');
-        Route::get('get-ethnic_communities', 'EmployeesController@getEthnic_communities');
-        Route::get('get-titles', 'EmployeesController@getTitles');
-
-        Route::get('get-employee_types', 'EmployeeSchoolsController@getEmployee_types');
-        Route::get('get-work_states', 'EmployeeSchoolsController@getWork_states');
-        Route::get('get-contracts', 'EmployeeSchoolsController@getContracts');
-        Route::get('get-school', 'EmployeeSchoolsController@getSchool');
-        Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
-
-        Route::resource('schools', 'SchoolsController');
-        Route::get('get-schools', 'SchoolsController@getSchools');
-        Route::get('get-levels', 'SchoolsController@getLevel');
-        Route::get('get-districts', 'SchoolsController@getDistrict');
-        Route::get('get-areas', 'SchoolsController@getArea');
-        Route::get('get-classifications', 'SchoolsController@getClassification');
-        Route::get('get-modalities', 'SchoolsController@getModality');
-        Route::get('get-working_days', 'SchoolsController@getWorkingDay');
-        Route::get('get-plans', 'SchoolsController@getPlan');
->>>>>>> 8d43267cd571206960627ab6fe852fc119b978ce
     });
 
     //Grupo de rutas al que solo el de finanzas y el admin pueden acceder
