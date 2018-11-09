@@ -314,13 +314,12 @@
 										</div>
 										<br/>
 									</div>
-									<div class="col-sm-12 col-md-5">
+									<div class="col-sm-12 col-md-4">
 										<div class="input-group">
 											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-											<span class="input-group-addon" id="scivil_state">Estado Civil</span>
-											<select name="civil_state_id" id="update_civil_state_id" class="form-control" aria-describedby="scivil_state"></select>
+											<span class="input-group-addon" id="scivil_states">Estado Civil</span>
+											<select name="civil_state_id" id="update_civil_states_id" class="form-control" aria-describedby="sgender"></select>
 										</div>
-									</div>
                                 </div>
 								<input name="id" type="hidden" id="update_id" class="form-control"/>
 
@@ -484,7 +483,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 				// /**Se extrae de rowData el id del registro que se editará */
 				// var vid = rowData.id;
 				// console.log(vid);
-				$.get('../affiliates/' + vid + '/edit', {id:vid}, function(data){
+				$.get('../affiliates/' + {{$affiliate->id}} + '/edit', {id:{{$affiliate->id}}}, function(data){
                     console.log(data);
 				// 	/**Se llenan los input con los datos de la ruta */
 				 	$('#frm-update_person').find('#update_names').val(data.employee.person.names)
@@ -496,7 +495,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 				 	$('#frm-update_person').find('#update_address').val(data.employee.person.address)
 				 	$('#frm-update_person').find('#update_birthdate').val(data.employee.person.birthdate)
 				 	$('#frm-update_person').find('#update_gender_id').val(data.employee.person.gender_id)
-				 	$('#frm-update_person').find('#update_civil_state').val(data.employee.person.civil_state_id)
+				 	$('#frm-update_person').find('#update_civil_states').val(data.employee.person.civil_state_id)
 				 	$('#frm-update_employee').find('#update_dpi').val(data.employee.dpi)
 				 	$('#frm-update_employee').find('#update_nit').val(data.employee.nit)
 				 	$('#frm-update_employee').find('#update_scale_register').val(data.employee.scale_register)
@@ -509,11 +508,11 @@ $('body').delegate(' #Edit', 'click', function(e){
 				});
 			});
 
-            function getDepartmentEdit(vid){
+            function getDepartmentEdit(){
  				//$('#update_fee_type_id').empty();
  				$.get('../get-departments', function(data){
  					$.each(data,	function(i, value){
- 						if(value.id === vid ){
+ 						if(value.id === {{$affiliate->id}} ){
  							$('#update_department_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
  						}
  						$('#update_department_id').append($('<option >', {value: value.id, text: `${value.name}`}));
@@ -549,14 +548,14 @@ $('body').delegate(' #Edit', 'click', function(e){
 					}
 			}
 
-			 function getMunicipalityEdit(vid){
+			 function getMunicipalityEdit(){
  				//$('#update_fee_type_id').empty();
 
 				 console.log($id);
  				$.get('../get-municipalities/'+ $id, function(data){
  					$.each(data,	function(i, value){
 						console.log(value.id);
- 						if(value.id === vid ){
+ 						if(value.id === {{$affiliate->id}} ){
  							$('#update_municipality_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
  						}
  						$('#update_municipality_id').append($('<option >', {value: value.id, text: `${value.name}`}));
@@ -564,12 +563,12 @@ $('body').delegate(' #Edit', 'click', function(e){
  				});
  			}
 
-			 function getGenderEdit(vid){
+			 function getGenderEdit(){
  				$('#update_gender_id').empty();
  				$.get('../get-genders/', function(data){
  					$.each(data,	function(i, value){
 						console.log(data);
- 						if(value.id === vid ){
+ 						if(value.id === {{$affiliate->id}} ){
  							$('#update_gender_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
  						}
  						$('#update_gender_id').append($('<option >', {value: value.id, text: `${value.description}`}));
@@ -577,12 +576,12 @@ $('body').delegate(' #Edit', 'click', function(e){
  				});
  			}
 
-			 function getCivilStateEdit(vid){
+			 function getCivilStateEdit(){
  			 $('#update_civil_state_id').empty();
  				$.get('../get-civil_states', function(data){
  					$.each(data,	function(i, value){
 						console.log(data);
- 						if(value.id === vid ){
+ 						if(value.id == {{$affiliate->id}} ){
  							$('#update_civil_state_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
  						}
  						$('#update_civil_state_id').append($('<option >', {value: value.id, text: `${value.description}`}));
@@ -590,12 +589,12 @@ $('body').delegate(' #Edit', 'click', function(e){
  				});
  			}
 
-			 function getEthnicCommunityEdit(evid){
+			 function getEthnicCommunityEdit(){
  				$('#update_ethnic_community_id').empty();
  				$.get('../get-ethnic_communities/', function(data){
  					$.each(data,	function(i, value){
 						console.log(data);
- 						if(value.id === evid ){
+ 						if(value.id == {{$affiliate->id}} ){
  							$('#update_ethnic_community_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
  						}
  						$('#update_ethnic_community_id').append($('<option >', {value: value.id, text: `${value.name}`}));
