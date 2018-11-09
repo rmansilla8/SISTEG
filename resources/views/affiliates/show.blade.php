@@ -402,7 +402,7 @@
 									<select name="affiliate_state_id" id="update_affiliate_state_id" class="form-control" aria-describedby="sstatus"></select>
 								</div>
 							</div>
-							<input name="id" id="update_id_status" type="hidden"/>
+							<!-- <input name="id" id="update_id_status" type="hidden"/> -->
 						</form>
 					</div>
 				</div>
@@ -472,7 +472,8 @@ $('body').delegate(' #Edit', 'click', function(e){
 				/**Se obtiene los datos de la fila donde se encuentra el botón
 				   editar al que se le dio clic
 				*/
-                var vid = {{$affiliate->id}};
+				var vid = {{$affiliate->id}};
+				var evid = {{$affiliate->employee->id}}
                 //console.log(vid);
 				// var $tr = $(this).closest('li').length ?
 				// 	$(this).closest('li'):
@@ -484,22 +485,22 @@ $('body').delegate(' #Edit', 'click', function(e){
 				// var vid = rowData.id;
 				// console.log(vid);
 				$.get('../affiliates/' + vid + '/edit', {id:vid}, function(data){
-                    //console.log(data);
+                    console.log(data);
 				// 	/**Se llenan los input con los datos de la ruta */
 				 	$('#frm-update_person').find('#update_names').val(data.employee.person.names)
 				 	$('#frm-update_person').find('#update_surnames').val(data.employee.person.surnames)
 				 	$('#frm-update_person').find('#update_email').val(data.employee.person.email)
 				 	$('#frm-update_person').find('#update_phone').val(data.employee.person.phone)
-				 	$('#frm-update_person').find('#update_department_id').val(data.employee.person.municipality.department.id)
-				 	$('#frm-update_person').find('#update_municipality_id').val(data.employee.person.municipality.id)
+				 	$('#frm-update_person').find('#update_department_id').val(data.employee.person.municipality.department_id)
+				 	$('#frm-update_person').find('#update_municipality_id').val(data.employee.person.municipality_id)
 				 	$('#frm-update_person').find('#update_address').val(data.employee.person.address)
 				 	$('#frm-update_person').find('#update_birthdate').val(data.employee.person.birthdate)
-				 	$('#frm-update_person').find('#update_gender_id').val(data.employee.person.gender.id)
-				 	$('#frm-update_person').find('#update_civil_state').val(data.employee.person.civil_state.id)
+				 	$('#frm-update_person').find('#update_gender_id').val(data.employee.person.gender_id)
+				 	$('#frm-update_person').find('#update_civil_state').val(data.employee.person.civil_state_id)
 				 	$('#frm-update_employee').find('#update_dpi').val(data.employee.dpi)
 				 	$('#frm-update_employee').find('#update_nit').val(data.employee.nit)
 				 	$('#frm-update_employee').find('#update_scale_register').val(data.employee.scale_register)
-				 	$('#frm-update_employee').find('#update_ethnic_community').val(data.employee.ethnic_community.id)
+				 	$('#frm-update_employee').find('#update_ethnic_community').val(data.employee.ethnic_community_id)
 				 	$('#frm-update_person').find('#update_id').val(data.id)
 				 	$('#update_affiliate_modal').modal('show');
 
@@ -564,8 +565,7 @@ $('body').delegate(' #Edit', 'click', function(e){
  			}
 
 			 function getGenderEdit(vid){
- 				//$('#update_fee_type_id').empty();
-
+ 				$('#update_gender_id').empty();
  				$.get('../get-genders/', function(data){
  					$.each(data,	function(i, value){
 						console.log(data);
@@ -578,9 +578,8 @@ $('body').delegate(' #Edit', 'click', function(e){
  			}
 
 			 function getCivilStateEdit(vid){
- 				//$('#update_fee_type_id').empty();
-
- 				$.get('../get-civil_states/', function(data){
+ 			 $('#update_civil_state_id').empty();
+ 				$.get('../get-civil_states', function(data){
  					$.each(data,	function(i, value){
 						console.log(data);
  						if(value.id === vid ){
@@ -590,13 +589,13 @@ $('body').delegate(' #Edit', 'click', function(e){
  					});
  				});
  			}
-			 function getEthnicCommunityEdit(vid){
- 				//$('#update_fee_type_id').empty();
 
+			 function getEthnicCommunityEdit(evid){
+ 				$('#update_ethnic_community_id').empty();
  				$.get('../get-ethnic_communities/', function(data){
  					$.each(data,	function(i, value){
 						console.log(data);
- 						if(value.id === vid ){
+ 						if(value.id === evid ){
  							$('#update_ethnic_community_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
  						}
  						$('#update_ethnic_community_id').append($('<option >', {value: value.id, text: `${value.name}`}));
@@ -614,6 +613,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 
 				/**data se carga con el array de los datos del formulario #frm-update */
 				var data 	= $('#frm-update_person, #frm-update_employee').serializeArray();
+				console.log(data)
 				/**Se pasa el valor del id del registro a actualiza cargado en #update_id a la variable id */
 				var id 		= $('#update_id').val();
 				$.ajax({

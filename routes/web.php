@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('get-employee_types', 'EmployeeSchoolsController@getEmployee_types');
         Route::get('get-work_states', 'EmployeeSchoolsController@getWork_states');
         Route::get('get-contracts', 'EmployeeSchoolsController@getContracts');
-        Route::get('get-schools', 'EmployeeSchoolsController@getSchools');
+        Route::get('get-school', 'EmployeeSchoolsController@getSchool');
         Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
 
         Route::resource('schools', 'SchoolsController');

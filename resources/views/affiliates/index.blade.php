@@ -190,8 +190,8 @@
 							</form>
 						</div>
 					</div>
-					</div>
-				<!-- </div> -->
+
+
 					<!-- Paso 2 del modal -->
 				<div class="row hide" data-step="2" data-title="Afiliación- 2 de 3">
 					<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
@@ -347,6 +347,8 @@
 							</div>
 
 						</form>
+						</div>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -627,7 +629,7 @@
 
 			function getSchools(){
 				if($('#school_id').val()==null){
-				$.get('get-schools', function(data){
+				$.get('get-school', function(data){
 					$('#school_id').append($('<option>', {value: '0', text: 'Seleccionar escuela'}));
 						$.each(data,	function(i, value){
 						$('#school_id').append($('<option>', {value: value.id, text: `${value.name}`}));
