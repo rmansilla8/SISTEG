@@ -61,7 +61,7 @@ class EmployeeSchoolsController extends Controller
         return $contracts;
     }
 
-    public function getSchools()
+    public function getSchool()
     {
         $schools = School::orderby('id', 'DESC')->get();
         return $schools;
