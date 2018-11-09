@@ -198,7 +198,37 @@ class PeopleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            DB::beginTransaction();
+            try {
+
+                $person = Person::find($request->id);
+                $person->names = $request->input('names');
+                $person->surnames = $request->input('surnames');
+                $person->email = $request->input('email');
+                $person->phone = $request->input('phone');
+                $person->address = $request->input('address');
+                $person->municipality_id = $request->input('municipality_id');
+                $person->gender_id = $request->input('gender_id');
+                $person->birthdate = $request->input('birthdate');
+                $person->civil_state_id = $request->input('civil_state_id');
+                $person->save();
+
+
+                $employee = Employee::find($person->id);
+                $employee->dpi = $request->input('dpi');
+                $employee->nit = $request->input('nit');
+                $employee->scale_register = $request->input('scale_register');
+                $employee->person_id = $person->id;
+                $employee->ethnic_community_id = $request->input('ethnic_community_id');
+                $employee->save();
+
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollBack();
+            }
+            return response($request);
+        }
     }
 
     /**

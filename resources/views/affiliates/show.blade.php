@@ -220,6 +220,8 @@
 					<div class="row hide" data-step="1" data-title="Actualización">
 						<div class="container-fluid">
 							<form  id="frm-update_person" data-toggle="validator">
+							<input type="hidden" name="_method" value="PUT">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
 								<div class="row">
@@ -388,6 +390,10 @@
 
 				modalSteps();
 				getDepartmentEdit();
+				departmentMunicipality();
+				getGenderEdit();
+				getCivilStateEdit();
+				getEthnicCommunityEdit();
 
 
 			});
@@ -400,19 +406,19 @@
 					btnLastStepHtml: "Complete",
 					disableNextButton: false,
 					completeCallback: function() {
-						// create();
+						update();
 					},
 					callbacks: {
-						// '1':	callback1,
+						 '1':	callback1,
 						// '2':	callback2,
 						// '3':	callback3
 					},
 					getTitleAndStep: function() {}
 				});
 			}
-			// var callback1 = function (){
-			// 	getMunicipalityEdit();
-			// };
+			var callback1 = function (){
+				catchDepartment();
+			};
 
 $('body').delegate(' #Edit', 'click', function(e){
 				e.preventDefault();
@@ -420,7 +426,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 				   editar al que se le dio clic
 				*/
                 var vid = {{$affiliate->id}};
-                console.log(vid);
+                //console.log(vid);
 				// var $tr = $(this).closest('li').length ?
 				// 	$(this).closest('li'):
 				// 	$(this).closest('tr');
@@ -431,7 +437,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 				// var vid = rowData.id;
 				// console.log(vid);
 				$.get('../affiliates/' + vid + '/edit', {id:vid}, function(data){
-                    console.log(data);
+                    //console.log(data);
 				// 	/**Se llenan los input con los datos de la ruta */
 				 	$('#frm-update_person').find('#update_names').val(data.employee.person.names)
 				 	$('#frm-update_person').find('#update_surnames').val(data.employee.person.surnames)
@@ -450,6 +456,8 @@ $('body').delegate(' #Edit', 'click', function(e){
 				 	$('#frm-update_person').find('#update_id').val(data.id)
 				 	$('#update_affiliate_modal').modal('show');
 
+
+
 				});
 			});
 
@@ -466,17 +474,40 @@ $('body').delegate(' #Edit', 'click', function(e){
  				});
 
  			}
-			  $('#update_affiliate_modal').on('loaded.bs.modal', function () {
-			 	getMunicipalityEdit();
-			 });
+
+			 function departmentMunicipality(){
+				$("#update_department_id").change(function() {
+					$('#update_municipality_id').empty();
+					if($("#update_department_id").val() !== '0'){
+						$('#update_municipality_id').prop('disabled', false);
+						$id = $('#update_department_id').val();
+						getMunicipalityEdit();
+					}else{
+						$('#update_municipality_id').prop('disabled', true);
+					}
+				});
+
+			}
+
+			//   $('#update_affiliate_modal').on('shown.bs.modal', function () {
+			//  	catchDepartment();
+			//  });
+			function catchDepartment(){
+				if($("#update_department_id").val() !== '0'){
+					//$('#update_municipality_id').empty();
+						$('#update_municipality_id').prop('disabled', false);
+						$id = $('#update_department_id').val();
+						getMunicipalityEdit();
+					}
+			}
 
 			 function getMunicipalityEdit(vid){
  				//$('#update_fee_type_id').empty();
-				 $id = $('#update_department_id').val();
+
 				 console.log($id);
  				$.get('../get-municipalities/'+ $id, function(data){
  					$.each(data,	function(i, value){
-						console.log(data);
+						console.log(value.id);
  						if(value.id === vid ){
  							$('#update_municipality_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
  						}
@@ -484,6 +515,79 @@ $('body').delegate(' #Edit', 'click', function(e){
  					});
  				});
  			}
+
+			 function getGenderEdit(vid){
+ 				//$('#update_fee_type_id').empty();
+
+ 				$.get('../get-genders/', function(data){
+ 					$.each(data,	function(i, value){
+						console.log(data);
+ 						if(value.id === vid ){
+ 							$('#update_gender_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+ 						}
+ 						$('#update_gender_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+ 					});
+ 				});
+ 			}
+
+			 function getCivilStateEdit(vid){
+ 				//$('#update_fee_type_id').empty();
+
+ 				$.get('../get-civil_states/', function(data){
+ 					$.each(data,	function(i, value){
+						console.log(data);
+ 						if(value.id === vid ){
+ 							$('#update_civil_state_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+ 						}
+ 						$('#update_civil_state_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+ 					});
+ 				});
+ 			}
+			 function getEthnicCommunityEdit(vid){
+ 				//$('#update_fee_type_id').empty();
+
+ 				$.get('../get-ethnic_communities/', function(data){
+ 					$.each(data,	function(i, value){
+						console.log(data);
+ 						if(value.id === vid ){
+ 							$('#update_ethnic_community_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
+ 						}
+ 						$('#update_ethnic_community_id').append($('<option >', {value: value.id, text: `${value.name}`}));
+ 					});
+ 				});
+ 			}
+
+			 //-------------Actualizar cuotas-------------
+			 	function update(e){
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+
+				/**data se carga con el array de los datos del formulario #frm-update */
+				var data 	= $('#frm-update_person, #frm-update_employee').serializeArray();
+				/**Se pasa el valor del id del registro a actualiza cargado en #update_id a la variable id */
+				var id 		= $('#update_id').val();
+				$.ajax({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					},
+					type 	: 'post',
+					url 	: '../people/' + id,
+					data 	: data,
+					dataType: 'json',
+					success:function(data)
+					{
+						/**Se actualiza el DataTable */
+
+						/**Se cierra el modal #update_fee_modal */
+						$('#update_fee_modal').modal('hide');
+						toastr["success"]("Persona guardada","Información")
+					}
+					});
+
+				}
 </script>
 
 
