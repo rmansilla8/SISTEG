@@ -270,7 +270,7 @@
 									<div class="col-sm-12 col-md-6">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
-											<input type="email" name="email" id="update_email" class="form-control" placeholder="Ingrese el correo electrónico" data-error="El correo ingresado es invalido"/>
+											<input type="email" name="email" id="update_email" class="form-control" placeholder="Ingrese el correo electrónico"/>
 										</div>
 										<br/>
 									</div>
@@ -392,36 +392,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- modal update state affiliate -->
-	<div class="modal fade" id="update_status_affiliate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
-	    <div class="modal-dialog" role="document">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                <h4 class="modal-title" id="myModalLabel">Editar estado</h4>
-	            </div>
-					<div class="modal-body">
-	 				<form  action="{{ URL::to('updateStatus')}}" method="POST" id="frm-status">
-					<input type="hidden" name="_method" value="PUT">
-    				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-list"></i></span>
-							<select name="status" id="affiliate_state_id" placeholder="Estado"  class="form-control"></select>
-	                	</div>
-						<input type="text" name="id_affiliate" id="update_affiliateStatus_id"/>
-						<input type="text" name="id_affiliate" id="hola"/>
-
-						<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<button type="button" id="btnUpdate"  class="btn btn-primary">Actualizar</button>
-					</div>
-				</form>
-				</div>
-	        </div>
-	    </div>
-	</div>
-    <!-- fin de modal -->
 
         <!-- Fin de la caja -->
         <div class="box-footer">
@@ -449,6 +419,7 @@
 				getCivilStateEdit();
 				getEthnicCommunityEdit();
 				getAffiliateStateEdit();
+				validar ();
 
 
 			});
@@ -661,6 +632,166 @@ $('body').delegate(' #Edit', 'click', function(e){
 								$('#update_state').append($('<option >', {value: value.id, text: `${value.description}`}));
 							});
 						});
+					}
+
+
+					function validar () {
+			jQuery.validator.addMethod("lettersonly", function(value, element) {
+				return this.optional(element) || /^[a-z\sÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]+$/i.test(value);
+			}, );
+			jQuery.validator.addMethod("phone", function(value, element) {
+				return this.optional(element) || /^[0-9/-]+$/i.test(value);
+			}, );
+			$('#frm-update_person').validate({
+				keyup: false,
+				rules: {
+					update_names: {
+						required: 		true,
+						lettersonly: 	true,
+						minlength: 		3,
+						maxlength: 		30,
+
+
+					},
+					update_surnames: {
+						required: 		true,
+						lettersonly: 	true,
+						minlength: 		3,
+						maxlength: 		30,
+
+					},
+					update_email: {
+						email: 			true,
+
+					},
+					update_phone: {
+						phone: 			true,
+						minlength: 		8,
+						maxlength: 		8,
+
+					},
+
+					update_department_id: {
+						required: 		true
+					},
+
+					update_municipality_id: {
+						required: 		true
+					},
+
+					update_address: {
+						required: 		true,
+						minlength: 		10,
+					},
+					update_birthdate:{
+						required: 		true,
+						date: 			true,
+					},
+
+					update_gender_id: {
+						required:		true,
+					},
+
+					update_civil_states_id: {
+						required: 		true,
+					}
+				},
+				messages: {
+					update_names: {
+						required: 		function () {toastr.error('Por favor ingrese al menos un nombre')},
+						lettersonly: 	function () {toastr.error('Los nombres solo pueden contener letras')},
+						minlength: 		function () {toastr.error('Ingrese un nombre válido')},
+						maxlength: 		function () {toastr.error('Ingrese un nombre válido')},
+
+					},
+					update_surnames: {
+						required: 		function () {toastr.error('Por favor ingrese al menos un apellido')},
+						lettersonly: 	function () {toastr.error('Los apellidos solo pueden contener letras')},
+						minlength: 		function () {toastr.error('Ingrese un apellido válido')},
+						maxlength: 		function () {toastr.error('Ingrese un apellido válido')},
+
+					},
+					update_email: {
+						email: 			function () {toastr.error('Ingrese un correo electrónico válido')},
+					},
+					update_phone: {
+						phone: 			function () {toastr.error('Ingrese un número de teléfono válido')},
+						minlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
+						maxlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
+
+					},
+					update_department_id: {
+						required: 		function () {toastr.error('Debe elegir un departamento')},
+					},
+					update_municipality_id: {
+						required: 		function () {toastr.error('Debe elegir un municipio')}
+					},
+					update_address: {
+						required: 		function () {toastr.error('La dirección es requerida')},
+						minlength: 		function () {toastr.error('Ingrese una dirección válida')},
+					},
+					update_birthdate: {
+						required: 		function () {toastr.error('Debe ingresa fecha de nacimiento')},
+						date: 			function () {toastr.error('Ingrese una fecha válida')}
+					},
+					update_gender_id: {
+						required: 		function () {toastr.error('Debe elegir un género')}
+					},
+					update_civil_states_id: {
+						required: 		function () {toastr.error('Debe elegir un estado civil')}
+					}
+				},
+			});
+
+			$('#frm-update_employee').validate({
+				keyup: false,
+				rules: {
+					update_dpi: {
+						required: 		true,
+						lettersonly: 	false,
+						minlength: 		13,
+						maxlength: 		13,
+
+
+					},
+					update_nit: {
+						required: 		true,
+						minlength: 		4,
+						maxlength: 		10,
+
+					},
+					update_scale_register: {
+						required: 		true,
+
+					},
+					update_ethnic_community_id: {
+						required: 		true,
+
+					},
+
+				},
+				messages: {
+					update_dpi: {
+						required: 		function () {toastr.error('Por favor ingrese DPI')},
+						lettersonly: 	function () {toastr.error('el DPI no puede incluir letras')},
+						minlength: 		function () {toastr.error('Ingrese un DPI válido')},
+						maxlength: 		function () {toastr.error('Ingrese un DPI válido')},
+
+					},
+					upate_nit: {
+						required: 		function () {toastr.error('Por favor ingrese NIT')},
+						minlength: 		function () {toastr.error('Ingrese un NIT válido')},
+						maxlength: 		function () {toastr.error('Ingrese un NIT válido')},
+
+					},
+					update_scale_register: {
+						required: 			function () {toastr.error('Ingrese el registro escalafonario')},
+					},
+					update_ethnic_community_id: {
+						required: 			function () {toastr.error('Seleccione una comunidad étnica')},
+					},
+				},
+			});
 					}
 
 
