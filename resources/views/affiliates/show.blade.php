@@ -322,7 +322,7 @@
 										</div>
                                 </div>
 								<input name="id" type="hidden" id="update_id" class="form-control"/>
-
+							</div>
 							</form>
 						</div>
 					</div>
