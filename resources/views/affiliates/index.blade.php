@@ -265,6 +265,7 @@
 						</form>
 					</div>
 				</div>
+			</div>
 
 				<div class="row hide" data-step="3" data-title="Datos complementarios - 3 de 3">
 					<div class='container-fluid'>
@@ -349,12 +350,13 @@
 						</form>
 						</div>
 						</div>
-					</div>
-				</div>
+
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
 					<button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
 					<button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -770,6 +772,140 @@
 					}
 				},
 			});
+
+			$('#frm-insert_employees').validate({
+				keyup: false,
+				rules: {
+					dpi: {
+						required: 		true,
+						lettersonly: 	false,
+						minlength: 		13,
+						maxlength: 		13,
+
+
+					},
+					nit: {
+						required: 		true,
+						minlength: 		4,
+						maxlength: 		10,
+
+					},
+					scale_register: {
+						required: 		true,
+
+					},
+					ethnic_community_id: {
+						required: 		true,
+
+					},
+
+					title_id: {
+						required: 		true,
+					},
+
+					year_title: {
+						required: 		true,
+						minlength: 		4,
+						maxlength: 		4,
+					},
+
+					institution: {
+						required: 		true,
+						minlength: 		6,
+					},
+
+				},
+				messages: {
+					dpi: {
+						required: 		function () {toastr.error('Por favor ingrese DPI')},
+						lettersonly: 	function () {toastr.error('el DPI no puede incluir letras')},
+						minlength: 		function () {toastr.error('Ingrese un DPI válido')},
+						maxlength: 		function () {toastr.error('Ingrese un DPI válido')},
+
+					},
+					nit: {
+						required: 		function () {toastr.error('Por favor ingrese NIT')},
+						minlength: 		function () {toastr.error('Ingrese un NIT válido')},
+						maxlength: 		function () {toastr.error('Ingrese un NIT válido')},
+
+					},
+					scale_register: {
+						required: 			function () {toastr.error('Ingrese el registro escalafonario')},
+					},
+					ethnic_community_id: {
+						required: 			function () {toastr.error('Seleccione una comunidad étnica')},
+					},
+					title_id: {
+						required: 		function () {toastr.error('Seleccione título académico')},
+					},
+					year_title: {
+						required: 		function () {toastr.error('Ingrese año en que se obtuvo el título')},
+						minlength:		function () {toastr.error('Ingrese un año válido')},
+						maxlength: 		function () {toastr.error('Ingrese un año válido')},
+					},
+					institution: {
+						required: 		function () {toastr.error('Ingrese institución donde se obtuvo el título')},
+						minlength: 		function () {toastr.error('Ingrese una institución educativa válida')},
+					},
+				},
+			});
+
+			$('#frm-insert_schools').validate({
+				keyup: false,
+				rules: {
+					school_id: {
+						required: 		true,
+
+					},
+					contract_id: {
+						required: 		true,
+
+					},
+					year_start: {
+						required: 		true,
+						minlength: 		4,
+						maxlength: 		4,
+					},
+					work_state_id: {
+						required: 		true,
+
+					},
+
+					employee_type_id: {
+						required: 		true
+					},
+
+					language_id: {
+						required: 		true
+
+					},
+
+				},
+				messages: {
+					school_id: {
+						required: 		function () {toastr.error('Por favor seleccione una escuela')},
+
+					},
+					contract_id: {
+						required: 		function () {toastr.error('Por seleccione tipo de contratación')},
+
+					},
+					year_start: {
+						required: 			function () {toastr.error('Ingrese el año desde que inicio labores en el establecimiento')},
+					},
+					work_state_id: {
+						required: 			function () {toastr.error('Seleccione situación laboral')},
+					},
+					employee_type_id: {
+						required: 		function () {toastr.error('Seleccione tipo de empleado')},
+					},
+					language_id: {
+						required: 		function () {toastr.error('Seleccione idioma materno')},
+
+					},
+
+				},
+		});
 		}
 
 
