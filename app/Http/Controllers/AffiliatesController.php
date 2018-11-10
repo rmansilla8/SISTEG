@@ -161,6 +161,14 @@ class AffiliatesController extends Controller
         }
     }
 
+    public function editStatus(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $status = Affiliate::find($request->id);
+            return response($status);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -170,12 +178,25 @@ class AffiliatesController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+
         if ($request->ajax()) {
+            DB::beginTransaction();
+            try {
 
-            $affiliates = Affiliate::find($request->id);
-            $affiliates->update($request->all());
-            return response($affiliates);
+                $affiliate_status = Affiliate::find($request->id);
+                $affiliate_status->affiliate_state_id = $request->input('affiliate_state_id');
+                $affiliate_status->save();
 
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollBack();
+            }
+            return response($request);
         }
     }
 

@@ -223,6 +223,10 @@ class PeopleController extends Controller
                 $employee->ethnic_community_id = $request->input('ethnic_community_id');
                 $employee->save();
 
+                $affiliate = Affiliate::find($employee->id);
+                $affiliate->affiliate_state_id = $request->input('affiliate_state_id');
+                $affiliate->save();
+
                 DB::commit();
             } catch (Exception $e) {
                 DB::rollBack();

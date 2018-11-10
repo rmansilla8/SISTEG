@@ -57,9 +57,7 @@
 					@endif
 					</p>
                 </div>
-				<div class="col-md-4">
-					<button type='button' id='EditStatus' class='edit btn btn-warning pull-left'><i class='fa fa-pencil-square-o'> </i> Actualizar estado de afiliación </button>
-                </div>
+
             </div>
 			<br/>
             <div class='row'>
@@ -72,7 +70,7 @@
                     <p><strong>Genero:</strong> {{$person->gender->description}} </p>
                     <p><strong>Estado Civil:</strong> {{$person->civil_state->description}} </p>
                     <p><strong>Fecha de Nacimiento:</strong> <input type="date" value="{{$person->birthdate}}" readonly="readonly" style="border: 0; background: transparent;"/> </p>
-                    <button type='button' id='Edit' class='edit btn btn-warning pull-right'><i class='fa fa-pencil-square-o'> </i> Actualizar datos personales </button>
+
                 </div>
 
                 <div class='col-md-6'>
@@ -85,6 +83,11 @@
                 </div>
 
             </div>
+			<div class="row">
+				<div class="col-md-12">
+					<button type='button' id='Edit' class='edit btn btn-warning center'><i class='fa fa-pencil-square-o'> </i> Actualizar datos personales </button>
+				</div>
+			</div>
 <br/>
             <div class='row '>
                 <div class='col-md-6'>
@@ -241,6 +244,15 @@
 								<div class="row">
 									<div class="col-sm-12 col-md-6">
 										<div  class="input-group ">
+											<span class="input-group-addon" id="states">Estado</span>
+											<select name="affiliate_state_id" id="update_state" class="form-control" placeholder="Ingrese los nombres" aria-describedby="states"></select>
+										</div>
+										<br/>
+								</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+										<div  class="input-group ">
 											<span class="input-group-addon" id="snames">Nombres</span>
 											<input name="names" id="update_names" class="form-control" placeholder="Ingrese los nombres" aria-describedby="snames"/>
 										</div>
@@ -322,7 +334,7 @@
 										</div>
                                 </div>
 								<input name="id" type="hidden" id="update_id" class="form-control"/>
-
+							</div>
 							</form>
 						</div>
 					</div>
@@ -380,38 +392,35 @@
 			</div>
 		</div>
 	</div>
+	<!-- modal update state affiliate -->
+	<div class="modal fade" id="update_status_affiliate_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="myModalLabel">Editar estado</h4>
+	            </div>
+					<div class="modal-body">
+	 				<form  action="{{ URL::to('updateStatus')}}" method="POST" id="frm-status">
+					<input type="hidden" name="_method" value="PUT">
+    				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-	<div class="modal fade" id="update_status" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Modal title</h4>
-				</div>
-				<div class="modal-body">
-					<div class="container-fluid">
-						<form id="frm_update-status">
-						<input type="hidden" name="_method" value="PUT">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
-								{{ csrf_field() }}
-							<div class="col-sm-12 col-md-12">
-								<div class="input-group">
-									<span class="input-group-addon" id="sstatus">Estado</span>
-									<select name="affiliate_state_id" id="update_affiliate_state_id" class="form-control" aria-describedby="sstatus"></select>
-								</div>
-							</div>
-							<!-- <input name="id" id="update_id_status" type="hidden"/> -->
-						</form>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-list"></i></span>
+							<select name="status" id="affiliate_state_id" placeholder="Estado"  class="form-control"></select>
+	                	</div>
+						<input type="text" name="id_affiliate" id="update_affiliateStatus_id"/>
+						<input type="text" name="id_affiliate" id="hola"/>
+
+						<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" id="btnUpdate"  class="btn btn-primary">Actualizar</button>
 					</div>
+				</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<button type="button" class="btn btn-primary">Actualizar</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+	        </div>
+	    </div>
+	</div>
     <!-- fin de modal -->
 
         <!-- Fin de la caja -->
@@ -484,8 +493,10 @@ $('body').delegate(' #Edit', 'click', function(e){
 				// var vid = rowData.id;
 				// console.log(vid);
 				$.get('../affiliates/' + {{$affiliate->id}} + '/edit', {id:{{$affiliate->id}}}, function(data){
-                    console.log(data);
+                   // console.log(data);
 				// 	/**Se llenan los input con los datos de la ruta */
+
+				 	$('#frm-update_person').find('#update_state').val(data.affiliate_state_id)
 				 	$('#frm-update_person').find('#update_names').val(data.employee.person.names)
 				 	$('#frm-update_person').find('#update_surnames').val(data.employee.person.surnames)
 				 	$('#frm-update_person').find('#update_email').val(data.employee.person.email)
@@ -495,14 +506,13 @@ $('body').delegate(' #Edit', 'click', function(e){
 				 	$('#frm-update_person').find('#update_address').val(data.employee.person.address)
 				 	$('#frm-update_person').find('#update_birthdate').val(data.employee.person.birthdate)
 				 	$('#frm-update_person').find('#update_gender_id').val(data.employee.person.gender_id)
-				 	$('#frm-update_person').find('#update_civil_states').val(data.employee.person.civil_state_id)
+				 	$('#frm-update_person').find('#update_civil_states_id').val(data.employee.person.civil_state_id)
 				 	$('#frm-update_employee').find('#update_dpi').val(data.employee.dpi)
 				 	$('#frm-update_employee').find('#update_nit').val(data.employee.nit)
 				 	$('#frm-update_employee').find('#update_scale_register').val(data.employee.scale_register)
-				 	$('#frm-update_employee').find('#update_ethnic_community').val(data.employee.ethnic_community_id)
+				 	$('#frm-update_employee').find('#update_ethnic_community_id').val(data.employee.ethnic_community_id)
 				 	$('#frm-update_person').find('#update_id').val(data.id)
 				 	$('#update_affiliate_modal').modal('show');
-
 
 
 				});
@@ -551,10 +561,10 @@ $('body').delegate(' #Edit', 'click', function(e){
 			 function getMunicipalityEdit(){
  				//$('#update_fee_type_id').empty();
 
-				 console.log($id);
+				// console.log($id);
  				$.get('../get-municipalities/'+ $id, function(data){
  					$.each(data,	function(i, value){
-						console.log(value.id);
+					//	console.log(value.id);
  						if(value.id === {{$affiliate->id}} ){
  							$('#update_municipality_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
  						}
@@ -567,10 +577,12 @@ $('body').delegate(' #Edit', 'click', function(e){
  				$('#update_gender_id').empty();
  				$.get('../get-genders/', function(data){
  					$.each(data,	function(i, value){
-						console.log(data);
- 						if(value.id === {{$affiliate->id}} ){
- 							$('#update_gender_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
- 						}
+
+ 						// if(value.id === {{$affiliate->id}} ){
+
+ 						// 	$('#update_gender_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+ 						// }
+						 console.log({{$affiliate->id}});
  						$('#update_gender_id').append($('<option >', {value: value.id, text: `${value.description}`}));
  					});
  				});
@@ -580,11 +592,13 @@ $('body').delegate(' #Edit', 'click', function(e){
  				$('#update_civil_states_id').empty();
  				$.get('../get-civil_states/', function(data){
  					$.each(data,	function(i, value){
-						console.log(data);
- 						if(value.id === {{$affiliate->id}} ){
- 							$('#update_civil_states_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
- 						}
+						// console.log(value);
+						// console.log({{$person->civil_state_id}})
+ 						// if(value.id ===  {{$affiliate->id}}  ){
+ 						// 	$('#update_civil_states_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+ 						// }
  						$('#update_civil_states_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+
  					});
  				});
  			}
@@ -595,17 +609,17 @@ $('body').delegate(' #Edit', 'click', function(e){
  				$('#update_ethnic_community_id').empty();
  				$.get('../get-ethnic_communities/', function(data){
  					$.each(data,	function(i, value){
-						console.log(data);
- 						if(value.id == {{$affiliate->id}} ){
- 							$('#update_ethnic_community_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
- 						}
+						//console.log(data);
+ 						// if(value.id == {{$affiliate->id}} ){
+ 						// 	$('#update_ethnic_community_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
+ 						// }
  						$('#update_ethnic_community_id').append($('<option >', {value: value.id, text: `${value.name}`}));
  					});
  				});
  			}
 
-			 //-------------Actualizar cuotas-------------
-			 	function update(e){
+			 //-------------Actualizar afiliado-------------
+			 	function update(){
 					$.ajaxSetup({
 						headers: {
 							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -636,34 +650,23 @@ $('body').delegate(' #Edit', 'click', function(e){
 					});
 
 				}
-				function getAffiliateStateEdit(vid){
-						$('#update_affiliate_state_id').empty();
-						$.get('../get-affiliates_states/', function(data){
+				function getAffiliateStateEdit(){
+						//$('#update_affiliate_state_id').empty();
+						$.get('../get-affiliates_states', function(data){
 							$.each(data,	function(i, value){
-								console.log(data)
-								if(value.id === vid ){
-									$('#update_affiliate_state_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
-								}
-								$('#update_affiliate_state_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+								//console.log(data)
+								// if(value.id === vid ){
+								// 	$('#update_affiliate_state_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+								// }
+								$('#update_state').append($('<option >', {value: value.id, text: `${value.description}`}));
 							});
 						});
 					}
 
 
-			// $('body').delegate(' #EditStatus', 'click', function(e){
-			// 	e.preventDefault();
-			// 	/**Se obtiene los datos de la fila donde se encuentra el botón
-			// 	   editar al que se le dio clic
-			// 	*/
-            //     var vid = {{$affiliate->id}};
-			// 	$.get('../affiliates/' + vid + '/edit', {id:vid}, function(data){
-            //         //console.log(data);
-			// 	// 	/**Se llenan los input con los datos de la ruta */
-			// 	 	$('#frm-update_status').find('#update_affiliate_state_id').val(data.affiliate_state_id)
-			// 	 	$('#frm-update_status').find('#update_id').val(data.id)
-			// 	 	$('#update_status').modal('show');
-			// 	});
-			// });
+
+
+
 
 </script>
 
