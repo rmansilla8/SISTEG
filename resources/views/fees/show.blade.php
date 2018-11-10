@@ -28,7 +28,7 @@
 <div class="container">
     <div class="panel-group">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="panel panel-info">
                     <div class="panel-heading"><b>Detalles de la cuota</b></div>
                         <div class="panel-body">
@@ -37,16 +37,15 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                         <input type="hidden" id="fee_id" value="{{$fee->id}}"/>
-                                        <p><strong>Afiliado:</strong> {{ $fee->names }} {{ $fee->surnames }}</p>
-                                        <p><strong>Tipo de afiliado:</strong> {{ $fee->description }}</p>
-                                        <p><strong>Amount:</strong> {{ $fee->cuota }}</p>
                                         <p><strong>Fecha:</strong> {{ $fee->fecha }}</p>
-                                        <p><strong>Dirección:</strong> {{}}</p>
-                                        <p><strong>Detalles:</strong> {{ $fee->details }}</p>
+                                        <p><strong>Afiliado:</strong> {{ $fee->names }} {{ $fee->surnames }}</p>
+                                        <p><strong>Tipo de cuota:</strong> {{ $fee->descripcion }}</p>
+                                        <p><strong>Cantidad:</strong> {{ $fee->cuota }}</p>
+                                        <p><strong>Detalles:</strong> {{ $fee->detalle }}</p>
                                         </div>
                                     </div>
                                 </form>
-                        <button type='button' id='edit' class='edit btn btn-warning' title='Modificar' data-id='id'><i class='fa fa-pencil-square-o'></i></button>
+                    <a target="_blank" href="{{ URL::to('../fees-pdf')}}" type="hidden" id="fee_id" value="{{$fee->id}}"  class="btn btn-primary">Generar PDF  <i class='fa fa-file-pdf-o'></i></a>
                     </div>
                 </div>
             </div>

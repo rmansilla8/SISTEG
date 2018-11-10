@@ -11,7 +11,9 @@ use IntelGUA\Sisteg\Employee;
 use IntelGUA\Sisteg\AffiliatePerson;
 use IntelGUA\Sisteg\Person;
 use IntelGUA\Sisteg\Http\Requests\FeeRequest;
-
+use Illuminate\Support\Facades\View;
+use PDF;
+// use View;
 
 
 class FeesController extends Controller
@@ -84,7 +86,7 @@ class FeesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminte\Http\Response
      */
     public function store(Request $request)
     {
@@ -110,10 +112,10 @@ class FeesController extends Controller
         ->leftJoin('people', 'people.id', '=', 'employees.person_id')
         ->leftJoin('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
         ->where('fees.id', '=', $id)
-        ->select('fees.*','fee_type.description as description','fees.amount as cantidad', 'fees.date as fecha', 'fees.detail as detalle')
+        ->select('fees.*', 'people.names', 'people.surnames','fee_types.description as descripcion','fees.amount as cuota', 'fees.date as fecha', 'fees.detail as detalle')
         ->first();
-        // return view('fees.show', compact('fees'));
-        return(compact('fees'));
+         return view('fees.show', compact('fee'));
+        //return(compact('fees'));
     }
 
     /**
@@ -122,7 +124,7 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
 
@@ -177,6 +179,30 @@ class FeesController extends Controller
             Fee::destroy($request->id);
             return redirect('fees')->with('status', 'Cuota eliminada exitosamente');
         } */
+
+    }
+
+    public function generarPdf($id)
+    {
+
+
+        $fee = DB:: table('fees')
+        ->leftJoin('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
+        ->leftJoin('employees', 'employees.id', '=', 'affiliates.employee_id')
+        ->leftJoin('people', 'people.id', '=', 'employees.person_id')
+        ->leftJoin('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
+        ->where('fees.id', '=', $id)
+        ->select('fees.*', 'people.names', 'people.surnames','fee_types.description as descripcion','fees.amount as cuota', 'fees.date as fecha', 'fees.detail as detalle')
+        ->first();
+        $view = view::make('fees.pdf', compact('fee'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        echo $view;
+        exit;
+        return $pdf->download('invoice.pdf');
+
+
+        //  return view('fees.show', compact('fee'));
 
     }
 }

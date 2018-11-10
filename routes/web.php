@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('get-fees', 'FeesController@getFees');
         Route::get('get-fee_types', 'FeesController@getFeeType');
         Route::get('get-affiliates', 'FeesController@getAffiliate');
+        Route::get('fees-pdf/{$id}', 'FeesController@generarPdf');
 
         Route::resource('accounting_records', 'AccountingRecordsController');
         Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingRecords');
