@@ -57,9 +57,7 @@
 					@endif
 					</p>
                 </div>
-				<div class="col-md-4">
-					<button type='button' id='EditStatus' class='edit btn btn-warning pull-left'><i class='fa fa-pencil-square-o'> </i> Actualizar estado de afiliación </button>
-                </div>
+
             </div>
 			<br/>
             <div class='row'>
@@ -72,7 +70,7 @@
                     <p><strong>Genero:</strong> {{$person->gender->description}} </p>
                     <p><strong>Estado Civil:</strong> {{$person->civil_state->description}} </p>
                     <p><strong>Fecha de Nacimiento:</strong> <input type="date" value="{{$person->birthdate}}" readonly="readonly" style="border: 0; background: transparent;"/> </p>
-                    <button type='button' id='Edit' class='edit btn btn-warning pull-right'><i class='fa fa-pencil-square-o'> </i> Actualizar datos personales </button>
+
                 </div>
 
                 <div class='col-md-6'>
@@ -85,6 +83,11 @@
                 </div>
 
             </div>
+			<div class="row">
+				<div class="col-md-12">
+					<button type='button' id='Edit' class='edit btn btn-warning center'><i class='fa fa-pencil-square-o'> </i> Actualizar datos personales </button>
+				</div>
+			</div>
 <br/>
             <div class='row '>
                 <div class='col-md-6'>
@@ -245,6 +248,7 @@
 											<select name="affiliate_state_id" id="update_state" class="form-control" placeholder="Ingrese los nombres" aria-describedby="states"></select>
 										</div>
 										<br/>
+								</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-12 col-md-6">
