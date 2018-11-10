@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('affiliates', 'affiliatesController');
         Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
         Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
+        Route::get('get-status/{affiliate_id}/edit', 'AffiliatesController@editStatus');
+        Route::put('updateStatus/{affiliate_id}', 'AffiliatesController@updateStatus');
 
         Route::get('get-departments', 'PeopleController@getDepartments');
         Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
