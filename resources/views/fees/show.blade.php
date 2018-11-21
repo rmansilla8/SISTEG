@@ -45,7 +45,7 @@
                                         </div>
                                     </div>
                                 </form>
-                    <a target="_blank" href="{{ URL::to('../fees-pdf')}}" type="hidden" id="fee_id" value="{{$fee->id}}"  class="btn btn-primary">Generar PDF  <i class='fa fa-file-pdf-o'></i></a>
+                    <!-- <a target="_blank" href="{{ URL::to('../fees-pdf')}}" type="hidden" id="fee_id" value="{{$fee->id}}"  class="btn btn-primary">Generar PDF  <i class='fa fa-file-pdf-o'></i></a> -->
                     </div>
                 </div>
             </div>

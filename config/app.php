@@ -162,7 +162,7 @@ return [
         IntelGUA\Sisteg\Providers\EventServiceProvider::class,
         IntelGUA\Sisteg\Providers\RouteServiceProvider::class,
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+        //Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -212,7 +212,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+       // 'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
