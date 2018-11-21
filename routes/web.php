@@ -38,59 +38,61 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('status/{id}', 'UsersController@Status');
         Route::get('get-status', 'UsersController@getStatus');
 
-    });
+    
     //Grupo de rutas al que solo el Admin y el registrador pueden acceder
-    Route::group([
-        'middleware' => ['permission:registrador'],
-    ], function () {
+        Route::group([
+            'middleware' => ['permission:registrador'],
+        ], function () {
 
-        Route::resource('affiliates', 'affiliatesController');
-        Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
-        Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
-        Route::get('get-status/{affiliate_id}/edit', 'AffiliatesController@editStatus');
-        Route::put('updateStatus/{affiliate_id}', 'AffiliatesController@updateStatus');
+            Route::resource('affiliates', 'affiliatesController');
+            Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
+            Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
+            Route::get('get-status/{affiliate_id}/edit', 'AffiliatesController@editStatus');
+            Route::put('updateStatus/{affiliate_id}', 'AffiliatesController@updateStatus');
 
-        Route::get('get-departments', 'PeopleController@getDepartments');
-        Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
-        Route::get('get-genders', 'PeopleController@getGenders');
-        Route::get('get-civil_states', 'PeopleController@getCivilStates');
-        Route::resource('people', 'PeopleController');
-        Route::get('get-ethnic_communities', 'EmployeesController@getEthnic_communities');
-        Route::get('get-titles', 'EmployeesController@getTitles');
+            Route::get('get-departments', 'PeopleController@getDepartments');
+            Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
+            Route::get('get-genders', 'PeopleController@getGenders');
+            Route::get('get-civil_states', 'PeopleController@getCivilStates');
+            Route::resource('people', 'PeopleController');
+            Route::get('get-ethnic_communities', 'EmployeesController@getEthnic_communities');
+            Route::get('get-titles', 'EmployeesController@getTitles');
 
-        Route::get('get-employee_types', 'EmployeeSchoolsController@getEmployee_types');
-        Route::get('get-work_states', 'EmployeeSchoolsController@getWork_states');
-        Route::get('get-contracts', 'EmployeeSchoolsController@getContracts');
-        Route::get('get-school', 'EmployeeSchoolsController@getSchool');
-        Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
+            Route::get('get-employee_types', 'EmployeeSchoolsController@getEmployee_types');
+            Route::get('get-work_states', 'EmployeeSchoolsController@getWork_states');
+            Route::get('get-contracts', 'EmployeeSchoolsController@getContracts');
+            Route::get('get-school', 'EmployeeSchoolsController@getSchool');
+            Route::get('get-languages', 'EmployeeSchoolsController@getLanguages');
 
-        Route::resource('schools', 'SchoolsController');
-        Route::get('get-schools', 'SchoolsController@getSchools');
-        Route::get('get-levels', 'SchoolsController@getLevel');
-        Route::get('get-districts', 'SchoolsController@getDistrict');
-        Route::get('get-areas', 'SchoolsController@getArea');
-        Route::get('get-classifications', 'SchoolsController@getClassification');
-        Route::get('get-modalities', 'SchoolsController@getModality');
-        Route::get('get-working_days', 'SchoolsController@getWorkingDay');
-        Route::get('get-plans', 'SchoolsController@getPlan');
-    });
+            Route::resource('schools', 'SchoolsController');
+            Route::get('get-schools', 'SchoolsController@getSchools');
+            Route::get('get-levels', 'SchoolsController@getLevel');
+            Route::get('get-districts', 'SchoolsController@getDistrict');
+            Route::get('get-areas', 'SchoolsController@getArea');
+            Route::get('get-classifications', 'SchoolsController@getClassification');
+            Route::get('get-modalities', 'SchoolsController@getModality');
+            Route::get('get-working_days', 'SchoolsController@getWorkingDay');
+            Route::get('get-plans', 'SchoolsController@getPlan');
+        });
 
     //Grupo de rutas al que solo el de finanzas y el admin pueden acceder
-    Route::group([
-        'middleware' => ['permission:finanzas'],
-    ], function () {
+        Route::group([
+            'middleware' => ['permission:finanzas'],
+        ], function () {
 
               //Route::resource('fees',   'FeesController');
-        Route::resource('fees', 'FeesController');
-        Route::get('get-fees', 'FeesController@getFees');
-        Route::get('get-fee_types', 'FeesController@getFeeType');
-        Route::get('get-affiliates', 'FeesController@getAffiliate');
-        Route::get('fees-pdf/{$id}', 'FeesController@generarPdf');
+            Route::resource('fees', 'FeesController');
+            Route::get('get-fees', 'FeesController@getFees');
+            Route::get('get-fee_types', 'FeesController@getFeeType');
+            Route::get('get-affiliates', 'FeesController@getAffiliate');
+            Route::get('fees-pdf/{$id}', 'FeesController@generarPdf');
 
-        Route::resource('accounting_records', 'AccountingRecordsController');
-        Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingRecords');
-        Route::get('get-record_types', 'AccountingRecordsController@getRecordTypes');
+            Route::resource('accounting_records', 'AccountingRecordsController');
+            Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingRecords');
+            Route::get('get-record_types', 'AccountingRecordsController@getRecordTypes');
         //Route::post('fees/{fee}', 'FeesController@destroy')->name('eliminar');
+
+        });
 
     });
 });
