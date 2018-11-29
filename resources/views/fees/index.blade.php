@@ -29,7 +29,7 @@
 <div class="box">
 		<!-- Encabezado de la caja -->
     <div class="box-header with-border">
-        <h3 class="box-title">Listado de cuotas</h3>
+        <h3 class="box-title">Listado de cuotas </h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                 <i class="fa fa-minus"></i>
@@ -309,8 +309,9 @@
 						/**Contiene los botones de actualizar, mostrar y eliminar */
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs'>"+
-							"<button type='button' id='Show' class='show btn btn-info'><i class='fa fa-eye'></i></button>"+
-							"<button type='button' id='Edit' class='edit btn btn-warning'><i class='fa fa-pencil-square-o'></i></button>"+
+							"<button type='button' id='Show' class='show btn btn-info'><i class='fa fa-eye' title='Mostrar'></i></button>"+
+							"<button type='button' id='Edit' class='edit btn btn-warning' title='Editar'><i class='fa fa-pencil-square-o'></i></button>"+
+							"<button type='button' id='pdf' class='btn btn-danger' title='PDF' data-id='id'><i class='fa fa-file-pdf-o'></i></button>"+
 							"</div>"
 						}
 					]
@@ -575,7 +576,45 @@
 						var tbl = $('#tblfees').DataTable();
 						tbl.ajax.reload()
 						$('#add_new_fee_modal').modal('hide');
-						toastr["success"]("Cuota guardada","Información")
+						//toastr["success"]("Cuota guardada","Información")
+						console.log(data)
+						var last_id = data.id;
+						const swalWithBootstrapButtons = swal.mixin({
+						confirmButtonClass: 'btn btn-success',
+						cancelButtonClass: 'btn btn-danger',
+						buttonsStyling: false,
+					})
+					//Muestra el mensaje de la alerta y activa el botón cancelar
+					swalWithBootstrapButtons({
+						title: 'Cuota voluntaria guardada',
+						text: "¿Desea imprimir el comprobante?",
+						type: 'success',
+						showCancelButton: true,
+						confirmButtonText: 'Si, Imprimir!',
+						cancelButtonText: 'No, cancelar!',
+						reverseButtons: true
+						// Se recoge el valor si se dio Click al botón eliminar
+					}).then((result) =>{
+						//console.log(result);
+							if (result.value) {
+								window.open( 'pdf/' + last_id );
+								
+								//Se muestra un mensaje de que el dato se elimino correctamente
+								swalWithBootstrapButtons({
+									title:"Comprobante! ",
+									text: "Generando el comprobante!",
+									type: "success",
+								});
+								// En caso de que el usuario seleccione el botón cancelar se muestra un mensaje de operación cancelada
+							} else if(
+								result.dismiss === swal.DismissReason.cancel){
+								swalWithBootstrapButtons({
+									title	:"Cancelado",
+									text	:"¡Operación cancelada por el usuario!",
+									type	:"error",
+								});
+							}
+						});
 
 					}
 				});
@@ -673,7 +712,21 @@ $('body').delegate('#tblfees #Show', 'click', function(e){
 		 });
 	});
 
+	$('body').delegate('#tblfees #pdf', 'click', function(e){
+          e.preventDefault();
+            var $tr = $(this).closest('li').length ?
+                $(this).closest('li'):
+                $(this).closest('tr');;
+                  var rowData = $('#tblfees').DataTable().row($tr).data();
+                    //console.log(rowData);
+                var vid = rowData.id;
+                console.log(vid);
+              //$.get('plans/' + vid +'/edit', {id:vid}, function(data){
+                window.location.href = 'pdf/' + vid;
+          // });
+        });
     </script>
+
 
 
 

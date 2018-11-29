@@ -45,14 +45,18 @@
         <div class="box-body">
             <!-- Cuerpo de la caja-->
 
-			<div class="row">
+			<div class="row ">
 				<!-- Botón que invoca el Modal #add_new_fee_modal para agregar registros -->
-				<div class="col-xs-12">
+				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
 						<button style="margin-bottom:10px;" type="button" data-toggle="modal" data-target="#add_new_affiliate_modal" class="btn btn-success pull-right">
 						<i class="fa fa-plus"></i> Nuevo Registro</button>
-					<br/>
 				</div>
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+					<a type="button" id="pdf" href="{{ url('../get-pdf-census') }}" class="btn btn-warning pull-right" title="PDF" data-id="id"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+				</div>
+				<br/>
 			</div>
+			
 
             <!-- DataTable -->
 			<div class="row">

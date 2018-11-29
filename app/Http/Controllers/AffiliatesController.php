@@ -25,6 +25,8 @@ use IntelGUA\Sisteg\Language;
 use IntelGUA\Sisteg\Ethnic_community;
 use IntelGUA\Sisteg\Municipality;
 use IntelGUA\Sisteg\Employee_type;
+use PDF;
+use Illuminate\Support\Carbon;
 
 class AffiliatesController extends Controller
 {
@@ -88,6 +90,27 @@ class AffiliatesController extends Controller
             ->select('affiliates.*', 'employees.dpi', 'people.names', 'people.surnames', 'schools.name AS school', 'titles.description AS title', 'genders.description AS gender')
             ->get();
         return (compact('affiliates'));
+    }
+
+    public function pdfCensus()
+    {
+        $affiliates = DB::table('affiliates')
+            ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
+            ->join('people', 'people.id', '=', 'employees.person_id')
+            ->join('employee_schools', 'employees.id', '=', 'employee_schools.employee_id')
+            ->join('schools', 'schools.id', 'employee_schools.school_id')
+            ->join('employee_titles', 'employees.id', '=', 'employee_titles.employee_id')
+            ->join('titles', 'titles.id', '=', 'employee_titles.title_id')
+            ->join('genders', 'genders.id', '=', 'people.gender_id')
+            ->select('affiliates.*', 'employees.dpi', 'people.names', 'people.surnames', 'schools.name AS school', 'titles.description AS title', 'genders.description AS gender')
+            ->get();
+
+        $fullDate = Carbon::now()->toDateString();
+        $nombre_padron = sprintf('Padrón-de-afiliados-%s.pdf', $fullDate);
+        $pdf = PDF::loadView('affiliates.pdfcensus', compact('affiliates'))->setPaper('legal', 'landscape');
+        return $pdf->stream($nombre_padron);
+        //return view('affiliates.pdfcensus', compact('affiliates'));
+        //return (compact('affiliates'));
     }
 
     public function getAffiliateStates()

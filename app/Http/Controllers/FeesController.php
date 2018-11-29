@@ -106,15 +106,15 @@ class FeesController extends Controller
      */
     public function show($id)
     {
-        $fee = DB:: table('fees')
-        ->leftJoin('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
-        ->leftJoin('employees', 'employees.id', '=', 'affiliates.employee_id')
-        ->leftJoin('people', 'people.id', '=', 'employees.person_id')
-        ->leftJoin('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
-        ->where('fees.id', '=', $id)
-        ->select('fees.*', 'people.names', 'people.surnames','fee_types.description as descripcion','fees.amount as cuota', 'fees.date as fecha', 'fees.detail as detalle')
-        ->first();
-         return view('fees.show', compact('fee'));
+        $fee = DB::table('fees')
+            ->leftJoin('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
+            ->leftJoin('employees', 'employees.id', '=', 'affiliates.employee_id')
+            ->leftJoin('people', 'people.id', '=', 'employees.person_id')
+            ->leftJoin('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
+            ->where('fees.id', '=', $id)
+            ->select('fees.*', 'people.names', 'people.surnames', 'fee_types.description as descripcion', 'fees.amount as cuota', 'fees.date as fecha', 'fees.detail as detalle')
+            ->first();
+        return view('fees.show', compact('fee'));
         //return(compact('fees'));
     }
 
@@ -182,27 +182,21 @@ class FeesController extends Controller
 
     }
 
-    public function generarPdf($id)
+    public function generatePDF($id)
     {
+        $fee = DB::table('fees')
+            ->leftJoin('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
+            ->leftJoin('employees', 'employees.id', '=', 'affiliates.employee_id')
+            ->leftJoin('people', 'people.id', '=', 'employees.person_id')
+            ->leftJoin('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
+            ->where('fees.id', '=', $id)
+            ->select('fees.*', 'affiliates.number', 'people.names', 'people.surnames', 'fee_types.description as descripcion', 'fees.amount as cuota', 'fees.date as fecha', 'fees.detail as detalle')
+            ->first();
 
+        $nombre_comprobante = sprintf('comprobante-%s.pdf', $fee->names . '-' . $fee->surnames . '-' . str_pad($fee->id, 7, '0', STR_PAD_LEFT));
+        $pdf = PDF::loadView('fees.pdffee', compact('fee'))->setPaper('legal', 'landscape');
+        return $pdf->stream($nombre_comprobante);
 
-        $fee = DB:: table('fees')
-        ->leftJoin('affiliates', 'affiliates.id', '=', 'fees.affiliate_id')
-        ->leftJoin('employees', 'employees.id', '=', 'affiliates.employee_id')
-        ->leftJoin('people', 'people.id', '=', 'employees.person_id')
-        ->leftJoin('fee_types', 'fee_types.id', '=', 'fees.fee_type_id')
-        ->where('fees.id', '=', $id)
-        ->select('fees.*', 'people.names', 'people.surnames','fee_types.description as descripcion','fees.amount as cuota', 'fees.date as fecha', 'fees.detail as detalle')
-        ->first();
-        $view = view::make('fees.pdf', compact('fee'))->render();
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
-        echo $view;
-        exit;
-        return $pdf->download('invoice.pdf');
-
-
-        //  return view('fees.show', compact('fee'));
 
     }
 }
