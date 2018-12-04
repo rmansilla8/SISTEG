@@ -216,9 +216,7 @@
 										<span class="input-group-addon" id="snit">NIT</span>
 										<input name="nit" type="text" id="nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
 									</div>
-									<br/>
 								</div>
-								<br/>
 							</div>
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos complementarios</b></center> </span></div>
 							<div class="row">
@@ -236,7 +234,6 @@
 									</div>
 									<br/>
 								</div>
-
 							</div>
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Información Académica</b></center> </span></div>
 							<div class="row">
@@ -245,6 +242,7 @@
 										<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
 										<select name="title_id" id="title_id" class="form-control"></select>
 									</div>
+									<br/>
 								</div>
 								<div class="col-sm-12 col-md-4">
 									<div class="input-group">
@@ -252,7 +250,6 @@
 										<input name="year_title" type="text" id="year_title" aria-describedby="yearHelp" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
 									</div>
 									<small id="yearHelp" class="form-text text-muted">Año en el que obtuvo el título.</small>
-									<br/>
 								</div>
 							</div>
 							<div class="row">
@@ -279,6 +276,7 @@
 										<span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
 										<select name="school_id" id="school_id" class="form-control"></select>
 									</div>
+									<br/>
 								</div>
 								<div class="col-sm-12 col-md-4">
 									<div class="input-group">
@@ -286,7 +284,6 @@
 										<select name="contract_id" type="text" id="contract_id" aria-describedby="contractHelp" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"></select>
 									</div>
 									<small id="contractHelp" class="form-text text-muted">Renglón presupuestario al que pertenece.</small>
-									<br/>
 								</div>
 							</div>
 							<div class='row'>
@@ -296,19 +293,20 @@
 										<input name="year_start" type="text" id="year_start" aria-describedby="yearSchoolHelp" placeholder="Ingrese el año" class="form-control" aria-describedby="ssurnames"/>
 									</div>
 									<small id="yearSchoolHelp" class="form-text text-muted">Año desde que labora en dicha escuela.</small>
+								<br/>
 								</div>
 								<div class="col-md-4">
 									<div class="input-group">
 										<span class="input-group-addon" id="swork_state">Estado</span>
 										<select name="work_state_id" type="text" id="work_state_id" placeholder="Seleccione estado" class="form-control" aria-describedby="swork_state"></select>
 									</div>
+									<br/>
 								</div>
 								<div class="col-sm-12 col-md-4">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
 										<select name="employee_type_id" id="employee_type_id" class="form-control"></select>
 									</div>
-									<br/>
 								</div>
 							</div>
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Idioma materno</b></center> </span></div>
