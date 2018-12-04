@@ -217,6 +217,7 @@
 										<input name="nit" type="text" id="nit" placeholder="Ingrese NIT" class="form-control" aria-describedby="snit"/>
 									</div>
 								</div>
+								<br/>
 							</div>
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Datos complementarios</b></center> </span></div>
 							<div class="row">
@@ -234,6 +235,7 @@
 									</div>
 									<br/>
 								</div>
+								<br/>
 							</div>
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Información Académica</b></center> </span></div>
 							<div class="row">
@@ -308,37 +310,38 @@
 										<select name="employee_type_id" id="employee_type_id" class="form-control"></select>
 									</div>
 								</div>
+								<br/>
 							</div>
 							<div class="well well-sm" style="background-color: #00a65a;"><span style="color:white;"><center><b>Idioma materno</b></center> </span></div>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-sm-12 col-md-4">
 									<div class="input-group">
 										<span class="input-group-addon" id="slanguage">Idioma</span>
 										<select name="language_id" type="text" id="language_id" placeholder="Seleccione idioma" class="form-control" aria-describedby="slanguage"></select>
 									</div>
 								</div>
-								<div class="col-md-2">
+								<div class="col-sm-3 col-md-2">
 									<div class="input-group">
 										<span>Habla
 											<input type="radio" id="speak" name="speak" aria-label="habla">
 										</span>
 									</div>
 								</div>
-								<div class="col-md-2">
+								<div class="col-sm-3 col-md-2">
 									<div class="input-group">
 										<p>Entiende
 											<input type="radio" id="understand" name="undestand" aria-label="entiende">
 										</p>
 									</div>
 								</div>
-								<div class="col-md-2">
+								<div class="col-sm-3 col-md-2">
 									<div class="input-group">
 										<p>Lee
 											<input type="radio" id="read" name="read" aria-label="lee">
 										</p>
 									</div>
 								</div>
-								<div class="col-md-2">
+								<div class="col-sm-3 col-md-2">
 									<div class="input-group">
 										<p>Escribe
 											<input type="radio" id="write" name="write" aria-label="escribe">
