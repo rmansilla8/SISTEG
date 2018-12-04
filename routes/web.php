@@ -11,7 +11,7 @@ use IntelGUA\Generators\Generate;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::get('pdf/{id}', 'FeesController@generatePDF');
+
 Route::get('/', function () {
     return view('welcome');
 
@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('accounting_records', 'AccountingRecordsController');
         Route::get('get-accounting_records', 'AccountingRecordsController@getAccountingRecords');
         Route::get('get-record_types', 'AccountingRecordsController@getRecordTypes');
+        Route::get('pdf/{id}', 'FeesController@generatePDF');
         //Route::post('fees/{fee}', 'FeesController@destroy')->name('eliminar');
 
     });
