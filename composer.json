@@ -62,6 +62,9 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "compile": [
+            "chmod -R 777 storage/fonts/"
         ]
     },
     "config": {
