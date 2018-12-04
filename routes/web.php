@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         'middleware' => ['permission:registrador'],
     ], function () {
 
-        Route::resource('affiliates', 'affiliatesController');
+        Route::resource('affiliates', 'AffiliatesController');
         Route::get('get-all_affiliates', 'AffiliatesController@getAllAffiliates');
         Route::get('get-pdf-census', 'AffiliatesController@pdfCensus');
         Route::get('get-affiliates_states', 'AffiliatesController@getAffiliateStates');
