@@ -61,7 +61,6 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize",
             "mkdir storage/fonts"
         ],
         "post-autoload-dump": [
