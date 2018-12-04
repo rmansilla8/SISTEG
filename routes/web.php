@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     //Grupo de rutas al que solo el Admin y el registrador pueden acceder
     Route::group([
-        'middleware' => ['role:registrador'],
+        'middleware' => ['role:registrador' || 'role:administrador'],
     ], function () {
 
         Route::resource('affiliates', 'affiliatesController');
@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Grupo de rutas al que solo el de finanzas y el admin pueden acceder
     Route::group([
-        'middleware' => ['role:finanzas'],
+        'middleware' => ['role:finanzas' || 'role:administrador'],
     ], function () {
 
               //Route::resource('fees',   'FeesController');
