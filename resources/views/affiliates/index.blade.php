@@ -198,7 +198,6 @@
 
 					<!-- Paso 2 del modal -->
 				<div class="row hide" data-step="2" data-title="Afiliación- 2 de 3">
-					<!-- <div class="jumbotron jumbotron-fluid" style="background-color:#FFFF;"> -->
 					<div class="container-fluid">
 						<form   id="frm-insert_employees" data-toggle="validator">
 							<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
@@ -269,7 +268,6 @@
 						</form>
 					</div>
 				</div>
-			</div>
 
 				<div class="row hide" data-step="3" data-title="Datos complementarios - 3 de 3">
 					<div class='container-fluid'>
@@ -352,9 +350,9 @@
 							</div>
 
 						</form>
-						</div>
-						</div>
-						</div>
+				</div>
+			</div>
+						
 
 
 				<div class="modal-footer">
@@ -366,6 +364,7 @@
 			</div>
 		</div>
 	</div>
+	
 
 
 
