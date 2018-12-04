@@ -54,7 +54,7 @@
     },
     "scripts": {
         "compile": [
-            "chmod -R 777 storage/fonts/"
+            "chmod 777 storage/fonts/"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
