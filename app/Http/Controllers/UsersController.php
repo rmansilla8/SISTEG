@@ -2,6 +2,7 @@
 
 namespace IntelGUA\Sisteg\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use IntelGUA\Sisteg\User;
 use Caffeinated\Shinobi\Models\Role;
