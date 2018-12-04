@@ -88,6 +88,7 @@
             @endif
             <div class="content">
                 <div class="title m-b-md">
+                    <img src="{{asset('../images/police.png')}}" alt="Police"><br/>
                      <center><b>No tienes permisos,</b></center>
                      <center><b>para acceder a esta sección.</b></center>
                 </div>
