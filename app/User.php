@@ -10,10 +10,10 @@ use Caffeinated\Shinobi\Models\Role;
 use Caffeinated\Shinobi\Models\Permission;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 
+
 class User extends Authenticatable
 {
-    use Notifiable;
-    use ShinobiTrait;
+    use Notifiable, ShinobiTrait;
 
 
     /**

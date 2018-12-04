@@ -580,10 +580,10 @@
 						console.log(data)
 						var last_id = data.id;
 						const swalWithBootstrapButtons = swal.mixin({
-						confirmButtonClass: 'btn btn-success',
-						cancelButtonClass: 'btn btn-danger',
-						buttonsStyling: false,
-					})
+							confirmButtonClass: 'btn btn-success',
+							cancelButtonClass: 'btn btn-danger',
+							buttonsStyling: false,
+						})
 					//Muestra el mensaje de la alerta y activa el botón cancelar
 					swalWithBootstrapButtons({
 						title: 'Cuota voluntaria guardada',
