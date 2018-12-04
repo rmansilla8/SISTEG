@@ -55,9 +55,11 @@
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "php artisan clear-compiled",
-            "mkdir storage/fonts",
-            "chmod -R 777 storage/fonts"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan optimize",
+            "mkdir storage/fonts"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate"
