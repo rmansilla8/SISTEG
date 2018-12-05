@@ -332,7 +332,6 @@
 							"<div class='btn-group btn-group-xs'>"+
 							"<button type='button' id='Show' class='show btn btn-info'><i class='fa fa-eye'></i></button>"+
 							"<button type='button' id='Edit' class='edit btn btn-warning'><i class='fa fa-pencil-square-o'></i></button>"+
-							"<button type='button' id='Delete' class='delete btn btn-danger'><i class='fa fa-trash-o'></i></button>"+
 							"</div>"
 						}
 					]
