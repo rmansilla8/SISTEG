@@ -538,7 +538,7 @@
 					$('#show').find('#show_description').val(rowData.description)
 					$('#show').find('#show_amount').val(rowData.amount)
 					$('#show').find('#show_date').val(rowData.date)
-					$('#show').find('#show_record_type_id').val(rowData.record_type.description)
+					$('#show').find('#show_record_type_id').val(rowData.rdescription)
 					$('#show').find('#show_id').val(rowData.id)
 					$('#show_accounting_record_modal').modal('show');
 				});
