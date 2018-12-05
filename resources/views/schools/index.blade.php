@@ -98,7 +98,7 @@
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
 								-El nombre de los input y select deben ser igual nombre del campo en la BD.
 							 -->
-							<form  action="{{ URL::to('schools')}}" method="POST" id="frm-insert_school" onsubmit="return validaCamposCreate();">
+							<form  action="{{ URL::to('schools')}}" method="POST" id="frm-insert_school" data-toggle="validator">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
 
@@ -164,7 +164,7 @@
 								</div>
 									<br/>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									<button type="button" id="cancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 									<input type="submit" class="btn btn-success" value="Guardar" />
 								</div>
 							</form>
@@ -185,7 +185,7 @@
 								<h4 class="modal-title" id="myModalLabel">Agregar registro</h4>
 							</div>
 							<div class="modal-body">
-								<form  action="{{ URL::to('school')}}" method="POST" id="frm-update_school" onsubmit="return validaCamposUpdate();">
+								<form  action="{{ URL::to('school')}}" method="POST" id="frm-update_school" data-toggle="validator">
 									<input type="hidden" name="_method" value="PUT">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="input-group">
@@ -251,7 +251,7 @@
 										<br/>
 											<input type="hidden" name="id" id="school_update_id"/>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+										<button type="button" id="cancelarUpdate" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 										<input type="submit" class="btn btn-success" value="Guardar" />
 									</div>
 							</form>
@@ -278,6 +278,9 @@
  */
 			$(document).ready(function(){
 				/**Llena el DataTable */
+				validar();
+				var validator;
+				var validatorUpdate;
 				dataTableFees();
 				getLevel();
 				getDistrict();
@@ -293,7 +296,19 @@
 				getModalityEdit();
 				getWorkingDayEdit();
 				getPlanEdit();
+				
 
+			});
+
+			$("#cancelar").on("click",function(e){
+				e.preventDefault();
+				validator.resetForm();
+				$('#frm-insert').trigger("reset");
+			});
+			$("#cancelarUpdate").on("click",function(e){
+				e.preventDefault();
+				validatorUpdate.resetForm();
+				$('#frm-update').trigger("reset");
 			});
 			/**Inicio del DataTable de fees */
 			function dataTableFees()
@@ -480,65 +495,7 @@
 			});
 
 /**Función que valida que no existan campos vacíos en el modal #add_new_fee_modal */
-function validaCamposCreate(){
 
-		var code	 			= $("#code").val();
-		var name 	 			= $("#name").val();
-		var level 	 	 		= $("#level_id").val();
-		var district			= $("#school_district_id").val();
-		var area				= $("#area_id").val();
-		var classification	 	= $("#classification_id").val();
-		var modality	 		= $("#modality_id").val();
-		var working	 			= $("#working_day_id").val();
-		var address				= $("#address").val();
-		var plan				= $("#plan_id").val();
-		//validamos campos
-		if($.trim(code) == ""){
-		toastr.error("No ha ingresado el código","Aviso!");
-			return false;
-		}
-		if($.trim(name) == ""){
-		toastr.error("No ha ingresado un nombre","Aviso!");
-			return false;
-		}
-		if($.trim(level) == ""){
-		toastr.error("No ha seleccionado el nivel","Aviso!");
-			return false;
-		}
-		if($.trim(district) == ""){
-		toastr.error("No ha seleccionado el distrito","Aviso!");
-			return false;
-		}
-
-		if($.trim(area) == ""){
-		toastr.error("No ha seleccionado el área","Aviso!");
-			return false;
-		}
-
-		if($.trim(classification) == ""){
-		toastr.error("No ha seleccionado la clasificación","Aviso!");
-			return false;
-		}
-
-		if($.trim(modality) == ""){
-		toastr.error("No ha seleccionado la modalidad","Aviso!");
-			return false;
-		}
-		if($.trim(working) == ""){
-		toastr.error("No ha seleccionado la jornada","Aviso!");
-			return false;
-		}
-		if($.trim(address) == ""){
-		toastr.error("No ha ingresado la dirección","Aviso!");
-			return false;
-		}
-		if($.trim(plan) == ""){
-		toastr.error("No ha seleccionado el plan","Aviso!");
-			return false;
-		}
-
-
-	}
 
  		//Esta función se utiliza para cargar los datos del dropdown list de tipo de niveles
 			function getLevelEdit(vid){
@@ -687,65 +644,6 @@ function validaCamposCreate(){
 
 
 /**Función que valida que no existan campos vacíos en el modal #update_fee_modal */
-function validaCamposUpdate(){
-
-		var code	 			= $("#update_code").val();
-		var name 	 			= $("#update_name").val();
-		var level 	 	 		= $("#update_level_id").val();
-		var district			= $("#update_school_district_id").val();
-		var area				= $("#update_area_id").val();
-		var classification	 	= $("#update_classification_id").val();
-		var modality	 		= $("#update_modality_id").val();
-		var working	 			= $("#update_working_day_id").val();
-		var address				= $("#update_address").val();
-		var plan				= $("#update_plan_id").val();
-		//validamos campos
-		if($.trim(code) == ""){
-		toastr.error("No ha ingresado el código","Aviso!");
-			return false;
-		}
-		if($.trim(name) == ""){
-		toastr.error("No ha ingresado un nombre","Aviso!");
-			return false;
-		}
-		if($.trim(level) == ""){
-		toastr.error("No ha seleccionado el nivel","Aviso!");
-			return false;
-		}
-		if($.trim(district) == ""){
-		toastr.error("No ha seleccionado el distrito","Aviso!");
-			return false;
-		}
-
-		if($.trim(area) == ""){
-		toastr.error("No ha seleccionado el área","Aviso!");
-			return false;
-		}
-
-		if($.trim(classification) == ""){
-		toastr.error("No ha seleccionado la clasificación","Aviso!");
-			return false;
-		}
-
-		if($.trim(modality) == ""){
-		toastr.error("No ha seleccionado la modalidad","Aviso!");
-			return false;
-		}
-		if($.trim(working) == ""){
-		toastr.error("No ha seleccionado la jornada","Aviso!");
-			return false;
-		}
-		if($.trim(address) == ""){
-		toastr.error("No ha ingresado la dirección","Aviso!");
-			return false;
-		}
-		if($.trim(plan) == ""){
-		toastr.error("No ha seleccionado el plan","Aviso!");
-			return false;
-		}
-
-
-	}
 
 	//-------------Eliminar Diente-------------
 
@@ -812,6 +710,187 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 				}
 			});
 		});
+
+	function validar() {
+			jQuery.validator.addMethod("lettersonly", function(value, element) {
+				return this.optional(element) || /^[a-z\sÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]+$/i.test(value);
+			}, );
+			jQuery.validator.addMethod("phone", function(value, element) {
+				return this.optional(element) || /^[0-9/-]+$/i.test(value);
+			}, );
+			validator = $('#frm-insert_school').validate({
+				keyup: true,
+				rules: {
+					code: {
+						required: 		true,
+					},
+					name: {
+						required: 		true,
+					},
+					level_id: {
+						required: 		true,
+					},
+					school_district_id: {
+						required: 		true,
+					},
+					area_id: {
+						required: 		true
+					},
+					classification_id: {
+						required: 		true
+					},
+					working_day_id: {
+						required: 		true
+					},
+					address: {
+						required: 		true
+					},
+
+				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
+				messages: {
+					code: {
+						required: 		'Por favor, ingrese el código de la escuela.',
+					},
+					name: {
+						required: 		'El nombre de la escuela es requerido',
+					},
+					level_id: {
+						required: 		'Seleccione un nivel',
+					},
+					school_district_id: {
+						required: 		'Seleccione un distrito escolar',
+					},
+					area_id: {
+						required: 		'Seleccione un area'
+					},
+					classification_id: {
+						required: 		'Seleccione la clasificación de la escuela'
+					},
+					working_day_id: {
+						required: 		'Seleccione la jornada laboral'
+					},
+					address: {
+						required: 		'Ingrese la dirección de la escuela'
+					},
+				},
+			});
+
+			validatorUpdate = $('#frm-update_school').validate({
+				keyup: true,
+				rules: {
+					code: {
+						required: 		true,
+					},
+					name: {
+						required: 		true,
+					},
+					level_id: {
+						required: 		true,
+					},
+					school_district_id: {
+						required: 		true,
+					},
+					area_id: {
+						required: 		true
+					},
+					classification_id: {
+						required: 		true
+					},
+					working_day_id: {
+						required: 		true
+					},
+					address: {
+						required: 		true
+					},
+
+				},
+
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
+				messages: {
+					code: {
+						required: 		'Por favor, ingrese el código de la escuela.',
+					},
+					name: {
+						required: 		'El nombre de la escuela es requerido',
+					},
+					level_id: {
+						required: 		'Seleccione un nivel',
+					},
+					school_district_id: {
+						required: 		'Seleccione un distrito escolar',
+					},
+					area_id: {
+						required: 		'Seleccione un area'
+					},
+					classification_id: {
+						required: 		'Seleccione la clasificación de la escuela'
+					},
+					working_day_id: {
+						required: 		'Seleccione la jornada laboral'
+					},
+					address: {
+						required: 		'Ingrese la dirección de la escuela'
+					},
+				},
+			});
+
+		}
+
 
 </script>
 @stop

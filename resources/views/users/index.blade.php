@@ -228,6 +228,7 @@
 			getRolesEdit();
 			getPermissionsEdit();
 			check();
+			validar();
 
         });
 		function dataTableUsers()
@@ -486,6 +487,183 @@ function check(){
 					}
 					});
 				});
+
+
+/* Esta función se creo para hacer validaciones mas especificas, como cantidad de caracteres, si solo permite números entre otros,
+para hacer uso de ella es necesario descargar la librería jqueryvalidate.js  y la función debe ser llamada en el document ready*/
+		function validar () {
+			jQuery.validator.addMethod("lettersonly", function(value, element) {
+				return this.optional(element) || /^[a-z\sÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]+$/i.test(value);
+			}, );
+			jQuery.validator.addMethod("phoneguion", function(value, element) {
+				return this.optional(element) || /^[0-9\-]+$/i.test(value);
+			}, );
+			jQuery.validator.addMethod("pwcheck", function(value) {
+   					return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
+					&& /[a-z]/.test(value) // has a lowercase letter
+					&& /\d/.test(value) // has a digit
+				});
+		validator = $('#frm-user').validate({
+			 keyup: true,
+				rules: {
+					name: {
+						required: 		true,
+						lettersonly: 	true,
+						minlength: 		5,
+						maxlength: 		50,
+					},
+					email: {
+						required: 		true,
+						email:			true,
+						minlength: 		8,
+						maxlength: 		35,
+					},
+					password: {
+						required:		true,
+						minlength: 		6,
+						pwcheck: 		true,
+						// maxlength: 		15,
+					},
+					role_id: {
+						required: 		true
+					},
+					permission_id: {
+						required: 		true,
+					},
+					status: {
+						required: 		true,
+					}
+				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
+				messages: {
+					name: {
+						required: 		'Debe ingresar al menos un nombre y un apellido',
+						lettersonly: 	'Los nombres solo pueden contener letras',
+						minlength: 		'Un nombre válido tiene como mínimo 5 letras',
+						maxlength: 		'Un nombre válido tiene como máximo 50 letras',
+					},
+					email: {
+						required:		'Debe ingresar una dirección de correo electrónico',
+						email:			'Por favor ingrese una dirección de correo válida',
+						minlength: 		'Un correo electrónico válido tiene como mínimo 8 caracteres',
+						maxlength: 		'Supera el límite de 35 caracteres',
+					},
+					password: {
+						required: 		'Debe ingresar una contraseña',
+						minlength: 		'La contraseña debe tener como mínimo 6 caracteres',
+						pwcheck:        'Debe tener al menos una letra mayúscula, al menos un número y al menos un símbolo',
+					},
+					role_id: {
+						required: 		'Debe seleccionar un rol',
+					},
+					permission_id: {
+						required: 		'Debe seleccionar un permiso',
+					},
+					status: {
+						required: 		'Debe activar el estado del usuario'
+					}
+				 },
+			});
+			validatorUpdate = $('#frm-update_user').validate({
+				keyup: true,
+					rules: {
+						name: {
+							required: 		true,
+							lettersonly: 	true,
+							minlength: 		5,
+							maxlength: 		50,
+						},
+						email: {
+							required: 		true,
+							email:			true,
+							minlength: 		8,
+							maxlength: 		35,
+						},
+						role_id: {
+							required: 		true
+						},
+						permission_id: {
+							required: 		true,
+						}
+					},
+					debug: true,
+					errorClass: 'help-block',
+					validClass: 'success',
+					errorElement: "span",
+					highlight: function(element, errorClass, validClass){
+						if (!$(element).hasClass('novalidation')) {
+							$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+						}
+					},
+					unhighlight: function(element, errorClass, validClass){
+						if (!$(element).hasClass('novalidation')) {
+							$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+						}
+					},
+					errorPlacement: function (error, element) {
+						if (element.parent('.input-group').length) {
+							error.insertAfter(element.parent());
+						}
+						else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+							error.insertAfter(element.parent().parent());
+						}
+						else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+							error.appendTo(element.parent().parent());
+						}
+						else {
+							error.insertAfter(element);
+						}
+					},
+					messages: {
+						name: {
+							required: 		'Debe ingresar al menos un nombre y un apellido',
+							lettersonly: 	'Los nombres solo pueden contener letras',
+							minlength: 		'Un nombre válido tiene como mínimo 5 letras',
+							maxlength: 		'Un nombre válido tiene como máximo 50 letras',
+						},
+						email: {
+							required:		'Debe ingresar una dirección de correo electrónico',
+							email:			'Por favor ingrese una dirección de correo válida',
+							minlength: 		'Un correo electrónico válido tiene como mínimo 8 caracteres',
+							maxlength: 		'Supera el límite de 35 caracteres',
+						},
+						role_id: {
+							required: 		'Debe seleccionar un rol',
+						},
+						permission_id: {
+							required: 		'Debe seleccionar un permiso',
+						}
+					},
+				});
+		}
+
 
 
 </script>

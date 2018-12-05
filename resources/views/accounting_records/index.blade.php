@@ -99,7 +99,7 @@
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
 								-El nombre de los input y select deben ser igual nombre del campo en la BD.
 							 -->
-							<form  action="{{ URL::to('accounting_records')}}" method="POST" id="frm-insert">
+							<form  action="{{ URL::to('accounting_records')}}" method="POST" id="frm-insert" data-toggle="validator">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
 								<div  class="input-group ">
@@ -130,7 +130,7 @@
 								</div>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									<button type="button" id="cancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 									<input type="submit" class="btn btn-success" value="Guardar" />
 								</div>
 							</form>
@@ -155,7 +155,7 @@
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
 								 -->
 											<div class="modal-body">
-												<form  action="{{ URL::to('accounting_records')}}" method="POST" id="frm-update" onsubmit="return validateDataUpdate();">
+												<form  action="{{ URL::to('accounting_records')}}" method="POST" id="frm-update" data-toggle="validator">
 													<input type="hidden" name="_method" value="PUT">
 													<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -190,7 +190,7 @@
 														<input name="id" type="hidden" id="update_id"  placeholder="" class=""/>
 
 														<div class="modal-footer">
-															<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+															<button type="button" id="cancelarUpdate" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 															<input type="submit" class="btn btn-success" value="Actualizar" />
 														</div>
 												</form>
@@ -236,7 +236,7 @@
 											<input name="id" type="hidden" id="show_id"  placeholder="" class=""/>
 
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+												<button type="button" id="cancelarUpdate" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 												<input type="submit" class="btn btn-success" value="Show" />
 											</div>
 										</form>
@@ -252,7 +252,22 @@
 
 
 @section('css')
-
+<style>
+			
+			.help-block {
+			display: run-in;
+			color: #ff0000;
+			}
+			input.error {
+			border:1px dotted red;
+			}
+			.modal-header{
+					border-radius: 15px;
+			}
+			.modal-content{
+			border-radius: 15px;
+			}
+		</style>
 
 @stop
 
@@ -270,8 +285,23 @@
 				/**Llena el select #affiliate_id del modal #add_new_accounting_record_modal */
 				getRecordTypeEdit();
 				/**Contiene maskaras para inputs */
-				mask();
+				validar();
+				var validator;
+				var validatorUpdate;
 
+
+			});
+
+			$("#cancelar").on("click",function(e){
+				e.preventDefault();
+				validator.resetForm();
+				$('#frm-insert').trigger("reset");
+
+			});
+			$("#cancelar").on("click",function(e){
+				e.preventDefault();
+				validator.resetForm();
+				$('#frm-update').trigger("reset");
 
 			});
 			/**Inicio del DataTable de accounting_records */
@@ -579,66 +609,155 @@
 
 			});
 /**Función que valida que no existan campos vacíos en el modal #add_new_accounting_record_modal */
-function validateDataCreate(){
 
-		var description_create	 = $("#description").val();
-		var amount_create 	 	 = $("#amount").val();
-		var date_create			 = $("#date").val();
-		var record_type_id_create	 = $("#record_type_id").val();
-		//validamos campos
-		if($.trim(description_create) == ""){
-		toastr.error("No ha ingresado una description","Aviso!");
-			return false;
-		}
-		if($.trim(amount_create) == ""){
-		toastr.error("No ha ingresado la cantidad","Aviso!");
-			return false;
-		}
-		if($.trim(date_create	) == ""){
-		toastr.error("No ha ingresado fecha","Aviso!");
-			return false;
-		}
-
-		if($.trim(record_type_id_create) == ""){
-		toastr.error("No ha seleccionado el tipo de registro","Aviso!");
-			return false;
-		}
-
-}
 
 /**Función que valida que no existan campos vacíos en el modal #update_accounting_record_modal */
-function validateDataUpdate(){
+function validar() {
+			jQuery.validator.addMethod("lettersonly", function(value, element) {
+				return this.optional(element) || /^[a-z\sÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]+$/i.test(value);
+			}, );
+			jQuery.validator.addMethod("phone", function(value, element) {
+				return this.optional(element) || /^[0-9/-]+$/i.test(value);
+			}, );
+			validator = $('#frm-insert').validate({
+				keyup: true,
+				rules: {
+					description: {
+						required: 		true,
+					},
+					amount: {
+						required: 		true,
+						number:			true,
 
-		var description_update	     = $("#update_description").val();
-		var amount_update 	         = $("#update_amount").val();
-		var date_update		         = $("#update_date").val();
-		var record_type_id_update	 = $("#update_record_type_id").val();
-		//validamos campos
-		if($.trim(description_update) == ""){
-		toastr.error("No ha ingresado una descripción","Aviso!");
-			return false;
-		}
-		if($.trim(amount_update) == ""){
-		toastr.error("No ha ingresado la cantidad","Aviso!");
-			return false;
-		}
-		if($.trim(date_update) == ""){
-		toastr.error("No ha ingresado fecha","Aviso!");
-			return false;
-		}
+					},
+					date: {
+						required: 		true,
 
-		if($.trim(record_type_id_update) == ""){
-		toastr.error("No ha seleccionado el tipo de registro","Aviso!");
-			return false;
-		}
+					},
 
-}
+					record_type_id: {
+						required: 		true
+					},
+				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
+				messages: {
+					description: {
+						required: 		'Por favor, ingrese la descripción del registro contable',
+					},
+					amount: {
+						required: 		'Por favor, ingrese el monto de la cuota voluntaria',
+						number:			'Se aceptan solo números',
+					},
+					date: {
+						required:		'Por favor, ingrese una fecha',
+
+					},
+					record_type_id: {
+						required: 		'Por favor, seleccione el tipo de registro contable',
+					},
+				},
+			});
+
+			validatorUpdate = $('#frm-update').validate({
+				keyup: true,
+				rules: {
+					description: {
+						required: 		true,
+					},
+					amount: {
+						required: 		true,
+						number:			true,
+
+					},
+					date: {
+						required: 		true,
+
+					},
+
+					record_type_id: {
+						required: 		true
+					},
+				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
+				messages: {
+					description: {
+						required: 		'Por favor, ingrese la descripción del registro contable',
+					},
+					amount: {
+						required: 		'Por favor, ingrese el monto de la cuota voluntaria',
+						number:			'Se aceptan solo números',
+					},
+					date: {
+						required:		'Por favor, ingrese una fecha',
+
+					},
+					record_type_id: {
+						required: 		'Por favor, seleccione el tipo de registro contable',
+					},
+				},
+			});
+
+		}
 
 /**Máscara para el input de monto */
-function mask(){
-	$('#amount').mask('00.00', {reverse: true});
-	$('#update_amount').mask('00.00', {reverse: true});
-}
+// function mask(){
+// 	$('#amount').mask('00.00', {reverse: true});
+// 	$('#update_amount').mask('00.00', {reverse: true});
+// }
 
 
 

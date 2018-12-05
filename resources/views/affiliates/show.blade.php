@@ -385,9 +385,9 @@
                         </div>
                 </div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
-					<button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
-					<button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
+					<button type="button" id="cancelar" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
+					<button type="button" id="anterior" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
+					<button type="button" id="siguiente" class="btn btn-success js-btn-step" data-orientation="next"></button>
 				</div>
 			</div>
 		</div>
@@ -403,7 +403,22 @@
 
 
 @section('css')
-
+<style>
+			
+			.help-block {
+			display: run-in;
+			color: #ff0000;
+			}
+			input.error {
+			border:1px dotted red;
+			}
+			.modal-header{
+					border-radius: 15px;
+			}
+			.modal-content{
+			border-radius: 15px;
+			}
+		</style>
 
 @stop
 
@@ -419,10 +434,31 @@
 				getCivilStateEdit();
 				getEthnicCommunityEdit();
 				getAffiliateStateEdit();
-				validar ();
-
+				validar();
+				var validator;
 
 			});
+			
+			$("#cancelar").on("click",function(e){
+				e.preventDefault();
+				validator.resetForm();
+				$('#frm-update_person').trigger("reset");
+				$('#frm-update_employee').trigger("reset");
+			});
+
+			$('#frm-update_person').bind('change keyup', function() {
+			if($(this).validate().checkForm()) {
+				$('#siguiente').attr('disabled', false);
+			} else {
+				$('#siguiente').attr('disabled', true);
+			} });
+
+			$('#frm-update_employee').bind('change keyup', function() {
+			if($(this).validate().checkForm()) {
+				$('#siguiente').attr('disabled', false);
+			} else {
+				$('#siguiente').attr('disabled', true);
+			} });
 
     function modalSteps(){
 				$('#update_affiliate_modal').modalSteps({
@@ -635,17 +671,17 @@ $('body').delegate(' #Edit', 'click', function(e){
 					}
 
 
-					function validar () {
+			function validar() {
 			jQuery.validator.addMethod("lettersonly", function(value, element) {
 				return this.optional(element) || /^[a-z\sÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]+$/i.test(value);
 			}, );
 			jQuery.validator.addMethod("phone", function(value, element) {
 				return this.optional(element) || /^[0-9/-]+$/i.test(value);
 			}, );
-			$('#frm-update_person').validate({
-				keyup: false,
+			validator = $('#frm-update_person').validate({
+				keyup: true,
 				rules: {
-					update_names: {
+					names: {
 						required: 		true,
 						lettersonly: 	true,
 						minlength: 		3,
@@ -653,100 +689,128 @@ $('body').delegate(' #Edit', 'click', function(e){
 
 
 					},
-					update_surnames: {
+					surnames: {
 						required: 		true,
 						lettersonly: 	true,
 						minlength: 		3,
 						maxlength: 		30,
 
 					},
-					update_email: {
+					email: {
 						email: 			true,
 
 					},
-					update_phone: {
+					phone: {
 						phone: 			true,
 						minlength: 		8,
 						maxlength: 		8,
 
 					},
 
-					update_department_id: {
+					department_id: {
 						required: 		true
 					},
 
-					update_municipality_id: {
+					municipality_id: {
 						required: 		true
 					},
 
-					update_address: {
+					address: {
 						required: 		true,
 						minlength: 		10,
 					},
-					update_birthdate:{
+					birthdate:{
 						required: 		true,
 						date: 			true,
 					},
 
-					update_gender_id: {
+					gender_id: {
 						required:		true,
 					},
 
-					update_civil_states_id: {
+					civil_states_id: {
 						required: 		true,
 					}
 				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
 				messages: {
-					update_names: {
-						required: 		function () {toastr.error('Por favor ingrese al menos un nombre')},
-						lettersonly: 	function () {toastr.error('Los nombres solo pueden contener letras')},
-						minlength: 		function () {toastr.error('Ingrese un nombre válido')},
-						maxlength: 		function () {toastr.error('Ingrese un nombre válido')},
+					names: {
+						required: 		'Por favor ingrese al menos un nombre',
+						lettersonly: 	'Los nombres solo pueden contener letras',
+						minlength: 		'Ingrese un nombre válido',
+						maxlength: 		'Ingrese un nombre válido',
 
 					},
-					update_surnames: {
-						required: 		function () {toastr.error('Por favor ingrese al menos un apellido')},
-						lettersonly: 	function () {toastr.error('Los apellidos solo pueden contener letras')},
-						minlength: 		function () {toastr.error('Ingrese un apellido válido')},
-						maxlength: 		function () {toastr.error('Ingrese un apellido válido')},
+					surnames: {
+						required: 		'Por favor ingrese al menos un apellido',
+						lettersonly: 	'Los apellidos solo pueden contener letras',
+						minlength: 		'Ingrese un apellido válido',
+						maxlength: 		'Ingrese un apellido válido',
 
 					},
-					update_email: {
-						email: 			function () {toastr.error('Ingrese un correo electrónico válido')},
+					email: {
+						email: 			'Ingrese un correo electrónico válido',
 					},
-					update_phone: {
-						phone: 			function () {toastr.error('Ingrese un número de teléfono válido')},
-						minlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
-						maxlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
+					phone: {
+						phone: 			'Ingrese un número de teléfono válido',
+						minlength: 		'El número de teléfono debe tener 8 dígitos',
+						maxlength: 		'El número de teléfono debe tener 8 dígitos',
 
 					},
-					update_department_id: {
-						required: 		function () {toastr.error('Debe elegir un departamento')},
+					department_id: {
+						required: 		'Debe elegir un departamento',
 					},
-					update_municipality_id: {
-						required: 		function () {toastr.error('Debe elegir un municipio')}
+					municipality_id: {
+						required: 		'Debe elegir un municipio',
 					},
-					update_address: {
-						required: 		function () {toastr.error('La dirección es requerida')},
-						minlength: 		function () {toastr.error('Ingrese una dirección válida')},
+					address: {
+						required: 		'La dirección es requerida',
+						minlength: 		'Ingrese una dirección válida',
 					},
-					update_birthdate: {
-						required: 		function () {toastr.error('Debe ingresa fecha de nacimiento')},
-						date: 			function () {toastr.error('Ingrese una fecha válida')}
+					birthdate: {
+						required: 		'Debe ingresa fecha de nacimiento',
+						date: 			'Ingrese una fecha válida',
 					},
-					update_gender_id: {
-						required: 		function () {toastr.error('Debe elegir un género')}
+					gender_id: {
+						required: 		'Debe elegir un género',
 					},
-					update_civil_states_id: {
-						required: 		function () {toastr.error('Debe elegir un estado civil')}
+					civil_states_id: {
+						required: 		'Debe elegir un estado civil',
 					}
 				},
 			});
 
 			$('#frm-update_employee').validate({
-				keyup: false,
+				keyup: true,
 				rules: {
-					update_dpi: {
+					dpi: {
 						required: 		true,
 						lettersonly: 	false,
 						minlength: 		13,
@@ -754,41 +818,41 @@ $('body').delegate(' #Edit', 'click', function(e){
 
 
 					},
-					update_nit: {
+					nit: {
 						required: 		true,
 						minlength: 		4,
 						maxlength: 		10,
 
 					},
-					update_scale_register: {
+					scale_register: {
 						required: 		true,
 
 					},
-					update_ethnic_community_id: {
+					ethnic_community_id: {
 						required: 		true,
 
 					},
 
 				},
 				messages: {
-					update_dpi: {
-						required: 		function () {toastr.error('Por favor ingrese DPI')},
-						lettersonly: 	function () {toastr.error('el DPI no puede incluir letras')},
-						minlength: 		function () {toastr.error('Ingrese un DPI válido')},
-						maxlength: 		function () {toastr.error('Ingrese un DPI válido')},
+					dpi: {
+						required: 		'Por favor ingrese DPI',
+						lettersonly: 	'el DPI no puede incluir letras',
+						minlength: 		'Ingrese un DPI válido',
+						maxlength: 		'Ingrese un DPI válido',
 
 					},
-					upate_nit: {
-						required: 		function () {toastr.error('Por favor ingrese NIT')},
-						minlength: 		function () {toastr.error('Ingrese un NIT válido')},
-						maxlength: 		function () {toastr.error('Ingrese un NIT válido')},
+					nit: {
+						required: 		'Por favor ingrese NIT',
+						minlength: 		'Ingrese un NIT válido',
+						maxlength: 		'Ingrese un NIT válido',
 
 					},
-					update_scale_register: {
-						required: 			function () {toastr.error('Ingrese el registro escalafonario')},
+					scale_register: {
+						required: 			'Ingrese el registro escalafonario',
 					},
-					update_ethnic_community_id: {
-						required: 			function () {toastr.error('Seleccione una comunidad étnica')},
+					ethnic_community_id: {
+						required: 			'Seleccione una comunidad étnica',
 					},
 				},
 			});

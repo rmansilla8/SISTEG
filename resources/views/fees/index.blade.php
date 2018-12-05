@@ -94,7 +94,7 @@
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
 								-El nombre de los input y select deben ser igual nombre del campo en la BD.
 							 -->
-							<form  action="{{ URL::to('fees')}}" method="POST" id="frm-insert" onsubmit="return validateDataCreate();">
+							<form  action="{{ URL::to('fees')}}" method="POST" id="frm-insert" >
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
 								<div  class="input-group ">
@@ -133,7 +133,7 @@
 								<br/>
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									<button type="button" id="cancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 									<input type="submit" class="btn btn-success" value="Guardar" />
 								</div>
 							</form>
@@ -158,7 +158,7 @@
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
 								 -->
 											<div class="modal-body">
-												<form  action="{{ URL::to('fees')}}" method="POST" id="frm-update" onsubmit="return validateDataUpdate();">
+												<form  action="{{ URL::to('fees')}}" method="POST" id="frm-update" ">
 													<input type="hidden" name="_method" value="PUT">
 													<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -200,7 +200,7 @@
 														<input name="id" type="hidden" id="update_id"  placeholder="" class=""/>
 
 														<div class="modal-footer">
-															<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+															<button type="button" id="cancelarUpdate" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 															<input type="submit" class="btn btn-success" value="Actualizar" />
 														</div>
 												</form>
@@ -217,7 +217,22 @@
 
 
 @section('css')
-
+		<style>
+			
+			.help-block {
+			display: run-in;
+			color: #ff0000;
+			}
+			input.error {
+			border:1px dotted red;
+			}
+			.modal-header{
+					border-radius: 15px;
+			}
+			.modal-content{
+			border-radius: 15px;
+			}
+		</style>
 
 @stop
 
@@ -239,8 +254,22 @@
 				getAffiliateEdit();
 				/**Contiene maskaras para inputs */
 				// mask();
+				validar();
+				var validator;
+				var validatorUpdate;
 
 			});
+			$("#cancelar").on("click",function(e){
+				e.preventDefault();
+				validator.resetForm();
+				$('#frm-insert').trigger("reset");
+			});
+			$("#cancelarUpdate").on("click",function(e){
+				e.preventDefault();
+				validatorUpdate.resetForm();
+				$('#frm-update').trigger("reset");
+			});
+
 			/**Inicio del DataTable de fees */
 			function dataTableFees()
 			{
@@ -621,71 +650,162 @@
 
 
 			});
-/**Función que valida que no existan campos vacíos en el modal #add_new_fee_modal */
-function validateDataCreate(){
 
-		var affiliate_create	 = $("#affiliate_id").val();
-		var fee_type_create 	 = $("#fee_type_id").val();
-		var amount_create 	 	 = $("#amount").val();
-		var date_create			 = $("#date").val();
-		var description_create	 = $("#detail").val();
-		//validamos campos
-		if($.trim(affiliate_create) == ""){
-		toastr.error("No ha seleccionado un afiliado","Aviso!");
-			return false;
-		}
-		if($.trim(fee_type_create) == ""){
-		toastr.error("No ha seleccionado un tipo de cuota","Aviso!");
-			return false;
-		}
-		if($.trim(amount_create) == ""){
-		toastr.error("No ha ingresado la cantidad","Aviso!");
-			return false;
-		}
-		if($.trim(date_create	) == ""){
-		toastr.error("No ha ingresado fecha","Aviso!");
-			return false;
-		}
-
-		if($.trim(description_create) == ""){
-		toastr.error("No ha ingresado descripción","Aviso!");
-			return false;
-		}
-
-}
 
 /**Función que valida que no existan campos vacíos en el modal #update_fee_modal */
-function validateDataUpdate(){
+function validar() {
+			jQuery.validator.addMethod("lettersonly", function(value, element) {
+				return this.optional(element) || /^[a-z\sÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]+$/i.test(value);
+			}, );
+			jQuery.validator.addMethod("phone", function(value, element) {
+				return this.optional(element) || /^[0-9/-]+$/i.test(value);
+			}, );
+			validator = $('#frm-insert').validate({
+				keyup: true,
+				rules: {
+					affiliate_id: {
+						required: 		true,
+					},
+					fee_type_id: {
+						required: 		true,
+					},
+					amount: {
+						required: 		true,
+						number:			true,
 
-		var affiliate_update	 = $("#update_affiliate_id").val();
-		var fee_type_update 	 = $("#update_fee_type_id").val();
-		var amount_update 	 = $("#update_amount").val();
-		var date_update		 = $("#update_date").val();
-		var description_update	 = $("#update_detail").val();
-		//validamos campos
-		if($.trim(affiliate_update) == ""){
-		toastr.error("No ha seleccionado un afiliado","Aviso!");
-			return false;
-		}
-		if($.trim(fee_type_update) == ""){
-		toastr.error("No ha seleccionado un tipo de cuota","Aviso!");
-			return false;
-		}
-		if($.trim(amount_update) == ""){
-		toastr.error("No ha ingresado la cantidad","Aviso!");
-			return false;
-		}
-		if($.trim(date_update) == ""){
-		toastr.error("No ha ingresado fecha","Aviso!");
-			return false;
+					},
+					date: {
+						required: 		true,
+
+					},
+
+					detail: {
+						required: 		true
+					},
+				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
+				messages: {
+					affiliate_id: {
+						required: 		'Por favor, seleccione un afiliado',
+					},
+					fee_type_id: {
+						required: 		'Por favor, seleccione un tipo de cuota',
+					},
+					amount: {
+						required: 		'Por favor, ingrese el monto de la cuota voluntaria',
+						number:			'Se aceptan solo números',
+					},
+					date: {
+						required:		'Por favor, ingrese una fecha',
+
+					},
+					detail: {
+						required: 		'Por favor, ingrese el detalle de la cuota voluntaria',
+					},
+				},
+			});
+
+			validatorUpdate = $('#frm-update').validate({
+				keyup: true,
+				rules: {
+					affiliate_id: {
+						required: 		true,
+					},
+					fee_type_id: {
+						required: 		true,
+					},
+					amount: {
+						required: 		true,
+						number:			true,
+
+					},
+					date: {
+						required: 		true,
+
+					},
+
+					detail: {
+						required: 		true
+					},
+				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
+				messages: {
+					affiliate_id: {
+						required: 		'Por favor, seleccione un afiliado',
+					},
+					fee_type_id: {
+						required: 		'Por favor, seleccione un tipo de cuota',
+					},
+					amount: {
+						required: 		'Por favor, ingrese el monto de la cuota voluntaria',
+						number:			'Se aceptan solo números',
+					},
+					date: {
+						required:		'Por favor, ingrese una fecha',
+
+					},
+					detail: {
+						required: 		'Por favor, ingrese el detalle de la cuota voluntaria',
+					},
+				},
+			});
+
 		}
 
-		if($.trim(description_update) == ""){
-		toastr.error("No ha ingresado descripción","Aviso!");
-			return false;
-		}
-
-}
 
 /**Máscara para el input de monto */
 // function mask(){
@@ -725,6 +845,10 @@ $('body').delegate('#tblfees #Show', 'click', function(e){
                 window.location.href = 'pdf/' + vid;
           // });
         });
+
+		
+
+
     </script>
 
 

@@ -249,7 +249,7 @@
 								<div class="col-sm-12 col-md-4">
 									<div class="input-group">
 										<span class="input-group-addon" id="syear">Año</span>
-										<input name="year_title" type="text" id="year_title" aria-describedby="yearHelp" placeholder="Ingrese los apellidos" class="form-control" aria-describedby="ssurnames"/>
+										<input name="year_title" type="text" id="year_title" aria-describedby="yearHelp" placeholder="Ingrese año" class="form-control" aria-describedby="ssurnames"/>
 									</div>
 									<small id="yearHelp" class="form-text text-muted">Año en el que obtuvo el título.</small>
 								</div>
@@ -357,9 +357,9 @@
 
 
 				<div class="modal-footer">
-					<button type="button" id="Cancel" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
-					<button type="button" id="Next" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
-					<button type="button" id="Complete" class="btn btn-success js-btn-step" data-orientation="next"></button>
+					<button type="button" id="cancelar" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
+					<button type="button" id="anterior" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
+					<button type="button" id="siguiente" class="btn btn-success js-btn-step" data-orientation="next"></button>
 				</div>
 				</div>
 			</div>
@@ -377,7 +377,22 @@
 	@stop
 
 	@section('css')
-
+		<style>
+			
+			.help-block {
+			display: run-in;
+			color: #ff0000;
+			}
+			input.error {
+			border:1px dotted red;
+			}
+			.modal-header{
+					border-radius: 15px;
+			}
+			.modal-content{
+			border-radius: 15px;
+			}
+		</style>
 
 	@stop
 
@@ -389,17 +404,20 @@
 				dataTableAffiliates();
 				modalSteps();
 				validar();
-
-
-				//getMunicipalities();
-
-
-
-				// getAffiliateStates()
-
-
 				check();
+				var validator;
+      			
 			});
+
+			$("#cancelar").on("click",function(e){
+				e.preventDefault();
+				validator.resetForm();
+				$('#frm-insert_people').trigger("reset");
+				$('#frm-insert_employees').trigger("reset");
+				$('#frm-insert_schools').trigger("reset");
+
+			});
+			
 
 		function dataTableAffiliates()
 			{
@@ -505,10 +523,12 @@
 				departmentMunicipality();
 				getGenders();
 				getCivilStates();
+				$('#siguiente').attr('disabled', true);
 			};
 			var callback2 = function(){
 				getEthnicCommunities();
 				getTitles();
+				$('#siguiente').attr('disabled', true);
 			}
 			var callback3 = function(){
 				getEmployeeTypes();
@@ -517,6 +537,27 @@
 				getSchools();
 				getLanguages();
 			}
+
+			$('#frm-insert_people').bind('change keyup', function() {
+			if($(this).validate().checkForm()) {
+				$('#siguiente').attr('disabled', false);
+			} else {
+				$('#siguiente').attr('disabled', true);
+			} });
+
+			$('#frm-insert_employees').bind('change keyup', function() {
+			if($(this).validate().checkForm()) {
+				$('#siguiente').attr('disabled', false);
+			} else {
+				$('#siguiente').attr('disabled', true);
+			} });
+
+			$('#frm-insert_schools').bind('change keyup', function() {
+			if($(this).validate().checkForm()) {
+				$('#siguiente').attr('disabled', false);
+			} else {
+				$('#siguiente').attr('disabled', true);
+			} });
 
 
 			function departmentMunicipality(){
@@ -676,8 +717,9 @@
 			jQuery.validator.addMethod("phone", function(value, element) {
 				return this.optional(element) || /^[0-9/-]+$/i.test(value);
 			}, );
-			$('#frm-insert_people').validate({
-				keyup: false,
+
+			validator= $('#frm-insert_people').validate({
+				keyup: true,
 				rules: {
 					names: {
 						required: 		true,
@@ -706,11 +748,11 @@
 					},
 
 					department_id: {
-						required: 		true
+						required: 		true,
 					},
 
 					municipality_id: {
-						required: 		true
+						required: 		true,
 					},
 
 					address: {
@@ -730,55 +772,84 @@
 						required: 		true,
 					}
 				},
+				debug: true,
+				errorClass: 'help-block',
+				validClass: 'success',
+				errorElement: "span",
+				onclick: true,
+				highlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           			 	$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        			}
+				},
+				unhighlight: function(element, errorClass, validClass){
+					if (!$(element).hasClass('novalidation')) {
+           				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        			}
+				},
+				errorPlacement: function (error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					}
+					else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+						error.insertAfter(element.parent().parent());
+					}
+					else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+						error.appendTo(element.parent().parent());
+					}
+					else {
+						error.insertAfter(element);
+					}
+				},
 				messages: {
 					names: {
-						required: 		function () {toastr.error('Por favor ingrese al menos un nombre')},
-						lettersonly: 	function () {toastr.error('Los nombres solo pueden contener letras')},
-						minlength: 		function () {toastr.error('Ingrese un nombre válido')},
-						maxlength: 		function () {toastr.error('Ingrese un nombre válido')},
+						required: 		'Por favor ingrese al menos un nombre',
+						lettersonly: 	'Los nombres solo pueden contener letras',
+						minlength: 		'Ingrese un nombre válido',
+						maxlength: 		'Ingrese un nombre válido',
 
 					},
 					surnames: {
-						required: 		function () {toastr.error('Por favor ingrese al menos un apellido')},
-						lettersonly: 	function () {toastr.error('Los apellidos solo pueden contener letras')},
-						minlength: 		function () {toastr.error('Ingrese un apellido válido')},
-						maxlength: 		function () {toastr.error('Ingrese un apellido válido')},
+						required: 		'Por favor ingrese al menos un apellido',
+						lettersonly: 	'Los apellidos solo pueden contener letras',
+						minlength: 		'Ingrese un apellido válido',
+						maxlength: 		'Ingrese un apellido válido',
 
 					},
 					email: {
-						email: 			function () {toastr.error('Ingrese un correo electrónico válido')},
+						email: 			'Ingrese un correo electrónico válido',
 					},
 					phone: {
-						phone: 			function () {toastr.error('Ingrese un número de teléfono válido')},
-						minlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
-						maxlength: 		function () {toastr.error('El número de teléfono debe tener 8 dígitos')},
+						phone: 			'Ingrese un número de teléfono válido',
+						minlength: 		'El número de teléfono debe tener 8 dígitos',
+						maxlength: 		'El número de teléfono debe tener 8 dígitos',
 
 					},
 					department_id: {
-						required: 		function () {toastr.error('Debe elegir un departamento')},
+						required: 		'Debe elegir un departamento',
 					},
 					municipality_id: {
-						required: 		function () {toastr.error('Debe elegir un municipio')}
+						required: 		'Debe elegir un municipio',
 					},
 					address: {
-						required: 		function () {toastr.error('La dirección es requerida')},
-						minlength: 		function () {toastr.error('Ingrese una dirección válida')},
+						required: 		'La dirección es requerida',
+						minlength: 		'Ingrese una dirección válida',
 					},
 					birthdate: {
-						required: 		function () {toastr.error('Debe ingresa fecha de nacimiento')},
-						date: 			function () {toastr.error('Ingrese una fecha válida')}
+						required: 		'Debe ingresa fecha de nacimiento',
+						date: 			'Ingrese una fecha válida'
 					},
 					gender_id: {
-						required: 		function () {toastr.error('Debe elegir un género')}
+						required: 		'Debe elegir un género',
 					},
 					civil_state_id: {
-						required: 		function () {toastr.error('Debe elegir un estado civil')}
+						required: 		'Debe elegir un estado civil',
 					}
 				},
 			});
 
 			$('#frm-insert_employees').validate({
-				keyup: false,
+				keyup: true,
 				rules: {
 					dpi: {
 						required: 		true,
@@ -821,41 +892,41 @@
 				},
 				messages: {
 					dpi: {
-						required: 		function () {toastr.error('Por favor ingrese DPI')},
-						lettersonly: 	function () {toastr.error('el DPI no puede incluir letras')},
-						minlength: 		function () {toastr.error('Ingrese un DPI válido')},
-						maxlength: 		function () {toastr.error('Ingrese un DPI válido')},
+						required: 		'Por favor ingrese DPI',
+						lettersonly: 	'el DPI no puede incluir letras',
+						minlength: 		'Ingrese un DPI válido',
+						maxlength: 		'Ingrese un DPI válido',
 
 					},
 					nit: {
-						required: 		function () {toastr.error('Por favor ingrese NIT')},
-						minlength: 		function () {toastr.error('Ingrese un NIT válido')},
-						maxlength: 		function () {toastr.error('Ingrese un NIT válido')},
+						required: 		'Por favor ingrese NIT',
+						minlength: 		'Ingrese un NIT válido',
+						maxlength: 		'Ingrese un NIT válido',
 
 					},
 					scale_register: {
-						required: 			function () {toastr.error('Ingrese el registro escalafonario')},
+						required: 			'Ingrese el registro escalafonario',
 					},
 					ethnic_community_id: {
-						required: 			function () {toastr.error('Seleccione una comunidad étnica')},
+						required: 			'Seleccione una comunidad étnica',
 					},
 					title_id: {
-						required: 		function () {toastr.error('Seleccione título académico')},
+						required: 		'Seleccione título académico',
 					},
 					year_title: {
-						required: 		function () {toastr.error('Ingrese año en que se obtuvo el título')},
-						minlength:		function () {toastr.error('Ingrese un año válido')},
-						maxlength: 		function () {toastr.error('Ingrese un año válido')},
+						required: 		'Ingrese año en que se obtuvo el título',
+						minlength:		'Ingrese un año válido',
+						maxlength: 		'Ingrese un año válido',
 					},
 					institution: {
-						required: 		function () {toastr.error('Ingrese institución donde se obtuvo el título')},
-						minlength: 		function () {toastr.error('Ingrese una institución educativa válida')},
+						required: 		'Ingrese institución donde se obtuvo el título',
+						minlength: 		'Ingrese una institución educativa válida',
 					},
 				},
 			});
 
 			$('#frm-insert_schools').validate({
-				keyup: false,
+				keyup: true,
 				rules: {
 					school_id: {
 						required: 		true,
@@ -869,6 +940,7 @@
 						required: 		true,
 						minlength: 		4,
 						maxlength: 		4,
+						lettersonly: 	false,
 					},
 					work_state_id: {
 						required: 		true,
@@ -876,35 +948,37 @@
 					},
 
 					employee_type_id: {
-						required: 		true
+						required: 		true,
 					},
 
 					language_id: {
-						required: 		true
+						required: 		true,
 
 					},
 
 				},
 				messages: {
 					school_id: {
-						required: 		function () {toastr.error('Por favor seleccione una escuela')},
+						required: 		'Por favor seleccione una escuela',
 
 					},
 					contract_id: {
-						required: 		function () {toastr.error('Por seleccione tipo de contratación')},
+						required: 		'Por seleccione tipo de contratación',
 
 					},
 					year_start: {
-						required: 			function () {toastr.error('Ingrese el año desde que inicio labores en el establecimiento')},
+						required: 			'Ingrese el año desde que inicio labores en el establecimiento',
+						minlength:			'El año debe contener 4 dígitos',
+						maxlength:			'El año debe contener solo 4 dígitos',
 					},
 					work_state_id: {
-						required: 			function () {toastr.error('Seleccione situación laboral')},
+						required: 			'Seleccione situación laboral',
 					},
 					employee_type_id: {
-						required: 		function () {toastr.error('Seleccione tipo de empleado')},
+						required: 		'Seleccione tipo de empleado',
 					},
 					language_id: {
-						required: 		function () {toastr.error('Seleccione idioma materno')},
+						required: 		'Seleccione idioma materno',
 
 					},
 
