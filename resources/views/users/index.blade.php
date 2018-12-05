@@ -429,6 +429,7 @@ function check(){
 						var $t = $('#tbl-users').DataTable();
 						$t.ajax.reload();
 						$('#update_user_modal').modal('hide');
+						toastr["success"]("Usuario actualizado exitosamente!", "Actualizado")
 					}
 					});
 				});
@@ -481,6 +482,7 @@ function check(){
 						var $t = $('#tbl-users').DataTable();
 						$t.ajax.reload();
 						$('#update_status_modal').modal('hide');
+						toastr["success"]("Estado de usuario actualizado exitosamente!", "Actualizado")
 					}
 					});
 				});
