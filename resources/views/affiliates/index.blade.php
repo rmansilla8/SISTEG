@@ -357,9 +357,9 @@
 
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
-					<button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
-					<button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
+					<button type="button" id="Cancel" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
+					<button type="button" id="Next" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
+					<button type="button" id="Complete" class="btn btn-success js-btn-step" data-orientation="next"></button>
 				</div>
 				</div>
 			</div>
