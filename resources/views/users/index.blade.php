@@ -122,7 +122,7 @@
 						</div>
 							<br/>
 						<div class="modal-footer">
-	                		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	                		<button type="button" id="cancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 							<input type="submit" class="btn btn-success" value="Guardar" />
 						</div>
 					</form>
@@ -177,7 +177,7 @@
 						<input type="hidden" name="id" id="update_user_id"/>
 
 						<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" id="cancelarUpdate" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						<input type="submit" class="btn btn-success" value="Actualizar" />
 					</div>
 				</form>
@@ -218,6 +218,23 @@
 	</div>
 @stop
 <!-- /Content Section -->
+@section('css')
+		<style>
+			.help-block {
+			display: run-in;
+			color: #ff0000;
+			}
+			input.error {
+			border:1px dotted red;
+			}
+			.modal-header{
+					border-radius: 15px;
+			}
+			.modal-content{
+			border-radius: 15px;
+			}
+		</style>
+@stop
 
 @push('js')
 	<script>
@@ -229,8 +246,21 @@
 			getPermissionsEdit();
 			check();
 			validar();
-
+			var validator;
+			var validatorUpdate;
         });
+		$("#cancelar").on("click",function(e){
+				e.preventDefault();
+				validator.resetForm();
+				$('#frm-user').trigger("reset");
+			});
+			$("#cancelarUpdate").on("click",function(e){
+				e.preventDefault();
+				validatorUpdate.resetForm();
+				$('#frm-update-user').trigger("reset");
+			});
+
+		
 		function dataTableUsers()
 			{
 				var t = $('#tbl-users').DataTable({
@@ -525,7 +555,7 @@ para hacer uso de ella es necesario descargar la librería jqueryvalidate.js  y 
 						// maxlength: 		15,
 					},
 					role_id: {
-						required: 		true
+						required: 		true,
 					},
 					permission_id: {
 						required: 		true,

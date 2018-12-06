@@ -19,7 +19,7 @@
                 </td>
                 <td>
                     <center>
-                        <h1>Padrón de Afiliados</h1>  
+                        <h1></h1>  
                         <h3>Sindicato de Trabajadores de la Educación de Guatemala</h3>
                         <h4>Sub seccional de Morales, Izabal</h4>
                     </center>

@@ -267,7 +267,21 @@
 
 
 @section('css')
-
+		<style>	
+			.help-block {
+			display: run-in;
+			color: #ff0000;
+			}
+			input.error {
+			border:1px dotted red;
+			}
+			.modal-header{
+					border-radius: 15px;
+			}
+			.modal-content{
+			border-radius: 15px;
+			}
+		</style>
 
 @stop
 

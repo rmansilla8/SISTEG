@@ -12,9 +12,7 @@
     <ol class="breadcrumb">
         <li class="active"><i class="fa fa-bank"></i>  Cuotas</li>
     </ol>
-	<style type="text/css">
 
-</style>
 @stop
 
 @section('content')
@@ -158,7 +156,7 @@
 								-onsubmit retorna la función que valida que ningún campo se encuentre vacío.
 								 -->
 											<div class="modal-body">
-												<form  action="{{ URL::to('fees')}}" method="POST" id="frm-update" ">
+												<form  action="{{ URL::to('fees')}}" method="POST" id="frm-update" >
 													<input type="hidden" name="_method" value="PUT">
 													<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -209,16 +207,14 @@
 									</div>
 								</div>
 				<!-- Fin del Modal #update_fee_modal -->
+<!--Fin del área de modales -->
 
 @stop
-
-<!--Fin del área de modales -->
 
 
 
 @section('css')
 		<style>
-			
 			.help-block {
 			display: run-in;
 			color: #ff0000;
@@ -233,7 +229,6 @@
 			border-radius: 15px;
 			}
 		</style>
-
 @stop
 
 @section('js')

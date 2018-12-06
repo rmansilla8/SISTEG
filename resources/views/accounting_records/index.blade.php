@@ -252,8 +252,7 @@
 
 
 @section('css')
-<style>
-			
+		<style>	
 			.help-block {
 			display: run-in;
 			color: #ff0000;
