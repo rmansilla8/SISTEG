@@ -11,6 +11,8 @@ use IntelGUA\Sisteg\Modality;
 use IntelGUA\Sisteg\Working_day;
 use IntelGUA\Sisteg\Plan;
 use IntelGUA\Sisteg\School;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 
 class SchoolsController extends Controller
@@ -22,51 +24,78 @@ class SchoolsController extends Controller
      */
     public function index()
     {
-         return view('schools.index');
+        return view('schools.index');
     }
 
     public function getSchools()
     {
-        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'working_day','plan')->get();
-        // return $schools;
+        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'working_day', 'plan')->get();
         return (compact('schools'));
     }
 
-     public function getLevel()
+    public function getLevel()
     {
-        $level = Level::orderby('id', 'DESC')->get();
-        return $level;
+        return $levels = Cache::remember('levels', 30, function () {
+            return DB::table('levels')->orderby('id', 'DESC')->get();
+
+        });
+        // $level = Level::orderby('id', 'DESC')->get();
+        // return $level;
     }
 
-      public function getDistrict()
+    public function getDistrict()
     {
-        $district = School_district::orderby('id', 'DESC')->get();
-        return $district;
+        return $school_districts = Cache::remember('school_districts', 30, function () {
+            return DB::table('school_districts')->orderby('id', 'DESC')->get();
+
+        });
+        // $district = School_district::orderby('id', 'DESC')->get();
+        // return $district;
     }
-      public function getArea()
+    public function getArea()
     {
-        $area = Area::orderby('id', 'DESC')->get();
-        return $area;
+        return $areas = Cache::remember('areas', 30, function () {
+            return DB::table('areas')->orderby('id', 'DESC')->get();
+
+        });
+        // $area = Area::orderby('id', 'DESC')->get();
+        // return $area;
     }
-      public function getClassification()
+    public function getClassification()
     {
-        $classification = Classification::orderby('id', 'DESC')->get();
-        return $classification;
+        return $classifications = Cache::remember('classifications', 30, function () {
+            return DB::table('classifications')->orderby('id', 'DESC')->get();
+
+        });
+        // $classification = Classification::orderby('id', 'DESC')->get();
+        // return $classification;
     }
-        public function  getModality()
+    public function getModality()
     {
-        $modality = Modality::orderby('id', 'DESC')->get();
-        return $modality;
+        return $modalities = Cache::remember('modalities', 30, function () {
+            return DB::table('modalities')->orderby('id', 'DESC')->get();
+
+        });
+        // $modality = Modality::orderby('id', 'DESC')->get();
+        // return $modality;
     }
-        public function getWorkingDay()
+    public function getWorkingDay()
     {
-        $working = Working_day::orderby('id', 'DESC')->get();
-        return $working;
+        return $working_days = Cache::remember('working_days', 30, function () {
+            return DB::table('working_days')->orderby('id', 'DESC')->get();
+
+        });
+        // $working = Working_day::orderby('id', 'DESC')->get();
+        // return $working;
     }
-        public function getPlan()
+    public function getPlan()
     {
-        $plan = Plan::orderby('id', 'DESC')->get();
-        return $plan;
+        return $plans = Cache::remember('plans', 30, function () {
+            return DB::table('plans')->orderby('id', 'DESC')->get();
+
+        });
+        // $plan = Plan::orderby('id', 'DESC')->get();
+        // return $plan;
     }
     /**
      * Show the form for creating a new resource.
@@ -86,7 +115,7 @@ class SchoolsController extends Controller
      */
     public function store(Request $request)
     {
-         if ($request->ajax()) {
+        if ($request->ajax()) {
 
             $school = School::create($request->all());
             return $school;
@@ -115,13 +144,14 @@ class SchoolsController extends Controller
     {
         if ($request->ajax()) {
 
-           $schools = School::with(
-               'level',
-               'school_district',
-               'area',
-               'classification',
-               'modality',
-               'working_day','plan'
+            $schools = School::with(
+                'level',
+                'school_district',
+                'area',
+                'classification',
+                'modality',
+                'working_day',
+                'plan'
 
             )->find($request->id);
             return response($schools);
@@ -135,7 +165,7 @@ class SchoolsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-  public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         if ($request->ajax()) {
 
@@ -152,7 +182,7 @@ class SchoolsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function destroy(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
         if ($request->ajax()) {
             $schols = School::findOrFail($id);

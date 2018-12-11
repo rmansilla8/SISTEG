@@ -22,6 +22,9 @@ class AccountingRecordsController extends Controller
 
     public function getAccountingRecords()
     {
+        /**
+         * Se obtienen todos los registros contables.
+         */
         $accounting_records = DB::table("accounting_records")
             ->join('record_types', 'record_types.id', '=', 'accounting_records.record_type_id')
             ->select('accounting_records.*', 'record_types.description as rdescription', DB::Raw('date_format(accounting_records.date,\'%d/%m/%Y\') as date'))

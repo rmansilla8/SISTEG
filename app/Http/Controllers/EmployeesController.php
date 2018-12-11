@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use IntelGUA\Sisteg\Ethnic_community;
 use IntelGUA\Sisteg\Employee_type;
 use IntelGUA\Sisteg\Title;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class EmployeesController extends Controller
 {
@@ -31,16 +33,24 @@ class EmployeesController extends Controller
 
     public function getEthnic_communities()
     {
-        $ethnic_community = Ethnic_community::orderby('id', 'DESC')->get();
-        return $ethnic_community;
+        return $ethnic_communities = Cache::remember('ethnic_communities', 30, function () {
+            return DB::table('ethnic_communities')->orderby('id', 'DESC')->get();
+
+        });
+        // $ethnic_community = Ethnic_community::orderby('id', 'DESC')->get();
+        // return $ethnic_community;
     }
 
 
 
     public function getTitles()
     {
-        $titles = Title::orderby('id', 'DESC')->get();
-        return $titles;
+        return $titles = Cache::remember('titles', 30, function () {
+            return DB::table('titles')->orderby('id', 'DESC')->get();
+
+        });
+        // $titles = Title::orderby('id', 'DESC')->get();
+        // return $titles;
     }
     /**
      * Store a newly created resource in storage.

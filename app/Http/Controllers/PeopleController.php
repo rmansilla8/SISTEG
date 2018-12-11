@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 use IntelGUA\Sisteg\Employee_title;
 use IntelGUA\Sisteg\Employee_school;
 use IntelGUA\Sisteg\Language_domain;
+use Illuminate\Support\Facades\Cache;
+
 
 class PeopleController extends Controller
 {
@@ -45,20 +47,32 @@ class PeopleController extends Controller
 
     public function getDepartments()
     {
-        $departments = Department::orderby('id', 'DESC')->get();
-        return $departments;
+        return $departments = Cache::remember('departments', 30, function () {
+            return DB::table('departments')->orderby('id', 'DESC')->get();
+
+        });
+        // $departments = Department::orderby('id', 'DESC')->get();
+        // return $departments;
     }
 
     public function getGenders()
     {
-        $genders = Gender::orderby('id', 'DESC')->get();
-        return $genders;
+        return $genders = Cache::remember('genders', 30, function () {
+            return DB::table('genders')->orderby('id', 'DESC')->get();
+
+        });
+        // $genders = Gender::orderby('id', 'DESC')->get();
+        // return $genders;
     }
 
     public function getCivilStates()
     {
-        $civil_states = Civil_state::orderby('id', 'DESC')->get();
-        return $civil_states;
+        return $civil_states = Cache::remember('civil_states', 30, function () {
+            return DB::table('civil_states')->orderby('id', 'DESC')->get();
+
+        });
+        // $civil_states = Civil_state::orderby('id', 'DESC')->get();
+        // return $civil_states;
     }
 
     /**

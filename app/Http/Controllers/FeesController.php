@@ -13,6 +13,7 @@ use IntelGUA\Sisteg\Person;
 use IntelGUA\Sisteg\Http\Requests\FeeRequest;
 use Illuminate\Support\Facades\View;
 use PDF;
+use Illuminate\Support\Facades\Cache;
 // use View;
 
 
@@ -45,8 +46,11 @@ class FeesController extends Controller
 
     public function getFeeType()
     {
-        $fee_types = Fee_type::orderby('id', 'DESC')->get();
-        return $fee_types;
+        return $fee_types = Cache::remember('fee_types', 30, function () {
+            return DB::table('fee_types')->orderby('id', 'DESC')->get();
+
+        });
+
     }
 
     public function getAffiliate()

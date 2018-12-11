@@ -68,17 +68,9 @@ class AffiliatesController extends Controller
 
     public function getAllAffiliates()
     {
-        /**join('tablaSecundaria', 'TablaSecundaria.id', '=', 'TablaPrincipal.TablaSecundaria_id') */
-        // $affiliates = DB::table('schools', 'titles')
-        //     ->join('employee_school', 'schools.id', '=', 'employee_school.school_id')
-        //     ->join('employees', 'employees.id', '=', 'employee_school.employee_id')
-        //     ->join('employee_title', 'employees.id', '=', 'employee_title.employee_id')
-        //     ->join('titles', 'titles.id', '=', 'employee_title.title_id')
-        //     ->join('affiliates', 'affiliates.id', '=', 'employees.id')
-        //     ->join('people', 'people.id', '=', 'employees.person_id')
-        //     ->join('genders', 'genders.id', '=', 'people.gender_id')
-        //     ->select('employees.dpi', 'titles.description AS title', 'schools.name AS school', 'affiliates.*', 'people.names', 'people.surnames', 'genders.description AS gender')
-        //     ->get();
+        /**
+         * Se obtiene el listado de todos los afiliados activos.
+         */
         $affiliates = DB::table('affiliates')
             ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
             ->join('people', 'people.id', '=', 'employees.person_id')
@@ -94,6 +86,9 @@ class AffiliatesController extends Controller
 
     public function pdfCensus()
     {
+        /**
+         * Se obtienen los datos de todos los afiliados para generar el padrón de afiliados en pdf.
+         */
         $affiliates = DB::table('affiliates')
             ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
             ->join('people', 'people.id', '=', 'employees.person_id')
@@ -104,13 +99,14 @@ class AffiliatesController extends Controller
             ->join('genders', 'genders.id', '=', 'people.gender_id')
             ->select('affiliates.*', 'employees.dpi', 'people.names', 'people.surnames', 'schools.name AS school', 'titles.description AS title', 'genders.description AS gender')
             ->get();
-
+        /**
+         * $fullDate obtiene la fecha actual.
+         * $nombre_padron guarda el nombre que se le dara al pdf.
+         */
         $fullDate = Carbon::now()->toDateString();
         $nombre_padron = sprintf('Padrón-de-afiliados-%s.pdf', $fullDate);
         $pdf = PDF::loadView('affiliates.pdfcensus', compact('affiliates'))->setPaper('legal', 'landscape');
         return $pdf->stream($nombre_padron);
-        //return view('affiliates.pdfcensus', compact('affiliates'));
-        //return (compact('affiliates'));
     }
 
     public function getAffiliateStates()
@@ -137,7 +133,6 @@ class AffiliatesController extends Controller
         $employee_title = Employee_title::with('title')->where('employee_id', '=', $employee->id)->get();
         $language_domain = Language_domain::with('language')->where('employee_id', '=', $employee->id)->get();
         return view('affiliates.show', compact(
-        //return (compact(
             'affiliate',
             'employee',
             'person',
@@ -145,19 +140,6 @@ class AffiliatesController extends Controller
             'employee_title',
             'language_domain'
         ));
-        // $affiliate = DB::table('affiliates')
-        //     ->join('employees', 'employees.id', '=', 'affiliates.employee_id')
-        //     ->join('people', 'people.id', '=', 'employees.person_id')
-        //     ->join('employee_schools', 'employees.id', '=', 'employee_schools.employee_id')
-        //     ->join('schools', 'schools.id', 'employee_schools.school_id')
-        //     ->join('employee_titles', 'employees.id', '=', 'employee_titles.employee_id')
-        //     ->join('titles', 'titles.id', '=', 'employee_titles.title_id')
-        //     ->join('genders', 'genders.id', '=', 'people.gender_id')
-        //     ->join('levels', 'levels.id', '=', 'schools.level_id')
-        //     ->where('affiliates.id', '=', $id)
-        //     ->select('affiliates.*', 'employees.*', 'people.*', 'schools.*', 'titles.description AS title', 'genders.description AS gender', 'levels.description AS level')
-        //     ->get();
-        // return (compact('affiliate'));
     }
 
     /**
@@ -169,7 +151,6 @@ class AffiliatesController extends Controller
     public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
-
             $affiliates = Affiliate::with(
                 'employee',
                 'employee.ethnic_community',
