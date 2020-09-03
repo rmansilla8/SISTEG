@@ -22,7 +22,7 @@ class CreateSchoolsTable extends Migration
             $table->integer('area_id')->unsigned();
             $table->integer('classification_id')->unsigned();
             $table->integer('modality_id')->unsigned();
-            $table->integer('working_day_id')->unsigned();
+            $table->integer('turn_id')->unsigned();
             $table->integer('plan_id')->unsigned();
             $table->string('address', 200);
             $table->timestamps();
@@ -51,7 +51,7 @@ class CreateSchoolsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('working_day_id')->references('id')->on('working_days')
+            $table->foreign('turn_id')->references('id')->on('turns')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

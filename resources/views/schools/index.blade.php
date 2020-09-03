@@ -148,7 +148,7 @@
 								<div class="input-group">
 									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
 									<span class="input-group-addon"><i class="fa  fa-sun-o"></i></span>
-									<select name="working_day_id" id="working_day_id" class="form-control"></select>
+									<select name="turn_id" id="turn_id" class="form-control"></select>
 								</div>
 								<br/>
 								<div class="input-group">
@@ -234,7 +234,7 @@
 									<div class="input-group">
 										<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
 										<span class="input-group-addon"><i class="fa  fa-sun-o"></i></span>
-										<select name="working_day_id" id="update_working_day_id" class="form-control"></select>
+										<select name="turn_id" id="update_turn_id" class="form-control"></select>
 									</div>
 									<br/>
 									<div class="input-group">
@@ -301,14 +301,14 @@
 				getArea();
 				getClassification();
 				getModality();
-				getWorkingDay();
+				getTurn();
 				getPlan();
 				getLevelEdit();
 				getDistrictEdit();
 				getAreaEdit();
 				getClassificationEdit();
 				getModalityEdit();
-				getWorkingDayEdit();
+				getTurnEdit();
 				getPlanEdit();
 				
 
@@ -377,7 +377,7 @@
 						{"data":	"area.name"},
 						{"data":	"classification.description"},
 						{"data":	"modality.description"},
-						{"data":	"working_day.description"},
+						{"data":	"turn.description"},
 						{"data":	"address"},
 						{"data":	"plan.name"},
 						/**Contiene los botones de actualizar, mostrar y eliminar */
@@ -457,11 +457,11 @@
 			/*
 			 * Permite cargar la lista de jornadas.
 			 */
-			function getWorkingDay(){
-			$.get('get-working_days', function(data){
-				$('#working_day_id').append($('<option>', {value: '', text: 'Seleccionar jornada'}));
+			function getTurn(){
+			$.get('get-turns', function(data){
+				$('#turn_id').append($('<option>', {value: '', text: 'Seleccionar jornada'}));
 					$.each(data,	function(i, value){
-					$('#working_day_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+					$('#turn_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 					});
 				});
 			}
@@ -577,15 +577,15 @@
 				});
 			}
 				//Esta función se utiliza para cargar los datos del dropdown list de tipo de jornadas
-				function getWorkingDayEdit(vid){
-				$('#update_working_day_id').empty();
-				$.get('../get-working_days', function(data){
+				function getTurnEdit(vid){
+				$('#update_turn_id').empty();
+				$.get('../get-turns', function(data){
 					$.each(data,	function(i, value){
 						//console.info(value);
 						if(value.id === vid ){
-							$('#update_working_day_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+							$('#update_turn_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
 						}
-						$('#update_working_day_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+						$('#update_turn_id').append($('<option >', {value: value.id, text: `${value.description}`}));
 					});
 				});
 			}
@@ -621,7 +621,7 @@
 			$('#frm-update_school').find('#update_area_id').val(data.area_id)
 			$('#frm-update_school').find('#update_classification_id').val(data.classification_id)
 			$('#frm-update_school').find('#update_modality_id').val(data.modality_id)
-			$('#frm-update_school').find('#update_working_day_id').val(data.working_day_id)
+			$('#frm-update_school').find('#update_turn_id').val(data.turn_id)
 			$('#frm-update_school').find('#update_address').val(data.address)
 			$('#frm-update_school').find('#update_plan_id').val(data.plan_id)
 			$('#frm-update_school').find('#school_update_id').val(data.id)
@@ -753,7 +753,7 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 					classification_id: {
 						required: 		true
 					},
-					working_day_id: {
+					turn_id: {
 						required: 		true
 					},
 					address: {
@@ -808,7 +808,7 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 					classification_id: {
 						required: 		'Seleccione la clasificación de la escuela'
 					},
-					working_day_id: {
+					turn_id: {
 						required: 		'Seleccione la jornada laboral'
 					},
 					address: {
@@ -838,7 +838,7 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 					classification_id: {
 						required: 		true
 					},
-					working_day_id: {
+					turn_id: {
 						required: 		true
 					},
 					address: {
@@ -894,7 +894,7 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 					classification_id: {
 						required: 		'Seleccione la clasificación de la escuela'
 					},
-					working_day_id: {
+					turn_id: {
 						required: 		'Seleccione la jornada laboral'
 					},
 					address: {

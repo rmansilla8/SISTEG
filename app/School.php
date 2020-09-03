@@ -14,7 +14,7 @@ class School extends Model
         'area_id',
         'classification_id',
         'modality_id',
-        'working_day_id',
+        'turn_id',
         'address',
         'plan_id',
     ];
@@ -49,9 +49,9 @@ class School extends Model
         return $this->belongsTo(Modality::class);
     }
 
-    public function working_day()
+    public function turn()
     {
-        return $this->belongsTo(Working_day::class);
+        return $this->belongsTo(Turn::class);
     }
 
     public function employees()

@@ -153,7 +153,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <p><strong>Jornada:</strong>  {{$schools->school->working_day->description}}</p>
+                                    <p><strong>Jornada:</strong>  {{$schools->school->turn->description}}</p>
                                 </div>
                                 <div class="col-md-4">
                                     <p><strong>Plan:</strong> {{$schools->school->plan->name}}</p>

@@ -65,7 +65,7 @@ class PeopleController extends Controller
         // return $genders;
     }
 
-    public function getCivilStates()
+    public function getCivilStatus()
     {
         return $civil_status = Cache::remember('civil_status', 30, function () {
             return DB::table('civil_status')->orderby('id', 'DESC')->get();

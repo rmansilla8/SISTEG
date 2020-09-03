@@ -8,7 +8,7 @@ use IntelGUA\Sisteg\School_district;
 use IntelGUA\Sisteg\Area;
 use IntelGUA\Sisteg\Classification;
 use IntelGUA\Sisteg\Modality;
-use IntelGUA\Sisteg\Working_day;
+use IntelGUA\Sisteg\Turn;
 use IntelGUA\Sisteg\Plan;
 use IntelGUA\Sisteg\School;
 use Illuminate\Support\Facades\Cache;
@@ -29,7 +29,7 @@ class SchoolsController extends Controller
 
     public function getSchools()
     {
-        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'working_day', 'plan')->get();
+        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'turn', 'plan')->get();
         return (compact('schools'));
     }
 
@@ -79,13 +79,13 @@ class SchoolsController extends Controller
         // $modality = Modality::orderby('id', 'DESC')->get();
         // return $modality;
     }
-    public function getWorkingDay()
+    public function getTurn()
     {
-        return $working_days = Cache::remember('working_days', 30, function () {
-            return DB::table('working_days')->orderby('id', 'DESC')->get();
+        return $turns = Cache::remember('turns', 30, function () {
+            return DB::table('turns')->orderby('id', 'DESC')->get();
 
         });
-        // $working = Working_day::orderby('id', 'DESC')->get();
+        // $working = Turn::orderby('id', 'DESC')->get();
         // return $working;
     }
     public function getPlan()
@@ -150,7 +150,7 @@ class SchoolsController extends Controller
                 'area',
                 'classification',
                 'modality',
-                'working_day',
+                'turn',
                 'plan'
 
             )->find($request->id);

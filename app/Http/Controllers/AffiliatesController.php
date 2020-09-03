@@ -18,7 +18,7 @@ use IntelGUA\Sisteg\Area;
 use IntelGUA\Sisteg\Classification;
 use IntelGUA\Sisteg\Modality;
 use IntelGUA\Sisteg\Plan;
-use IntelGUA\Sisteg\Working_day;
+use IntelGUA\Sisteg\Turn;
 use IntelGUA\Sisteg\Employee_title;
 use IntelGUA\Sisteg\Language_domain;
 use IntelGUA\Sisteg\Language;
@@ -128,7 +128,7 @@ class AffiliatesController extends Controller
         $person = Person::with('gender')->with('civil_status')->with('municipality.department')
             ->where('id', '=', $employee->person_id)->first();
         $employee_school = Employee_school::with('contract')->with('employee_type')->with('work_state')
-            ->with('school.level', 'school.area', 'school.classification', 'school.school_district.municipality.department', 'school.modality', 'school.working_day', 'school.plan')
+            ->with('school.level', 'school.area', 'school.classification', 'school.school_district.municipality.department', 'school.modality', 'school.turn', 'school.plan')
             ->where('employee_id', '=', $employee->id)->get();
         $employee_title = Employee_title::with('title')->where('employee_id', '=', $employee->id)->get();
         $language_domain = Language_domain::with('language')->where('employee_id', '=', $employee->id)->get();

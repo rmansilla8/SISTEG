@@ -521,7 +521,7 @@
 				getDepartments();
 				departmentMunicipality();
 				getGenders();
-				getCivilStates();
+				getCivilStatus();
 				$('#siguiente').attr('disabled', true);
 			};
 			var callback2 = function(){
@@ -607,7 +607,7 @@
 				}
 			}
 
-			function getCivilStates(){
+			function geuCivilStatus(){
 				if($('#civil_status_id').val()==null){
 				$.get('get-civil_status', function(data){
 					$('#civil_status_id').append($('<option>', {value: '', text: 'Seleccionar estado civil'}));

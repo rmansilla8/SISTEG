@@ -31,7 +31,7 @@ class SchoolsTest extends DuskTestCase
             $browser->select('area_id', '7');
             $browser->select('classification_id', '7');
             $browser->select('modality_id', '7');
-            $browser->select('working_day_id', '7');
+            $browser->select('turn_id', '7');
             $browser->select('plan_id', '7');
             $browser->value('#address', 'Barrio Nuevo');
             $browser->press('Guardar');

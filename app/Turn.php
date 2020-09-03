@@ -4,7 +4,7 @@ namespace IntelGUA\Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Working_day extends Model
+class Turn extends Model
 {
     protected $fillable = [
         'description',

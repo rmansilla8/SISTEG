@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWorkingDaysTable extends Migration
+class CreateTurnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWorkingDaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('working_days', function (Blueprint $table) {
+        Schema::create('turns', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description', 100)->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateWorkingDaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('working_days');
+        Schema::dropIfExists('turns');
     }
 }
