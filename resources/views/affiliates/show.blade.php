@@ -68,7 +68,7 @@
                     <p><strong>Teléfono:</strong> {{$person->phone}} </p>
                     <p><strong>Residencia:</strong> {{$person->address}}, {{$person->municipality->name}}, {{$person->municipality->department->name}} </p>
                     <p><strong>Genero:</strong> {{$person->gender->description}} </p>
-                    <p><strong>Estado Civil:</strong> {{$person->civil_state->description}} </p>
+                    <p><strong>Estado Civil:</strong> {{$person->civil_status->name}} </p>
                     <p><strong>Fecha de Nacimiento:</strong> <input type="date" value="{{$person->birthdate}}" readonly="readonly" style="border: 0; background: transparent;"/> </p>
 
                 </div>
@@ -329,8 +329,8 @@
 									<div class="col-sm-12 col-md-4">
 										<div class="input-group">
 											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-											<span class="input-group-addon" id="scivil_states">Estado Civil</span>
-											<select name="civil_state_id" id="update_civil_states_id" class="form-control" aria-describedby="sgender"></select>
+											<span class="input-group-addon" id="scivil_status">Estado Civil</span>
+											<select name="civil_status_id" id="update_civil_status_id" class="form-control" aria-describedby="sgender"></select>
 										</div>
                                 </div>
 								<input name="id" type="hidden" id="update_id" class="form-control"/>
@@ -513,7 +513,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 				 	$('#frm-update_person').find('#update_address').val(data.employee.person.address)
 				 	$('#frm-update_person').find('#update_birthdate').val(data.employee.person.birthdate)
 				 	$('#frm-update_person').find('#update_gender_id').val(data.employee.person.gender_id)
-				 	$('#frm-update_person').find('#update_civil_states_id').val(data.employee.person.civil_state_id)
+				 	$('#frm-update_person').find('#update_civil_status_id').val(data.employee.person.civil_status_id)
 				 	$('#frm-update_employee').find('#update_dpi').val(data.employee.dpi)
 				 	$('#frm-update_employee').find('#update_nit').val(data.employee.nit)
 				 	$('#frm-update_employee').find('#update_scale_register').val(data.employee.scale_register)
@@ -596,15 +596,15 @@ $('body').delegate(' #Edit', 'click', function(e){
  			}
 
 			function getCivilStateEdit(){
- 				$('#update_civil_states_id').empty();
- 				$.get('../get-civil_states/', function(data){
+ 				$('#update_civil_status_id').empty();
+ 				$.get('../get-civil_status/', function(data){
  					$.each(data,	function(i, value){
 						// console.log(value);
-						// console.log({{$person->civil_state_id}})
+						// console.log({{$person->civil_status_id}})
  						// if(value.id ===  {{$affiliate->id}}  ){
- 						// 	$('#update_civil_states_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
+ 						// 	$('#update_civil_status_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
  						// }
- 						$('#update_civil_states_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+ 						$('#update_civil_status_id').append($('<option >', {value: value.id, text: `${value.name}`}));
 
  					});
  				});
@@ -728,7 +728,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 						required:		true,
 					},
 
-					civil_states_id: {
+					civil_status_id: {
 						required: 		true,
 					}
 				},
@@ -801,7 +801,7 @@ $('body').delegate(' #Edit', 'click', function(e){
 					gender_id: {
 						required: 		'Debe elegir un género',
 					},
-					civil_states_id: {
+					civil_status_id: {
 						required: 		'Debe elegir un estado civil',
 					}
 				},

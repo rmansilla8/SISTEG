@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('get-departments', 'PeopleController@getDepartments');
         Route::get('get-municipalities/{department_id}', 'PeopleController@getMunicipalities');
         Route::get('get-genders', 'PeopleController@getGenders');
-        Route::get('get-civil_states', 'PeopleController@getCivilStates');
+        Route::get('get-civil_status', 'PeopleController@getCivilStates');
         Route::get('get-ethnic_communities', 'EmployeesController@getEthnic_communities');
         Route::get('get-titles', 'EmployeesController@getTitles');
 

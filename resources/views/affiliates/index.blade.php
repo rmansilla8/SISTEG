@@ -186,8 +186,8 @@
 									<div class="col-sm-12 col-md-5">
 										<div class="input-group">
 											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-											<span class="input-group-addon" id="scivil_state">Estado Civil</span>
-											<select name="civil_state_id" id="civil_state_id" class="form-control" aria-describedby="scivil_state"></select>
+											<span class="input-group-addon" id="scivil_status">Estado Civil</span>
+											<select name="civil_status_id" id="civil_status_id" class="form-control" aria-describedby="scivil_status"></select>
 										</div>
 									</div>
 								</div>
@@ -608,11 +608,11 @@
 			}
 
 			function getCivilStates(){
-				if($('#civil_state_id').val()==null){
-				$.get('get-civil_states', function(data){
-					$('#civil_state_id').append($('<option>', {value: '', text: 'Seleccionar estado civil'}));
+				if($('#civil_status_id').val()==null){
+				$.get('get-civil_status', function(data){
+					$('#civil_status_id').append($('<option>', {value: '', text: 'Seleccionar estado civil'}));
 					$.each(data,	function(i, value){
-						$('#civil_state_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+						$('#civil_status_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 					});
 				});
 				}
@@ -767,7 +767,7 @@
 						required:		true,
 					},
 
-					civil_state_id: {
+					civil_status_id: {
 						required: 		true,
 					}
 				},
@@ -841,7 +841,7 @@
 					gender_id: {
 						required: 		'Debe elegir un género',
 					},
-					civil_state_id: {
+					civil_status_id: {
 						required: 		'Debe elegir un estado civil',
 					}
 				},

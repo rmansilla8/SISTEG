@@ -15,7 +15,7 @@ class Person extends Model
         'municipality_id',
         'gender_id',
         'birthdate',
-        'civil_state_id'
+        'civil_status_id'
 
     ];
 
@@ -23,9 +23,9 @@ class Person extends Model
     {
         return $this->names . ' ' . $this->surnames;
     }
-    public function civil_state()
+    public function civil_status()
     {
-        return $this->belongsTo(Civil_state::class);
+        return $this->belongsTo(Civil_status::class);
     }
     public function gender()
     {

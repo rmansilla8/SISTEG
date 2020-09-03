@@ -16,6 +16,6 @@ $factory->define(IntelGUA\Sisteg\Person::class, function (Faker $faker) {
         'municipality_id'           =>rand(1, 6),  
         'gender_id'                 =>rand(1, 6),
         'birthdate'                 =>$faker->date($format = 'Y-m-d', $max='now'),
-        'civil_state_id'           =>rand(1, 6),
+        'civil_status_id'           =>rand(1, 6),
     ];
 });

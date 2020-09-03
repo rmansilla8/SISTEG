@@ -23,13 +23,13 @@ class CreatePeopleTable extends Migration
             $table->integer('municipality_id')->unsigned();
             $table->integer('gender_id')->unsigned();
             $table->date('birthdate');
-            $table->integer('civil_state_id')->unsigned();
+            $table->integer('civil_status_id')->unsigned();
             $table->timestamps();
 
             /**
              * *Area de las Llaves foraneas
              */
-            $table->foreign('civil_state_id')->references('id')->on('civil_states')
+            $table->foreign('civil_status_id')->references('id')->on('civil_status')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

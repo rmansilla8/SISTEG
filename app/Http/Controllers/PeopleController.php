@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use IntelGUA\Sisteg\Municipality;
 use IntelGUA\Sisteg\Department;
 use IntelGUA\Sisteg\Gender;
-use IntelGUA\Sisteg\Civil_state;
+use IntelGUA\Sisteg\civil_status;
 use IntelGUA\Sisteg\Person;
 use IntelGUA\Sisteg\Employee;
 use IntelGUA\Sisteg\Affiliate;
@@ -67,12 +67,12 @@ class PeopleController extends Controller
 
     public function getCivilStates()
     {
-        return $civil_states = Cache::remember('civil_states', 30, function () {
-            return DB::table('civil_states')->orderby('id', 'DESC')->get();
+        return $civil_status = Cache::remember('civil_status', 30, function () {
+            return DB::table('civil_status')->orderby('id', 'DESC')->get();
 
         });
-        // $civil_states = Civil_state::orderby('id', 'DESC')->get();
-        // return $civil_states;
+        // $civil_status = civil_status::orderby('id', 'DESC')->get();
+        // return $civil_status;
     }
 
     /**
@@ -101,7 +101,7 @@ class PeopleController extends Controller
                 $person->municipality_id = $request->input('municipality_id');
                 $person->gender_id = $request->input('gender_id');
                 $person->birthdate = $request->input('birthdate');
-                $person->civil_state_id = $request->input('civil_state_id');
+                $person->civil_status_id = $request->input('civil_status_id');
                 $person->save();
 
 
@@ -225,7 +225,7 @@ class PeopleController extends Controller
                 $person->municipality_id = $request->input('municipality_id');
                 $person->gender_id = $request->input('gender_id');
                 $person->birthdate = $request->input('birthdate');
-                $person->civil_state_id = $request->input('civil_state_id');
+                $person->civil_status_id = $request->input('civil_status_id');
                 $person->save();
 
 

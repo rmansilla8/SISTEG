@@ -35,7 +35,7 @@ class RegisterAffiliateTest extends DuskTestCase
             $browser->value('#address', 'Barrio El Mitchal');
             $browser->value('#birthdate', '1986-01-01');
             $browser->select('gender_id', '7');
-            $browser->select('civil_state_id', '7');
+            $browser->select('civil_status_id', '7');
             $browser->press('Next');
             $browser->value('#dpi', '2589687514712');
             $browser->value('#nit', '56687482');

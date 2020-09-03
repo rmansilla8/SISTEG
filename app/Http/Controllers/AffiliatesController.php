@@ -125,7 +125,7 @@ class AffiliatesController extends Controller
     {
         $affiliate = Affiliate::where('id', '=', $id)->first();
         $employee = Employee::with('ethnic_community')->where('id', '=', $affiliate->employee_id)->first();
-        $person = Person::with('gender')->with('civil_state')->with('municipality.department')
+        $person = Person::with('gender')->with('civil_status')->with('municipality.department')
             ->where('id', '=', $employee->person_id)->first();
         $employee_school = Employee_school::with('contract')->with('employee_type')->with('work_state')
             ->with('school.level', 'school.area', 'school.classification', 'school.school_district.municipality.department', 'school.modality', 'school.working_day', 'school.plan')
@@ -155,7 +155,7 @@ class AffiliatesController extends Controller
                 'employee',
                 'employee.ethnic_community',
                 'employee.person',
-                'employee.person.civil_state',
+                'employee.person.civil_status',
                 'employee.person.gender',
                 'employee.person.municipality',
                 'employee.person.municipality.department'

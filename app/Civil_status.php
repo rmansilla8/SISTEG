@@ -4,10 +4,10 @@ namespace IntelGUA\Sisteg;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Civil_state extends Model
+class Civil_status extends Model
 {
     protected $fillable = [
-        'description',
+        'name',
     ];
 
     public function people()
