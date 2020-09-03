@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             MunicipalitiesTableSeeder::class,
             PlansTableSeeder::class,
             //StatusSchoolTableSeeder::class,
-            //TurnsTableSeeder::class,
+            TurnsTableSeeder::class,
 
         ]);
     }
