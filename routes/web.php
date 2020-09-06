@@ -44,8 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('get-permissions', 'UsersController@getPermissions');
         Route::put('status/{id}', 'UsersController@Status');
         Route::get('get-status', 'UsersController@getStatus');
-
     });
+    
     //Grupo de rutas al que solo el Admin y el registrador pueden acceder
     Route::group([
         'middleware' => ['permission:registrador'],
@@ -102,5 +102,7 @@ Route::group(['middleware' => ['auth']], function () {
         //Route::post('fees/{fee}', 'FeesController@destroy')->name('eliminar');
 
     });
+
+    
 
 });
