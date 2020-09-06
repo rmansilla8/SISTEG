@@ -16,7 +16,13 @@ Route::get('/', function () {
     return view('welcome');
 
 });
-
+// Route::resource('users', 'UsersController');
+// Route::get('get-users', 'UsersController@getUsers');
+//         Route::get('get-roles', 'UsersController@getRoles');
+//         Route::get('get-permissions', 'UsersController@getPermissions');
+//         Route::get('get-permissions', 'UsersController@getPermissions');
+//         Route::put('status/{id}', 'UsersController@Status');
+//         Route::get('get-status', 'UsersController@getStatus');
 
 Auth::routes();
 // Auth::user()->ability('admin', 'todos');
@@ -24,6 +30,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+    
 
 
     //Grupo de rutas al que solo el Admin puede acceder
