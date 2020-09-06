@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 });
 
-
-Auth::routes();
 // Auth::user()->ability('admin', 'todos');
+Auth::routes();
+
+
 // en las siguientes rutas si no esta logeado mandar a login
 Route::group(['middleware' => ['auth']], function () {
 
