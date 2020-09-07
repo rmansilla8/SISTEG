@@ -59,7 +59,7 @@ class LanguagesTableSeeder extends Seeder
                 'name'  =>  'Poqomam'
             ],
             [
-                'name'  =>  'Itzaj'''
+                'name'  =>  'Itzaj\''
             ],
             [
                 'name'  =>  'Ch\'orti\''
