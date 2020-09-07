@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             AreasTableSeeder::class,
             LanguagesTableSeeder::class,
             EthnicCommunitiesTableSeeder::class,
+            CivilStatusTableSeeder::class,
             //CyclesTablesSeeder::class,
             DepartmentsTableSeeder::class,
             GendersTableSeeder::class,
