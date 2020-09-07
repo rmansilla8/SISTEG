@@ -14,13 +14,13 @@ class LanguagesTableSeeder extends Seeder
     {
         DB::table('languages')->insert([
             [
-                'name'  =>  "K'iche'"
+                'name'  =>  'K\'iche\''
             ],
             [
                 'name'  =>  'Kaqchikel'
             ],
             [
-                'name'  =>  'Tz''utujil'
+                'name'  =>  'Tz\'utujil'
             ],
             [
                 'name'  =>  'Achi'
@@ -41,19 +41,19 @@ class LanguagesTableSeeder extends Seeder
                 'name'  =>  'Chuj'
             ],
             [
-                'name'  =>  'Popti''(Jakalteco)'
+                'name'  =>  'Popti\'(Jakalteco)'
             ],
             [
-                'name'  =>  'Q''anjob''al'
+                'name'  =>  'Q\'anjob\'al'
             ],
             [
                 'name'  =>  'Awakateko'
             ],
             [
-                'name'  =>  'Q''eqchi'''
+                'name'  =>  'Q\'eqchi\''
             ],
             [
-                'name'  =>  'Poqomchi'''
+                'name'  =>  'Poqomchi\''
             ],
             [
                 'name'  =>  'Poqomam'
@@ -62,7 +62,7 @@ class LanguagesTableSeeder extends Seeder
                 'name'  =>  'Itzaj'''
             ],
             [
-                'name'  =>  'Ch''orti'''
+                'name'  =>  'Ch\'orti\''
             ],
             [
                 'name'  =>  'Akateko'
