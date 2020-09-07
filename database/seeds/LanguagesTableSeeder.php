@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LanguagesTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class LanguagesTableSeeder extends Seeder
     {
         DB::table('languages')->insert([
             [
-                'name'  =>  'K''iche'''
+                'name'  =>  "K'iche'"
             ],
             [
                 'name'  =>  'Kaqchikel'
