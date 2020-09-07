@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class GendersSeeder extends Seeder
+class GendersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
