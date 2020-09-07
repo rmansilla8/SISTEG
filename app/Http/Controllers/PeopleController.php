@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use IntelGUA\Sisteg\Municipality;
 use IntelGUA\Sisteg\Department;
 use IntelGUA\Sisteg\Gender;
-use IntelGUA\Sisteg\civil_status;
+use IntelGUA\Sisteg\Civil_status;
 use IntelGUA\Sisteg\Person;
 use IntelGUA\Sisteg\Employee;
-use IntelGUA\Sisteg\Affiliate;
 use Illuminate\Support\Facades\DB;
 use IntelGUA\Sisteg\Employee_title;
 use IntelGUA\Sisteg\Employee_school;
 use IntelGUA\Sisteg\Language_domain;
 use Illuminate\Support\Facades\Cache;
+
 
 
 class PeopleController extends Controller

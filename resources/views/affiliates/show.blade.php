@@ -329,7 +329,7 @@
 									<div class="col-sm-12 col-md-4">
 										<div class="input-group">
 											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-											<span class="input-group-addon" id="scivil_status">Estado Civil</span>
+											<span class="input-group-addon" id="civil_status">Estado Civil</span>
 											<select name="civil_status_id" id="update_civil_status_id" class="form-control" aria-describedby="sgender"></select>
 										</div>
                                 </div>
@@ -431,7 +431,8 @@
 				getDepartmentEdit();
 				departmentMunicipality();
 				getGenderEdit();
-				getCivilStateEdit();
+				getCivilStatus();
+			    getCivilStatusEdit();
 				getEthnicCommunityEdit();
 				getAffiliateStateEdit();
 				validar();
@@ -595,7 +596,7 @@ $('body').delegate(' #Edit', 'click', function(e){
  				});
  			}
 
-			function getCivilStateEdit(){
+			function getCivilStatusEdit(){
  				$('#update_civil_status_id').empty();
  				$.get('../get-civil_status/', function(data){
  					$.each(data,	function(i, value){

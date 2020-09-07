@@ -607,7 +607,7 @@
 				}
 			}
 
-			function geuCivilStatus(){
+			function getCivilStatus(){
 				if($('#civil_status_id').val()==null){
 				$.get('get-civil_status', function(data){
 					$('#civil_status_id').append($('<option>', {value: '', text: 'Seleccionar estado civil'}));
