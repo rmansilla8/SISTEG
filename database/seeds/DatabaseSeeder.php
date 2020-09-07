@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             AreasTableSeeder::class,
             //CyclesTablesSeeder::class,
             DepartmentsTableSeeder::class,
+            GendersSeeder::class,
             LevelsTableSeeder::class,
             ModalitiesTableSeeder::class,
             MunicipalitiesTableSeeder::class,
