@@ -35,7 +35,7 @@ class CreateEmployeeSchoolsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('work_state_id')->references('id')->on('work_states')
+            $table->foreign('work_state_id')->references('id')->on('work_status')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
