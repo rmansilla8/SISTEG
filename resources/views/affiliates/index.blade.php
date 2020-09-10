@@ -8,7 +8,7 @@
     </h1>
 	<!--
 		Migas de pan con icono
-	 -->
+	-->
     <ol class="breadcrumb">
         <li class="active"><i class="fa fa-users"></i>  Afiliados</li>
     </ol>
@@ -25,7 +25,7 @@
 	@endif
 	<!--
 		Comienzo de la caja donde se mostrará el datatable
-	 -->
+	-->
 <div class="box">
 		<!-- Encabezado de la caja -->
         <div class="box-header with-border">
@@ -41,7 +41,7 @@
                 </button> -->
 
             </div>
-       	</div>
+    </div>
         <div class="box-body">
             <!-- Cuerpo de la caja-->
 
@@ -61,7 +61,7 @@
             <!-- DataTable -->
 			<div class="row">
                 <div class="col-md-12">
-                   <table id="tbl-affiliates" class="display responsive no-wrap" width="100%" >
+                <table id="tbl-affiliates" class="display responsive no-wrap" width="100%" >
 					<thead>
 						<tr >
 							<th class="text-center">No.</th>
@@ -405,7 +405,6 @@
 				validar();
 				check();
 				var validator;
-      			
 			});
 
 			$("#cancelar").on("click",function(e){
@@ -421,9 +420,9 @@
 		function dataTableAffiliates()
 			{
 				/**
-				 El DataTable se coloca en una variable
-				 que se usara mas adelante para indexar los
-				 registros.
+				El DataTable se coloca en una variable
+				que se usara mas adelante para indexar los
+				registros.
 				*/
 				var t = $('#tbl-affiliates').DataTable({
 					/**Procesamiento del lado del servidor */
