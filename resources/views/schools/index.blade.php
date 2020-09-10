@@ -158,6 +158,12 @@
 								</div>
 								<br/>
 								<div class="input-group">
+									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+									<span class="input-group-addon"><i class="fa fa-list"></i></span>
+									<select name="cycle_id" id="cycle_id" class="form-control"></select>
+								</div>
+								<br/>
+								<div class="input-group">
 									<!-- <label for="name">Nombre</label> -->
 									<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
 									<input name="address" type="text" id="address" placeholder="Dirección" class="form-control"/>
@@ -303,6 +309,7 @@
 				getModality();
 				getTurn();
 				getPlan();
+				getCycle();
 				getLevelEdit();
 				getDistrictEdit();
 				getAreaEdit();
@@ -406,7 +413,7 @@
 			$.get('get-levels', function(data){
 				$('#level_id').append($('<option>', {value: '', text: 'Seleccionar nivel'}));
 					$.each(data,	function(i, value){
-					$('#level_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+					$('#level_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 					});
 				});
 			}
@@ -450,7 +457,7 @@
 			$.get('get-modalities', function(data){
 				$('#modality_id').append($('<option>', {value: '', text: 'Seleccionar modalidad'}));
 					$.each(data,	function(i, value){
-					$('#modality_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+					$('#modality_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 					});
 				});
 			}
@@ -461,7 +468,7 @@
 			$.get('get-turns', function(data){
 				$('#turn_id').append($('<option>', {value: '', text: 'Seleccionar jornada'}));
 					$.each(data,	function(i, value){
-					$('#turn_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+					$('#turn_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 					});
 				});
 			}
@@ -476,6 +483,16 @@
 					});
 				});
 			}
+
+			function getCycle(){
+				$.get('get-cycles', function(data){
+					$('#cycle_id').append($('<option>', {value: '', text: 'Seleccione el ciclo'}));
+						$.each(data, function (i, value){
+							$('#cycle_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+						});
+				});
+			}
+
 
 
 			//-----------Crear escuela --------
