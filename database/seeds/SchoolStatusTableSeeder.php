@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class StatusSchoolTableSeeder extends Seeder
+class SchoolStatusTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class StatusSchoolTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('status_schools')->insert([
+        DB::table('school_status')->insert([
             [
                 'name'  =>  'Activa'
             ],
