@@ -15,7 +15,7 @@ class TitlesTableSeeder extends Seeder
     {
         DB::table('titles')->insert([
             [
-                'description'   =>  'Maestra de Educación PrimariaUrbana'
+                'description'   =>  'Maestra de Educación Primaria Urbana'
             ],
             [
                 'description'   =>  'Maestro de Educación Primaria Urbana'
