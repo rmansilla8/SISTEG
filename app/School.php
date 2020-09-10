@@ -17,6 +17,7 @@ class School extends Model
         'turn_id',
         'address',
         'plan_id',
+        'cycle_id',
     ];
 
     public function level()
@@ -62,5 +63,10 @@ class School extends Model
     public function contracts()
     {
         return $this->belongsToMany(Contract::class);
+    }
+
+    public function cycles()
+    {
+        return $this->belongsTo(Cycle::class);
     }
 }

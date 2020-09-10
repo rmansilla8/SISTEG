@@ -64,6 +64,7 @@
 							<th class="text-center">Jornada</th>
 							<th class="text-center">Dirección</th>
 							<th class="text-center">Plan</th>
+							<th class="text-center">Ciclo</th>
 							<th class="text-center">Acciones</th>
 						</tr>
 					</thead>
@@ -158,6 +159,12 @@
 								</div>
 								<br/>
 								<div class="input-group">
+									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+									<span class="input-group-addon"><i class="fa fa-list"></i></span>
+									<select name="cycle_id" id="cycle_id" class="form-control"></select>
+								</div>
+								<br/>
+								<div class="input-group">
 									<!-- <label for="name">Nombre</label> -->
 									<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
 									<input name="address" type="text" id="address" placeholder="Dirección" class="form-control"/>
@@ -244,6 +251,12 @@
 									</div>
 									<br/>
 									<div class="input-group">
+										<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+										<span class="input-group-addon"><i class="fa fa-list"></i></span>
+										<select name="cycle_id" id="update_cycle_id" class="form-control"></select>
+									</div>
+									<br/>
+									<div class="input-group">
 										<!-- <label for="name">Nombre</label> -->
 										<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
 										<input name="address" type="text" id="update_address" placeholder="Dirección" class="form-control"/>
@@ -310,6 +323,8 @@
 				getModalityEdit();
 				getTurnEdit();
 				getPlanEdit();
+				getCycle();
+				getCycleEdit();
 				
 
 			});
@@ -380,6 +395,7 @@
 						{"data":	"turn.description"},
 						{"data":	"address"},
 						{"data":	"plan.name"},
+						{"data":	"cycle.name"}
 						/**Contiene los botones de actualizar, mostrar y eliminar */
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs'>"+
@@ -477,6 +493,17 @@
 				});
 			}
 
+			/**
+			 * Permite cargar la lista de Ciclos escolares
+			*/
+			function getCycle(){
+				$.get('get-cycles', function (data){
+					$('#cycle_id').append($('<option>', {value: '', text: 'Seleccionar Ciclo'}));
+						$.each(data, function(i, value){
+							$('#cycle_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+						});
+				});
+			}
 
 			//-----------Crear escuela --------
 			$.ajaxSetup({

@@ -29,8 +29,15 @@ class SchoolsController extends Controller
 
     public function getSchools()
     {
-        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'turn', 'plan')->get();
+        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'turn', 'plan', 'cycle')->get();
         return (compact('schools'));
+    }
+
+    public function getCycle()
+    {
+        return $cycles = Cache::remember('cycles', 30, function(){
+            return DB::table('cycles')->orderby('id', 'DESC')->get();
+        });
     }
 
     public function getLevel()

@@ -24,13 +24,17 @@ class CreateSchoolsTable extends Migration
             $table->integer('modality_id')->unsigned();
             $table->integer('turn_id')->unsigned();
             $table->integer('plan_id')->unsigned();
+            $table->integer('cycle_id')->unsigned();
             $table->string('address', 200);
             $table->timestamps();
 
             /**
              * *Area de las llaves foraneas
              */
-
+            $table->foreign('cycle_id')->references('id')->on('cycles')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+                
             $table->foreign('level_id')->references('id')->on('levels')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

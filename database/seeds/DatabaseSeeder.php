@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             TitlesTableSeeder::class,
             ContractsTableSeeder::class,
             ClassificationsTableSeeder::class,
-            //CyclesTablesSeeder::class,
+            CyclesTableSeeder::class,
             DepartmentsTableSeeder::class,
             GendersTableSeeder::class,
             LevelsTableSeeder::class,
