@@ -14,10 +14,10 @@ class SchoolStatusTableSeeder extends Seeder
     {
         DB::table('school_status')->insert([
             [
-                'name'  =>  'Activa'
+                'description'  =>  'Activa'
             ],
             [
-                'name'  =>  'Inactiva'
+                'description'  =>  'Inactiva'
             ]
         ]);
     }
