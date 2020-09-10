@@ -16,6 +16,9 @@ class WorkStatusTableSeeder extends Seeder
             [
                 'description'   =>  'Activo'
             ],
+            [
+                'description'   =>  'Inactivo'
+            ],
         ]);
     }
 }
