@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             CyclesTableSeeder::class,
             SchoolStatusTableSeeder::class,
             WorkStatusTableSeeder::class,
-            //CyclesTablesSeeder::class,
+            CyclesTablesSeeder::class,
             DepartmentsTableSeeder::class,
             GendersTableSeeder::class,
             LevelsTableSeeder::class,
