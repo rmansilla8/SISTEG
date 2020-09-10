@@ -52,9 +52,8 @@ class SchoolsController extends Controller
 
     public function getDistrict()
     {
-        return $school_districts = Cache::remember('school_districts', 30, function () {
+        return $school_districts = Cache::remember('school_districts', 1, function () {
             return DB::table('school_districts')->orderby('id', 'DESC')->get();
-
         });
         // $district = School_district::orderby('id', 'DESC')->get();
         // return $district;

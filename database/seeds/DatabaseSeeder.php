@@ -26,10 +26,8 @@ class DatabaseSeeder extends Seeder
             TitlesTableSeeder::class,
             ContractsTableSeeder::class,
             ClassificationsTableSeeder::class,
-            CyclesTableSeeder::class,
             SchoolStatusTableSeeder::class,
             WorkStatusTableSeeder::class,
-            CyclesTablesSeeder::class,
             DepartmentsTableSeeder::class,
             GendersTableSeeder::class,
             LevelsTableSeeder::class,
@@ -38,6 +36,7 @@ class DatabaseSeeder extends Seeder
             PlansTableSeeder::class,
             //StatusSchoolTableSeeder::class,
             TurnsTableSeeder::class,
+            CyclesTableSeeder::class,
 
         ]);
     }
