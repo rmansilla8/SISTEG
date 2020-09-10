@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             TitlesTableSeeder::class,
             ContractsTableSeeder::class,
             ClassificationsTableSeeder::class,
-            StatusSchoolTableSeeder::class,
+            SchoolStatusTableSeeder::class,
             WorkStatusTableSeeder::class,
             //CyclesTablesSeeder::class,
             DepartmentsTableSeeder::class,
