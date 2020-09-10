@@ -83,7 +83,7 @@ class LanguagesTableSeeder extends Seeder
                 'name'  =>  'Tektiteko'
             ],
             [
-                'name'  =>  'Ladino/no indigena'
+                'name'  =>  'Español'
             ],
             [
                 'name'  =>  'Chalchiteko'   
