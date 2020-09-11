@@ -64,6 +64,8 @@
 							<th class="text-center">Jornada</th>
 							<th class="text-center">Dirección</th>
 							<th class="text-center">Plan</th>
+							<th class="text-center">Ciclo</th>
+							<th class="text-center">Estado</th>
 							<th class="text-center">Acciones</th>
 						</tr>
 					</thead>
@@ -161,6 +163,12 @@
 									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
 									<span class="input-group-addon"><i class="fa fa-list"></i></span>
 									<select name="cycle_id" id="cycle_id" class="form-control"></select>
+								</div>
+								<br/>
+								<div class="input-group">
+									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+									<span class="input-group-addon"><i class="fa fa-list"></i></span>
+									<select name="school_status_id" id="school_status_id" class="form-control"></select>
 								</div>
 								<br/>
 								<div class="input-group">
@@ -310,6 +318,7 @@
 				getTurn();
 				getPlan();
 				getCycle();
+				getSchoolStatus();
 				getLevelEdit();
 				getDistrictEdit();
 				getAreaEdit();
@@ -387,6 +396,8 @@
 						{"data":	"turn.description"},
 						{"data":	"address"},
 						{"data":	"plan.name"},
+						{"data":	"cycle.name"},
+						{"data":	"school_status.description"},
 						/**Contiene los botones de actualizar, mostrar y eliminar */
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs'>"+
@@ -492,6 +503,16 @@
 						});
 				});
 			}
+
+			function getSchoolStatus(){
+				$.get('get-school_status', function(data){
+					$('#school_status_id').append($('<option>', {value: '', text: 'Seleccione el estado de la escuela'}));
+						$.each(data, function (i, value){
+							$('#school_status_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+						});
+				});
+			}
+			
 
 
 

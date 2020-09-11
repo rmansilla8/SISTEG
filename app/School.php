@@ -18,6 +18,7 @@ class School extends Model
         'address',
         'plan_id',
         'cycle_id',
+        'school_status_id'
     ];
 
     public function level()
@@ -68,5 +69,10 @@ class School extends Model
     public function cycles()
     {
         return $this->belongsTo(Cycle::class);
+    }
+
+    public function school_status()
+    {
+        return $this->belongsTo(School_status::class);
     }
 }

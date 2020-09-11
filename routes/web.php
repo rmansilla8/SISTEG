@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('get-turns', 'SchoolsController@getTurn');
         Route::get('get-plans', 'SchoolsController@getPlan');
         Route::get('get-cycles', 'SchoolsController@getCycle');
+        Route::get('get-school_status', 'SchoolsController@getSchoolStatus');
     });
 
     //Grupo de rutas al que solo el de finanzas y el admin pueden acceder

@@ -26,6 +26,7 @@ class CreateSchoolsTable extends Migration
             $table->integer('plan_id')->unsigned();
             $table->integer('cycle_id')->unsigned();
             $table->string('address', 200);
+            $table->integer('school_status_id')->unsigned();
             $table->timestamps();
 
             /**
@@ -60,6 +61,10 @@ class CreateSchoolsTable extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('plan_id')->references('id')->on('plans')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            
+            $table->foreign('school_status_id')->references('id')->on('plans')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

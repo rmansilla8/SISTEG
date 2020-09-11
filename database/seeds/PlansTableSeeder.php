@@ -14,10 +14,10 @@ class PlansTableSeeder extends Seeder
     {
         DB::table('plans')->insert([
             [
-                'name'  =>  'Monolingüe'
+                'name'  =>  'Diario'
             ],
             [
-                'name'  =>  'Bilingüe'
+                'name'  =>  'Fin de semana'
             ]
         ]);
     }

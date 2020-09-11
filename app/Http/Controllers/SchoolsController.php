@@ -36,14 +36,21 @@ class SchoolsController extends Controller
     public function getCycle()
     {
         return $cycles = Cache::remember('cycles', 30, function(){
-            return DB::table('cycles')->orderby('id', 'DESC')->get();
+            return DB::table('cycles')->orderby('id', 'ASC')->get();
+        });
+    }
+
+    public function getSchoolStatus()
+    {
+        return $school_status = Cache::remember('school_status', 30, function(){
+            return DB::table('school_status')->orderby('id', 'ASC')->get();
         });
     }
 
     public function getLevel()
     {
         return $levels = Cache::remember('levels', 30, function () {
-            return DB::table('levels')->orderby('id', 'DESC')->get();
+            return DB::table('levels')->orderby('id', 'ASC')->get();
 
         });
         // $level = Level::orderby('id', 'DESC')->get();
@@ -96,7 +103,7 @@ class SchoolsController extends Controller
     }
     public function getPlan()
     {
-        return $plans = Cache::remember('plans', 30, function () {
+        return $plans = Cache::remember('plans', 1, function () {
             return DB::table('plans')->orderby('id', 'DESC')->get();
 
         });
