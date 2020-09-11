@@ -360,7 +360,7 @@
 						[
 							/**Permite aumentar la prioridad de una columna */
 							{ responsivePriority: 1, targets: 0 },
-							{ responsivePriority: 2, targets: -2 },
+							{ responsivePriority: 2, targets: -1 },
 							{
 								/**Desactiva la búsqueda y el orden en la columna mas a la izquierda */
 								"searchable": false,
