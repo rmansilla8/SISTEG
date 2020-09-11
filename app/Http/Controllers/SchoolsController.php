@@ -29,7 +29,7 @@ class SchoolsController extends Controller
 
     public function getSchools()
     {
-        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'turn', 'plan', 'cycle')->get();
+        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'turn', 'plan', 'cycle', 'school_statuses')->get();
         return (compact('schools'));
     }
 
@@ -42,8 +42,8 @@ class SchoolsController extends Controller
 
     public function getSchoolStatus()
     {
-        return $school_status = Cache::remember('school_status', 30, function(){
-            return DB::table('school_status')->orderby('id', 'ASC')->get();
+        return $school_status = Cache::remember('school_statuses', 30, function(){
+            return DB::table('school_statuses')->orderby('id', 'ASC')->get();
         });
     }
 
