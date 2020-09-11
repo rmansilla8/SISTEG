@@ -38,8 +38,7 @@ class DatabaseSeeder extends Seeder
             //StatusSchoolTableSeeder::class,
             TurnsTableSeeder::class,
             CyclesTableSeeder::class,
-            School_districts::class,
-
+            SchoolDistrictsTableSeeder::class,
         ]);
     }
 }
