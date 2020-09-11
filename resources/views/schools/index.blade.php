@@ -86,7 +86,7 @@
 		<!--Área de los Modals-->
 			<!--Modal: #add_new_school_modal-->
 				<div class="modal fade" id="add_new_school_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -103,25 +103,62 @@
 							<form  action="{{ URL::to('schools')}}" method="POST" id="frm-insert_school" data-toggle="validator">
 								<!-- Token para proteger contra la falsificación de solicitudes entre sitios-->
 								{{ csrf_field() }}
-
-								<div class="input-group">
-									<!-- <label for="name">Nombre</label> -->
-									<span class="input-group-addon" id="number">#</span>
-									<input name="code" type="text" id="code" placeholder="Código de la escuela" class="form-control" aria-describedby="number"  />
-								</div>
-									<br/>
 								<div class="input-group">
 									<!-- <label for="name">Nombre</label> -->
 									<span class="input-group-addon"><i class="fa fa-bank "></i></span>
-									<input name="name" type="text" id="name" placeholder="Nombre de la escuela" class="form-control"/>
-								</div>
-									<br/>
-								<div  class="input-group ">
-									<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
-									<span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
-									<select name="level_id" id="level_id" class="form-control"></select>
+									<input name="name" type="text" id="name" placeholder="Ingrese el nombre del establecimiento" class="form-control"/>
 								</div>
 								<br/>
+								<div class="row">
+									<div class="col-md-4">
+										<div  class="input-group ">
+											<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
+											<span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+											<select name="level_id" id="level_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div  class="input-group ">
+											<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
+											<span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+											<select name="department_id" id="department_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div  class="input-group ">
+											<!-- <label for="affiliate_id">Nombre Afiliado</label> -->
+											<span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+											<select name="municipality_id" id="municipality_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-1 col-md-offset-2">
+										<input id="code_department" class="form-control" type="text" readonly>
+									</div>
+									<div class="col-md-1">
+										<input id="code_municipality" class="form-control" type="text" readonly>
+									</div>
+									<div class="col-md-5">
+										<div class="input-group">
+											<!-- <label for="name">Nombre</label> -->
+											<span class="input-group-addon" id="number">#</span>
+											<input name="code" type="text" id="code" placeholder="Código de la escuela" class="form-control" aria-describedby="number"  />
+										</div>
+										<br/>
+									</div>
+									<div>
+										<div class="col-md-1">
+											<input id="code_level" class="form-control" type="text" readonly>
+										</div>
+									</div>
+								</div>
+								
+								
+								
 
 								<div class="input-group">
 									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
@@ -326,7 +363,9 @@
 				getModalityEdit();
 				getTurnEdit();
 				getPlanEdit();
-				
+				departmentMunicipality();
+				getDepartments();
+				getMunicipalities();
 
 			});
 
@@ -942,6 +981,43 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 			});
 
 		}
+
+		function departmentMunicipality(){
+				$('#municipality_id').prop('disabled', true);
+				$("#department_id").change(function() {
+					$('#municipality_id').empty();
+					if($("#department_id").val() !== '0'){
+						$('#municipality_id').prop('disabled', false);
+						getMunicipalities();
+					}else{
+						$('#municipality_id').prop('disabled', true);
+					}
+				});
+
+			}
+
+
+			 function getDepartments(){
+				 if($('#department_id').val()==null){
+				$.get('get-departments', function(data){
+					$('#department_id').append($('<option>', {value: '0', text: 'Seleccionar departamento'}));
+						$.each(data,	function(i, value){
+						$('#department_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+						});
+					});
+					}
+			}
+
+
+			function getMunicipalities(){
+				$department=$('#department_id').val();
+				$.get('get-municipalities/'+$department, function(data){
+					$('#municipality_id').append($('<option>', {value: '', text: 'Seleccionar municipio'}));
+					$.each(data,	function(i, value){
+						$('#municipality_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+					});
+				});
+			}
 
 
 </script>
