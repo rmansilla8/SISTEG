@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use IntelGUA\Sisteg\School_district;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
             //StatusSchoolTableSeeder::class,
             TurnsTableSeeder::class,
             CyclesTableSeeder::class,
+            School_districts::class,
 
         ]);
     }
