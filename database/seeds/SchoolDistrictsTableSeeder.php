@@ -12,7 +12,7 @@ class SchoolDistrictsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("School_district")->insert([
+        DB::table("school_districts")->insert([
 
             [
                 'code'  =>  '14',
