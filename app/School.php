@@ -66,7 +66,7 @@ class School extends Model
         return $this->belongsToMany(Contract::class);
     }
 
-    public function cycles()
+    public function cycle()
     {
         return $this->belongsTo(Cycle::class);
     }

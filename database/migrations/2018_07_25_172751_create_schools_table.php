@@ -64,7 +64,7 @@ class CreateSchoolsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             
-            $table->foreign('school_status_id')->references('id')->on('plans')
+            $table->foreign('school_status_id')->references('id')->on('school_statuses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

@@ -388,16 +388,16 @@
 						{"data":	"id"},
 						{"data":	"code"},
 						{"data":	"name"},
-						{"data":	"level.description"},
+						{"data":	"level.name"},
 						{"data":	"school_district.code"},
 						{"data":	"area.name"},
 						{"data":	"classification.description"},
-						{"data":	"modality.description"},
-						{"data":	"turn.description"},
+						{"data":	"modality.name"},
+						{"data":	"turn.name"},
 						{"data":	"address"},
 						{"data":	"plan.name"},
 						{"data":	"cycle.name"},
-						{"data":	"school_status.description"},
+						{"data":	"school_statuses.description"},
 						/**Contiene los botones de actualizar, mostrar y eliminar */
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs'>"+

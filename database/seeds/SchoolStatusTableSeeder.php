@@ -12,7 +12,7 @@ class SchoolStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('school_status')->insert([
+        DB::table('school_statuses')->insert([
             [
                 'description'  =>  'Activa'
             ],
