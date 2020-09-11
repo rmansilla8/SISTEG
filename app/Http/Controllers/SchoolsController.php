@@ -29,7 +29,7 @@ class SchoolsController extends Controller
 
     public function getSchools()
     {
-        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'turn', 'plan', 'cycle', 'school_statuses')->get();
+        $schools = School::with('level', 'school_district', 'area', 'classification', 'modality', 'turn', 'plan', 'cycle', 'school_status')->get();
         return (compact('schools'));
     }
 

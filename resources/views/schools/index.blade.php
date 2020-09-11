@@ -397,7 +397,7 @@
 						{"data":	"address"},
 						{"data":	"plan.name"},
 						{"data":	"cycle.name"},
-						{"data":	"school_statuses.description"},
+						{"data":	"school_status.description"},
 						/**Contiene los botones de actualizar, mostrar y eliminar */
 						{"defaultContent":
 							"<div class='btn-group btn-group-xs'>"+
