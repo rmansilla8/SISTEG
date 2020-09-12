@@ -469,7 +469,22 @@
 					/**Area que comprende las columnas y los datos que se mostrarán en el DataTable */
 					"columns" : [
 						{"data":	"id"},
-						{"data":	"code"},
+						//{"data":	"code"},
+						{
+							/**
+							 * * Permite combinar el nombre de la persona en una sola columna.
+							 */
+							data: null,
+							render: function ( data, type, row )
+								{
+									/**
+									** data se carga con los campos donde se almacena el nombre.
+									*/
+									//return //data.school_district.municipality.deparment.code+'  '+data.school_district.municipality.code+' '+data.code+' '+data.level.code;
+									return data.school_district.municipality.department.code+'-'+data.school_district.municipality.code+'-'+data.code+'-'+data.level.code;
+								},
+							//editField: ['first_name', 'second_name', 'first_surname', 'second_surname']
+						},
 						{"data":	"name"},
 						{"data":	"level.name"},
 						{"data":	"school_district.code"},
