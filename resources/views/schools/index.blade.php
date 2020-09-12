@@ -380,30 +380,35 @@
 				var validator;
 				var validatorUpdate;
 				dataTableFees();
-				getLevel();
-				getDistrict();
-				getArea();
-				getClassification();
-				getModality();
-				getTurn();
-				getPlan();
-				getCycle();
-				getSchoolStatus();
-				getLevelEdit();
-				getDistrictEdit();
-				getAreaEdit();
-				getClassificationEdit();
-				getModalityEdit();
-				getTurnEdit();
-				getPlanEdit();
-				departmentMunicipality();
-				getDepartments();
-				getMunicipalities();
-				fillCodeLevel();
-				fillCodeDepartment();
-				fillCodeMunicipality();
+				$('#add_new_school_modal').on('show.bs.modal', function (e) {
+					getLevel();
+					getDistrict();
+					getArea();
+					getClassification();
+					getModality();
+					getTurn();
+					getPlan();
+					getCycle();
+					departmentMunicipality();
+					getDepartments();
+					getMunicipalities();
+					fillCodeLevel();
+					fillCodeDepartment();
+					fillCodeMunicipality();
+				})
 
+				$('#update_school_modal').on('show.bs.modal', function (e){
+					getSchoolStatus();
+					getLevelEdit();
+					getDistrictEdit();
+					getAreaEdit();
+					getClassificationEdit();
+					getModalityEdit();
+					getTurnEdit();
+					getPlanEdit();
+				})
 			});
+
 
 			$("#cancelar").on("click",function(e){
 				e.preventDefault();
@@ -1033,14 +1038,14 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 			}
 
 
-			 function getDepartments(){
-				 if($('#department_id').val()==null){
-				$.get('get-departments', function(data){
-					$('#department_id').append($('<option>', {value: '0', text: 'Seleccionar departamento'}));
-						$.each(data,	function(i, value){
-						$('#department_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+			function getDepartments(){
+				if($('#department_id').val()==null){
+					$.get('get-departments', function(data){
+						$('#department_id').append($('<option>', {value: '0', text: 'Seleccionar departamento'}));
+							$.each(data,	function(i, value){
+								$('#department_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+							});
 						});
-					});
 					}
 			}
 
@@ -1117,6 +1122,8 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 					}
 				});
 			}
+
+			
 			
 
 
