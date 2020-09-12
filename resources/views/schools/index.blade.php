@@ -136,11 +136,28 @@
 									</div>
 								</div>
 								<div class="row">
+									<div class="col-md-12">
+										<div class="input-group">
+											<!-- <label for="name">Nombre</label> -->
+											<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+											<input name="address" type="text" id="address" placeholder="Dirección" class="form-control"/>
+										</div>
+											<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-md-offset-3">
+										<center>
+											<h5>Código estadístico</h5>
+										</center>
+									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-1 col-md-offset-2">
-										<input id="code_department" class="form-control" type="text" readonly>
+										<input id="code_department" class="form-control" type="text" style="background: #FFFFFF" readonly>
 									</div>
 									<div class="col-md-1">
-										<input id="code_municipality" class="form-control" type="text" readonly>
+										<input id="code_municipality" class="form-control" type="text" style="background: #FFFFFF" readonly>
 									</div>
 									<div class="col-md-5">
 										<div class="input-group">
@@ -152,68 +169,84 @@
 									</div>
 									<div>
 										<div class="col-md-1">
-											<input id="code_level" class="form-control" type="text" readonly>
+											<input id="code_level" class="form-control" type="text" style="background: #FFFFFF" readonly>
 										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-md-offset-3">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon" id="num">#</span>
+											<select name="school_district_id" id="school_district_id" class="form-control"  aria-describedby="num"></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+											<select name="area_id" id="area_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa  fa-users"></i></span>
+											<select name="classification_id" id="classification_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa  fa-language"></i></span>
+											<select name="modality_id" id="modality_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa  fa-sun-o"></i></span>
+											<select name="turn_id" id="turn_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-list"></i></span>
+											<select name="plan_id" id="plan_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-list"></i></span>
+											<select name="cycle_id" id="cycle_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-xs-offset-3">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-list"></i></span>
+											<select name="school_status_id" id="school_status_id" class="form-control"></select>
+										</div>
+										<br/>
 									</div>
 								</div>
 								
 								
-								
-
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon" id="num">#</span>
-									<select name="school_district_id" id="school_district_id" class="form-control"  aria-describedby="num"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-									<select name="area_id" id="area_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa  fa-users"></i></span>
-									<select name="classification_id" id="classification_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa  fa-language"></i></span>
-									<select name="modality_id" id="modality_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa  fa-sun-o"></i></span>
-									<select name="turn_id" id="turn_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-list"></i></span>
-									<select name="plan_id" id="plan_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-list"></i></span>
-									<select name="cycle_id" id="cycle_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-list"></i></span>
-									<select name="school_status_id" id="school_status_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="name">Nombre</label> -->
-									<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-									<input name="address" type="text" id="address" placeholder="Dirección" class="form-control"/>
-								</div>
-									<br/>
 								<div class="modal-footer">
 									<button type="button" id="cancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 									<input type="submit" class="btn btn-success" value="Guardar" />
@@ -366,6 +399,7 @@
 				departmentMunicipality();
 				getDepartments();
 				getMunicipalities();
+				fillCodeLevel();
 
 			});
 
@@ -1016,6 +1050,25 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 					$.each(data,	function(i, value){
 						$('#municipality_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 					});
+				});
+			}
+			/**
+			 * Obtiene el codigo del nivel para mostrarlo en el codigo estadistico del establecimiento
+			*/
+			function fillCodeLevel(){
+				$("#level_id").change(function() {
+					if($("#level_id").val() !== '0'){
+						var codeData = document.getElementById("level_id");
+						var codeLevel = codeData.options[codeData.selectedIndex].value;
+						
+						$.get('get-levels', function(data){
+							var level =data.filter(function(d){
+								return d.id == codeLevel;
+							});
+							//console.log(level);
+							$('#frm-insert_school').find('#code_level').val(level[0].code)
+						});
+					}
 				});
 			}
 
