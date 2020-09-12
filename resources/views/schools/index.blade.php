@@ -409,24 +409,27 @@
 				})
 			});
 
-
+			/**
+			 * Funciones que pemiten limpiar los formularios al dar click en el boton cancelar
+			 * del modal
+			*/
 			$("#cancelar").on("click",function(e){
 				e.preventDefault();
 				validator.resetForm();
-				$('#frm-insert').trigger("reset");
+				$('#frm-insert_school').trigger("reset");
 			});
 			$("#cancelarUpdate").on("click",function(e){
 				e.preventDefault();
 				validatorUpdate.resetForm();
-				$('#frm-update').trigger("reset");
+				$('#frm-update_school').trigger("reset");
 			});
 			/**Inicio del DataTable de fees */
 			function dataTableFees()
 			{
 				/**
-				 El DataTable se coloca en una variable
-				 que se usara mas adelante para indexar los
-				 registros.
+				El DataTable se coloca en una variable
+				que se usara mas adelante para indexar los
+				registros.
 				*/
 				var t = $('#tbl-schools').DataTable({
 					/**Procesamiento del lado del servidor */
