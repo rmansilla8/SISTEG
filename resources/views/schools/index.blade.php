@@ -400,6 +400,8 @@
 				getDepartments();
 				getMunicipalities();
 				fillCodeLevel();
+				fillCodeDepartment();
+				fillCodeMunicipality();
 
 			});
 
@@ -1056,21 +1058,66 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 			 * Obtiene el codigo del nivel para mostrarlo en el codigo estadistico del establecimiento
 			*/
 			function fillCodeLevel(){
-				$("#level_id").change(function() {
-					if($("#level_id").val() !== '0'){
+				$("#level_id").change(function() { //Monitorea cambios en el select #level_id
+					if($("#level_id").val() !== '0'){ 
+						//Se obtiene el valor, en este caso el id del nivel seleccionado
 						var codeData = document.getElementById("level_id");
 						var codeLevel = codeData.options[codeData.selectedIndex].value;
-						
+						//se obtienen todos los niveles de la bd a través de la ruta
 						$.get('get-levels', function(data){
+							//Se filtran los datos de la ruta comparandolos con el dato seleccionado en el select
 							var level =data.filter(function(d){
 								return d.id == codeLevel;
 							});
-							//console.log(level);
+							//Se llena con el codigo del nivel el input code_level
 							$('#frm-insert_school').find('#code_level').val(level[0].code)
 						});
 					}
 				});
 			}
+			/**
+			 * Para entender el funcionamiento, revisar comentarios de la funcion fillCodeLevel()
+			*/
+			function fillCodeDepartment(){
+				$("#department_id").change(function() {
+					//En caso de que se vuelva a elegir otro departamento, el select municipality_id se limpia.
+					$('#frm-insert_school').find('#code_municipality').val(null)
+					if($("#department_id").val() !== '0'){
+						var codeDData = document.getElementById("department_id");
+						var codeDepartment = codeDData.options[codeDData.selectedIndex].value;
+						
+						$.get('get-departments', function(data){
+							var department =data.filter(function(d){
+								return d.id == codeDepartment;
+							});
+							$('#frm-insert_school').find('#code_department').val(department[0].code)
+						});
+					}
+				});
+			}
+			/**
+			 * Para entender el funcionamiento de forma general, leer los comentarios de la función fillCodeLevel
+			 * Debido a algunas caracteristicas de la ruta de municipalidades esta función tiene algunos comentarios complementarios para entender el funcionamiento
+			*/
+			function fillCodeMunicipality(){
+				$("#municipality_id").change(function() {
+						//Se obtiene el id del departamento del select departmentd_id que se utilizará en la ruta
+						var codeDData2 = document.getElementById("department_id");
+						var codeDepartment2 = codeDData2.options[codeDData2.selectedIndex].value;
+					if($("#municipality_id").val() !== '0'){
+						var codeMData = document.getElementById("municipality_id");
+						var codeMunicipality = codeMData.options[codeMData.selectedIndex].value;
+						//se cologa en la ruta la variable que contiene el id del departamento seleccionado
+						$.get('get-municipalities/'+codeDepartment2, function(data){
+							var municipality =data.filter(function(d){
+								return d.id == codeMunicipality;
+							});
+							$('#frm-insert_school').find('#code_municipality').val(municipality[0].code)
+						});
+					}
+				});
+			}
+			
 
 
 </script>
