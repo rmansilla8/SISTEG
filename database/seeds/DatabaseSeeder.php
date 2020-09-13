@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use IntelGUA\Sisteg\School_district;
 
 class DatabaseSeeder extends Seeder
 {
