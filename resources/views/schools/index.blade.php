@@ -136,11 +136,28 @@
 									</div>
 								</div>
 								<div class="row">
+									<div class="col-md-12">
+										<div class="input-group">
+											<!-- <label for="name">Nombre</label> -->
+											<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+											<input name="address" type="text" id="address" placeholder="Dirección" class="form-control"/>
+										</div>
+											<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-md-offset-3">
+										<center>
+											<h5>Código estadístico</h5>
+										</center>
+									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-1 col-md-offset-2">
-										<input id="code_department" class="form-control" type="text" readonly>
+										<input id="code_department" class="form-control" type="text" style="background: #FFFFFF" readonly>
 									</div>
 									<div class="col-md-1">
-										<input id="code_municipality" class="form-control" type="text" readonly>
+										<input id="code_municipality" class="form-control" type="text" style="background: #FFFFFF" readonly>
 									</div>
 									<div class="col-md-5">
 										<div class="input-group">
@@ -152,68 +169,84 @@
 									</div>
 									<div>
 										<div class="col-md-1">
-											<input id="code_level" class="form-control" type="text" readonly>
+											<input id="code_level" class="form-control" type="text" style="background: #FFFFFF" readonly>
 										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-md-offset-3">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon" id="num">#</span>
+											<select name="school_district_id" id="school_district_id" class="form-control"  aria-describedby="num"></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-exchange"></i></span>
+											<select name="area_id" id="area_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa  fa-users"></i></span>
+											<select name="classification_id" id="classification_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa  fa-language"></i></span>
+											<select name="modality_id" id="modality_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa  fa-sun-o"></i></span>
+											<select name="turn_id" id="turn_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-list"></i></span>
+											<select name="plan_id" id="plan_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+									<div class="col-md-4">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-list"></i></span>
+											<select name="cycle_id" id="cycle_id" class="form-control"></select>
+										</div>
+										<br/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-xs-offset-3">
+										<div class="input-group">
+											<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
+											<span class="input-group-addon"><i class="fa fa-list"></i></span>
+											<select name="school_status_id" id="school_status_id" class="form-control"></select>
+										</div>
+										<br/>
 									</div>
 								</div>
 								
 								
-								
-
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon" id="num">#</span>
-									<select name="school_district_id" id="school_district_id" class="form-control"  aria-describedby="num"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-exchange"></i></span>
-									<select name="area_id" id="area_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa  fa-users"></i></span>
-									<select name="classification_id" id="classification_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa  fa-language"></i></span>
-									<select name="modality_id" id="modality_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa  fa-sun-o"></i></span>
-									<select name="turn_id" id="turn_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-list"></i></span>
-									<select name="plan_id" id="plan_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-list"></i></span>
-									<select name="cycle_id" id="cycle_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="fee_type_id">Tipo de Cuota</label> -->
-									<span class="input-group-addon"><i class="fa fa-list"></i></span>
-									<select name="school_status_id" id="school_status_id" class="form-control"></select>
-								</div>
-								<br/>
-								<div class="input-group">
-									<!-- <label for="name">Nombre</label> -->
-									<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-									<input name="address" type="text" id="address" placeholder="Dirección" class="form-control"/>
-								</div>
-									<br/>
 								<div class="modal-footer">
 									<button type="button" id="cancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 									<input type="submit" class="btn btn-success" value="Guardar" />
@@ -347,45 +380,57 @@
 				var validator;
 				var validatorUpdate;
 				dataTableFees();
-				getLevel();
-				getDistrict();
-				getArea();
-				getClassification();
-				getModality();
-				getTurn();
-				getPlan();
-				getCycle();
-				getSchoolStatus();
-				getLevelEdit();
-				getDistrictEdit();
-				getAreaEdit();
-				getClassificationEdit();
-				getModalityEdit();
-				getTurnEdit();
-				getPlanEdit();
-				departmentMunicipality();
-				getDepartments();
-				getMunicipalities();
+				$('#add_new_school_modal').on('show.bs.modal', function (e) {
+					getLevel();
+					getDistrict();
+					getArea();
+					getClassification();
+					getModality();
+					getTurn();
+					getPlan();
+					getCycle();
+					getSchoolStatus();
+					departmentMunicipality();
+					getDepartments();
+					getMunicipalities();
+					fillCodeLevel();
+					fillCodeDepartment();
+					fillCodeMunicipality();
+				})
 
+				$('#update_school_modal').on('show.bs.modal', function (e){
+					getSchoolStatus();
+					getLevelEdit();
+					getDistrictEdit();
+					getAreaEdit();
+					getClassificationEdit();
+					getModalityEdit();
+					getTurnEdit();
+					getPlanEdit();
+				})
 			});
 
+			/**
+			 * Funciones que pemiten limpiar los formularios al dar click en el boton cancelar
+			 * del modal
+			*/
 			$("#cancelar").on("click",function(e){
 				e.preventDefault();
 				validator.resetForm();
-				$('#frm-insert').trigger("reset");
+				$('#frm-insert_school').trigger("reset");
 			});
 			$("#cancelarUpdate").on("click",function(e){
 				e.preventDefault();
 				validatorUpdate.resetForm();
-				$('#frm-update').trigger("reset");
+				$('#frm-update_school').trigger("reset");
 			});
 			/**Inicio del DataTable de fees */
 			function dataTableFees()
 			{
 				/**
-				 El DataTable se coloca en una variable
-				 que se usara mas adelante para indexar los
-				 registros.
+				El DataTable se coloca en una variable
+				que se usara mas adelante para indexar los
+				registros.
 				*/
 				var t = $('#tbl-schools').DataTable({
 					/**Procesamiento del lado del servidor */
@@ -425,10 +470,41 @@
 					/**Area que comprende las columnas y los datos que se mostrarán en el DataTable */
 					"columns" : [
 						{"data":	"id"},
-						{"data":	"code"},
+						//{"data":	"code"},
+						{
+							/**
+							 * * Permite combinar el nombre de la persona en una sola columna.
+							 */
+							data: null,
+							render: function ( data, type, row )
+								{
+									/**
+									** data se carga con los campos donde se almacena el nombre.
+									*/
+									//return //data.school_district.municipality.deparment.code+'  '+data.school_district.municipality.code+' '+data.code+' '+data.level.code;
+									return data.school_district.municipality.department.code+'-'+data.school_district.municipality.code+'-'+data.code+'-'+data.level.code;
+								},
+							//editField: ['first_name', 'second_name', 'first_surname', 'second_surname']
+						},
 						{"data":	"name"},
 						{"data":	"level.name"},
-						{"data":	"school_district.code"},
+						//{"data":	"school_district.code"},
+						{
+							/**
+							 * * Permite combinar el nombre de la persona en una sola columna.
+							 */
+							data: null,
+							render: function ( data, type, row )
+								{
+									/**
+									** data se carga con los campos donde se almacena el nombre.
+									*/
+									//return //data.school_district.municipality.deparment.code+'  '+data.school_district.municipality.code+' '+data.code+' '+data.level.code;
+									return data.school_district.municipality.department.code+'-'+data.school_district.municipality.code+'-'+data.school_district.code;
+								},
+							//editField: ['first_name', 'second_name', 'first_surname', 'second_surname']
+						},
+
 						{"data":	"area.name"},
 						{"data":	"classification.description"},
 						{"data":	"modality.name"},
@@ -997,14 +1073,14 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 			}
 
 
-			 function getDepartments(){
-				 if($('#department_id').val()==null){
-				$.get('get-departments', function(data){
-					$('#department_id').append($('<option>', {value: '0', text: 'Seleccionar departamento'}));
-						$.each(data,	function(i, value){
-						$('#department_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+			function getDepartments(){
+				if($('#department_id').val()==null){
+					$.get('get-departments', function(data){
+						$('#department_id').append($('<option>', {value: '0', text: 'Seleccionar departamento'}));
+							$.each(data,	function(i, value){
+								$('#department_id').append($('<option>', {value: value.id, text: `${value.name}`}));
+							});
 						});
-					});
 					}
 			}
 
@@ -1018,6 +1094,72 @@ $('body').delegate('#tbl-schools #Delete', 'click', function(e){
 					});
 				});
 			}
+			/**
+			 * Obtiene el codigo del nivel para mostrarlo en el codigo estadistico del establecimiento
+			*/
+			function fillCodeLevel(){
+				$("#level_id").change(function() { //Monitorea cambios en el select #level_id
+					if($("#level_id").val() !== '0'){ 
+						//Se obtiene el valor, en este caso el id del nivel seleccionado
+						var codeData = document.getElementById("level_id");
+						var codeLevel = codeData.options[codeData.selectedIndex].value;
+						//se obtienen todos los niveles de la bd a través de la ruta
+						$.get('get-levels', function(data){
+							//Se filtran los datos de la ruta comparandolos con el dato seleccionado en el select
+							var level =data.filter(function(d){
+								return d.id == codeLevel;
+							});
+							//Se llena con el codigo del nivel el input code_level
+							$('#frm-insert_school').find('#code_level').val(level[0].code)
+						});
+					}
+				});
+			}
+			/**
+			 * Para entender el funcionamiento, revisar comentarios de la funcion fillCodeLevel()
+			*/
+			function fillCodeDepartment(){
+				$("#department_id").change(function() {
+					//En caso de que se vuelva a elegir otro departamento, el select municipality_id se limpia.
+					$('#frm-insert_school').find('#code_municipality').val(null)
+					if($("#department_id").val() !== '0'){
+						var codeDData = document.getElementById("department_id");
+						var codeDepartment = codeDData.options[codeDData.selectedIndex].value;
+						
+						$.get('get-departments', function(data){
+							var department =data.filter(function(d){
+								return d.id == codeDepartment;
+							});
+							$('#frm-insert_school').find('#code_department').val(department[0].code)
+						});
+					}
+				});
+			}
+			/**
+			 * Para entender el funcionamiento de forma general, leer los comentarios de la función fillCodeLevel
+			 * Debido a algunas caracteristicas de la ruta de municipalidades esta función tiene algunos comentarios complementarios para entender el funcionamiento
+			*/
+			function fillCodeMunicipality(){
+				$("#municipality_id").change(function() {
+						//Se obtiene el id del departamento del select departmentd_id que se utilizará en la ruta
+						var codeDData2 = document.getElementById("department_id");
+						var codeDepartment2 = codeDData2.options[codeDData2.selectedIndex].value;
+					if($("#municipality_id").val() !== '0'){
+						var codeMData = document.getElementById("municipality_id");
+						var codeMunicipality = codeMData.options[codeMData.selectedIndex].value;
+						//se cologa en la ruta la variable que contiene el id del departamento seleccionado
+						$.get('get-municipalities/'+codeDepartment2, function(data){
+							var municipality =data.filter(function(d){
+								return d.id == codeMunicipality;
+							});
+							$('#frm-insert_school').find('#code_municipality').val(municipality[0].code)
+						});
+					}
+				});
+			}
+
+			
+			
 
 
 </script>

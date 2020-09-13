@@ -48,7 +48,7 @@ class PeopleController extends Controller
     public function getDepartments()
     {
         return $departments = Cache::remember('departments', 30, function () {
-            return DB::table('departments')->orderby('id', 'DESC')->get();
+            return DB::table('departments')->orderby('id', 'ASC')->get();
 
         });
         // $departments = Department::orderby('id', 'DESC')->get();
@@ -58,7 +58,7 @@ class PeopleController extends Controller
     public function getGenders()
     {
         return $genders = Cache::remember('genders', 30, function () {
-            return DB::table('genders')->orderby('id', 'DESC')->get();
+            return DB::table('genders')->orderby('id', 'ASC')->get();
 
         });
         // $genders = Gender::orderby('id', 'DESC')->get();
@@ -68,7 +68,7 @@ class PeopleController extends Controller
     public function getCivilStatus()
     {
         return $civil_status = Cache::remember('civil_status', 30, function () {
-            return DB::table('civil_status')->orderby('id', 'DESC')->get();
+            return DB::table('civil_status')->orderby('id', 'ASC')->get();
 
         });
         // $civil_status = civil_status::orderby('id', 'DESC')->get();
