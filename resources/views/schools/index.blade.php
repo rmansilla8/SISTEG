@@ -61,8 +61,7 @@
 							<th class="text-center">Área</th>
 							<th class="text-center">Clasificación</th>
 							<th class="text-center">Modalidad</th>
-							<th class="text-center">Jornada</th>
-							<th class="text-center">Dirección</th>
+							<th class="text-center">Jornada</th>							
 							<th class="text-center">Plan</th>
 							<th class="text-center">Ciclo</th>
 							<th class="text-center">Estado</th>
@@ -510,7 +509,7 @@
 						{"data":	"classification.description"},
 						{"data":	"modality.name"},
 						{"data":	"turn.name"},
-						{"data":	"address"},
+						//{"data":	"address"},
 						{"data":	"plan.name"},
 						{"data":	"cycle.name"},
 						{"data":	"school_status.description"},
