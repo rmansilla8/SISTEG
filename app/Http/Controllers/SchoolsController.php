@@ -57,14 +57,21 @@ class SchoolsController extends Controller
         // return $level;
     }
 
-    public function getDistrict()
+    public function getDistrict($municipality_id)
     {
-        return $school_districts = Cache::remember('school_districts', 1, function () {
-            return DB::table('school_districts')->orderby('id', 'DESC')->get();
-        });
-        // $district = School_district::orderby('id', 'DESC')->get();
-        // return $district;
+        $school_districts = School_district::Where('municipality_id', $municipality_id)->with('municipality.department')->get();
+        return $school_districts;
     }
+
+    // public function getDistrict()
+    // {
+    //     return $school_districts = Cache::remember('school_districts', 1, function () {
+    //         return DB::table('school_districts')->orderby('id', 'DESC')->get();
+    //     });
+    //     // $district = School_district::orderby('id', 'DESC')->get();
+    //     // return $district;
+    // }
+
     public function getArea()
     {
         return $areas = Cache::remember('areas', 30, function () {

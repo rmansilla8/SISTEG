@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('schools', 'SchoolsController');
         Route::get('get-schools', 'SchoolsController@getSchools');
         Route::get('get-levels', 'SchoolsController@getLevel');
-        Route::get('get-districts', 'SchoolsController@getDistrict');
+        Route::get('get-districts/{municipality_id}', 'SchoolsController@getDistrict');
         Route::get('get-areas', 'SchoolsController@getArea');
         Route::get('get-classifications', 'SchoolsController@getClassification');
         Route::get('get-modalities', 'SchoolsController@getModality');
