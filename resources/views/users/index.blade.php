@@ -346,7 +346,7 @@
 				//para cargar la lista de roles
 			function getRoles(){
 			$.get('get-roles', function(data){
-					$('#role_id').append($('<option>', {value: "", text: 'Seleccionar tipo'}));
+					$('#role_id').append($('<option>', {value: "", text: 'Seleccionar Rol'}));
 					$.each(data,	function(i, value){
 						//posiciones.append($('<option value="' + value.id + '">').text = value.name;
 					$('#role_id').append($('<option>', {value: value.id, text: `${value.name}`}));
@@ -356,7 +356,7 @@
 			//para cargar la lista de permisos
 			function getPermissions(){
 			$.get('get-permissions', function(data){
-					$('#permission_id').append($('<option>', {value: "", text: 'Seleccionar etapa'}));
+					$('#permission_id').append($('<option>', {value: "", text: 'Seleccionar Permiso'}));
 					$.each(data,	function(i, value){
 						//posiciones.append($('<option value="' + value.id + '">').text = value.name;
 					$('#permission_id').append($('<option>', {value: value.id, text: `${value.name}`}));
