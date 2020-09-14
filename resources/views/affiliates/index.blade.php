@@ -299,8 +299,8 @@
 								</div>
 								<div class="col-md-4">
 									<div class="input-group">
-										<span class="input-group-addon" id="swork_status">Estado</span>
-										<select name="work_status_id" type="text" id="work_status_id" placeholder="Seleccione estado" class="form-control" aria-describedby="swork_status"></select>
+										<span class="input-group-addon" id="work_status">Estado</span>
+										<select name="work_status_id" type="text" id="work_status_id" placeholder="Seleccione estado" class="form-control" aria-describedby="work_status"></select>
 									</div>
 									<br/>
 								</div>
@@ -531,7 +531,7 @@
 			var callback3 = function(){
 				getEmployeeTypes();
 				getContracts();
-				getWorkStates();
+				getWorkStatus();
 				getSchools();
 				getLanguages();
 			}
@@ -650,7 +650,7 @@
 				}
 			}
 
-			function getWorkStates(){
+			function getWorkStatus(){
 				if($('#work_status_id').val()==null){
 				$.get('get-work_status', function(data){
 					$('#work_status_id').append($('<option>', {value: '0', text: 'Seleccionar estado laboral'}));
@@ -661,7 +661,7 @@
 				}
 			}
 
-			function getContracts(){w
+			function getContracts(){
 				if($('#contract_id').val()==null){
 				$.get('get-contracts', function(data){
 					$('#contract_id').append($('<option>', {value: '0', text: 'Seleccionar contrato'}));

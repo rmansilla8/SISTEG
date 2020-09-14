@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWorkStatusTable extends Migration
+class CreateWorkStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -27,6 +27,6 @@ class CreateWorkStatusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_status');
+        Schema::dropIfExists('work_statuses');
     }
 }

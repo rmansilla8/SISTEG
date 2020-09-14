@@ -12,7 +12,7 @@ class WorkStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('work_status')->insert([
+        DB::table('work_statuses')->insert([
             [
                 'description'   =>  'Activo'
             ],
