@@ -299,8 +299,8 @@
 								</div>
 								<div class="col-md-4">
 									<div class="input-group">
-										<span class="input-group-addon" id="swork_state">Estado</span>
-										<select name="work_state_id" type="text" id="work_state_id" placeholder="Seleccione estado" class="form-control" aria-describedby="swork_state"></select>
+										<span class="input-group-addon" id="swork_status">Estado</span>
+										<select name="work_status_id" type="text" id="work_status_id" placeholder="Seleccione estado" class="form-control" aria-describedby="swork_status"></select>
 									</div>
 									<br/>
 								</div>
@@ -651,17 +651,17 @@
 			}
 
 			function getWorkStates(){
-				if($('#work_state_id').val()==null){
-				$.get('get-work_states', function(data){
-					$('#work_state_id').append($('<option>', {value: '0', text: 'Seleccionar estado laboral'}));
+				if($('#work_status_id').val()==null){
+				$.get('get-work_status', function(data){
+					$('#work_status_id').append($('<option>', {value: '0', text: 'Seleccionar estado laboral'}));
 						$.each(data,	function(i, value){
-						$('#work_state_id').append($('<option>', {value: value.id, text: `${value.description}`}));
+						$('#work_status_id').append($('<option>', {value: value.id, text: `${value.description}`}));
 						});
 					});
 				}
 			}
 
-			function getContracts(){
+			function getContracts(){w
 				if($('#contract_id').val()==null){
 				$.get('get-contracts', function(data){
 					$('#contract_id').append($('<option>', {value: '0', text: 'Seleccionar contrato'}));
@@ -969,7 +969,7 @@
 						maxlength: 		4,
 						lettersonly: 	false,
 					},
-					work_state_id: {
+					work_status_id: {
 						required: 		true,
 
 					},
@@ -1027,7 +1027,7 @@
 						minlength:			'El año debe contener 4 dígitos',
 						maxlength:			'El año debe contener solo 4 dígitos',
 					},
-					work_state_id: {
+					work_status_id: {
 						required: 			'Seleccione situación laboral',
 					},
 					employee_type_id: {
