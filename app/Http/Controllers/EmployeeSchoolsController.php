@@ -5,7 +5,7 @@ namespace IntelGUA\Sisteg\Http\Controllers;
 use Illuminate\Http\Request;
 use IntelGUA\Sisteg\Employee_type;
 use IntelGUA\Sisteg\Employee_school;
-use IntelGUA\Sisteg\Work_state;
+use IntelGUA\Sisteg\Work_status;
 use IntelGUA\Sisteg\Contract;
 use IntelGUA\Sisteg\School;
 use IntelGUA\Sisteg\Language;
@@ -49,10 +49,10 @@ class EmployeeSchoolsController extends Controller
         return $employee_types;
     }
 
-    public function getWork_states()
+    public function getWork_status()
     {
-        $work_states = Work_state::orderby('id', 'DESC')->get();
-        return $work_states;
+        $work_status = Work_status::orderby('id', 'DESC')->get();
+        return $work_status;
     }
 
     public function getContracts()
