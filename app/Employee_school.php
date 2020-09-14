@@ -10,7 +10,7 @@ class Employee_school extends Model
         'school_id',
         'empleado_id',
         'contract_id',
-        'work_state_id',
+        'work_statuses_id',
         'year_start',
         'employee_type_id',
     ];
@@ -30,9 +30,9 @@ class Employee_school extends Model
         return $this->belongsTo(Contract::class);
     }
 
-    public function work_state()
+    public function work_statuses()
     {
-        return $this->belongsTo(Work_state::class);
+        return $this->belongsTo(Work_statuses::class);
     }
     public function employee_type()
     {
