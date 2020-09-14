@@ -13,7 +13,7 @@ class CreateWorkStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('work_status', function (Blueprint $table) {
+        Schema::create('work_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
             $table->timestamps();
