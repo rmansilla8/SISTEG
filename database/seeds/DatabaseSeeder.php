@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             ModalitiesTableSeeder::class,
             MunicipalitiesTableSeeder::class,
             PlansTableSeeder::class,
+            EmployeeTypesTableSeeder::class,
             //StatusSchoolTableSeeder::class,
             TurnsTableSeeder::class,
             CyclesTableSeeder::class,
