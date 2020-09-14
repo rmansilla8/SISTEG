@@ -346,7 +346,7 @@
 				//para cargar la lista de roles
 			function getRoles(){
 			$.get('get-roles', function(data){
-					$('#role_id').append($('<option>', {value: "", text: 'Seleccionar tipo'}));
+					$('#role_id').append($('<option>', {value: "", text: 'Seleccionar rol'}));
 					$.each(data,	function(i, value){
 						//posiciones.append($('<option value="' + value.id + '">').text = value.name;
 					$('#role_id').append($('<option>', {value: value.id, text: `${value.name}`}));
@@ -356,9 +356,8 @@
 			//para cargar la lista de permisos
 			function getPermissions(){
 			$.get('get-permissions', function(data){
-					$('#permission_id').append($('<option>', {value: "", text: 'Seleccionar etapa'}));
+					$('#permission_id').append($('<option>', {value: "", text: 'Seleccionar permisos'}));
 					$.each(data,	function(i, value){
-						//posiciones.append($('<option value="' + value.id + '">').text = value.name;
 					$('#permission_id').append($('<option>', {value: value.id, text: `${value.name}`}));
 					});
 				});
@@ -459,7 +458,7 @@ function check(){
 						/**Se actualiza el DataTable */
 						var $t = $('#tbl-users').DataTable();
 						$t.ajax.reload();
-						$('#update_user_modal').modal('hide');
+						$('#update_+user_modal').modal('hide');
 						toastr["success"]("Usuario actualizado exitosamente!", "Actualizado")
 					}
 					});
