@@ -75,7 +75,7 @@ class SchoolsController extends Controller
     public function getArea()
     {
         return $areas = Cache::remember('areas', 30, function () {
-            return DB::table('areas')->orderby('id', 'DESC')->get();
+            return DB::table('areas')->orderby('id', 'ASC')->get();
 
         });
         // $area = Area::orderby('id', 'DESC')->get();
@@ -84,7 +84,7 @@ class SchoolsController extends Controller
     public function getClassification()
     {
         return $classifications = Cache::remember('classifications', 30, function () {
-            return DB::table('classifications')->orderby('id', 'DESC')->get();
+            return DB::table('classifications')->orderby('id', 'ASC')->get();
 
         });
         // $classification = Classification::orderby('id', 'DESC')->get();
@@ -93,7 +93,7 @@ class SchoolsController extends Controller
     public function getModality()
     {
         return $modalities = Cache::remember('modalities', 30, function () {
-            return DB::table('modalities')->orderby('id', 'DESC')->get();
+            return DB::table('modalities')->orderby('id', 'ASC')->get();
 
         });
         // $modality = Modality::orderby('id', 'DESC')->get();
@@ -102,7 +102,7 @@ class SchoolsController extends Controller
     public function getTurn()
     {
         return $turns = Cache::remember('turns', 30, function () {
-            return DB::table('turns')->orderby('id', 'DESC')->get();
+            return DB::table('turns')->orderby('id', 'ASC')->get();
 
         });
         // $working = Turn::orderby('id', 'DESC')->get();
@@ -111,7 +111,7 @@ class SchoolsController extends Controller
     public function getPlan()
     {
         return $plans = Cache::remember('plans', 1, function () {
-            return DB::table('plans')->orderby('id', 'DESC')->get();
+            return DB::table('plans')->orderby('id', 'ASC')->get();
 
         });
         // $plan = Plan::orderby('id', 'DESC')->get();
@@ -166,7 +166,7 @@ class SchoolsController extends Controller
 
             $schools = School::with(
                 'level',
-                'school_district',
+                'school_district.municipality.department',
                 'area',
                 'classification',
                 'modality',
