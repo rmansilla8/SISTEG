@@ -471,11 +471,11 @@
 
 				$('#update_school_modal').on('show.bs.modal', function (e){
 					catchDepartment();
-				});
-					getSchoolStatus();
-					getDepartmentEdit();
 					
-					departmentMunicipality();
+				});
+					getDepartmentEdit();
+					departmentMunicipalityUpdate();
+					municipalityDistrictUpdate()
 					getLevelEdit();
 					//getDistrictEdit();
 					getAreaEdit();
@@ -483,6 +483,7 @@
 					getModalityEdit();
 					getTurnEdit();
 					getPlanEdit();
+					getSchoolStatus();
 				
 			});
 
@@ -880,6 +881,9 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 			$('#frm-update_school').find('#update_level_id').val(data.level_id)
 			$('#frm-update_school').find('#update_department_id').val(data.school_district.municipality.department_id)
 			$('#frm-update_school').find('#update_municipality_id').val(data.school_district.municipality_id)
+			$('#frm-update_school').find('#update_code_department').val(data.school_district.municipality.department.code)
+			$('#frm-update_school').find('#update_code_municipality').val(data.school_district.municipality.code)
+			$('#frm-update_school').find('#update_code_level').val(data.level.code)
 			
 			$('#frm-update_school').find('#update_school_district_id').val(data.school_district_id)
 			$('#frm-update_school').find('#update_code').val(data.code)
@@ -898,6 +902,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 		function getLevelEdit(){
 			$('#update_level_id').empty();
 				$.get('get-levels', function(data){
+					$('#update_level_id').append($('<option>', {value: '', text: 'Seleccione el nivel'}));
 					$.each(data,	function(i, value){
 						$('#update_level_id').append($('<option >', {value: value.id, text: `${value.name}`}));
 					});
@@ -907,6 +912,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 			function getDepartmentEdit(){
 				$('#update_department_id').empty();
 				$.get('../get-departments', function(data){
+					$('#update_department_id').append($('<option>', {value: '', text: 'Seleccionar departamento'}));
 					$.each(data,	function(i, value){
 						$('#update_department_id').append($('<option >', {value: value.id, text: `${value.name}`}));
 					});
@@ -918,11 +924,12 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					//$('#update_municipality_id').empty();
 						$('#update_municipality_id').prop('disabled', false);
 						$id = $('#update_department_id').val();
+						console.log($id)
 						getMunicipalityEdit();
-					}
+					} 
 			}
 
-			function departmentMunicipality(){
+			function departmentMunicipalityUpdate(){
 				$("#update_department_id").change(function() {
 					$('#update_municipality_id').empty();
 					if($("#update_department_id").val() !== '0'){
@@ -932,20 +939,52 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 						$('#update_municipality_id').prop('disabled', true);
 					}
 				});
-
 			}
 
 			function getMunicipalityEdit(){
- 				//$('#update_fee_type_id').empty();
- 				$.get('../get-municipalities/'+ $id, function(data){
- 					$.each(data,	function(i, value){
-					//	console.log(value.id);
- 						$('#update_municipality_id').append($('<option >', {value: value.id, text: `${value.name}`}));
- 					});
- 				});
- 			}
-			//Esta función se utiliza para cargar los datos del dropdown list de tipo de distritos escolares
+				$('#update_municipality_id').empty();
+				$.get('../get-municipalities/'+ $id, function(data){
+					$.each(data,	function(i, value){
+						$('#update_municipality_id').append($('<option >', {value: value.id, text: `${value.name}`}));
+					});
+					catchMunicipality();
+				});
+			}
 			
+			function catchMunicipality(){
+				if($("#update_municipality_id").val() !== '0'){
+					//$('#update_municipality_id').empty();
+					$('#update_school_district_id').prop('disabled', false);
+					$idSchoolDistrict = $('#update_municipality_id').val();
+					getSchoolDistrictEdit();
+				}
+			}
+
+			function municipalityDistrictUpdate(){
+				$("#update_municipality_id").change(function() {
+					$('#update_school_district_id').empty();
+					if($("#update_municipality_id").val() !== '0'){
+						$('#update_school_district_id').prop('disabled', false);
+						catchMunicipality();
+					}else{
+						$('#update_school_district_id').prop('disabled', true);
+					}
+				});
+
+			}
+			function getSchoolDistrictEdit(){
+ 				//$('#update_fee_type_id').empty();
+				$.get('../get-districts/'+ $idSchoolDistrict, function(data){
+					$('#update_school_district_id').append($('<option >', {value: '', text: 'Seleccionar distrito'}));
+					$.each(data,	function(i, value){
+						var district = value.code
+						var municipality = value.municipality.code
+						var department = value.municipality.department.code
+						var resultado = department+'-'+municipality+'-'+district;
+						$('#update_school_district_id').append($('<option >', {value: value.id, text: `${resultado}`}));
+					});
+				});
+			}
 				
 				
 			//Esta función se utiliza para cargar los datos del dropdown list de tipo de distritos escolares
