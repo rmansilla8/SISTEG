@@ -444,6 +444,7 @@
 /**
  **Se invocan las funciones que llenan el DataTable y los input, select, etc.
  */
+
 			$(document).ready(function(){
 				/**Llena el DataTable */
 				validar();
@@ -452,7 +453,6 @@
 				dataTableFees();
 				$('#add_new_school_modal').on('show.bs.modal', function (e) {
 					getLevel();
-					//getDistrict();
 					municipalityDistrict();
 					getArea();
 					getClassification();
@@ -473,17 +473,20 @@
 					catchDepartment();
 					
 				});
+			
+				
 					getDepartmentEdit();
 					departmentMunicipalityUpdate();
 					municipalityDistrictUpdate()
 					getLevelEdit();
-					//getDistrictEdit();
 					getAreaEdit();
 					getClassificationEdit();
 					getModalityEdit();
 					getTurnEdit();
 					getPlanEdit();
 					getSchoolStatus();
+					getCycleEdit();
+					getSchoolStatusEdit();
 				
 			});
 
@@ -884,7 +887,6 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 			$('#frm-update_school').find('#update_code_department').val(data.school_district.municipality.department.code)
 			$('#frm-update_school').find('#update_code_municipality').val(data.school_district.municipality.code)
 			$('#frm-update_school').find('#update_code_level').val(data.level.code)
-			
 			$('#frm-update_school').find('#update_school_district_id').val(data.school_district_id)
 			$('#frm-update_school').find('#update_code').val(data.code)
 			$('#frm-update_school').find('#update_area_id').val(data.area_id)
@@ -893,9 +895,13 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 			$('#frm-update_school').find('#update_turn_id').val(data.turn_id)
 			$('#frm-update_school').find('#update_address').val(data.address)
 			$('#frm-update_school').find('#update_plan_id').val(data.plan_id)
+			$('#frm-update_school').find('#update_cycle_id').val(data.cycle_id)
+			$('#frm-update_school').find('#update_school_status_id').val(data.school_status_id)
 			$('#frm-update_school').find('#school_update_id').val(data.id)
 			$('#update_school_modal').modal('show');
 		});
+		
+
 	});
 
 		 //Esta función se utiliza para cargar los datos del dropdown list de tipo de niveles
@@ -924,7 +930,6 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					//$('#update_municipality_id').empty();
 						$('#update_municipality_id').prop('disabled', false);
 						$id = $('#update_department_id').val();
-						console.log($id)
 						getMunicipalityEdit();
 					} 
 			}
@@ -975,7 +980,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 			function getSchoolDistrictEdit(){
  				//$('#update_fee_type_id').empty();
 				$.get('../get-districts/'+ $idSchoolDistrict, function(data){
-					$('#update_school_district_id').append($('<option >', {value: '', text: 'Seleccionar distrito'}));
+					//$('#update_school_district_id').append($('<option >', {value: '', text: 'Seleccionar distrito'}));
 					$.each(data,	function(i, value){
 						var district = value.code
 						var municipality = value.municipality.code
@@ -991,11 +996,8 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 			function getAreaEdit(vid){
 				$('#update_area_id').empty();
 				$.get('../get-areas', function(data){
+					$('#update_area_id').append($('<option>', {value: '', text: 'Seleccione el área'}));
 					$.each(data,	function(i, value){
-						//console.info(value);
-						if(value.id === vid ){
-							$('#update_area_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
-						}
 						$('#update_area_id').append($('<option >', {value: value.id, text: `${value.name}`}));
 					});
 				});
@@ -1004,25 +1006,19 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 				function getClassificationEdit(vid){
 				$('#update_classification_id').empty();
 				$.get('../get-classifications', function(data){
+					$('#update_classification_id').append($('<option >', {value: '', text: 'Seleccione la clasificación'}));
 					$.each(data,	function(i, value){
-						//console.info(value);
-						if(value.id === vid ){
-							$('#update_classification_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
-						}
 						$('#update_classification_id').append($('<option >', {value: value.id, text: `${value.description}`}));
 					});
 				});
 			}
 				//Esta función se utiliza para cargar los datos del dropdown list de tipo de clasificación escolar
-				function getModalityEdit(vid){
+				function getModalityEdit(){
 				$('#update_modality_id').empty();
 				$.get('../get-modalities', function(data){
+					$('#update_modality_id').append($('<option >', {value: '', text: 'Seleccione la modalidad'}));
 					$.each(data,	function(i, value){
-						//console.info(value);
-						if(value.id === vid ){
-							$('#update_modality_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
-						}
-						$('#update_modality_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+						$('#update_modality_id').append($('<option >', {value: value.id, text: `${value.name}`}));
 					});
 				});
 			}
@@ -1030,25 +1026,38 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 				function getTurnEdit(vid){
 				$('#update_turn_id').empty();
 				$.get('../get-turns', function(data){
+					$('#update_turn_id').append($('<option >', {value: '', text: 'Seleccione la jornada'}));
 					$.each(data,	function(i, value){
-						//console.info(value);
-						if(value.id === vid ){
-							$('#update_turn_id').append($('<option selected >', {value: value.id, text: `${value.description}`}));
-						}
-						$('#update_turn_id').append($('<option >', {value: value.id, text: `${value.description}`}));
+						$('#update_turn_id').append($('<option >', {value: value.id, text: `${value.name}`}));
 					});
 				});
 			}
 			//Esta función se utiliza para cargar los datos del dropdown list de tipo de jornadas
-				function getPlanEdit(vid){
+				function getPlanEdit(){
 				$('#update_plan_id').empty();
 				$.get('../get-plans', function(data){
+					$('#update_plan_id').append($('<option >', {value: '', text: 'Seleccione el plan'}));
 					$.each(data,	function(i, value){
-						//console.info(value);
-						if(value.id === vid ){
-							$('#update_plan_id').append($('<option selected >', {value: value.id, text: `${value.name}`}));
-						}
 						$('#update_plan_id').append($('<option >', {value: value.id, text: `${value.name}`}));
+					});
+				});
+			}
+			function getCycleEdit(){
+				$('#update_cycle_id').empty();
+				$.get('../get-cycles', function(data){
+					$('#update_cycle_id').append($('<option >', {value: '', text: 'Seleccione el ciclo'}));
+					$.each(data,	function(i, value){
+						$('#update_cycle_id').append($('<option >', {value: value.id, text: `${value.name}`}));
+					});
+				});
+			}
+
+			function getSchoolStatusEdit(){
+				$('#update_school_status_id').empty();
+				$.get('../get-school_status', function(data){
+					$('#update_school_status_id').append($('<option >', {value: '', text: 'Seleccione estado'}));
+					$.each(data,	function(i, value){
+						$('#update_school_status_id').append($('<option >', {value: value.id, text: `${value.description}`}));
 					});
 				});
 			}
