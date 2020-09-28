@@ -4,11 +4,11 @@
 
 @section('content_header')
     <h1>
-    	Cuotas - <small>Listado de escuelas</small>
+    	Establecimientos - <small>Listado de establecimientos</small>
     </h1>
 	<!--Migas de pan con icono-->
     <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-bank"></i>  Escuelas</li>
+        <li class="active"><i class="fa fa-bank"></i>  Establecimientos</li>
     </ol>
 	<style type="text/css">
 	</style>
@@ -24,7 +24,7 @@
 <div class="box">
 		<!-- Encabezado de la caja -->
     <div class="box-header with-border">
-        <h3 class="box-title">Listado de escuelas</h3>
+        <h3 class="box-title">Listado de establecimientos</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                 <i class="fa fa-minus"></i>
@@ -37,7 +37,7 @@
 			<!-- Botón que invoca el Modal #add_new_fee_modal para agregar registros -->
 			<div class="col-xs-12">
 				<button style="margin-bottom:10px;" type="button" data-toggle="modal" data-target="#add_new_school_modal" class="btn btn-success pull-right">
-				<i class="fa fa-plus"></i> Nuevo Registro</button>
+				<i class="fa fa-plus"></i> Nuevo establecimiento</button>
 				<br/>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 							<th data-priority="2" class="text-center">Código</th>
 							<th data-priority="1" class="text-center">Nombre</th>
 							<th class="text-center">Nivel</th>
-							<th class="text-center">Distrito escolar</th>
+							<th class="text-center">Distrito educativo</th>
 							<th class="text-center">Área</th>
 							<th class="text-center">Clasificación</th>
 							<th class="text-center">Modalidad</th>
@@ -82,7 +82,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Agregar registro</h4>
+					<h4 class="modal-title" id="myModalLabel">Agregar establecimiento</h4>
 				</div>
 				<div class="modal-body">
 					<!--
@@ -254,7 +254,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Agregar registro</h4>
+					<h4 class="modal-title" id="myModalLabel">Actualizar establecimiento</h4>
 				</div>
 				<div class="modal-body">
 					<form  action="{{ URL::to('school')}}" method="POST" id="frm-update_school" data-toggle="validator">
@@ -489,7 +489,7 @@
 					getSchoolStatusEdit();
 				
 			});
-
+			
 			/**
 			 * Funciones que pemiten limpiar los formularios al dar click en el boton cancelar
 			 * del modal
@@ -612,6 +612,7 @@
 				} ).draw();
 			}
 
+			//---Funciones para el modar de crear escuela
 			/*
 			 * Permite cargar la lista de niveles.
 			 */
@@ -623,18 +624,10 @@
 					});
 				});
 			}
-			/*
-			 * Permite cargar la lista de distritos.
-			 */
-			// function getDistrict(){
-			// $.get('get-districts', function(data){
-			// 	$('#school_district_id').append($('<option>', {value: '', text: 'Seleccionar distrito'}));
-			// 		$.each(data,	function(i, value){
-			// 		$('#school_district_id').append($('<option>', {value: value.id, text: `${value.code}`}));
-			// 		});
-			// 	});
-			// }
-
+			
+			/**
+			 * Permite cargar los distritos educativos que pertenecen al municipio seleccionado
+			*/
 			function municipalityDistrict(){
 				$('#school_district_id').prop('disabled', true);
 				$("#municipality_id").change(function() {
@@ -746,7 +739,6 @@
 						$('#municipality_id').prop('disabled', true);
 					}
 				});
-
 			}
 
 			function getDepartments(){
@@ -858,7 +850,7 @@
 						var tbl = $('#tbl-schools').DataTable();
 						tbl.ajax.reload()
 						$('#add_new_school_modal').modal('hide');
-						toastr["success"]("Escuela guardada","Información")
+						toastr["success"]("Establecimiento guardado","Información")
 
 					}
 				});
@@ -903,7 +895,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 		
 
 	});
-
+		//--Funciones para el modal de actualzar escuela
 		 //Esta función se utiliza para cargar los datos del dropdown list de tipo de niveles
 		function getLevelEdit(){
 			$('#update_level_id').empty();
@@ -914,7 +906,9 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					});
 				});
 			}
-			
+			/**
+			 * Carga los departamentos en el select y asigna eldepartamento seleccionado
+			*/
 			function getDepartmentEdit(){
 				$('#update_department_id').empty();
 				$.get('../get-departments', function(data){
@@ -924,7 +918,9 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					});
 				});
 			}
-
+			/**
+			 * Captura el id del departamento para utilizarlo en la ruta de municipalities
+			*/
 			function catchDepartment(){
 				if($("#update_department_id").val() !== '0'){
 					//$('#update_municipality_id').empty();
@@ -933,7 +929,9 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 						getMunicipalityEdit();
 					} 
 			}
-
+			/**
+			 * Monitorea cambios en el select de departamentos
+			*/
 			function departmentMunicipalityUpdate(){
 				$("#update_department_id").change(function() {
 					$('#update_municipality_id').empty();
@@ -945,7 +943,9 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					}
 				});
 			}
-
+			/**
+			 * Obtiene los municipios del departamento seleccionado
+			*/
 			function getMunicipalityEdit(){
 				$('#update_municipality_id').empty();
 				$.get('../get-municipalities/'+ $id, function(data){
@@ -955,7 +955,9 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					catchMunicipality();
 				});
 			}
-			
+			/**
+			 * Captura el id del municipio para utilizarlo en la ruta de districts
+			*/
 			function catchMunicipality(){
 				if($("#update_municipality_id").val() !== '0'){
 					//$('#update_municipality_id').empty();
@@ -964,7 +966,9 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					getSchoolDistrictEdit();
 				}
 			}
-
+			/**
+			 * Monitorea cambios en el select de municipios
+			*/
 			function municipalityDistrictUpdate(){
 				$("#update_municipality_id").change(function() {
 					$('#update_school_district_id').empty();
@@ -975,8 +979,10 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 						$('#update_school_district_id').prop('disabled', true);
 					}
 				});
-
 			}
+			/**
+			 * Obtiene los distritos del municipio seleccionado
+			*/
 			function getSchoolDistrictEdit(){
  				//$('#update_fee_type_id').empty();
 				$.get('../get-districts/'+ $idSchoolDistrict, function(data){
@@ -992,8 +998,8 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 			}
 				
 				
-			//Esta función se utiliza para cargar los datos del dropdown list de tipo de distritos escolares
-			function getAreaEdit(vid){
+			//Esta función se utiliza para cargar los datos del dropdown list de Area
+			function getAreaEdit(){
 				$('#update_area_id').empty();
 				$.get('../get-areas', function(data){
 					$('#update_area_id').append($('<option>', {value: '', text: 'Seleccione el área'}));
@@ -1003,7 +1009,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 				});
 			}
 				//Esta función se utiliza para cargar los datos del dropdown list de tipo de clasificación escolar
-				function getClassificationEdit(vid){
+				function getClassificationEdit(){
 				$('#update_classification_id').empty();
 				$.get('../get-classifications', function(data){
 					$('#update_classification_id').append($('<option >', {value: '', text: 'Seleccione la clasificación'}));
@@ -1012,7 +1018,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					});
 				});
 			}
-				//Esta función se utiliza para cargar los datos del dropdown list de tipo de clasificación escolar
+				//Esta función se utiliza para cargar los datos del dropdown list de modalidad
 				function getModalityEdit(){
 				$('#update_modality_id').empty();
 				$.get('../get-modalities', function(data){
@@ -1023,7 +1029,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 				});
 			}
 				//Esta función se utiliza para cargar los datos del dropdown list de tipo de jornadas
-				function getTurnEdit(vid){
+				function getTurnEdit(){
 				$('#update_turn_id').empty();
 				$.get('../get-turns', function(data){
 					$('#update_turn_id').append($('<option >', {value: '', text: 'Seleccione la jornada'}));
@@ -1032,7 +1038,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					});
 				});
 			}
-			//Esta función se utiliza para cargar los datos del dropdown list de tipo de jornadas
+			//Esta función se utiliza para cargar los datos del dropdown list de planes
 				function getPlanEdit(){
 				$('#update_plan_id').empty();
 				$.get('../get-plans', function(data){
@@ -1042,6 +1048,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					});
 				});
 			}
+			//Esta función se utiliza para cargar los datos del dropdown list de ciclos
 			function getCycleEdit(){
 				$('#update_cycle_id').empty();
 				$.get('../get-cycles', function(data){
@@ -1051,7 +1058,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 					});
 				});
 			}
-
+			//Esta función se utiliza para cargar los datos del dropdown list de status
 			function getSchoolStatusEdit(){
 				$('#update_school_status_id').empty();
 				$.get('../get-school_status', function(data){
@@ -1093,7 +1100,7 @@ $('body').delegate('#tbl-schools #Edit', 'click', function(e){
 
 /**Función que valida que no existan campos vacíos en el modal #update_fee_modal */
 
-	//-------------Eliminar Diente-------------
+	
 
 	/*se creo esta función para que al dar click al botón eliminar muestre uns alerta con
 	 mensajes para que el usuario de click a la opción aceptar o cancelar */
